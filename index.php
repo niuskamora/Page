@@ -1,11 +1,11 @@
 <!DOCTYPE html>
     <head>
-        <title>Facelet Title</title>
+        <title>Pangea Technologies</title>
         <title>Nuevo proyecto con Bootstrap 2.0</title>
-        <meta name="description" content="Artículo en GenbetaDev sobre Bootstrap 2.0"/>
-        <meta name="author" content="Gerson Ramirez"/>
+        <meta name="description" content="Pagina Web"/>
+        <meta name="author" content="Pangea Technologies"/>
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-        
+         <meta charset="utf-8" />
     
         <link rel=StyleSheet href="recursos/css/bootstrap.min.css" type="text/css" />
         <style>
