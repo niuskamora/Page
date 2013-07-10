@@ -46,7 +46,7 @@
 
         </style>
         <link rel=StyleSheet href="recursos/css/bootstrap-responsive.min.css" type="text/css" />
-       <link rel=StyleSheet href="slide/jquery.pageslide.css" type="text/css" />
+       <link rel=StyleSheet href="recursos/slide/jquery.pageslide.css" type="text/css" />
        
     </h:head>
     <h:body>
@@ -54,7 +54,7 @@
      <script type="text/javascript" src="recursos/js/bootstrap.min.js" ></script>
  <script type="text/javascript" src="recursos/slide/jquery.pageslide.min.js" ></script>
   
-        <div  class="container-fluid" style="background-image: url('recursos/imagenes/back.jpg'); background-repeat: repeat;">
+        <div  class="container-fluid" style="background-image: url('recursos/img/back.jpg'); background-repeat: repeat;">
             <div id="fullp">
                 <div class="container" style="background-color:white;">
                     <div class="row-fluid">
