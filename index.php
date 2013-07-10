@@ -1,4 +1,3 @@
-<?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html>
     <head>
         <title>Facelet Title</title>
@@ -55,7 +54,7 @@
      <script type="text/javascript" src="recursos/js/bootstrap.min.js" ></script>
  <script type="text/javascript" src="recursos/slide/jquery.pageslide.min.js" ></script>
   
-        <div  class="container-fluid" style="background-image: url('resources/imagenes/back.jpg'); background-repeat: repeat;">
+        <div  class="container-fluid" style="background-image: url('recursos/imagenes/back.jpg'); background-repeat: repeat;">
             <div id="fullp">
                 <div class="container" style="background-color:white;">
                     <div class="row-fluid">
@@ -66,13 +65,13 @@
 
                                     <div class="row-fluid">
                                         <div class="span2" style="text-align: left;" >
-                                            <img  src="resources/img/izquierdasuperior.png" style="margin-bottom: 3px;" /> 
+                                            <img  src="recursos/img/izquierdasuperior.png" style="margin-bottom: 3px;" /> 
                                         </div>
                                         <div class="span8" style="text-align: center;">
-                                             <img  src="resources/img/logo.png" style="margin-bottom: 3px; height:160px;" height="160" /> 
+                                             <img  src="recursos/img/logo.png" style="margin-bottom: 3px; height:160px;" height="160" /> 
                                         </div>
                                         <div class="span2"  style="text-align: right;">
-                                             <img  src="resources/img/derechainferior.png" style="margin-bottom: 3px; text-align: left;" /> 
+                                             <img  src="recursos/img/derechainferior.png" style="margin-bottom: 3px; text-align: left;" /> 
                                         </div>                    
                                     </div>
                                 </div>
@@ -93,7 +92,7 @@
                                             <i class="icon-user"></i>
 
                                         </a>
-                                        <a class="brand hidden-desktop" href="#"><p:graphicImage style=""  value="resources/imagenes/logo.png" width="140" height="30"/> 
+                                        <a class="brand hidden-desktop" href="#"><p:graphicImage style=""  value="recursos/imagenes/logo.png" width="140" height="30"/> 
                                         </a>
 
                                         <div id="barrac" class="nav-collapse collapse">
@@ -163,10 +162,10 @@
                                     <!-- Carousel items -->
                                     <div class="carousel-inner">
                                         <div class="active item"> 
-                                            <img style="width:100%;"   src="resources/img/servitest.png" /></div>
-                                        <div class="item">  <img style="width:100%;" src="resources/img/servitest.png" />
+                                            <img style="width:100%;"   src="recursos/img/servitest.png" /></div>
+                                        <div class="item">  <img style="width:100%;" src="recursos/img/servitest.png" />
                                         </div>
-                                        <div class="item">  <img style="width:100%;" src="resources/img/servitest.png" />
+                                        <div class="item">  <img style="width:100%;" src="recursos/img/servitest.png" />
                                         </div>
                                     </div>
                                     <!-- Carousel nav -->
