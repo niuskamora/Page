@@ -2,7 +2,7 @@
 session_start();
 
 include("../recursos/funciones.php");
-$var=conectar();
+$conn=conectar();
 
 ?>
 
@@ -27,14 +27,14 @@ $var=conectar();
       <div class="container" style="width: auto;"> <a class="btn btn-navbar" href="#nav" data-toggle="collapse" data-target="#barrap"> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </a> <a  class="brand" id="brand-admin" href="#">PANGEATECH</a>
         <div id="barrap" class="nav-collapse collapse">
           <ul class="nav slidernav">
-            <li><a href="#servicios">Administrador</a></li>
-            <li><a href="#productos">Usuario</a></li>
-            <li><a href="#tecnologia">Menu</a></li>
-            <li><a href="#nosotros">Informacion</a></li>
-            <li><a href="#contacto">Producto</a></li>
-            <li><a href="#tecnologia">Sucursal</a></li>
-            <li><a href="#nosotros">Tipo Info</a></li>
-            <li><a href="#contacto">Tipo Admin</a></li>
+            <li><a href="#servicios"> <b> Administrador </b> </a></li>
+            <li><a href="#productos"> <b>Usuario</b></a></li>
+            <li><a href="#tecnologia"> <b>Menu</b></a></li>
+            <li><a href="#nosotros"> <b>Informacion</b></a></li>
+            <li><a href="#contacto"> <b>Producto</b></a></li>
+            <li><a href="#tecnologia"> <b>Sucursal</b></a></li>
+            <li><a href="#nosotros"> <b>Tipo Info</b></a></li>
+            <li><a href="#contacto"> <b>Tipo Admin</b></a></li>
           </ul>
         </div>
         <!-- /.nav-collapse --> 
@@ -49,19 +49,49 @@ $var=conectar();
                        
     <div class="span3">
       <div style="text-align:center">
-        <h2> 
-         
-             <button class="btn btn-primary">Crear</button>
-             <button class="btn btn-primary">Editar</button>
-             <button class="btn btn-primary">Eliminar</button>
-             <button class="btn btn-primary">Atras</button>
         
-        </h2>
+         <div class="btn-group btn-group-vertical">
+          
+             <button class="btn btn-primary dropdown-menu btn-large text-left"> <span class="add-on"><i class="icon-plus "></i></span> Crear   </button>
+             <button class="btn btn-primary text-left dropdown-menu btn-large"> <span class="add-on"><i class="icon-pencil"></i> </span> Editar  </button>
+             <button class="btn btn-primary dropdown-menu btn-large text-left"> <span class="add-on"><i class="icon-trash"></i></span> Eliminar</button>
+             <button class="btn btn-primary dropdown-menu btn-large text-left "> <span class="add-on"><i class="icon-arrow-left"></i></span> Atras   </button>
+        
+        </div>
       </div>
     </div>
     <div class="span9">
       <div class="well well-large">
-        <p> En este sitio se podran realizar todas las acciones necesarias para alimentar el contenido de la Pagina Web principal de PangeaTechnologies </p>
+        <p>
+        <?php
+		
+		$SQL="SELECT * FROM tipoadministrador";
+		$result = pg_query ($conn, $SQL ) or die("Error en la consulta SQL");
+		$registros= pg_num_rows($result);
+
+	//mostrar resultados
+	?>
+		<table width="100%" class="listado_tablas">
+      <?php    
+		for ($i=0;$i<$registros;$i++)
+			{
+
+			$row = pg_fetch_array ($result,$i );
+			
+			echo '<tr>';
+			echo '<td width="20%">'.$row["tipoadministradorid"].'</td>';
+			echo '<td width="20%">'.$row["nombre"].'</td>';
+			echo '<td width="60%">'.$row["descripcion"].'</td>';
+			echo '</tr>';
+			}
+		?>
+		
+</table>;
+
+		
+        
+        
+         </p>
       </div>
     </div>
     </div>
