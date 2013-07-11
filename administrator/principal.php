@@ -9,11 +9,14 @@ $var=conectar();
 <!DOCTYPE html>
 <html lang="es">
   <head>
-    <title>:: Pangea Technologies ::</title>
+     <title>:: Pangea Technologies ::</title>
+     <meta name="description" content="Pagina Web"/>
+     <meta name="author" content="Pangea Technologies"/>
+     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+     
     <meta charset="utf-8">
      <link href="../recursos/css/bootstrap.css" rel="stylesheet">
      <link href="../recursos/css/bootstrap.min.css" rel="stylesheet">
-     <link href="../recursos/css/bootstrap-responsive.css" rel="stylesheet">
      <link href="../recursos/css/bootstrap-responsive.min.css" rel="stylesheet">
      <link href="../recursos/css/estiloadmin.css" rel="stylesheet">
     
@@ -25,14 +28,14 @@ $var=conectar();
     <div class="navbar">
     	<div class="navbar-inner">
       		<div class="container" style="width: auto;">
-        		<a class="btn btn-navbar" data-toggle="collapse" data-target="#barrap">
+        		<a class="btn btn-navbar" href="#nav" data-toggle="collapse" data-target="#barrap">
           			<span class="icon-bar"></span>
           			<span class="icon-bar"></span>
           			<span class="icon-bar"></span>
         		</a>
         		<a  class="brand" id="brand-admin" href="#">PANGEATECH</a>
-        	<div id="barrap" class="nav-collapse">
-          		<ul class="nav">
+        	<div id="barrap" class="nav-collapse collapse">
+          		<ul class="nav slidernav">
             		<li><a href="#servicios">Administrador</a></li>
             		<li><a href="#productos">Usuario</a></li>
             		<li><a href="#tecnologia">Menu</a></li>
