@@ -53,8 +53,8 @@ $conn=conectar();
          <div class="btn-group btn-group-vertical">
           
              <button class="btn btn-primary dropdown-menu btn-large text-left"> <span class="add-on"><i class="icon-plus "></i></span> Crear   </button>
-             <button class="btn btn-primary text-left dropdown-menu btn-large"> <span class="add-on"><i class="icon-pencil"></i> </span> Editar  </button>
-             <button class="btn btn-primary dropdown-menu btn-large text-left"> <span class="add-on"><i class="icon-trash"></i></span> Eliminar</button>
+            
+             
              <button class="btn btn-primary dropdown-menu btn-large text-left "> <span class="add-on"><i class="icon-arrow-left"></i></span> Atras   </button>
         
         </div>
@@ -71,7 +71,13 @@ $conn=conectar();
 
 	//mostrar resultados
 	?>
-		<table width="100%" class="listado_tablas">
+		<table width="100%" class="table table-striped table-hover">
+      <th> Id  </th>
+      <th> Nombre </th>
+      <th> Descripcion </th>
+      <th> Editar  </th>
+      <th> Eliminar  </th>
+  
       <?php    
 		for ($i=0;$i<$registros;$i++)
 			{
@@ -79,14 +85,16 @@ $conn=conectar();
 			$row = pg_fetch_array ($result,$i );
 			
 			echo '<tr>';
-			echo '<td width="20%">'.$row["tipoadministradorid"].'</td>';
+			echo '<td width="10%">'.$row["tipoadministradorid"].'</td>';
 			echo '<td width="20%">'.$row["nombre"].'</td>';
-			echo '<td width="60%">'.$row["descripcion"].'</td>';
+			echo '<td width="40%">'.$row["descripcion"].'</td>';
+			echo '<td width="15%"> <button class="btn btn-primary"> <span class="add-on"><i class="icon-pencil"></i> </span> Editar  </button> </td>';
+			echo '<td width="15%"> <button class="btn btn-primary"> <span class="add-on"><i class="icon-trash"></i></span> Eliminar</button> </td>';
 			echo '</tr>';
 			}
 		?>
 		
-</table>;
+</table>
 
 		
         
