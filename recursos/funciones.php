@@ -1,5 +1,5 @@
 <?php
-
+//conexión de la base de dattos
 function conectar(){{
 	   if (!($conexion = pg_connect("host=192.168.1.101 dbname=pangeapage port=5432 user=postgres password=p4ng34"))){
 	       echo "No pudo conectarse al servidor";
@@ -8,22 +8,25 @@ function conectar(){{
 	    return $conexion;
 	}
 }
-
+//desconectar la base de datos
 function desconectar($conexion){
 	pg_close($conexion);
 	
 }
 
+//creación de sesiones de administradores
 function crearsesion($u,$p){
 
 	if($u!="" && $p!=""){
 		$_SESSION["usuarioadmin"] = strtolower($u);
 		$_SESSION["passwordadmin"] = $p;
+		
 		return true;
 	}else
 		return false;
 }
 
+// validación de usuario de administradores
 function validarlogin(){
 
 	if(existesesion()){
@@ -46,7 +49,7 @@ function validarlogin(){
 		
 			$_SESSION["id_usuario"]=$fila["administradorid"];
 			//$_SESSION["rol"]=strtolower($fila["nombre"]);
-			iraURL('../administrator/principal.php');
+			
 			return true;
 			
 		}
@@ -55,13 +58,14 @@ function validarlogin(){
 	
 	
 }
-
+//verificando  sesiones de administradores
 function existesesion(){
 	if(isset($_SESSION["usuarioadmin"]) && isset($_SESSION["passwordadmin"]))
 		return true;
 	else
 		return false;
 }
+
 
 function iraURL($url){
 	$ini='<script language="javascript">
@@ -71,6 +75,7 @@ function iraURL($url){
 	echo $ini.$url.$fin;
 }
 
+//eliminando variables de sesion de cuenta de administradores
 function quitarsesion(){
     if(isset($_SESSION["id_usuario"]))
 	//llenarLog($_SESSION["id_usuario"],5,"Bitacora","");
@@ -78,10 +83,34 @@ function quitarsesion(){
 	unset($_SESSION["usuario"]);
 	unset($_SESSION["password"]);
 }
-
+//alertas
 function javaalert($msj){
 	$ini='<script language="javascript">	alert("';
 	$fin='"); </script>';
 	echo $ini.$msj.$fin;
+}
+//bitacora del  sitio web
+function llenarLog($accion,$descripcion){
+
+	$conex = Conectar();
+		switch($accion){
+		case 1:
+			$accion="INSERCIÓN";
+			break;
+		case 2:
+			$accion="MODIFICACIÓN";
+		break;
+		case 3:
+			$accion="BORRADO";
+			break;
+		case 4:
+			$accion="INICIO DE SESIÓN";
+			break;
+		case 5:
+			$accion="FIN DE SESIÓN";
+			break;	
+		}
+pg_query($conex,"INSERT INTO bitacora values( nextval('bitacora_bitacoraid_seq'),'".$accion."',current_date,current_time,".$_SESSION["id_usuario"].",'".$descripcion."')") or die(pg_last_error($conex));
+
 }
 ?>
