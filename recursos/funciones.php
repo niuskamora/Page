@@ -16,12 +16,12 @@ function desconectar($conexion){
 
 function crearsesion($u,$p){
 
-	if($u!="" || $p!=""){
+	if($u!="" && $p!=""){
 		$_SESSION["usuarioadmin"] = strtolower($u);
 		$_SESSION["passwordadmin"] = $p;
 		return true;
 	}else
-		iraURL('../administrator/principal.php');
+		return false;
 }
 
 function validarlogin(){

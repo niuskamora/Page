@@ -10,11 +10,11 @@ if (isset($_POST["Biniciar"])) {
 
     if (crearsesion($user, $pass)) {
         if (validarlogin()) {
-		//	iraURL('entro.php');
-           // llenarLog($_SESSION["id_usuario"], 4, "Bitacora", "");
-            
+           // llenarLog($_SESSION["id_usuario"], 4, "Bitacora", "");  
         }
-    }
+    }else {
+	javaalert("Debe agregar el usuario y contraseña");
+		}
 }
 ?>
 
