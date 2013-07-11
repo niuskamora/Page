@@ -33,11 +33,14 @@ $var=conectar();
         		<a  class="brand" id="brand-admin" href="#">PANGEATECH</a>
         	<div id="barrap" class="nav-collapse">
           		<ul class="nav">
-            		<li><a href="#servicios">SERVICIOS</a></li>
-            		<li><a href="#productos">PRODUCTOS</a></li>
-            		<li><a href="#tecnologia">TECNOLOGÍA</a></li>
-           			<li><a href="#nosotros">NOSOTROS</a></li>
-           			<li><a href="#contacto">CONTACTO</a></li>
+            		<li><a href="#servicios">Administrador</a></li>
+            		<li><a href="#productos">Usuario</a></li>
+            		<li><a href="#tecnologia">Menu</a></li>
+           			<li><a href="#nosotros">Informacion</a></li>
+           			<li><a href="#contacto">Producto</a></li>
+                    <li><a href="#tecnologia">Sucursal</a></li>
+           			<li><a href="#nosotros">Tipo Info</a></li>
+           			<li><a href="#contacto">Tipo Admin</a></li>
          		</ul>
       
         </div><!-- /.nav-collapse -->
