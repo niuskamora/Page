@@ -50,14 +50,13 @@ $conn=conectar();
     <div class="span3">
       <div style="text-align:center">
         
-         <div class="btn-group btn-group-vertical">
+          <ul class="nav  nav-pills nav-stacked">
+              <li class="active"><a href="#"> <span class="add-on"><i class="icon-plus "></i></span> Crear </a></li>
+              <li><a href="#"> <span class="add-on"><i class="icon-arrow-left"></i></span> Atras</a></li>
+            
+          </ul>
           
-             <button class="btn btn-primary dropdown-menu btn-large text-left"> <span class="add-on"><i class="icon-plus "></i></span> Crear   </button>
-             <button class="btn btn-primary text-left dropdown-menu btn-large"> <span class="add-on"><i class="icon-pencil"></i> </span> Editar  </button>
-             <button class="btn btn-primary dropdown-menu btn-large text-left"> <span class="add-on"><i class="icon-trash"></i></span> Eliminar</button>
-             <button class="btn btn-primary dropdown-menu btn-large text-left "> <span class="add-on"><i class="icon-arrow-left"></i></span> Atras   </button>
-        
-        </div>
+   
       </div>
     </div>
     <div class="span9">
