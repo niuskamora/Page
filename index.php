@@ -35,8 +35,13 @@
 
             @media screen and (max-width: 48.063em) {
                 #magic-line { display: none;
-
+			
                 }
+				.hero-unit{
+					 padding:30px;
+					text-align:center;
+					}
+				
             }
 
 
@@ -249,8 +254,8 @@
                 var $magicLine = $('#magic-line');
 
                 $magicLine
-                        .width($('.active').width())
-                        .css('left', $('.active a').position().left)
+                        .width($('#nav').find('.active').width())
+                        .css('left', $('#nav').find('.active a').position().left)
                         .data('origLeft', $magicLine.position().left)
                         .data('origWidth', $magicLine.width());
 
