@@ -33,7 +33,7 @@ function validarlogin(){
 		$pass = $_SESSION["passwordadmin"];
 		
 		
-		$query="SELECT administradorId FROM administrador WHERE usuario='$usu' AND contrasena='$pass'";
+		$query="SELECT administradorid FROM administrador WHERE usuario='$usu' AND contrasena='$pass'";
 		$Qlogin = pg_query($conex,$query) or die(pg_last_error($conex));
 		$fila = pg_fetch_array($Qlogin);
 		
@@ -44,7 +44,7 @@ function validarlogin(){
 		}else{ 
 		//inserta en logs
 		
-			$_SESSION["id_usuario"]=$fila["ADMINISTRADORID"];
+			$_SESSION["id_usuario"]=$fila["administradorid"];
 			//$_SESSION["rol"]=strtolower($fila["nombre"]);
 			iraURL('../administrator/principal.php');
 			return true;
