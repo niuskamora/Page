@@ -26,15 +26,16 @@ $conn=conectar();
     <div class="navbar-inner">
       <div class="container" style="width: auto;"> <a class="btn btn-navbar" href="#nav" data-toggle="collapse" data-target="#barrap"> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </a> <a  class="brand" id="brand-admin" href="#">PANGEATECH</a>
         <div id="barrap" class="nav-collapse collapse">
-          <ul class="nav slidernav">
-            <li><a href="#servicios"> <b> Administrador </b> </a></li>
-            <li><a href="#productos"> <b>Usuario</b></a></li>
-            <li><a href="#tecnologia"> <b>Menu</b></a></li>
-            <li><a href="#nosotros"> <b>Informacion</b></a></li>
-            <li><a href="#contacto"> <b>Producto</b></a></li>
-            <li><a href="#tecnologia"> <b>Sucursal</b></a></li>
-            <li><a href="#nosotros"> <b>Tipo Info</b></a></li>
-            <li><a href="#contacto"> <b>Tipo Admin</b></a></li>
+         <ul class="nav slidernav">
+             <li><a href="admin.php">Administrador</a></li>
+            <li><a href="usuario">Usuario</a></li>
+            <li><a href="menu.php">Menú</a></li>
+            <li><a href="info.php">Información</a></li>
+            <li><a href="producto.php">Producto</a></li>
+            <li><a href="sucursal.php">Sucursal</a></li>
+            <li><a href="tipoinfo.php">Tipo Infomación</a></li>
+            <li><a href="tipoadmin.php"> <em> <b> Tipo Administracion </b> </em>  </a></li>
+            <li><a href="index.php">Cerrar Sesión</a></li>
           </ul>
         </div>
         <!-- /.nav-collapse --> 
@@ -65,47 +66,37 @@ $conn=conectar();
         	<table width="100%" class="table table-bordered">
             	<tr>
                 	<th>Nombre</th>
-                    <td><input id="nombre" name="nombre" type="text" value="" /></td>
+                    <td><input id="nombres" name="nombres" type="text" value="" /></td>
                 </tr>
                 <tr>
-                	<th>Apellido</th>
-                    <td><input id="apellido" name="apellido" type="text" value=""/></td>
+                	<th>Descripcion</th>
+                    <td><input id="descripcionn" name="descripcionn" type="text" value=""/></td>
                 </tr>
                 <tr>
-                	<th>Usuario</th>
-                    <td><input id="usuario" name="usuario" type="text" value=""/></td>
+                	<td> </td> <td><button id="guardar" name="guardar" class="btn-primary text-center" type="submit">Guardar</button></td>
                 </tr>
-                <tr>
-                	<th>Contraseña</th>
-                    <td><input id="contrasena" name="contrasena" type="password" value=""/></td>
-                </tr>
-                <tr>
-                	<th>Tipo Administrador</th>
-                    <td><select id="tipoadmin" name="tipoadmin">
-                    	<option value="0">Seleccione Opción</option>
-                        <?php
-		
-						$SQL="SELECT * FROM tipoadministrador";
-						$result = pg_query ($conn, $SQL ) or die("Error en la consulta SQL");
-						
-						while($row=pg_fetch_array($result)){
-							echo '<option value="'.$row['tipoadministradorid'].'">'.$row['nombre'].'</option>';
-
-							}
-
-						?>
-                    </select></td>
-                </tr>
-                
-                <tr>
-                	<td> </td> <td><button class="btn-primary text-center">Guardar</button></td>
-                </tr>
-                
+                <td> </td> <td><button id="guardar2" name="guardar2" class="btn-primary text-center" type="submit">Guardar y añadir otro</button></td>
             </table>
         </form>
 		<?php
-        pg_query($conn,"INSERT INTO administrador values( nextval('administrador_administradorid_seq'),'".$nombre."','".$apellido."','".$usuario."','".$contrasena."',".$_SESSION["id_usuario"].",'".$tipoadmin."')") or die(pg_last_error($conex));
-        ?>
+		
+if(isset($_POST["guardar"])){
+		$nombre=$_POST['nombres'];
+		$descripcion=$_POST['descripcionn'];
+        pg_query($conn,"INSERT INTO tipoadministrador values( nextval('tipoadministrador_tipoadministradorid_seq'),'$nombre','$descripcion')") or die(pg_last_error($conn));
+javaalert("El tipo de administrador fue creado con exito");
+iraURL("tipoadmin.php");
+}
+
+if(isset($_POST["guardar2"])){
+		$nombre=$_POST['nombres'];
+		$descripcion=$_POST['descripcionn'];
+        pg_query($conn,"INSERT INTO tipoadministrador values( nextval('tipoadministrador_tipoadministradorid_seq'),'$nombre','$descripcion')") or die(pg_last_error($conn));
+javaalert("El tipo de administrador fue creado con exito");
+iraURL("creartipoadmin.php");
+}
+
+	    ?>
         
          </p>
       </div>

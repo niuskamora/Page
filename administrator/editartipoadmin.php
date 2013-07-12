@@ -1,9 +1,10 @@
 <?php
+session_start();
 include("../recursos/funciones.php");
 $conn=conectar();
 
-switch( $_POST['boton'] ) {
-case "eliminar": $SQL="DELETE FROM tipoadministrador WHERE tipoadministradorid=".$_POST['id'];
+switch( $_GET['boton'] ) {
+case "eliminar": $SQL="DELETE FROM tipoadministrador WHERE tipoadministradorid=".$_GET['id'];
 		$result = pg_query ($conn, $SQL ) or die("Error en la consulta SQL");
 		javaalert("El tipo de administrador fue eliminado");
 		iraURL("tipoadmin.php");
@@ -11,7 +12,7 @@ case "eliminar": $SQL="DELETE FROM tipoadministrador WHERE tipoadministradorid="
 	
 break;
 }
-session_start();
+
 
 
 
@@ -47,7 +48,7 @@ session_start();
             <li><a href="producto.php">Producto</a</li>
             <li><a href="sucursal.php">Sucursal</a></li>
             <li><a href="tipoinfo.php">Tipo Infomación</a></li>
-            <li><a href="tipoadmin.php"> <em> <b> Tipo Administracion </b> </em>  </a></li>
+            <li><a href="tipoadmin.php"> <em> <b> Tipo Administrador</b> </em>  </a></li>
             <li><a href="index.php">Cerrar Sesión</a></li>
           </ul>
         </div>
@@ -77,7 +78,15 @@ session_start();
     <div class="span9">
       <div class="well well-large">
         <p>
-       
+        
+       <?php
+	   $SQL="SELECT * FROM tipoadministrador WHERE tipoadministradorid=".$_GET['id'];
+		$result = pg_query ($conn, $SQL ) or die("Error en la consulta SQL");
+		$registros= pg_num_rows($result);
+		$row = pg_fetch_array ($result,$i);
+	   ?>
+	   
+	   
 		<table width="100%" class="table table-striped table-hover">
       <th> Id  </th>
       <th> Nombre </th>
@@ -90,17 +99,30 @@ session_start();
 			
 			echo '<tr>';
 		
-			echo '<td width="20%"><input  type="text" value="'.$_POST['nombre'].'" contenteditable="true ></td>';
-			echo '<td width="40%"><input type="text" value="'.$_POST['descripcion'].'" contenteditable="true ></td>';
-			echo '<td width="20%"> <button class="btn btn-primary"> <span class="add-on"><i class="icon-trash"></i></span> Eliminar</button> </td>';
+			echo '<td width="20%"><input id="nombres" name="nombres"  type="text" value="'.$row["nombre"].'" contenteditable="true ></td>';
+			echo '<td width="40%"><input id="descripcionn" name="descripcionn"  type="text" value="'.$row["descripcion"].'" contenteditable="true ></td>';
+			echo '<tr>';
+			echo '<td width="14%"><button id="guardar" name="guardar" class="btn-primary text-center" type="submit"> <span class="add-on"><i class="icon-pencil"></i></span>Guardar</button></td>';
 			echo '</tr>';
-			
 		?>
-	 </form> 	
+       
 </table>
 
+	 </form> 	
+
 		
-        
+    	<?php
+		
+if(isset($_POST["guardar"])){
+		$id=$_POST['id'];
+		$nombre=$_POST['nombres'];
+		$descripcion=$_POST['descripcionn'];
+        pg_query($conn,"UPDATE tipoadministrador SET tipoadministradorid=$id, nombre='$nombre', descripcion='$descripcion' where tipoadministradorid=$id") or die(pg_last_error($conn));
+javaalert("El tipo de administrador fue creado con exito");
+iraURL("tipoadmin.php");
+}
+?>
+    
         
          </p>
       </div>
