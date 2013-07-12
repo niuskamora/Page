@@ -18,6 +18,9 @@ $conn=conectar();
 <link href="../recursos/css/bootstrap.min.css" rel="stylesheet">
 <link href="../recursos/css/bootstrap-responsive.min.css" rel="stylesheet">
 <link href="../recursos/css/estiloadmin.css" rel="stylesheet">
+<link href="../recursos/footable/css/footable-0.1.css" rel="stylesheet" type="text/css" />
+  <link href="../recursos/footable/css/footable.sortable-0.1.css" rel="stylesheet" type="text/css" />
+  <link href="../recursos/footable/css/footable.paginate.css" rel="stylesheet" type="text/css" />
 </head>
 
 <body class="preview" id="top" data-spy="scroll" data-target=".subnav" data-offset="80">
@@ -63,20 +66,7 @@ $conn=conectar();
     </div>
     <div class="span9">
       <div class="well well-large">
-      <br><br>
-       <div class="span1">ID</div>
-      <div class="span3">nombre</div>
-      <div class="span6">descripcion</div>
-      <div class="span1">editar</div>
-      <div class="span1">eliminar</div>
-      
-      
-      <div class="span1">1</div>
-      <div class="span3">pepe</div>
-      <div class="span6">hola como estas</div>
-      <div class="span1">editar</div>
-      <div class="span1">eliminar</div>
-      
+     
         <p>
         <?php
 		
@@ -86,12 +76,27 @@ $conn=conectar();
 
 	//mostrar resultados
 	?>
-	<table width="100%" class="table table-striped table-hover">
-      <th> Id  </th>
-      <th> Nombre </th>
-      <th> Descripción </th>
-      <th> <span class="add-on"> <i class="icon-pencil"></i> </span> Editar  </th>
-      <th><span class="add-on"><i class="icon-trash"></i></span> Eliminar  </th>
+    <table class="footable table-striped table-hover" data-page-size="5">
+			  <thead>
+				<tr>
+				  <th data-class="expand" data-sort-initial="true" data-type="numeric">
+					<span>Id</span>
+				  </th>
+				  <th>
+					<span>Nombre</span>
+				  </th>
+				  <th data-hide="phone" data-sort-ignore="true">
+					Descripcion
+				  </th>
+				  <th data-hide="phone" data-sort-ignore="true">
+					<span class="add-on"> <i class="icon-pencil"></i> </span> Editar 
+				  </th>
+				  <th data-hide="phone" data-sort-ignore="true">
+				<span class="add-on"><i class="icon-trash"></i></span> Eliminar 
+				  </th>
+				</tr>
+			  </thead>
+				<tbody>
     <form action="editartipoadmin.php" method="post"> 
      
       <?php   
@@ -118,7 +123,10 @@ $conn=conectar();
     
 		?>
 	 </form> 	
-</table>
+ </tbody>	  
+    </table>
+
+    <ul id="pagination" class="footable-nav"><span>Pages:</span></ul>
 
 		
         
@@ -135,5 +143,14 @@ $conn=conectar();
 <script type="text/javascript" src="../recursos/js/jquery-2.0.2.js" ></script> 
 <script src="../recursos/js/bootstrap.js"></script> 
 <script src="../recursos/js/bootstrap.min.js"></script>
+ <script src="../recursos/footable/js/footable.js" type="text/javascript"></script>
+  <script src="../recursos/footable/js/footable.paginate.js" type="text/javascript"></script>
+  <script src="../recursos/footable/js/footable.sortable.js" type="text/javascript"></script>
+ 
+  <script type="text/javascript">
+    $(function() {
+      $('table').footable();
+    });
+  </script>
 	</body>
 </html>
