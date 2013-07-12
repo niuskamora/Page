@@ -61,9 +61,12 @@ $conn=conectar();
         
       </div>
     </div>
-    
+    <div class="span9">
+      <div class="well well-large">
+      <br><br>
       
-        
+      
+        <p>
         <?php
 		
 		$SQL="SELECT * FROM tipoadministrador";
