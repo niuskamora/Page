@@ -57,18 +57,7 @@ $conn=conectar();
             
           </ul>
           
-           
-        
-        
-          
-<<<<<<< HEAD
-=======
-             <button class="btn btn-primary dropdown-menu btn-large text-left"> <span class="add-on"><i class="icon-plus "></i></span> Crear   </button>
-            
-             
-             <button class="btn btn-primary dropdown-menu btn-large text-left "> <span class="add-on"><i class="icon-arrow-left"></i></span> Atras   </button>
->>>>>>> 1faa7e1d673434033db4ae1f69fb2a9a2b40f873
-        
+
         </div>
       </div>
     </div>
