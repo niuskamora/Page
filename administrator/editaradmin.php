@@ -39,14 +39,15 @@ break;
       <div class="container" style="width: auto;"> <a class="btn btn-navbar" href="#nav" data-toggle="collapse" data-target="#barrap"> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </a> <a  class="brand" id="brand-admin" href="#">PANGEATECH</a>
         <div id="barrap" class="nav-collapse collapse">
           <ul class="nav slidernav">
-            <li><a href="#servicios"> <b> Administrador </b> </a></li>
-            <li><a href="#productos"> <b>Usuario</b></a></li>
-            <li><a href="#tecnologia"> <b>Menu</b></a></li>
-            <li><a href="#nosotros"> <b>Informacion</b></a></li>
-            <li><a href="#contacto"> <b>Producto</b></a></li>
-            <li><a href="#tecnologia"> <b>Sucursal</b></a></li>
-            <li><a href="#nosotros"> <b>Tipo Info</b></a></li>
-            <li><a href="#contacto"> <b>Tipo Admin</b></a></li>
+             <li><a href="admin.php">Administrador</a></li>
+            <li><a href="usuario.php">Usuario</a></li>
+            <li><a href="menu.php">Menú</a></li>
+            <li><a href="info.php">Información</a></li>
+            <li><a href="producto.php">Producto</a></li>
+            <li><a href="sucursal.php">Sucursal</a></li>
+            <li><a href="tipoinfo.php">Tipo Infomación</a></li>
+            <li><a href="tipoadmin.php">Tipo Administrador</a></li>
+            <li><a href="index.php">Cerrar Sesión</a></li>
           </ul>
         </div>
         <!-- /.nav-collapse --> 
@@ -135,14 +136,14 @@ break;
 
 if(isset($_POST["guardar"])){
 	
-	$nombre=$_POST['usuario'];
+	$nombre=$_POST['nombre'];
 	$apellido=$_POST['apellido'];
 	$usuario=$_POST['usuario'];
 	$contrasena=$_POST['contrasena'];
 	$tipoadmin=$_POST['tipoadmin'];
 
 
-	$resultado=pg_query($conn,"UPDATE administrador SET nombre=$nombre, apellido=$apellido, usuario=$usuario, contrasena=$contrasena, tipoadministradorid=$tipoadmin WHERE administradorid=$id") or die(pg_last_error($conn));
+	$resultado=pg_query($conn,"UPDATE administrador SET nombre='$nombre', apellido='$apellido', usuario='$usuario', contrasena='$contrasena', tipoadministradorid='$tipoadmin' WHERE administradorid=$id") or die(pg_last_error($conn));
 	
 	if($resultado){
 			javaalert('Entro');
