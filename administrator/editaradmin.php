@@ -4,8 +4,20 @@ session_start();
 include("../recursos/funciones.php");
 $conn=conectar();
 
-?>
+$id=$_GET['id'];
 
+switch( $_GET['boton'] ) {
+case "eliminar": $SQL="DELETE FROM administrador WHERE administradorid=$id";
+		$result = pg_query ($conn, $SQL ) or die("Error en la consulta SQL");
+		javaalert("El administrador fue eliminado");
+		llenarLog(3, "Eliminar Administrador");
+		iraURL('../administrator/admin.php');
+		
+	
+break;
+}
+
+?>
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -61,39 +73,43 @@ $conn=conectar();
       <div class="well well-large">
         <p>
         
+        <?php
+        	$cons="SELECT *FROM administrador WHERE administradorid=$id";
+			$resulta = pg_query ($conn, $cons) or die("Error en la consulta SQL");
+			
+			if($row=pg_fetch_array($resulta)){
+		?>
+        
 		<form method="post">
         	<table width="100%" class="table table-bordered">
             	<tr>
                 	<th>Nombre</th>
-<<<<<<< HEAD
-                    <td><input id="nombre" name="nombre" type="text" value="" /></td>
+                    <td><input id="nombre" name="nombre" type="text" value="<?php echo $row['nombre']; ?>"/></td>
                 </tr>
                 <tr>
                 	<th>Apellido</th>
-                    <td><input id="apellido" name="apellido" type="text" value=""/></td>
-=======
-                    <td><input id="nombre" name="nombre" type="text"/></td>
-                </tr>
-                <tr>
-                	<th>Apellido</th>
-                    <td><input id="apellido" name="apellido" type="text"/></td>
->>>>>>> inserta administrador y medio modifica
+                    <td><input id="apellido" name="apellido" type="text" value="<?php echo $row['apellido']; ?>"/></td>
                 </tr>
                 <tr>
                 	<th>Usuario</th>
-                    <td><input id="usuario" name="usuario" type="text" value=""/></td>
+                    <td><input id="usuario" name="usuario" type="text" value="<?php echo $row['usuario']; ?>" /></td>
                 </tr>
                 <tr>
                 	<th>Contraseña</th>
-<<<<<<< HEAD
-                    <td><input id="contrasena" name="contrasena" type="password" value=""/></td>
-=======
-                    <td><input id="contrasena" name="contrasena" type="password"/></td>
->>>>>>> inserta administrador y medio modifica
+                    <td><input id="contrasena" name="contrasena" type="password" value="<?php echo $row['contrasena']; ?>"/></td>
                 </tr>
                 <tr>
                 	<th>Tipo Administrador</th>
                     <td><select id="tipoadmin" name="tipoadmin">
+                    	<?php 
+						
+						$consu="SELECT *FROM tipoadministrador WHERE tipoadministradorid=".$row['tipoadministradorid'];
+						$resulta1 = pg_query ($conn, $consu) or die("Error en la consulta SQL");
+						if($row1=pg_fetch_array($resulta1)){
+							echo '<option value="'.$row1['tipoadministradorid'].'">'.$row1['nombre'].'</option>';
+                        
+                        }
+						?>
                     	<option value="0">Seleccione Opción</option>
                         <?php
 		
@@ -108,19 +124,13 @@ $conn=conectar();
 						?>
                     </select></td>
                 </tr>
-                
+                <?php }?>
                 <tr>
-                	<td> </td> <td><button name="guardar" id="guardar" type="submit" class="btn-primary text-center">Guardar</button></td>
+                	<td> </td> <td><button name="guardar" id="guardar" type="submit" class="btn-primary text-center">Modificar</button></td>
                 </tr>
                 
             </table>
         </form>
-<<<<<<< HEAD
-		<?php
-        pg_query($conn,"INSERT INTO administrador values( nextval('administrador_administradorid_seq'),'".$nombre."','".$apellido."','".$usuario."','".$contrasena."',".$_SESSION["id_usuario"].",'".$tipoadmin."')") or die(pg_last_error($conex));
-        ?>
-        
-=======
 <?php
 
 if(isset($_POST["guardar"])){
@@ -132,17 +142,16 @@ if(isset($_POST["guardar"])){
 	$tipoadmin=$_POST['tipoadmin'];
 
 
-	$resultado=pg_query($conn,"INSERT INTO administrador values( nextval('administrador_administradorid_seq'),'$nombre','$apellido','$usuario','$contrasena',".$_SESSION["id_usuario"].",'$tipoadmin')") or die(pg_last_error($conn));
+	$resultado=pg_query($conn,"UPDATE administrador SET nombre=$nombre, apellido=$apellido, usuario=$usuario, contrasena=$contrasena, tipoadministradorid=$tipoadmin WHERE administradorid=$id") or die(pg_last_error($conn));
 	
 	if($resultado){
 			javaalert('Entro');
-			llenarLog(1, "Creo Administrador");
+			llenarLog(2, "Modifico Administrador");
 			iraURL('../administrator/admin.php');
 		}
 
 }
 ?>
->>>>>>> inserta administrador y medio modifica
          </p>
       </div>
     </div>

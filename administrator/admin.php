@@ -52,7 +52,7 @@ $conn=conectar();
         
          <div class="btn-group btn-group-vertical">
           
-              <button class="btn btn-primary dropdown-menu btn-large text-left" onClick="location.href='crearadmin.php'" <span class="add-on"><i class="icon-plus "></i></span> Crear   </button>
+              <button class="btn btn-primary dropdown-menu btn-large text-left" onClick="location.href='crearadmin.php'"> <span class="add-on"><i class="icon-plus "></i></span> Crear   </button>
              <button class="btn btn-primary dropdown-menu btn-large text-left " onClick="location.href='principal.php'"> <span class="add-on"><i class="icon-arrow-left"></i></span> Atras   </button>
         
         </div>
@@ -77,24 +77,25 @@ $conn=conectar();
             <th>Editar</th>
       		<th>Eliminar</th>
             <th>Ver Mas</th>
+            
+	<form  method="get"> 
       <?php    
-		for ($i=0;$i<$registros;$i++)
-			{
+		for ($i=0;$i<$registros;$i++){
 
-			$row = pg_fetch_array ($result,$i );
+			$row = pg_fetch_array ($result,$i);
 			
 			echo '<tr>';
 			echo '<td width="10%">'.$row["administradorid"].'</td>';
 			echo '<td width="15%">'.$row["nombre"].'</td>';
 			echo '<td width="19%">'.$row["apellido"].'</td>';
 			echo '<td width="19%">'.$row["usuario"].'</td>';
-			echo '<td width="12%"> <button class="btn btn-primary"> <span class="add-on"><i class="icon-pencil"></i> </span> Editar  </button> </td>';
-			echo '<td width="14%"> <button class="btn btn-primary"> <span class="add-on"><i class="icon-trash"></i></span> Eliminar</button> </td>';
-			echo '<td width="11%"> <button class="btn btn-primary"> <span class="add-on"><i class="icon-eye-open"></i></span> Ver</button> </td>';
+			echo '<td width="12%"> <a href="editaradmin.php?id='.$row["administradorid"].'&boton=editar" <button class="btn btn-primary  type="submit" name=boton value=ed> <span class="add-on"><i class="icon-pencil"></i> </span> Editar  </button> </td> >';
+			echo '<td width="14%"> <a href="editaradmin.php?id='.$row["administradorid"].'&boton=eliminar" <button class="btn btn-primary  type="submit" name=boton> <span class="add-on"><i class="icon-pencil"></i>  </span> Eliminar </button> </td> >';
+			echo '<td width="11%"> <a href="editaradmin.php?id='.$row["administradorid"].'&boton=ver" <button class="btn btn-primary  type="submit" name=boton> <span class="add-on"><i class="icon-pencil"></i>  </span> Ver </button> </td> >';
 			echo '</tr>';
 			}
 		?>
-		
+	</form>
 </table>
 
          </p>
