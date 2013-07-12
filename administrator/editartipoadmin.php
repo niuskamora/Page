@@ -1,8 +1,21 @@
 <?php
+include("../recursos/funciones.php");
+$conn=conectar();
+
+switch( $_POST['boton'] ) {
+case "eliminar": $SQL="DELETE FROM tipoadministrador WHERE tipoadministradorid=".$_POST['id'];
+		$result = pg_query ($conn, $SQL ) or die("Error en la consulta SQL");
+		javaalert("El tipo de administrador fue eliminado");
+		iraURL("tipoadmin.php");
+		
+	
+break;
+}
 session_start();
 
-include("../recursos/funciones.php");
-$var=conectar();
+
+
+
 
 ?>
 
@@ -27,15 +40,15 @@ $var=conectar();
       <div class="container" style="width: auto;"> <a class="btn btn-navbar" href="#nav" data-toggle="collapse" data-target="#barrap"> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </a> <a  class="brand" id="brand-admin" href="#">PANGEATECH</a>
         <div id="barrap" class="nav-collapse collapse">
           <ul class="nav slidernav">
-            <li><a href="admin.php">Administrador</a></li>
+             <li><a href="admin.php">Administrador</a></li>
             <li><a href="usuario">Usuario</a></li>
             <li><a href="menu.php">Menú</a></li>
             <li><a href="info.php">Información</a></li>
-            <li><a href="producto.php">Producto</a></li>
+            <li><a href="producto.php">Producto</a</li>
             <li><a href="sucursal.php">Sucursal</a></li>
             <li><a href="tipoinfo.php">Tipo Infomación</a></li>
-            <li><a href="tipoadmin.php">Tipo Administrador</a></li>
-             <li><a href="index.php">Cerrar Sesión</a></li>
+            <li><a href="tipoadmin.php"> <em> <b> Tipo Administracion </b> </em>  </a></li>
+            <li><a href="index.php">Cerrar Sesión</a></li>
           </ul>
         </div>
         <!-- /.nav-collapse --> 
@@ -50,12 +63,46 @@ $var=conectar();
                        
     <div class="span3">
       <div style="text-align:center">
-        <h2> Bienvenidos </h2>
+        
+         <div class="btn-group btn-group-vertical">
+          
+             <button class="btn btn-primary dropdown-menu btn-large text-left"> <span class="add-on"><i class="icon-plus "></i></span> Crear   </button>
+            
+             
+             <button class="btn btn-primary dropdown-menu btn-large text-left "> <span class="add-on"><i class="icon-arrow-left"></i></span> Atras   </button>
+        
+        </div>
       </div>
     </div>
     <div class="span9">
       <div class="well well-large">
-        <p> En este sitio se podran realizar todas las acciones necesarias para alimentar el contenido de la Pagina Web principal de PangeaTechnologies </p>
+        <p>
+       
+		<table width="100%" class="table table-striped table-hover">
+      <th> Id  </th>
+      <th> Nombre </th>
+      <th> Descripcion </th>
+      <th> Eliminar  </th>
+    
+      <?php   
+	  
+	
+			
+			echo '<tr>';
+		
+			echo '<td width="20%"><input  type="text" value="'.$_POST['nombre'].'" contenteditable="true ></td>';
+			echo '<td width="40%"><input type="text" value="'.$_POST['descripcion'].'" contenteditable="true ></td>';
+			echo '<td width="20%"> <button class="btn btn-primary"> <span class="add-on"><i class="icon-trash"></i></span> Eliminar</button> </td>';
+			echo '</tr>';
+			
+		?>
+	 </form> 	
+</table>
+
+		
+        
+        
+         </p>
       </div>
     </div>
     </div>
@@ -67,5 +114,5 @@ $var=conectar();
 <script type="text/javascript" src="../recursos/js/jquery-2.0.2.js" ></script> 
 <script src="../recursos/js/bootstrap.js"></script> 
 <script src="../recursos/js/bootstrap.min.js"></script>
-</body>
+	</body>
 </html>
