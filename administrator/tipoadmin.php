@@ -61,23 +61,9 @@ $conn=conectar();
         
       </div>
     </div>
-    <div class="span9">
-      <div class="well well-large">
-      <br><br>
-       <div class="span1">ID</div>
-      <div class="span3">nombre</div>
-      <div class="span6">descripcion</div>
-      <div class="span1">editar</div>
-      <div class="span1">eliminar</div>
+    
       
-      
-      <div class="span1">1</div>
-      <div class="span3">pepe</div>
-      <div class="span6">hola como estas</div>
-      <div class="span1">editar</div>
-      <div class="span1">eliminar</div>
-      
-        <p>
+        
         <?php
 		
 		$SQL="SELECT * FROM tipoadministrador";
