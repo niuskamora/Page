@@ -2,7 +2,7 @@
 session_start();
 
 include("../recursos/funciones.php");
-$var=conectar();
+$conn=conectar();
 if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
 	iraURL('../administrator/index.php');
 	}
@@ -52,12 +52,70 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
                        
     <div class="span3">
       <div style="text-align:center">
-        <h2> Bienvenidos </h2>
+        
+         <div class="btn-group btn-group-vertical">
+          
+             <button class="btn btn-primary dropdown-menu btn-large text-left"> <span class="add-on"><i class="icon-plus "></i></span> Crear   </button>
+            
+             
+             <button class="btn btn-primary dropdown-menu btn-large text-left "> <span class="add-on"><i class="icon-arrow-left"></i></span> Atras   </button>
+        
+        </div>
       </div>
     </div>
     <div class="span9">
+      <?php 
+		$SQL="SELECT * FROM producto";
+		$result = pg_query ($conn, $SQL ) or die("Error en la consulta SQL");
+		$registros= pg_num_rows($result);
+
+	if($registros == 0){
+    ?>
+    <div class="alert alert-block" >
+    <h2 class="alert-block">Alerta</h2>
+    <h4>No existen registros en producto</h4>
+   
+    </div>
+     <?php 
+	}else{
+	
+	?>
       <div class="well well-large">
-        <p> En este sitio se podran realizar todas las acciones necesarias para alimentar el contenido de la Pagina Web principal de PangeaTechnologies </p>
+        <p>
+		<table width="100%" class="table table-striped table-hover">
+      <th> Id  </th>
+      <th> Nombre </th>
+      <th> Descripción </th>
+      <th>Enlace</th>
+      <th> Editar  </th>
+      <th> Eliminar  </th>
+      <th> Ver  </th>
+      <?php    
+		for ($i=0;$i<$registros;$i++)
+			{
+
+			$row = pg_fetch_array ($result,$i );
+			
+			echo '<tr>';
+			echo '<td width="10%">'.$row[0].'</td>';
+			echo '<td width="15%">'.$row[1].'</td>';
+			echo '<td width="23%">'.substr($row[2],0,30)."...".'</td>';
+			echo '<td width="15%">'.$row[3].'</td>';
+			echo '<td width="12%"> <button class="btn btn-primary"> <span class="add-on"><i class="icon-pencil"></i> </span> Editar  </button> </td>';
+			echo '<td width="14%"> <button class="btn btn-primary"> <span class="add-on"><i class="icon-trash"></i></span> Eliminar</button> </td>';
+			echo '<td width="11%"> <button class="btn btn-primary"> <span class="add-on"><i class="icon-eye-open"></i></span> Ver</button> </td>';
+			echo '</tr>';
+			}
+		?>
+		
+</table>
+<?php 
+	}
+?>
+		
+        
+        
+         </p>
       </div>
     </div>
     </div>
@@ -69,5 +127,5 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
 <script type="text/javascript" src="../recursos/js/jquery-2.0.2.js" ></script> 
 <script src="../recursos/js/bootstrap.js"></script> 
 <script src="../recursos/js/bootstrap.min.js"></script>
-</body>
+	</body>
 </html>

@@ -3,7 +3,9 @@ session_start();
 
 include("../recursos/funciones.php");
 $var=conectar();
-
+if(isset($_SESSION["usuarioadmin"]) && isset($_SESSION["passwordadmin"])){
+	iraURL('../administrator/principal.php');
+	}
 if (isset($_POST["Biniciar"])) {
     $user = $_POST["usuario"];
     $pass = $_POST["password"];
