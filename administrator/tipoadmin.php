@@ -58,7 +58,7 @@ $conn=conectar();
           </ul>
           
 
-        </div>
+        
       </div>
     </div>
     <div class="span9">
