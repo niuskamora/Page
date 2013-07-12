@@ -94,7 +94,7 @@ $conn=conectar();
 			echo '<td width="10%">'.$row["tipoadministradorid"].'</td>';
 			echo '<td width="20%">'.$row["nombre"].'</td>';
 			echo '<td width="44%">'.$row["descripcion"].'</td>';
-			echo '<td width="12%"> <a href="editartipoadmin.php?id='.$row["tipoadministradorid"].'&boton=editar" <button class="btn btn-primary  type="submit" name=boton value=ed> <span class="add-on"><i class="icon-pencil"></i> </span> Editar  </button> </td> >';
+			echo '<td width="12%"> <a href="editartipoadmin.php?id='.$row["tipoadministradorid"].'&boton=editar" <button class="btn btn-primary  type="submit" name=boton> <span class="add-on"><i class="icon-pencil"></i> </span> Editar  </button>  </td></a>';
 			echo '<td width="14%"> <button class="btn btn-primary" name=boton value=eliminar> <span class="add-on"><i class="icon-trash"></i></span> Eliminar</button> </td>';
 			echo '</tr>';
 		
