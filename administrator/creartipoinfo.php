@@ -2,7 +2,7 @@
 session_start();
 
 include("../recursos/funciones.php");
-$var=conectar();
+$conn=conectar();
 if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
 	iraURL('../administrator/index.php');
 	}
@@ -30,7 +30,7 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
         <div id="barrap" class="nav-collapse collapse">
           <ul class="nav slidernav">
             <li><a href="admin.php">Administrador</a></li>
-            <li><a href="usuario.php">Usuario</a></li>
+            <li><a href="usuario">Usuario</a></li>
             <li><a href="menu.php">Menú</a></li>
             <li><a href="info.php">Información</a></li>
             <li><a href="producto.php">Producto</a></li>
@@ -52,12 +52,32 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
                        
     <div class="span3">
       <div style="text-align:center">
-        <h2> Bienvenidos </h2>
+        
+         <div class="btn-group btn-group-vertical">
+           <button class="btn btn-primary dropdown-menu btn-large text-left " onclick="location.href='../administrator/tipoinfo.php'"> <span class="add-on"><i class="icon-arrow-left"></i></span> Atras   </button>
+        
+        </div>
       </div>
     </div>
     <div class="span9">
       <div class="well well-large">
-        <p> En este sitio se podran realizar todas las acciones necesarias para alimentar el contenido de la Pagina Web principal de PangeaTechnologies </p>
+      <form method="post">
+  <table class="table table-striped table-hover">
+	      <th> Nombre </th>
+	      <td> <input type="text" name="nombre" id="nombre" /></td>
+      </tr>
+	  <tr>
+	    <th> Descripción </th>
+	    <td><input type="text" name="desc" id="desc" /></td>
+      </tr>
+       <tr>
+	    <td></td>
+	    <td><button class="btn btn-primary" id="crear_uno" name="crear_uno" type="submit">Guardar</button>
+       <button class="btn btn-primary" id="crear_otro" name="crear_otro" type="submit">Guardar y añadir otro</button></td>
+      </tr>
+      
+</table>
+ </form >
       </div>
     </div>
     </div>
@@ -69,5 +89,23 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
 <script type="text/javascript" src="../recursos/js/jquery-2.0.2.js" ></script> 
 <script src="../recursos/js/bootstrap.js"></script> 
 <script src="../recursos/js/bootstrap.min.js"></script>
+	<?php 
+	//codigo para guardar y volver a la pagina de tipoinformacion.php
+	if(isset($_POST["crear_uno"])){
+			 $insertar = "insert into tipoinformacion values(nextval('tipoinformacion_tipoinformacionid_seq'),'".$_POST['nombre']."','".$_POST['desc']."');";
+			 $conex=conectar();
+	pg_query($conex,$insertar) or die (pg_last_error($conex));
+	iraURL('../administrator/tipoinfo.php');		
+	llenarLog(1,"Tipo de Información");
+	}
+	//codigo para guardar y volver a recargar la pagina para crear otro
+	if(isset($_POST["crear_otro"])){
+			 $insertar = "insert into tipoinformacion values(nextval('tipoinformacion_tipoinformacionid_seq'),'".$_POST['nombre']."','".$_POST['desc']."');";
+			 $conex=conectar();
+	pg_query($conex,$insertar) or die (pg_last_error($conex));
+	iraURL('../administrator/creartipoinfo.php');	
+	llenarLog(1,"Tipo de Información");	
+	}
+	?>
 </body>
 </html>

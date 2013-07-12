@@ -92,6 +92,7 @@ if(isset($_POST["guardar2"])){
 		$nombre=$_POST['nombres'];
 		$descripcion=$_POST['descripcionn'];
         pg_query($conn,"INSERT INTO tipoadministrador values( nextval('tipoadministrador_tipoadministradorid_seq'),'$nombre','$descripcion')") or die(pg_last_error($conn));
+llenarLog(1, "creo tipo Administrador");
 javaalert("El tipo de administrador fue creado con exito");
 iraURL("creartipoadmin.php");
 }

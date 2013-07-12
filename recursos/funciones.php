@@ -1,7 +1,8 @@
 <?php
+
 //conexión de la base de dattos
 function conectar(){{
-	   if (!($conexion = pg_connect("host=192.168.1.107 dbname=pangeapage port=5432 user=postgres password=p4ng34"))){
+	   if (!($conexion = pg_connect("host=localhost dbname=pangeapage port=5432 user=postgres password=p4ng34"))){
 	       echo "No pudo conectarse al servidor";
 	       exit();
 	   }
@@ -78,10 +79,11 @@ function iraURL($url){
 //eliminando variables de sesion de cuenta de administradores
 function quitarsesion(){
     if(isset($_SESSION["id_usuario"]))
-	//llenarLog($_SESSION["id_usuario"],5,"Bitacora","");
-    
-	unset($_SESSION["usuario"]);
-	unset($_SESSION["password"]);
+	llenarLog(5,"EN CUENTA DE ADMINISTRADORES");
+	unset($_SESSION["usuarioadmin"]);
+	unset($_SESSION["passwordadmin"]);
+	unset($_SESSION["id_usuario"]);
+	
 }
 //alertas
 function javaalert($msj){
@@ -110,7 +112,7 @@ function llenarLog($accion,$descripcion){
 			$accion="FIN DE SESIÓN";
 			break;	
 		}
-pg_query($conex,"INSERT INTO bitacora values( nextval('bitacora_bitacoraid_seq'),'".$accion."',current_date,current_time,".$_SESSION["id_usuario"].",'".$descripcion."')") or die(pg_last_error($conex));
+pg_query($conex,"INSERT INTO bitacora values(nextval('bitacora_bitacoraid_seq'),'".$accion."',current_date,current_time,".$_SESSION["id_usuario"].",'".$descripcion."')") or die(pg_last_error($conex));
 
 }
 ?>
