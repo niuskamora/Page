@@ -3,6 +3,9 @@ session_start();
 
 include("../recursos/funciones.php");
 $conn=conectar();
+if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
+	iraURL('../administrator/index.php');
+	}
 
 ?>
 
@@ -38,7 +41,7 @@ $conn=conectar();
             <li><a href="sucursal.php">Sucursal</a></li>
             <li><a href="tipoinfo.php">Tipo Infomación</a></li>
             <li><a href="tipoadmin.php">Tipo Administrador</a></li>
-            <li><a href="index.php">Cerrar Sesión</a></li>
+            <li><a href="cerrarsesion.php">Cerrar Sesión</a></li>
           </ul>
         </div>
         <!-- /.nav-collapse --> 
@@ -65,6 +68,24 @@ $conn=conectar();
       </div>
     </div>
     <div class="span9">
+    
+      <?php 
+		
+		$SQL="SELECT * FROM tipoadministrador";
+		$result = pg_query ($conn, $SQL ) or die("Error en la consulta SQL");
+		$registros= pg_num_rows($result);
+	if($registros == 0){
+    ?>
+    <div class="alert alert-block">
+    <h2 class="alert alert-block">Alerta</h2>
+    <h4>No existen registros en tipo de Información</h4>
+   
+    </div>
+     <?php 
+	}else{
+	
+	?>
+    
       <div class="well well-large">
       <br><br>
       
@@ -72,9 +93,6 @@ $conn=conectar();
         <p>
         <?php
 		
-		$SQL="SELECT * FROM tipoadministrador";
-		$result = pg_query ($conn, $SQL ) or die("Error en la consulta SQL");
-		$registros= pg_num_rows($result);
 
 	//mostrar resultados
 	?>
@@ -125,6 +143,7 @@ $conn=conectar();
 	 </form> 	
 </tbody>	  
     </table>
+    }
 
     <ul id="pagination" class="footable-nav"><span>Pages:</span></ul>
 

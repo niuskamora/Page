@@ -3,6 +3,9 @@ session_start();
 
 include("../recursos/funciones.php");
 $conn=conectar();
+if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
+	iraURL('../administrator/index.php');
+	}
 
 ?>
 
@@ -35,7 +38,7 @@ $conn=conectar();
             <li><a href="sucursal.php">Sucursal</a></li>
             <li><a href="tipoinfo.php">Tipo Infomación</a></li>
             <li><a href="tipoadmin.php"> <em> <b> Tipo Administracion </b> </em>  </a></li>
-            <li><a href="index.php">Cerrar Sesión</a></li>
+            <li><a href="cerrarsesion.php">Cerrar Sesión</a></li>
           </ul>
         </div>
         <!-- /.nav-collapse --> 

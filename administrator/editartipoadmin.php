@@ -2,6 +2,9 @@
 session_start();
 include("../recursos/funciones.php");
 $conn=conectar();
+if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
+	iraURL('../administrator/index.php');
+	}
 
 switch( $_GET['boton'] ) {
 case "eliminar": $SQL="DELETE FROM tipoadministrador WHERE tipoadministradorid=".$_GET['id'];
@@ -53,7 +56,7 @@ break;
             <li><a href="sucursal.php">Sucursal</a></li>
             <li><a href="tipoinfo.php">Tipo Infomación</a></li>
             <li><a href="tipoadmin.php"> <em> <b> Tipo Administrador</b> </em>  </a></li>
-            <li><a href="index.php">Cerrar Sesión</a></li>
+            <li><a href="cerrarsesion.php">Cerrar Sesión</a></li>
           </ul>
         </div>
         <!-- /.nav-collapse --> 
