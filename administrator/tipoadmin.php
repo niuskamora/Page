@@ -27,14 +27,15 @@ $conn=conectar();
       <div class="container" style="width: auto;"> <a class="btn btn-navbar" href="#nav" data-toggle="collapse" data-target="#barrap"> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </a> <a  class="brand" id="brand-admin" href="#">PANGEATECH</a>
         <div id="barrap" class="nav-collapse collapse">
           <ul class="nav slidernav">
-            <li><a href="#servicios"> <b> Administrador </b> </a></li>
-            <li><a href="#productos"> <b>Usuario</b></a></li>
-            <li><a href="#tecnologia"> <b>Menu</b></a></li>
-            <li><a href="#nosotros"> <b>Informacion</b></a></li>
-            <li><a href="#contacto"> <b>Producto</b></a></li>
-            <li><a href="#tecnologia"> <b>Sucursal</b></a></li>
-            <li><a href="#nosotros"> <b>Tipo Info</b></a></li>
-            <li><a href="#contacto"> <b>Tipo Admin</b></a></li>
+            <li><a href="admin.php">Administrador</a></li>
+            <li><a href="usuario">Usuario</a></li>
+            <li><a href="menu.php">Menú</a></li>
+            <li><a href="info.php">Información</a></li>
+            <li><a href="producto.php">Producto</a></li>
+            <li><a href="sucursal.php">Sucursal</a></li>
+            <li><a href="tipoinfo.php">Tipo Infomación</a></li>
+            <li><a href="tipoadmin.php">Tipo Administrador</a></li>
+            <li><a href="index.php">Cerrar Sesión</a></li>
           </ul>
         </div>
         <!-- /.nav-collapse --> 
@@ -74,11 +75,13 @@ $conn=conectar();
 		<table width="100%" class="table table-striped table-hover">
       <th> Id  </th>
       <th> Nombre </th>
-      <th> Descripcion </th>
-      <th> Editar  </th>
-      <th> Eliminar  </th>
-  
-      <?php    
+      <th> Descripción </th>
+      <th> <span class="add-on"> <i class="icon-pencil"></i> </span> Editar  </th>
+      <th><span class="add-on"><i class="icon-trash"></i></span> Eliminar  </th>
+    <form action="editartipoadmin.php" method="post"> 
+     
+      <?php   
+	  
 		for ($i=0;$i<$registros;$i++)
 			{
 
@@ -87,13 +90,20 @@ $conn=conectar();
 			echo '<tr>';
 			echo '<td width="10%">'.$row["tipoadministradorid"].'</td>';
 			echo '<td width="20%">'.$row["nombre"].'</td>';
-			echo '<td width="40%">'.$row["descripcion"].'</td>';
-			echo '<td width="15%"> <button class="btn btn-primary"> <span class="add-on"><i class="icon-pencil"></i> </span> Editar  </button> </td>';
-			echo '<td width="15%"> <button class="btn btn-primary"> <span class="add-on"><i class="icon-trash"></i></span> Eliminar</button> </td>';
+			echo '<td width="44%">'.$row["descripcion"].'</td>';
+			echo '<td width="12%"> <button class="btn btn-primary  type="submit" name=boton value=editar> <span class="add-on"><i class="icon-pencil"></i> </span> Editar  </button> </td>';
+			echo '<td width="14%"> <button class="btn btn-primary" name=boton value=eliminar> <span class="add-on"><i class="icon-trash"></i></span> Eliminar</button> </td>';
 			echo '</tr>';
+			 echo '<input name="id" type="hidden" value="'.$row["tipoadministradorid"].'">';
+			 echo '<input name="nombre" type="hidden" value="'.$row["nombre"].'">';
+			 echo '<input name="descripcion" type="hidden" value="'.$row["descripcion"].'">';
+			 
+            
 			}
+			
+    
 		?>
-		
+	 </form> 	
 </table>
 
 		
