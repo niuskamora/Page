@@ -40,7 +40,7 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
             <li><a href="producto.php">Producto</a></li>
             <li><a href="sucursal.php">Sucursal</a></li>
             <li><a href="tipoinfo.php">Tipo Infomación</a></li>
-            <li><a href="tipoadmin.php">Tipo Administrador</a></li>
+            <li><a href="tipoadmin.php"> <em><b>Tipo Administrador </b></em> </a></li>
             <li><a href="cerrarsesion.php">Cerrar Sesión</a></li>
           </ul>
         </div>
@@ -74,12 +74,12 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
 		$SQL="SELECT * FROM tipoadministrador";
 		$result = pg_query ($conn, $SQL ) or die("Error en la consulta SQL");
 		$registros= pg_num_rows($result);
-		$registros = 0;
+		
 	if($registros == 0){
     ?>
     <div class="well alert alert-block">
     <h2 class="alert alert-block">Atención</h2>
-    <h4>No existen registros en tipo de Información</h4>
+    <h4>No existen registros en tipo de Administracion</h4>
     </div>
      <?php 
 	}else{
@@ -131,7 +131,7 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
 			echo '<td width="20%">'.$row["nombre"].'</td>';
 			echo '<td width="42%">'.$row["descripcion"].'</td>';
 			echo '<td width="14%"> <a href="editartipoadmin.php?id='.$row["tipoadministradorid"].'&boton=editar"> <button class="btn btn-primary"  type="button" name="boton"> <span class="add-on"><i class="icon-pencil"></i> </span> Editar  </button>  </td></a>';
-			echo '<td width="14%">  <a href="editartipoadmin.php?id='.$row["tipoadministradorid"].'&boton=eliminar"> <button class="btn btn-primary"  type="button"  name="boton"> <span class="add-on"><i class="icon-pencil"></i> </span> Editar  </button>  </td></a>';
+			echo '<td width="14%">  <a href="eliminartipoadmin.php?id='.$row["tipoadministradorid"].'&boton=eliminar"> <button class="btn btn-primary"  type="button"  name="boton"> <span class="add-on"><i class="icon-pencil"></i> </span> Eliminar  </button>  </td></a>';
 			echo '</tr>';
             
 			}

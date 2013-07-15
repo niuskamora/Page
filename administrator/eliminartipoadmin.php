@@ -68,95 +68,103 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
       </div>
     </div>
     <div class="span9">
-    
+   
       <?php 
 		
-		$SQL="SELECT * FROM tipoadministrador";
+		 $SQL="SELECT * FROM tipoadministrador WHERE tipoadministradorid=".$_GET['id'];
 		$result = pg_query ($conn, $SQL ) or die("Error en la consulta SQL");
 		$registros= pg_num_rows($result);
-	if($registros == 0){
+		$row = pg_fetch_array ($result);
+		
+		
+		$SQL2="SELECT * FROM administrador  WHERE tipoadministradorid=".$_GET['id'];
+		$result2 = pg_query ($conn, $SQL2 ) or die("Error en la consulta SQL");
+		$registros2= pg_num_rows($result2);
+		
+		if($registros2!=0){
+		 
+			?>  
+            
+            <div class="well alert alert-danger">
+    <h2 class="alert alert-danger">Atención</h2>
+    <h4>no se puede eliminar el registro </h4>
+	 </div>
+     
+     
+     <?php
+		  }
+		else if($registros2==0){
+		
     ?>
-    <div class="alert alert-block">
-    <h2 class="alert alert-block">Atención</h2>
-    <h4>No existen registros en tipo de Información</h4>
-    </div>
-     <?php 
-	}else{
-	
-	?>
     
+    
+    
+    
+    
+    <div class="well well-small alert alert-block">
+    <h2 class="alert alert-block">Atención</h2>
+    <h4>Desea eliminar el registro </h4>
+   
+    </div>
+
       <div class="well well-large">
       <br><br>
       
-      
-        <p>
-        <?php
-		
-
-	//mostrar resultados
-	?>
-	 <table class="footable table-striped table-hover" data-page-size="5">
+      <form method="post">
+	    <table class="footable table-striped table-hover" data-page-size="5">
 			  <thead>
 				<tr>
 				  <th data-class="expand" data-sort-initial="true" data-type="numeric">
-					<span>Id</span>
-				  </th>
-				  <th>
 					<span>Nombre</span>
 				  </th>
-				  <th data-hide="phone" data-sort-ignore="true">
-					Descripcion
+				  <th>
+					<span>Descripcion</span>
 				  </th>
-				  <th data-hide="phone" data-sort-ignore="true">
-					<span class="add-on"> <i class="icon-pencil"></i> </span> Editar 
-				  </th>
-				  <th data-hide="phone" data-sort-ignore="true">
-				<span class="add-on"><i class="icon-trash"></i></span> Eliminar 
-				  </th>
+                
+				 
 				</tr>
 			  </thead>
 				<tbody>
-    <form action="editartipoadmin.php" method="get"> 
-   
-      <?php   
 	  
-		for ($i=0;$i<$registros;$i++)
-			{
-
-			$row = pg_fetch_array ($result,$i );
+      <?php   
+	  echo '<tr>';
+		echo '<td width="40%">  <label>'.$row["nombre"].' </label></td>';
 			
-			echo '<tr>';
-			echo '<td width="10%">'.$row["tipoadministradorid"].'</td>';
-			echo '<td width="20%">'.$row["nombre"].'</td>';
-			echo '<td width="42%">'.$row["descripcion"].'</td>';
-			echo '<td width="14%"> <a href="editartipoadmin.php?id='.$row["tipoadministradorid"].'&boton=editar"> <button class="btn btn-primary"  type="button" name="boton"> <span class="add-on"><i class="icon-pencil"></i> </span> Editar  </button>  </td></a>';
-			echo '<td width="14%">  <a href="editartipoadmin.php?id='.$row["tipoadministradorid"].'&boton=eliminar"> <button class="btn btn-primary"  type="button"  name="boton"> <span class="add-on"><i class="icon-pencil"></i> </span> Editar  </button>  </td></a>';
+			echo ' <td width="60%"> <label>'.$row["descripcion"].' </label></td>';
+			
+			
 			echo '</tr>';
-		
-			
-            
-			}
-			
-    
 		?>
-	 </form> 	
-</tbody>	  
+ </tbody>	  
     </table>
-    <?php
-    }
-	?>
-
-    <ul id="pagination" class="footable-nav"><span>Pages:</span></ul>
-
+    
+    <button id="si" name="si" class="btn-primary text-center " type="submit">  Si  </button>
+     <button id="no" name="no" class="btn-primary text-center " type="submit">  No </button>
+	 </form> 
+    
+     	<?php
+		   
 		
-        
-        
-         </p>
-      </div>
-    </div>
-    </div>
-  
-</div>
+		
+		
+		}
+		
+if(isset($_POST["si"])){
+	   $SQL="DELETE FROM tipoadministrador WHERE tipoadministradorid=".$_GET['id'];
+		$result = pg_query ($conn, $SQL ) or die("Error en la consulta SQL");
+		llenarLog(3, "elimino tipo Administrador");
+		javaalert("El tipo de administrador fue eliminado");
+		iraURL("tipoadmin.php");
+		
+	
+}
+if(isset($_POST["no"])){
+		iraURL("tipoadmin.php");  
+	
+}
+?>
+      
+
 
 <!-- Le javascript
 ================================================== --> 
@@ -173,5 +181,7 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
       $('table').footable();
     });
   </script>
+ 
+ 
 	</body>
 </html>

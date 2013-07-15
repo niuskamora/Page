@@ -6,17 +6,6 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
 	iraURL('../administrator/index.php');
 	}
 
-switch( $_GET['boton'] ) {
-case "eliminar": $SQL="DELETE FROM tipoadministrador WHERE tipoadministradorid=".$_GET['id'];
-		$result = pg_query ($conn, $SQL ) or die("Error en la consulta SQL");
-		llenarLog(3, "elimino tipo Administrador");
-		javaalert("El tipo de administrador fue eliminado");
-		iraURL("tipoadmin.php");
-		
-	
-break;
-}
-
 
 
 
