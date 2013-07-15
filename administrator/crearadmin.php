@@ -27,7 +27,7 @@ $conn=conectar();
       <div class="container" style="width: auto;"> <a class="btn btn-navbar" href="#nav" data-toggle="collapse" data-target="#barrap"> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </a> <a  class="brand" id="brand-admin" href="#">PANGEATECH</a>
         <div id="barrap" class="nav-collapse collapse">
           <ul class="nav slidernav">
-             <li><a href="admin.php">Administrador</a></li>
+            <li><a href="admin.php"> <em> <b> Administrador </b> </em> </a></li>
             <li><a href="usuario.php">Usuario</a></li>
             <li><a href="menu.php">Menú</a></li>
             <li><a href="info.php">Información</a></li>
@@ -66,19 +66,19 @@ $conn=conectar();
         	<table width="100%" class="table table-bordered">
             	<tr>
                 	<th>Nombre</th>
-                    <td><input id="nombre" name="nombre" type="text"/></td>
+                    <td><input id="nombre" name="nombre" type="text" required/></td>
                 </tr>
                 <tr>
                 	<th>Apellido</th>
-                    <td><input id="apellido" name="apellido" type="text"/></td>
+                    <td><input id="apellido" name="apellido" type="text" required/></td>
                 </tr>
                 <tr>
                 	<th>Usuario</th>
-                    <td><input id="usuario" name="usuario" type="text"/></td>
+                    <td><input id="usuario" name="usuario" type="text" required/></td>
                 </tr>
                 <tr>
                 	<th>Contraseña</th>
-                    <td><input id="contrasena" name="contrasena" type="password"/></td>
+                    <td><input id="contrasena" name="contrasena" type="password" required/></td>
                 </tr>
                 <tr>
                 	<th>Tipo Administrador</th>

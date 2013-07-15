@@ -3,7 +3,9 @@ session_start();
 
 include("../recursos/funciones.php");
 $conn=conectar();
-
+if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
+	iraURL('../administrator/index.php');
+	}
 ?>
 
 <!DOCTYPE html>
@@ -30,15 +32,15 @@ $conn=conectar();
       <div class="container" style="width: auto;"> <a class="btn btn-navbar" href="#nav" data-toggle="collapse" data-target="#barrap"> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </a> <a  class="brand" id="brand-admin" href="#">PANGEATECH</a>
         <div id="barrap" class="nav-collapse collapse">
           <ul class="nav slidernav">
-            <li><a href="admin.php"><em><b>Administrador</b></em></a></li>
+            <li><a href="admin.php">Administrador</a></li>
             <li><a href="usuario.php">Usuario</a></li>
             <li><a href="menu.php">Menú</a></li>
-            <li><a href="info.php">Información</a></li>
+            <li><a href="info.php"> <em> <b>Información </b> </em> </a></li>
             <li><a href="producto.php">Producto</a></li>
             <li><a href="sucursal.php">Sucursal</a></li>
             <li><a href="tipoinfo.php">Tipo Infomación</a></li>
             <li><a href="tipoadmin.php">Tipo Administrador</a></li>
-            <li><a href="index.php">Cerrar Sesión</a></li>
+            <li><a href="cerrarsesion.php">Cerrar Sesión</a></li>
           </ul>
         </div>
         <!-- /.nav-collapse --> 
@@ -56,7 +58,7 @@ $conn=conectar();
         
          <div class="btn-group btn-group-vertical">
           
-              <button class="btn btn-primary dropdown-menu btn-large text-left" onClick="location.href='crearadmin.php'"> <span class="add-on"><i class="icon-plus "></i></span> Crear   </button>
+              <button class="btn btn-primary dropdown-menu btn-large text-left" onClick="location.href='crearinfo.php'"> <span class="add-on"><i class="icon-plus "></i></span> Crear   </button>
              <button class="btn btn-primary dropdown-menu btn-large text-left " onClick="location.href='principal.php'"> <span class="add-on"><i class="icon-arrow-left"></i></span> Atras   </button>
         
         </div>
@@ -65,7 +67,7 @@ $conn=conectar();
     <div class="span9">
     <?php
 		
-		$SQL="SELECT * FROM administrador";
+		$SQL="SELECT * FROM informacion";
 		$result = pg_query ($conn, $SQL ) or die("Error en la consulta SQL");
 		$registros= pg_num_rows($result);
 
@@ -73,7 +75,7 @@ $conn=conectar();
     	?>
     		<div class="alert alert-block">
    			<h2 class="alert alert-block">Atención</h2>
-    		<h4>No Existen Registros en Adminsitrador</h4>
+    		<h4>No Existen Registros en Información</h4>
    			</div>
      <?php 
 		}else{
@@ -82,19 +84,19 @@ $conn=conectar();
       <div class="well well-large">
         <p>
         <table class="footable table-striped table-hover" data-page-size="5">
-        <thead>
+        	<thead>
 				<tr>
 				  <th data-class="expand" data-sort-initial="true" data-type="numeric">
 					<span>Id</span>
 				  </th>
 				  <th>
-					<span>Nombre</span>
+					<span>Título</span>
 				  </th>
 				  <th data-hide="phone" data-sort-ignore="true">
-					Apellido
+					Descripción
 				  </th>
                   <th data-hide="phone" data-sort-ignore="true">
-					Usuario
+					Enlace
 				  </th>
 				  <th data-hide="phone" data-sort-ignore="true">
 					<span class="add-on"> <i class="icon-pencil"></i> </span> Editar 
@@ -107,9 +109,8 @@ $conn=conectar();
 				  </th>
 				</tr>
 			  </thead>
-              
-              <tbody>
             
+           <tbody>
 	<form  method="get"> 
       <?php    
 		for ($i=0;$i<$registros;$i++){
@@ -117,24 +118,23 @@ $conn=conectar();
 			$row = pg_fetch_array ($result,$i);
 			
 			echo '<tr>';
-			echo '<td width="10%">'.$row["administradorid"].'</td>';
-			echo '<td width="15%">'.$row["nombre"].'</td>';
-			echo '<td width="17%">'.$row["apellido"].'</td>';
-			echo '<td width="18%">'.$row["usuario"].'</td>';
-			echo '<td width="14%"> <a href="editaradmin.php?id='.$row["administradorid"].'&boton=editar"> <button class="btn btn-primary"  type="button" name="boton"> <span class="add-on"><i class="icon-pencil"></i> </span> Editar  </button>  </td></a>';
-			echo '<td width="15%"> <a href="editaradmin.php?id='.$row["administradorid"].'&boton=eliminar"> <button class="btn btn-primary"  type="button" name="boton"> <span class="add-on"><i class="icon-trash"></i> </span> Eliminar  </button>  </td></a>';
-			echo '<td width="12%"> <a href="editaradmin.php?id='.$row["administradorid"].'&boton=ver"> <button class="btn btn-primary"  type="button" name="boton"> <span class="add-on"><i class="icon-eye-open"></i> </span> Ver  </button>  </td></a>';
+			echo '<td width="10%">'.$row["informacionid"].'</td>';
+			echo '<td width="15%">'.$row["titulo"].'</td>';
+			echo '<td width="17%">'.$row["descripcion"].'</td>';
+			echo '<td width="18%">'.$row["enlace"].'</td>';
+			echo '<td width="14%"> <a href="editarinfo.php?id='.$row["informacionid"].'&boton=editar"> <button class="btn btn-primary"  type="button" name="boton"> <span class="add-on"><i class="icon-pencil"></i> </span> Editar  </button>  </td></a>';
+			echo '<td width="15%"> <a href="editarinfo.php?id='.$row["informacionid"].'&boton=eliminar"> <button class="btn btn-primary"  type="button" name="boton"> <span class="add-on"><i class="icon-trash"></i> </span> Eliminar  </button>  </td></a>';
+			echo '<td width="12%"> <a href="editarinfo.php?id='.$row["informacionid"].'&boton=ver"> <button class="btn btn-primary"  type="button" name="boton"> <span class="add-on"><i class="icon-eye-open"></i> </span> Ver  </button>  </td></a>';
 			echo '</tr>';
 			}
 		?>
 	</form>
-    
     </tbody>
 </table>
 
-<?php } ?>
+ <?php } ?>
 
- <ul id="pagination" class="footable-nav"><span>Pages:</span></ul>
+<ul id="pagination" class="footable-nav"><span>Pages:</span></ul>
          </p>
       </div>
     </div>
