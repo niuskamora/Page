@@ -35,7 +35,7 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
             <li><a href="info.php">Información</a></li>
             <li><a href="producto.php">Producto</a></li>
             <li><a href="sucursal.php">Sucursal</a></li>
-            <li><a href="tipoinfo.php">Tipo Infomación</a></li>
+            <li><a href="tipoinfo.php"><em> <b>Tipo Infomación </b> </em></a></li>
             <li><a href="tipoadmin.php">Tipo Administrador</a></li>
              <li><a href="cerrarsesion.php">Cerrar Sesión</a></li>
           </ul>
@@ -89,22 +89,32 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
 <script type="text/javascript" src="../recursos/js/jquery-2.0.2.js" ></script> 
 <script src="../recursos/js/bootstrap.js"></script> 
 <script src="../recursos/js/bootstrap.min.js"></script>
-	<?php 
+<?php 
 	//codigo para guardar y volver a la pagina de tipoinformacion.php
 	if(isset($_POST["crear_uno"])){
+		if($_POST["nombre"]!="" && $_POST["desc"]!=""){
 			 $insertar = "insert into tipoinformacion values(nextval('tipoinformacion_tipoinformacionid_seq'),'".$_POST['nombre']."','".$_POST['desc']."');";
 			 $conex=conectar();
 	pg_query($conex,$insertar) or die (pg_last_error($conex));
 	iraURL('../administrator/tipoinfo.php');		
 	llenarLog(1,"Tipo de Información");
+			}else{
+				javaalert("Debe agregar el nombre y la descripción");
+			}
+			
 	}
 	//codigo para guardar y volver a recargar la pagina para crear otro
 	if(isset($_POST["crear_otro"])){
-			 $insertar = "insert into tipoinformacion values(nextval('tipoinformacion_tipoinformacionid_seq'),'".$_POST['nombre']."','".$_POST['desc']."');";
+		if($_POST["nombre"]!="" && $_POST["desc"]!=""){		
+		 $insertar = "insert into tipoinformacion values(nextval('tipoinformacion_tipoinformacionid_seq'),'".$_POST['nombre']."','".$_POST['desc']."');";
 			 $conex=conectar();
 	pg_query($conex,$insertar) or die (pg_last_error($conex));
 	iraURL('../administrator/creartipoinfo.php');	
 	llenarLog(1,"Tipo de Información");	
+			}else{
+				javaalert("Debe agregar el nombre y la descripción");
+			}
+			
 	}
 	?>
 </body>

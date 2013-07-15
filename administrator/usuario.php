@@ -30,7 +30,7 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
         <div id="barrap" class="nav-collapse collapse">
           <ul class="nav slidernav">
            <li><a href="admin.php">Administrador</a></li>
-            <li><a href="usuario.php">Usuario</a></li>
+            <li><a href="usuario.php"><em> <b>Usuario</b> </em></a></li>
             <li><a href="menu.php">Menú</a></li>
             <li><a href="info.php">Información</a></li>
             <li><a href="producto.php">Producto</a></li>
@@ -71,8 +71,9 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
 	if($registros == 0){
     ?>
     <div class="alert alert-block" >
-    <h2 class="alert-block">Alerta</h2>
+   <h2 class="alert alert-block">Atención  
     <h4>No existen registros en usuario</h4>
+    </h2>
    
     </div>
      <?php 
