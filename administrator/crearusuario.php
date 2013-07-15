@@ -20,8 +20,6 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
 <link href="../recursos/css/bootstrap.min.css" rel="stylesheet">
 <link href="../recursos/css/bootstrap-responsive.min.css" rel="stylesheet">
 <link href="../recursos/css/estiloadmin.css" rel="stylesheet">
-	<!-- Importanto plantilla del Redactor -->
-	<link rel="stylesheet" href="../recursos/redactor/redactor.css" />
 </head>
 
 <body class="preview" id="top" data-spy="scroll" data-target=".subnav" data-offset="80">
@@ -32,14 +30,14 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
         <div id="barrap" class="nav-collapse collapse">
           <ul class="nav slidernav">
             <li><a href="admin.php">Administrador</a></li>
-            <li><a href="usuario.php">Usuario</a></li>
+            <li><a href="usuario.php"><em> <b>Usuario</b> </em></a></li>
             <li><a href="menu.php">Menú</a></li>
             <li><a href="info.php">Información</a></li>
             <li><a href="producto.php">Producto</a></li>
             <li><a href="sucursal.php">Sucursal</a></li>
-            <li><a href="tipoinfo.php"><em> <b>Tipo Infomación </b> </em></a></li>
+            <li><a href="tipoinfo.php">Tipo Infomación </a></li>
             <li><a href="tipoadmin.php">Tipo Administrador</a></li>
-            <li><a href="cerrarsesion.php">Cerrar Sesión</a></li>
+             <li><a href="cerrarsesion.php">Cerrar Sesión</a></li>
           </ul>
         </div>
         <!-- /.nav-collapse --> 
@@ -56,7 +54,7 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
       <div style="text-align:center">
         
          <div class="btn-group btn-group-vertical">
-           <button class="btn btn-primary dropdown-menu btn-large text-left " onclick="location.href='../administrator/tipoinfo.php'"> <span class="add-on"><i class="icon-arrow-left"></i></span> Atras   </button>
+           <button class="btn btn-primary dropdown-menu btn-large text-left " onclick="location.href='../administrator/usuario.php'"> <span class="add-on"><i class="icon-arrow-left"></i></span> Atras   </button>
         
         </div>
       </div>
@@ -69,9 +67,25 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
 	      <td> <input type="text" name="nombre" id="nombre" required/></td>
       </tr>
 	  <tr>
-	    <th> Descripción </th>
-	    <td>  <textarea id="redactor" name="redactor"></textarea></td>
+	    <th>Apellido</th>
+	 <td> <input type="text" name="apellido" id="apellido" required/></td>
       </tr>
+      	  <tr>
+	    <th>Dirección</th>
+	 <td> <input type="text" name="direccion" id="direccion" required/></td>
+      </tr>	 
+       <tr>
+	    <th>Nombre de Usuario</th>
+	 <td> <input type="text" name="usuario" id="usuario" required/></td>
+      </tr>
+    <tr>
+	    <th>Contraseña</th>
+     <td><input type="password" name="contrasena" id="contrasena" required/></td>
+      </tr>
+       <tr>
+	    <th>Confirmar contraseña</th>
+     <td><input type="password" name="contrasena_c" id="contrasena_c" required/></td>
+      </tr>      
        <tr>
 	    <td></td>
 	    <td><button class="btn btn-primary" id="crear_uno" name="crear_uno" type="submit">Guardar</button>
@@ -91,34 +105,30 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
 <script type="text/javascript" src="../recursos/js/jquery-2.0.2.js" ></script> 
 <script src="../recursos/js/bootstrap.js"></script> 
 <script src="../recursos/js/bootstrap.min.js"></script>
-<!--Jquery para el Redactor
-================================================== --> 
-<script src="../recursos/redactor/redactor.js"></script>
-	<script src="../recursos/redactor/redactor.min.js"></script>
-	<script type="text/javascript">
-	$(document).ready(
-		function()
-		{
-			$('#redactor').redactor();
-		}
-	);
-	</script>
+
 <?php 
-	//codigo para guardar y volver a la pagina de tipoinformacion.php
-	if(isset($_POST["crear_uno"]) || isset($_POST["crear_otro"])){
-		if(isset($_POST["redactor"]) && $_POST["redactor"]!=""){
-			 $insertar = "insert into tipoinformacion values(nextval('tipoinformacion_tipoinformacionid_seq'),'".$_POST['nombre']."','".$_POST['redactor']."');";
-			 $conex=conectar();
-			pg_query($conex,$insertar) or die (pg_last_error($conex));
-			if(isset($_POST["crear_uno"])){
-				iraURL('../administrator/tipoinfo.php');	
+	//codigo para guardar
+	if(isset($_POST["nombre"]) &&  isset($_POST["apellido"]) && isset($_POST["direccion"]) && isset($_POST["usuario"]) && isset($_POST["contrasena"]) && isset($_POST["contrasena_c"]) && $_POST["nombre"]!="" && $_POST["apellido"]!="" && $_POST["direccion"]!="" && $_POST["usuario"]!="" && $_POST["contrasena"]!="" && $_POST["contrasena_c"]!=""){
+		$SQL="SELECT * FROM usuario where usuario='".$_POST["usuario"]."'";
+		$result = pg_query ($conn, $SQL ) or die("Error en la consulta SQL");
+		$registros= pg_num_rows($result);
+		if($registros == 0){
+				if($_POST["contrasena"]==$_POST["contrasena_c"]){
+						$insertar = "insert into usuario values(nextval('usuario_usuarioid_seq'),'".$_POST['nombre']."','".$_POST['apellido']."','".$_POST['direccion']."','".$_POST['usuario']."','".$_POST['contrasena']."',".$_SESSION["id_usuario"].");";
+						$conex=conectar();
+						pg_query($conex,$insertar) or die (pg_last_error($conex));
+						llenarLog(1,"USUARIO");
+						if(isset($_POST["crear_uno"])){
+						iraURL('../administrator/usuario.php');		
+						}else{
+						iraURL('../administrator/crearusuario.php');	
+							}
+				}else{
+					javaalert("Las contraseñas no coinciden, por favor verifique");
+				}
 			}else{
-				iraURL('../administrator/creartipoinfo.php');	
-				}	
-			llenarLog(1,"Tipo de Información");
-	}else{
-				javaalert("Debe agregar la descripción");
-			}		
+			javaalert("El nombre de usuario ya esta registrado, por favor verfique");
+			}	
 	}
 	?>
 </body>

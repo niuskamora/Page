@@ -55,10 +55,10 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
         
          <div class="btn-group btn-group-vertical">
           
-             <button class="btn btn-primary dropdown-menu btn-large text-left"> <span class="add-on"><i class="icon-plus "></i></span> Crear   </button>
+             <button class="btn btn-primary dropdown-menu btn-large text-left" onclick="location.href='../administrator/crearusuario.php'"> <span class="add-on"><i class="icon-plus "></i></span> Crear   </button>
             
              
-             <button class="btn btn-primary dropdown-menu btn-large text-left "> <span class="add-on"><i class="icon-arrow-left"></i></span> Atras   </button>
+             <button class="btn btn-primary dropdown-menu btn-large text-left " onclick="location.href='../administrator/principal.php'"> <span class="add-on"><i class="icon-arrow-left" ></i></span> Atras   </button>
         
         </div>
       </div>

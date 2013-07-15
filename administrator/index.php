@@ -39,8 +39,8 @@ if (isset($_POST["Biniciar"])) {
 
       <form class="form-signin" id="FormInicio" method="post">
         <h3 class="form-signin-heading">Por favor, inicie sesión</h3>
-        <input type="text" class="input-block-level" placeholder="Usuario" name="usuario" id="usuario">
-        <input type="password" class="input-block-level" placeholder="Contraseña" name="password" id="password">
+        <input type="text" class="input-block-level" placeholder="Usuario" name="usuario" id="usuario" required>
+        <input type="password" class="input-block-level" placeholder="Contraseña" name="password" id="password" required>
         <button class="btn btn-large btn-primary" type="submit" name="Biniciar">Iniciar Sesión</button>
       </form>
 

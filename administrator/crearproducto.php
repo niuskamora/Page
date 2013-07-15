@@ -22,6 +22,7 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
 <link href="../recursos/css/estiloadmin.css" rel="stylesheet">
 	<!-- Importanto plantilla del Redactor -->
 	<link rel="stylesheet" href="../recursos/redactor/redactor.css" />
+	
 </head>
 
 <body class="preview" id="top" data-spy="scroll" data-target=".subnav" data-offset="80">
@@ -32,14 +33,14 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
         <div id="barrap" class="nav-collapse collapse">
           <ul class="nav slidernav">
             <li><a href="admin.php">Administrador</a></li>
-            <li><a href="usuario.php">Usuario</a></li>
+            <li><a href="usuario">Usuario</a></li>
             <li><a href="menu.php">Menú</a></li>
             <li><a href="info.php">Información</a></li>
-            <li><a href="producto.php">Producto</a></li>
+            <li><a href="producto.php"><em> <b>Producto</b> </em></a></li>
             <li><a href="sucursal.php">Sucursal</a></li>
-            <li><a href="tipoinfo.php"><em> <b>Tipo Infomación </b> </em></a></li>
+            <li><a href="tipoinfo.php">Tipo Infomación </a></li>
             <li><a href="tipoadmin.php">Tipo Administrador</a></li>
-            <li><a href="cerrarsesion.php">Cerrar Sesión</a></li>
+             <li><a href="cerrarsesion.php">Cerrar Sesión</a></li>
           </ul>
         </div>
         <!-- /.nav-collapse --> 
@@ -56,7 +57,7 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
       <div style="text-align:center">
         
          <div class="btn-group btn-group-vertical">
-           <button class="btn btn-primary dropdown-menu btn-large text-left " onclick="location.href='../administrator/tipoinfo.php'"> <span class="add-on"><i class="icon-arrow-left"></i></span> Atras   </button>
+           <button class="btn btn-primary dropdown-menu btn-large text-left " onclick="location.href='../administrator/producto.php'"> <span class="add-on"><i class="icon-arrow-left"></i></span> Atras   </button>
         
         </div>
       </div>
@@ -70,7 +71,16 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
       </tr>
 	  <tr>
 	    <th> Descripción </th>
-	    <td>  <textarea id="redactor" name="redactor"></textarea></td>
+	    <td>
+        <textarea id="redactor" name="redactor"></textarea></td>
+      </tr>
+      <tr>
+	    <th> Enlace </th>
+	    <td><input type="text" name="enlace" id="enlace" required/></td>
+      </tr>
+      <tr>
+	    <th> Imagen </th>
+	    <td><input type="text" name="imagen" id="imagen" required/></td>
       </tr>
        <tr>
 	    <td></td>
@@ -83,11 +93,12 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
       </div>
     </div>
     </div>
+
   
 </div>
-
-<!-- Le javascript
+<!-- Javascript
 ================================================== --> 
+
 <script type="text/javascript" src="../recursos/js/jquery-2.0.2.js" ></script> 
 <script src="../recursos/js/bootstrap.js"></script> 
 <script src="../recursos/js/bootstrap.min.js"></script>
@@ -104,22 +115,24 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
 	);
 	</script>
 <?php 
-	//codigo para guardar y volver a la pagina de tipoinformacion.php
+	//codigo para guardar 
 	if(isset($_POST["crear_uno"]) || isset($_POST["crear_otro"])){
-		if(isset($_POST["redactor"]) && $_POST["redactor"]!=""){
-			 $insertar = "insert into tipoinformacion values(nextval('tipoinformacion_tipoinformacionid_seq'),'".$_POST['nombre']."','".$_POST['redactor']."');";
+	if(isset($_POST["redactor"]) && $_POST["redactor"]!="" ){		
+			 $insertar = "insert into producto values(nextval('producto_productoid_seq'),'".$_POST['nombre']."','".$_POST['redactor']."');";
 			 $conex=conectar();
-			pg_query($conex,$insertar) or die (pg_last_error($conex));
-			if(isset($_POST["crear_uno"])){
-				iraURL('../administrator/tipoinfo.php');	
+	pg_query($conex,$insertar) or die (pg_last_error($conex));
+	llenarLog(1,"PRODUCTO");
+	if(isset($_POST["crear_uno"])){
+			iraURL('../administrator/producto.php');		
 			}else{
-				iraURL('../administrator/creartipoinfo.php');	
+			iraURL('../administrator/crearproducto.php');	
 				}	
-			llenarLog(1,"Tipo de Información");
-	}else{
-				javaalert("Debe agregar la descripción");
-			}		
+			}else{
+				javaalert("Debe la descripción");
+			}
+			
 	}
+
 	?>
 </body>
 </html>
