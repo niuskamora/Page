@@ -20,8 +20,7 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
 <link href="../recursos/css/bootstrap.min.css" rel="stylesheet">
 <link href="../recursos/css/bootstrap-responsive.min.css" rel="stylesheet">
 <link href="../recursos/css/estiloadmin.css" rel="stylesheet">
-	<!-- Importanto plantilla del Redactor -->
-	<link rel="stylesheet" href="../recursos/redactor/redactor.css" />
+
 </head>
 
 <body class="preview" id="top" data-spy="scroll" data-target=".subnav" data-offset="80">
@@ -70,7 +69,7 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
       </tr>
 	  <tr>
 	    <th> Descripción </th>
-	    <td>  <textarea id="redactor" name="redactor"></textarea></td>
+	    <td>  <input type="text" id="redactor" name="redactor" required></textarea></td>
       </tr>
        <tr>
 	    <td></td>
@@ -91,22 +90,9 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
 <script type="text/javascript" src="../recursos/js/jquery-2.0.2.js" ></script> 
 <script src="../recursos/js/bootstrap.js"></script> 
 <script src="../recursos/js/bootstrap.min.js"></script>
-<!--Jquery para el Redactor
-================================================== --> 
-<script src="../recursos/redactor/redactor.js"></script>
-	<script src="../recursos/redactor/redactor.min.js"></script>
-	<script type="text/javascript">
-	$(document).ready(
-		function()
-		{
-			$('#redactor').redactor();
-		}
-	);
-	</script>
 <?php 
 	//codigo para guardar y volver a la pagina de tipoinformacion.php
 	if(isset($_POST["crear_uno"]) || isset($_POST["crear_otro"])){
-		if(isset($_POST["redactor"]) && $_POST["redactor"]!=""){
 			 $insertar = "insert into tipoinformacion values(nextval('tipoinformacion_tipoinformacionid_seq'),'".$_POST['nombre']."','".$_POST['redactor']."');";
 			 $conex=conectar();
 			pg_query($conex,$insertar) or die (pg_last_error($conex));
@@ -116,9 +102,7 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
 				iraURL('../administrator/creartipoinfo.php');	
 				}	
 			llenarLog(1,"Tipo de Información");
-	}else{
-				javaalert("Debe agregar la descripción");
-			}		
+	
 	}
 	?>
 </body>
