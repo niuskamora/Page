@@ -74,10 +74,9 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
 		$SQL="SELECT * FROM tipoadministrador";
 		$result = pg_query ($conn, $SQL ) or die("Error en la consulta SQL");
 		$registros= pg_num_rows($result);
-		$registros = 0;
 	if($registros == 0){
     ?>
-    <div class="well alert alert-block">
+    <div class="alert alert-block">
     <h2 class="alert alert-block">Atención</h2>
     <h4>No existen registros en tipo de Información</h4>
     </div>
@@ -133,6 +132,8 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
 			echo '<td width="14%"> <a href="editartipoadmin.php?id='.$row["tipoadministradorid"].'&boton=editar"> <button class="btn btn-primary"  type="button" name="boton"> <span class="add-on"><i class="icon-pencil"></i> </span> Editar  </button>  </td></a>';
 			echo '<td width="14%">  <a href="editartipoadmin.php?id='.$row["tipoadministradorid"].'&boton=eliminar"> <button class="btn btn-primary"  type="button"  name="boton"> <span class="add-on"><i class="icon-pencil"></i> </span> Editar  </button>  </td></a>';
 			echo '</tr>';
+		
+			
             
 			}
 			
