@@ -56,7 +56,7 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
         
          <div class="btn-group btn-group-vertical">
              
-             <button class="btn btn-primary dropdown-menu btn-large text-left " onClick="location.href='principal.php'"> <span class="add-on"><i class="icon-arrow-left"></i></span> Atras</button>
+             <button class="btn btn-primary dropdown-menu btn-large text-left " onClick="location.href='tipoadmin.php'"> <span class="add-on"><i class="icon-arrow-left"></i></span> Atras</button>
         
         </div>
       </div>
@@ -69,11 +69,11 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
         	<table width="100%" class="table table-bordered">
             	<tr>
                 	<th>Nombre</th>
-                    <td><input id="nombres" name="nombres" type="text" value="" /></td>
+                    <td><input title="Se necesita un nombre" id="nombres" name="nombres" type="text" value="" required/></td>
                 </tr>
                 <tr>
                 	<th>Descripcion</th>
-                    <td><input id="descripcionn" name="descripcionn" type="text" value=""/></td>
+             <td><input id="descripcionn" name="descripcionn" type="text" value="" required/></td>
                 </tr>
                 <tr>
                 	<td> </td> <td><button id="guardar" name="guardar" class="btn-primary text-center" type="submit">Guardar</button></td>
@@ -84,29 +84,25 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
 		<?php
 		
 if(isset($_POST["guardar"])){
-	if($_POST["nombres"]=="" || $_POST["descripcionn"]==""){
-		javaalert("Debe agregar el nombre y la descripción");
-	}else{
+
 		$nombre=$_POST['nombres'];
 		$descripcion=$_POST['descripcionn'];
         pg_query($conn,"INSERT INTO tipoadministrador values( nextval('tipoadministrador_tipoadministradorid_seq'),'$nombre','$descripcion')") or die(pg_last_error($conn));
 javaalert("El tipo de administrador fue creado con exito");
 iraURL("tipoadmin.php");
-	}
+	
 }
 
 if(isset($_POST["guardar2"])){
 	
-	if($_POST["nombres"]=="" || $_POST["descripcionn"]==""){
-		javaalert("Debe agregar el nombre y la descripción");
-	}else{
+	
 		$nombre=$_POST['nombres'];
 		$descripcion=$_POST['descripcionn'];
         pg_query($conn,"INSERT INTO tipoadministrador values( nextval('tipoadministrador_tipoadministradorid_seq'),'$nombre','$descripcion')") or die(pg_last_error($conn));
 llenarLog(1, "creo tipo Administrador");
 javaalert("El tipo de administrador fue creado con exito");
 iraURL("creartipoadmin.php");
-	}
+	
 }
 
 	    ?>
