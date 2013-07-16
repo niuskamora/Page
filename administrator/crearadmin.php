@@ -4,6 +4,9 @@ session_start();
 include("../recursos/funciones.php");
 $conn=conectar();
 
+if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
+	iraURL('../administrator/index.php');
+	}
 ?>
 
 <!DOCTYPE html>
@@ -50,14 +53,12 @@ $conn=conectar();
                        
     <div class="span3">
       <div style="text-align:center">
-        
-         <div class="btn-group btn-group-vertical">
-             
-             <button class="btn btn-primary dropdown-menu btn-large text-left " onClick="location.href='admin.php'"> <span class="add-on"><i class="icon-arrow-left"></i></span> Atras</button>
-        
-        </div>
+          <ul class="nav  nav-pills nav-stacked">
+              <li class="active"><a href="admin.php"> <span class="add-on"><i class="icon-arrow-left"></i></span> Atras</a></li>
+          </ul>
       </div>
     </div>
+    
     <div class="span9">
       <div class="well well-large">
         <p>
@@ -80,6 +81,10 @@ $conn=conectar();
                 	<th>Contraseña</th>
                     <td><input id="contrasena" name="contrasena" type="password" required/></td>
                 </tr>
+                <tr>
+                	<th>Confirmar contraseña</th>
+     				<td><input type="password" name="contrasena_c" id="contrasena_c" required/></td>
+     		 	</tr>
                 <tr>
                 	<th>Tipo Administrador</th>
                     <td><select id="tipoadmin" name="tipoadmin">
@@ -109,7 +114,7 @@ $conn=conectar();
         </form>
 <?php
 
-if(isset($_POST["guardar"])){
+if(isset($_POST["guardar"]) || isset($_POST["guardar2"])){
 	
 	$nombre=$_POST['nombre'];
 	$apellido=$_POST['apellido'];
@@ -117,36 +122,32 @@ if(isset($_POST["guardar"])){
 	$contrasena=$_POST['contrasena'];
 	$tipoadmin=$_POST['tipoadmin'];
 
-
-	$resultado=pg_query($conn,"INSERT INTO administrador values( nextval('administrador_administradorid_seq'),'$nombre','$apellido','$usuario','$contrasena',".$_SESSION["id_usuario"].",'$tipoadmin')") or die(pg_last_error($conn));
+	$SQL="SELECT * FROM administrador where usuario='$usuario'";
+	$result = pg_query ($conn, $SQL ) or die("Error en la consulta SQL");
+	$registros= pg_num_rows($result);
 	
-	if($resultado){
-			javaalert('Entro');
-			llenarLog(1, "Creo Administrador");
-			iraURL('../administrator/admin.php');
+	if($registros == 0){
+
+		if($_POST["contrasena"]==$_POST["contrasena_c"]){
+			$resultado=pg_query($conn,"INSERT INTO administrador values( nextval('administrador_administradorid_seq'),'$nombre','$apellido','$usuario','$contrasena',".$_SESSION["id_usuario"].",'$tipoadmin')") or die(pg_last_error($conn));
+	
+			if($resultado){
+				javaalert('Se Creo un Administrador');
+				llenarLog(1, "Creo Administrador");
+				if(isset($_POST["guardar"])){
+					iraURL('../administrator/admin.php');
+				}
+				else{
+					iraURL('../administrator/crearadmin.php');
+				}
+			}
+		}else{
+			javaalert("Las contraseñas no coinciden, por favor verifique");
 		}
-
+	}else{
+		javaalert("El nombre de usuario ya esta registrado, por favor verfique");
+	}
 }
-
-if(isset($_POST["guardar2"])){
-	
-	$nombre=$_POST['nombre'];
-	$apellido=$_POST['apellido'];
-	$usuario=$_POST['usuario'];
-	$contrasena=$_POST['contrasena'];
-	$tipoadmin=$_POST['tipoadmin'];
-
-
-	$resultado=pg_query($conn,"INSERT INTO administrador values( nextval('administrador_administradorid_seq'),'$nombre','$apellido','$usuario','$contrasena',".$_SESSION["id_usuario"].",'$tipoadmin')") or die(pg_last_error($conn));
-	
-	if($resultado){
-			javaalert('Entro');
-			llenarLog(1, "Creo Administrador");
-			iraURL('../administrator/crearadmin.php');
-		}
-
-}
-
 ?>
          </p>
       </div>

@@ -10,17 +10,6 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
 
 $id=$_GET['id'];
 
-switch( $_GET['boton'] ) {
-case "eliminar": $SQL="DELETE FROM administrador WHERE administradorid=$id";
-		$result = pg_query ($conn, $SQL ) or die("Error en la consulta SQL");
-		javaalert("El administrador fue eliminado");
-		llenarLog(3, "Eliminar Administrador");
-		iraURL('../administrator/admin.php');
-		
-	
-break;
-}
-
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -64,16 +53,14 @@ break;
 <div class="container">
    <div class="row-fluid">
                        
-    <div class="span3">
+   <div class="span3">
       <div style="text-align:center">
-        
-         <div class="btn-group btn-group-vertical">
-             
-             <button class="btn btn-primary dropdown-menu btn-large text-left " onClick="location.href='admin.php'"> <span class="add-on"><i class="icon-arrow-left"></i></span> Atras</button>
-        
-        </div>
+          <ul class="nav  nav-pills nav-stacked">
+              <li class="active"><a href="admin.php"> <span class="add-on"><i class="icon-arrow-left"></i></span> Atras</a></li>
+          </ul>
       </div>
     </div>
+    
     <div class="span9">
       <div class="well well-large">
         <p>
