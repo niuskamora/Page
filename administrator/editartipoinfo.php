@@ -70,7 +70,7 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
       <form method="post">
   <table class="table table-striped table-hover">
 	      <th> Nombre </th>
-	      <td> <input type="text" name="nombre" id="nombre" required <?php echo $row[1];?>/></td>
+	      <td> <input type="text" name="nombre" id="nombre" required value="<?php echo $row[1];?>"/></td>
       </tr>
 	  <tr>
 	    <th> Descripción </th>

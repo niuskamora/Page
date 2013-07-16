@@ -34,7 +34,7 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
         <div id="barrap" class="nav-collapse collapse">
           <ul class="nav slidernav">
             <li><a href="admin.php">Administrador</a></li>
-            <li><a href="usuario">Usuario</a></li>
+            <li><a href="usuario.php">Usuario</a></li>
             <li><a href="menu.php">Menú</a></li>
             <li><a href="info.php">Información</a></li>
             <li><a href="producto.php">Producto</a></li>
@@ -54,20 +54,14 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
    <div class="row-fluid">
                        
     <div class="span3">
-      <div style="text-align:center">
-        
-          <ul class="nav  nav-pills nav-stacked">
-              <li class="active"><a href="creartipoinfo.php"> <span class="add-on"><i class="icon-plus "></i></span> Crear </a></li>
-              <li><a href="tipoinfo.php"> <span class="add-on"><i class="icon-arrow-left"></i></span> Atras</a></li>
-            
-          </ul>
-          
-
-        
-      </div>
+<div style="text-align:center">    
+         <div class="btn-group btn-group-vertical">          
+             <button class="btn btn-primary dropdown-menu btn-large text-left" onclick="location.href='../administrator/crearusuario.php'"> <span class="add-on"><i class="icon-plus "></i></span> Crear   </button>
+             <button class="btn btn-primary dropdown-menu btn-large text-left " onclick="location.href='../administrator/principal.php'"> <span class="add-on"><i class="icon-arrow-left" ></i></span> Atras   </button>
+        </div>
+      </div> 
     </div>
-    <div class="span9">
-   
+    <div class="span9">   
       <?php 
 		
 		 $SQL="SELECT * FROM tipoinformacion WHERE tipoinformacionid=".$_GET['id'];

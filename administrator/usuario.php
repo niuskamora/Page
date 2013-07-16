@@ -120,7 +120,7 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
 			echo '<td width="15%">'.$row[2].'</td>';
 			echo '<td width="22%">'.$row[3].'</td>';
 			echo '<td width="13%"> <button class="btn btn-primary"> <span class="add-on"><i class="icon-pencil"></i> </span> Editar  </button> </td>';
-			echo '<td width="14%"> <button class="btn btn-primary"> <span class="add-on"><i class="icon-trash"></i></span> Eliminar</button> </td>';
+			echo '<td width="14%"><a href="eliminarusuario.php?id='.$row[0].'&boton=eliminar"> <button class="btn btn-primary" type="button"  name="eliminar"> <span class="add-on"><i class="icon-trash"></i></span> Eliminar</button> </td>';
 			echo '<td width="11%"> <button class="btn btn-primary"> <span class="add-on"><i class="icon-eye-open"></i></span> Ver</button> </td>';
 			echo '</tr>';
 			}
