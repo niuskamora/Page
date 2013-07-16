@@ -34,13 +34,13 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
         <div id="barrap" class="nav-collapse collapse">
           <ul class="nav slidernav">
             <li><a href="admin.php">Administrador</a></li>
-            <li><a href="usuario.php">Usuario</a></li>
+            <li><a href="usuario">Usuario</a></li>
             <li><a href="menu.php">Menú</a></li>
             <li><a href="info.php">Información</a></li>
             <li><a href="producto.php">Producto</a></li>
-            <li><a href="sucursal.php">Sucursal</a></li>
+            <li><a href="sucursal.php"> <em><b>Sucursal </b></em></a></li>
             <li><a href="tipoinfo.php">Tipo Infomación</a></li>
-            <li><a href="tipoadmin.php">Tipo Administrador</a></li>
+            <li><a href="tipoadmin.php"> Tipo Administrador  </a></li>
             <li><a href="cerrarsesion.php">Cerrar Sesión</a></li>
           </ul>
         </div>
@@ -58,8 +58,9 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
       <div style="text-align:center">
         
           <ul class="nav  nav-pills nav-stacked">
-              <li class="active"><a href="menu.php"> <span class="add-on"><i class="icon-plus "></i></span> Atras </a></li>
-
+              <li class="active"><a href="crearsucursal.php"> <span class="add-on"><i class="icon-plus "></i></span> Crear </a></li>
+              <li><a href="principal.php"> <span class="add-on"><i class="icon-arrow-left"></i></span> Atras</a></li>
+            
           </ul>
           
 
@@ -67,115 +68,100 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
       </div>
     </div>
     <div class="span9">
-   
+    
       <?php 
 		
-		 $SQL="SELECT * FROM menu WHERE menuid=".$_GET['id'];
+		$SQL="SELECT * FROM sucursal";
 		$result = pg_query ($conn, $SQL ) or die("Error en la consulta SQL");
 		$registros= pg_num_rows($result);
-		$row = pg_fetch_array ($result);
 		
-		
-		$SQL2="SELECT * FROM menu WHERE submenu=".$_GET['id'];
-		$result2 = pg_query ($conn, $SQL2 ) or die("Error en la consulta SQL");
-		$registros2= pg_num_rows($result2);
-		
-		$SQL4="SELECT * FROM informacion WHERE menuid=".$_GET['id'];
-		$result4 = pg_query ($conn, $SQL4 ) or die("Error en la consulta SQL");
-		$registros4= pg_num_rows($result4);
-		
-		$SQL5="SELECT * FROM sucursal WHERE menuid=".$_GET['id'];
-		$result5 = pg_query ($conn, $SQL5 ) or die("Error en la consulta SQL");
-		$registros5= pg_num_rows($result5);
-		
-		if($registros2!=0 || $registros4!=0 || $registros5!=0){
-		 
-			?>  
-            
-            <div class="well alert alert-danger">
-    <h2 class="alert alert-danger">Atención</h2>
-    <h4>no se puede eliminar el registro </h4>
-	 </div>
-     
-     
-     <?php
-		  }
-		else if($registros2==0){
-		
+	if($registros == 0){
     ?>
-    
-    
-    
-    
-    
-    <div class="well well-small alert alert-block">
+    <div class="well alert alert-block">
     <h2 class="alert alert-block">Atención</h2>
-    <h4>Desea eliminar el registro </h4>
-   
+    <h4>No existen registros en Surcursal</h4>
     </div>
-
+     <?php 
+	}else{
+	
+	?>
+    
       <div class="well well-large">
       <br><br>
       
-      <form method="post">
-	    <table class="footable table-striped table-hover" data-page-size="5">
+      
+        <p>
+        <?php
+		
+
+	//mostrar resultados
+	?>
+	 <table class="footable table-striped table-hover" data-page-size="5">
 			  <thead>
 				<tr>
 				  <th data-class="expand" data-sort-initial="true" data-type="numeric">
-					<span>Nombre</span>
+					<span>Id</span>
 				  </th>
 				  <th>
-					<span>Descripcion</span>
+					<span>Nombre</span>
 				  </th>
-                   <th>
-					<span>enlace</span>
+				  <th data-hide="phone" data-sort-ignore="true">
+					Descripcion
 				  </th>
-                
-				 
+          
+				  <th data-hide="phone" data-sort-ignore="true">
+					<span class="add-on"> <i class="icon-pencil"></i> </span> Editar 
+				  </th>
+				  <th data-hide="phone" data-sort-ignore="true">
+				<span class="add-on"><i class="icon-trash"></i></span> Eliminar 
+				  </th>
+                   <th data-hide="phone" data-sort-ignore="true">
+					<span class="add-on"> <i class="icon-eye-open"></i> </span> Ver 
+				  </th>
 				</tr>
 			  </thead>
 				<tbody>
-	  
+    <form action="editartipoadmin.php" method="get"> 
+   
       <?php   
-	  echo '<tr>';
-		echo '<td width="30%">  <label>'.$row["nombre"].' </label></td>';
-			
-			echo ' <td width="30%"> <label>'.$row["submenu"].' </label></td>';
-			echo ' <td width="40%"> <label>'.$row["enlace"].' </label></td>';
-			
-			
-			echo '</tr>';
-		?>
- </tbody>	  
-    </table>
-    
-    <button id="si" name="si" class="btn-primary text-center " type="submit">  Si  </button>
-     <button id="no" name="no" class="btn-primary text-center " type="submit">  No </button>
-	 </form> 
-    
-     	<?php
-		   
-		
-		
-		
-		}
-		
-if(isset($_POST["si"])){
-	   $SQL="DELETE FROM menu WHERE menuid=".$_GET['id'];
-		$result = pg_query ($conn, $SQL ) or die("Error en la consulta SQL");
-		llenarLog(3, "elimino menu");
-		javaalert("El menu fue eliminado");
-		iraURL("menu.php");
-		
-	
-}
-if(isset($_POST["no"])){
-		iraURL("menu.php");  
-	
-}
-?>
-      
+	  
+		for ($i=0;$i<$registros;$i++)
+			{
 
+			$row = pg_fetch_array ($result,$i );
+			
+			echo '<tr>';
+			echo '<td width="10%">'.$row["sucursalid"].'</td>';
+			echo '<td width="20%">'.$row["nombre"].'</td>';
+			echo '<td width="25%">'.$row["descripcion"].'</td>';
+			echo '<td width="15%"> <a href="editarsucursal.php?id='.$row["sucursalid"].'&boton=editar"> <button class="btn btn-primary"  type="button" name="boton"> <span class="add-on"><i class="icon-pencil"></i> </span> Editar  </button>  </td></a>';
+			echo '<td width="15%">  <a href="eliminarsucursal.php?id='.$row["sucursalid"].'&boton=eliminar"> <button class="btn btn-primary"  type="button"  name="boton"> <span class="add-on"><i class="icon-pencil"></i> </span> Eliminar  </button>  </td></a>';
+			
+			echo '<td width="15%">  <a href="versucursal.php?id='.$row["sucursalid"].'&boton=eliminar"> <button class="btn btn-primary"  type="button"  name="boton"> <span class="add-on"><i class="icon-eye-open"></i> </span> ver  </button>  </td></a>';
+			echo '</tr>';
+            
+			}
+			
+    
+		?>
+	 </form> 	
+</tbody>	  
+    </table>
+    <?php
+    }
+	?>
+
+    <ul id="pagination" class="footable-nav"><span>Pages:</span></ul>
+
+		
+        
+        
+         </p>
+      </div>
+    </div>
+    </div>
+  
+</div>
 
 <!-- Le javascript
 ================================================== --> 
@@ -192,7 +178,5 @@ if(isset($_POST["no"])){
       $('table').footable();
     });
   </script>
- 
- 
 	</body>
 </html>

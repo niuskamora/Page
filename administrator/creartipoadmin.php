@@ -54,11 +54,11 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
     <div class="span3">
       <div style="text-align:center">
         
-         <div class="btn-group btn-group-vertical">
-             
-             <button class="btn btn-primary dropdown-menu btn-large text-left " onClick="location.href='tipoadmin.php'"> <span class="add-on"><i class="icon-arrow-left"></i></span> Atras</button>
-        
-        </div>
+                  <ul class="nav  nav-pills nav-stacked">
+              <li class="active"><a href="rmenu.php"> <span class="add-on"><i class="icon-plus "></i></span> Atras </a></li>
+
+          </ul>
+
       </div>
     </div>
     <div class="span9">

@@ -27,6 +27,8 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
 </head>
 
 <body class="preview" id="top" data-spy="scroll" data-target=".subnav" data-offset="80">
+
+ 
 <div class="container">
   <div class="navbar">
     <div class="navbar-inner">
@@ -59,7 +61,7 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
         
           <ul class="nav  nav-pills nav-stacked">
               <li class="active"><a href="creartipoadmin.php"> <span class="add-on"><i class="icon-plus "></i></span> Crear </a></li>
-              <li><a href="tipoadmin.php"> <span class="add-on"><i class="icon-arrow-left"></i></span> Atras</a></li>
+              <li><a href="principal.php"> <span class="add-on"><i class="icon-arrow-left"></i></span> Atras</a></li>
             
           </ul>
           
@@ -68,7 +70,8 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
       </div>
     </div>
     <div class="span9">
-    
+   
+          
       <?php 
 		
 		$SQL="SELECT * FROM menu";
@@ -136,13 +139,17 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
 			
 			echo '<tr>';
 			echo '<td width="10%">'.$row["menuid"].'</td>';
-			echo '<td width="16%">'.$row["nombre"].'</td>';
+			
+			
 			 if($row["submenu"]!=""){
 			$SQL2="SELECT nombre FROM menu WHERE menuid=".$row["submenu"];
 		$result2 = pg_query ($conn, $SQL2 ) or die("Error en la consulta SQL");
 		$row2 = pg_fetch_array ($result2);
-		echo '<td width="16">'.$row2["nombre"].' </td>';
+	      echo '<td width="16%">'.$row["nombre"].' </td> </a>';
+		  echo '<td width="16">'.$row2["nombre"].' </td>';
 			 }else{
+				
+				 	echo '<td width="16%">'.$row["nombre"].'<a href="crear2.php?id='.$row["menuid"].'&boton=editar"> <i id="add" class="icon-plus" /> </td> </a>';
 				echo '<td width="20%">'.$row["submenu"].'</td>'; 
 			 }
 		 
@@ -191,7 +198,8 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
   <script type="text/javascript">
     $(function() {
       $('table').footable();
-    });
+	  
+   });
   </script>
 	</body>
 </html>

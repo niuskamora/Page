@@ -87,7 +87,6 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
       <th> Id  </th>
       <th> Nombre </th>
       <th> Descripción </th>
-      <th>Enlace</th>
       <th> Editar  </th>
       <th> Eliminar  </th>
       <th> Ver  </th>

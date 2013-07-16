@@ -58,8 +58,9 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
       <div style="text-align:center">
         
           <ul class="nav  nav-pills nav-stacked">
-              <li class="active"><a href="menu.php"> <span class="add-on"><i class="icon-plus "></i></span> Atras </a></li>
-
+              <li class="active"><a href="crearmenu.php"> <span class="add-on"><i class="icon-plus "></i></span> Crear </a></li>
+              <li><a href="menu.php"> <span class="add-on"><i class="icon-arrow-left"></i></span> Atras</a></li>
+            
           </ul>
           
 
@@ -70,37 +71,26 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
    
       <?php 
 		
-		 $SQL="SELECT * FROM menu WHERE menuid=".$_GET['id'];
+		 $SQL="SELECT * FROM sucursal WHERE sucursalid=".$_GET['id'];
 		$result = pg_query ($conn, $SQL ) or die("Error en la consulta SQL");
 		$registros= pg_num_rows($result);
 		$row = pg_fetch_array ($result);
 		
 		
-		$SQL2="SELECT * FROM menu WHERE submenu=".$_GET['id'];
-		$result2 = pg_query ($conn, $SQL2 ) or die("Error en la consulta SQL");
-		$registros2= pg_num_rows($result2);
 		
-		$SQL4="SELECT * FROM informacion WHERE menuid=".$_GET['id'];
-		$result4 = pg_query ($conn, $SQL4 ) or die("Error en la consulta SQL");
-		$registros4= pg_num_rows($result4);
-		
-		$SQL5="SELECT * FROM sucursal WHERE menuid=".$_GET['id'];
-		$result5 = pg_query ($conn, $SQL5 ) or die("Error en la consulta SQL");
-		$registros5= pg_num_rows($result5);
-		
-		if($registros2!=0 || $registros4!=0 || $registros5!=0){
+		if($registros=0){
 		 
 			?>  
             
             <div class="well alert alert-danger">
     <h2 class="alert alert-danger">Atención</h2>
-    <h4>no se puede eliminar el registro </h4>
+    <h4>no se puede eliminar el registro de sucursal</h4>
 	 </div>
      
      
      <?php
 		  }
-		else if($registros2==0){
+		else {
 		
     ?>
     
@@ -110,7 +100,7 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
     
     <div class="well well-small alert alert-block">
     <h2 class="alert alert-block">Atención</h2>
-    <h4>Desea eliminar el registro </h4>
+    <h4>Desea eliminar el registro de sucursal</h4>
    
     </div>
 
@@ -128,7 +118,7 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
 					<span>Descripcion</span>
 				  </th>
                    <th>
-					<span>enlace</span>
+					<span>direccion</span>
 				  </th>
                 
 				 
@@ -140,8 +130,8 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
 	  echo '<tr>';
 		echo '<td width="30%">  <label>'.$row["nombre"].' </label></td>';
 			
-			echo ' <td width="30%"> <label>'.$row["submenu"].' </label></td>';
-			echo ' <td width="40%"> <label>'.$row["enlace"].' </label></td>';
+			echo ' <td width="30%"> <label>'.$row["descripcion"].' </label></td>';
+			echo ' <td width="40%"> <label>'.$row["direccion"].' </label></td>';
 			
 			
 			echo '</tr>';
@@ -161,16 +151,16 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
 		}
 		
 if(isset($_POST["si"])){
-	   $SQL="DELETE FROM menu WHERE menuid=".$_GET['id'];
+	   $SQL="DELETE FROM sucursal WHERE sucursalid=".$_GET['id'];
 		$result = pg_query ($conn, $SQL ) or die("Error en la consulta SQL");
-		llenarLog(3, "elimino menu");
-		javaalert("El menu fue eliminado");
-		iraURL("menu.php");
+		llenarLog(3, "elimino sucursal");
+		javaalert("sucursal fue eliminado");
+		iraURL("sucursal.php");
 		
 	
 }
 if(isset($_POST["no"])){
-		iraURL("menu.php");  
+		iraURL("sucursal.php");  
 	
 }
 ?>
