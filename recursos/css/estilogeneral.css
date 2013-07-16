@@ -8,6 +8,30 @@ font-family: 'Lato', sans-serif !important;
 color: #333;
 
 }
+.headera{
+text-align: left;
+width: 10%;
+float: left;
+	
+}
+.headerb{
+text-align: left;
+width: 80%;
+float: left;
+	
+	
+}
+.headerc{
+text-align: left;
+width: 10%;
+float: left;
+	
+	
+}
+.headerg img{
+	
+	height:70px;
+}
 .navbar-fixed-top {
     margin-bottom: 0;
 }
@@ -223,6 +247,12 @@ background-image:url(../images/teamp.png);
 	#hero .carousel-inner .item {
 		padding: 0px 70px;
 	}
+	.ca-item{
+		float:left;
+	width:300px;
+	
+}
+	
 }
 @media (max-width: 979px) {
 	body {
@@ -241,6 +271,11 @@ background-image:url(../images/teamp.png);
 	#hero .carousel-inner .item.slide2 img {
 		margin-top: 20px;
 	}
+	.ca-item{
+		float:left;
+	width:280px;
+	
+}
 	
 }
 /* Portrait tablet to landscape and desktop */
@@ -262,6 +297,11 @@ background-image:url(../images/teamp.png);
 	#hero .item .span4 {
 		margin-left: 50px;
 	}
+	.ca-item{
+		float:left;
+	width:260px;
+	
+}
 }
 /* Landscape phone to portrait tablet */
 @media (max-width: 767px) {	
@@ -304,7 +344,12 @@ background-image:url(../images/teamp.png);
 	}
 	#footer .copyright .copy p {
 		margin-top: 0px;
-	}	
+	}
+	.ca-item{
+		float:left;
+	width:250px;
+	
+}	
 }
 /* Landscape phones and down */
 @media (max-width: 480px) {
@@ -319,4 +364,7 @@ background-image:url(../images/teamp.png);
 	.section_header span {
 		width: auto;
 	}
+	
+	
+}
 }

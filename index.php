@@ -28,9 +28,20 @@
     <div class="span12"> 
       
       <!--Nav bar content-->
+      <div  class="row-fluid headerg hidden-desktop">
+        <div class="headera" style="text-align: left;" >
+           <img  src="recursos/img/izquierdasuperior.png" style="margin-bottom: 3px;" />
+           </div>
+        <div  class="headerb" style="text-align: center;">
+           <img  src="recursos/img/logo.png" style="margin-bottom: 3px;" height="160" />
+           </div>
+        <div class="headerc"  style="text-align: right;">
+           <img  src="recursos/img/derechainferior.png" style="margin-bottom: 3px; text-align: left;" />
+           </div>
+      </div>
       <div class="navbar navbar-inverse navbar-fixed-top">
         <div class="navbar-inner">
-          <div class="container"><a id="open" href="#nav" class="btn btn-navbar" data-toggle="collapse" data-target="#barrac"><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></a><a id="open2" href="#" class="btn btn-navbar" data-toggle="collapse" data-target="#login"><i class="icon-user"></i></a><a class="brand hidden-desktop" href="#"><img src="recursos/img/logo.png" width="140" height="20"/></a><a class="brand visible-desktop" style="float:left" href="#"><img  src="recursos/img/logo.png" width="140" height="20"/></a>
+          <div class="container"><a id="open" href="#nav" class="btn btn-navbar" data-toggle="collapse" data-target="#barrac"><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></a><a id="open2" href="#" class="btn btn-navbar" data-toggle="collapse" data-target="#login"><i class="icon-user"></i></a> <a class="brand visible-desktop" style="float:left" href="#"><img  src="recursos/img/logo.png" width="140" height="20"/></a>
             <div id="barrac" class="nav-collapse collapse">
               <ul id="nav" class="nav slidernav">
                 <li class="active"><a href="#">Home</a></li>
@@ -191,28 +202,28 @@
               </div>
             </div>
           </div>
-          <!--fin del tercero --> 
-           <div class="span4 ca-item ca-item-4">
-        <div class="ca-item-main">
-          <div class="ca-icon"></div>
-          <h2>Sucursales</h2>
-          <h4> <span class="ca-quote">&ldquo;</span> <span>
-            <p>Puntos de encuentro extendidos por toda venezuela con atencion garantizada.</p>
-            </span> </h4>
-        </div>
-        <div class="ca-content-wrapper">
-          <div class="ca-content">
-            <h6>Animals are not commodities</h6>
-            <a href="#" class="ca-close">close</a>
-            <div class="ca-content-text">
-              <p>I am so happy, my dear friend, so absorbed in the exquisite sense of mere tranquil existence, that I neglect my talents. I should be incapable of drawing a single stroke at the present moment; and yet I feel that I never was a greater artist than now.</p>
-              <p>When, while the lovely valley teems with vapour around me, and the meridian sun strikes the upper surface of the impenetrable foliage of my trees, and but a few stray gleams steal into the inner sanctuary, I throw myself down among the tall grass by the trickling stream;</p>
-              <p>She packed her seven versalia, put her initial into the belt and made herself on the way.</p>
+          <!--fin del tercero -->
+          <div class="ca-item ca-item-4">
+            <div class="ca-item-main">
+              <div class="ca-icon"></div>
+              <h2>Sucursales</h2>
+              <h4> <span class="ca-quote">&ldquo;</span> <span>
+                <p>Puntos de encuentro extendidos por toda venezuela con atencion garantizada.</p>
+                </span> </h4>
+            </div>
+            <div class="ca-content-wrapper">
+              <div class="ca-content">
+                <h6>Animals are not commodities</h6>
+                <a href="#" class="ca-close">close</a>
+                <div class="ca-content-text">
+                  <p>I am so happy, my dear friend, so absorbed in the exquisite sense of mere tranquil existence, that I neglect my talents. I should be incapable of drawing a single stroke at the present moment; and yet I feel that I never was a greater artist than now.</p>
+                  <p>When, while the lovely valley teems with vapour around me, and the meridian sun strikes the upper surface of the impenetrable foliage of my trees, and but a few stray gleams steal into the inner sanctuary, I throw myself down among the tall grass by the trickling stream;</p>
+                  <p>She packed her seven versalia, put her initial into the belt and made herself on the way.</p>
+                </div>
+              </div>
             </div>
           </div>
-        </div>
-      </div>
-      <!--fin del cuarto -->
+          <!--fin del cuarto --> 
         </div>
       </div>
       <hr/>
@@ -285,7 +296,7 @@
         </div>
       </div>
       <!--fin del tercero -->
-       <div class="span4 ca-item ca-item-4">
+      <div class="span4 ca-item ca-item-4">
         <div class="ca-item-main">
           <div class="ca-icon"></div>
           <h2>Sucursales</h2>
