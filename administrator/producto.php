@@ -20,6 +20,10 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
 <link href="../recursos/css/bootstrap.min.css" rel="stylesheet">
 <link href="../recursos/css/bootstrap-responsive.min.css" rel="stylesheet">
 <link href="../recursos/css/estiloadmin.css" rel="stylesheet">
+<link href="../recursos/footable/css/footable-0.1.css" rel="stylesheet" type="text/css" />
+  <link href="../recursos/footable/css/footable.sortable-0.1.css" rel="stylesheet" type="text/css" />
+  <link href="../recursos/footable/css/footable.paginate.css" rel="stylesheet" type="text/css" />
+
 </head>
 
 <body class="preview" id="top" data-spy="scroll" data-target=".subnav" data-offset="80">
@@ -83,14 +87,33 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
 	?>
       <div class="well well-large">
         <p>
-		<table width="100%" class="table table-striped table-hover">
-      <th> Id  </th>
-      <th> Nombre </th>
-      <th> Descripción </th>
-      <th>Enlace</th>
-      <th> Editar  </th>
-      <th> Eliminar  </th>
-      <th> Ver  </th>
+	<table width="100%" class="footable table-striped table-hover" data-page-size="5">
+      <thead>
+				<tr>
+				  <th data-class="expand" data-sort-initial="true" data-type="numeric">
+					<span>Id</span>
+				  </th>
+				  <th>
+					<span>Nombre</span>
+				  </th>
+				  <th data-hide="phone" data-sort-ignore="true">
+					Descripción
+				  </th>
+                    <th data-hide="phone" data-sort-ignore="true">
+					Enlace
+				  </th>
+				  <th data-hide="phone" data-sort-ignore="true">
+					<span class="add-on"> <i class="icon-pencil"></i> </span> Editar 
+				  </th>
+				  <th data-hide="phone" data-sort-ignore="true">
+				<span class="add-on"><i class="icon-trash"></i></span> Eliminar 
+				  </th>
+          		 <th data-hide="phone" data-sort-ignore="true">
+				<span class="add-on"><i class="icon-eye-open"></i></span> Ver 
+				  </th>
+				</tr>
+	 </thead>
+  <tbody>
       <?php    
 		for ($i=0;$i<$registros;$i++)
 			{
@@ -100,19 +123,20 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
 			echo '<tr>';
 			echo '<td width="10%">'.$row[0].'</td>';
 			echo '<td width="15%">'.$row[1].'</td>';
-			echo '<td width="23%">'.substr($row[2],0,30)."...".'</td>';
+			echo '<td width="22%">'.substr($row[2],0,30)."...".'</td>';
 			echo '<td width="15%">'.$row[3].'</td>';
-			echo '<td width="12%"> <button class="btn btn-primary"> <span class="add-on"><i class="icon-pencil"></i> </span> Editar  </button> </td>';
+			echo '<td width="13%"> <button class="btn btn-primary"> <span class="add-on"><i class="icon-pencil"></i> </span> Editar  </button> </td>';
 			echo '<td width="14%"> <button class="btn btn-primary"> <span class="add-on"><i class="icon-trash"></i></span> Eliminar</button> </td>';
 			echo '<td width="11%"> <button class="btn btn-primary"> <span class="add-on"><i class="icon-eye-open"></i></span> Ver</button> </td>';
 			echo '</tr>';
 			}
 		?>
-		
+	</tbody>	
 </table>
 <?php 
 	}
-?>      
+?>
+		    <ul id="pagination" class="footable-nav"><span>Pages:</span></ul>
          </p>
       </div>
     </div>
@@ -125,5 +149,15 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
 <script type="text/javascript" src="../recursos/js/jquery-2.0.2.js" ></script> 
 <script src="../recursos/js/bootstrap.js"></script> 
 <script src="../recursos/js/bootstrap.min.js"></script>
+<script src="../recursos/footable/js/footable.js" type="text/javascript"></script>
+  <script src="../recursos/footable/js/footable.paginate.js" type="text/javascript"></script>
+  <script src="../recursos/footable/js/footable.sortable.js" type="text/javascript"></script>
+ 
+  <script type="text/javascript">
+    $(function() {
+      $('table').footable();
+    });
+  </script>
+
 	</body>
 </html>

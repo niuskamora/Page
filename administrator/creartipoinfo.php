@@ -21,6 +21,7 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
 <link href="../recursos/css/bootstrap-responsive.min.css" rel="stylesheet">
 <link href="../recursos/css/estiloadmin.css" rel="stylesheet">
 
+
 </head>
 
 <body class="preview" id="top" data-spy="scroll" data-target=".subnav" data-offset="80">
@@ -69,7 +70,7 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
       </tr>
 	  <tr>
 	    <th> Descripción </th>
-	    <td>  <input type="text" id="redactor" name="redactor" required></textarea></td>
+	    <td>  <input type="text" id="redactor" name="redactor" required/></td>
       </tr>
        <tr>
 	    <td></td>

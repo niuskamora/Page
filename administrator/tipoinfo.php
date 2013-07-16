@@ -97,7 +97,7 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
 					<span>Nombre</span>
 				  </th>
 				  <th data-hide="phone" data-sort-ignore="true">
-					Descripcion
+					Descripción
 				  </th>
 				  <th data-hide="phone" data-sort-ignore="true">
 					<span class="add-on"> <i class="icon-pencil"></i> </span> Editar 
@@ -108,6 +108,7 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
 				</tr>
 	 </thead>
   <tbody>
+  <form  method="get"> 
       <?php    
 		for ($i=0;$i<$registros;$i++)
 			{
@@ -116,12 +117,13 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
 			echo '<td width="10%">'.$row[0].'</td>';
 			echo '<td width="20%">'.$row[1].'</td>';
 			echo '<td width="43%">'.$row[2].'</td>';
-			echo '<td width="13%"> <button class="btn btn-primary"> <span class="add-on"><i class="icon-pencil"></i> </span> Editar  </button> </td>';
-			echo '<td width="14%"> <button class="btn btn-primary"> <span class="add-on"><i class="icon-trash"></i></span> Eliminar</button> </td>';
+			echo '<td width="13%"> <a href="editartipoinfo.php?id='.$row[0].'&boton=editar"> <button class="btn btn-primary" type="button"  name="editar"> <span class="add-on"><i class="icon-pencil"></i> </span> Editar  </button> </td>';
+			echo '<td width="14%"><a href="eliminartipoinfo.php?id='.$row[0].'&boton=eliminar"> <button class="btn btn-primary" type="button"  name="eliminar"> <span class="add-on"><i class="icon-trash"></i></span> Eliminar</button> </td>';
 			echo '</tr>';
 			}
 		?>
 	</tbody>	
+    </form> 
 </table>
 <?php 
 	}
