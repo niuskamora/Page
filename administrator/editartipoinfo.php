@@ -20,8 +20,6 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
 <link href="../recursos/css/bootstrap.min.css" rel="stylesheet">
 <link href="../recursos/css/bootstrap-responsive.min.css" rel="stylesheet">
 <link href="../recursos/css/estiloadmin.css" rel="stylesheet">
-
-
 </head>
 
 <body class="preview" id="top" data-spy="scroll" data-target=".subnav" data-offset="80">
@@ -63,23 +61,28 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
     </div>
     <div class="span9">
       <div class="well well-large">
+       <?php
+        	$cons="SELECT * FROM tipoinformacion WHERE tipoinformacionid="$_GET['id'];;
+			$resulta = pg_query ($conn, $cons) or die("Error en la consulta SQL");
+			
+		if($row=pg_fetch_array($resulta)){
+		?>
       <form method="post">
   <table class="table table-striped table-hover">
 	      <th> Nombre </th>
-	      <td> <input type="text" name="nombre" id="nombre" required/></td>
+	      <td> <input type="text" name="nombre" id="nombre" required value="<?php echo $row[1];?>"/></td>
       </tr>
 	  <tr>
 	    <th> Descripción </th>
-	    <td>  <input type="text" id="redactor" name="redactor" required/></td>
+	    <td>  <input type="text" id="redactor" name="redactor" required value="<?php echo $row[2];?>"/></td>
       </tr>
-       <tr>
-	    <td></td>
-	    <td><button class="btn btn-primary" id="crear_uno" name="crear_uno" type="submit">Guardar</button>
-       <button class="btn btn-primary" id="crear_otro" name="crear_otro" type="submit">Guardar y añadir otro</button></td>
-      </tr>
+   <tr>
+      <td> </td> <td><button name="editar" id="editar" type="submit" class="btn-primary text-center">Modificar</button></td>
+    </tr>
       
 </table>
  </form >
+  <?php }?>
       </div>
     </div>
     </div>
@@ -91,20 +94,6 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
 <script type="text/javascript" src="../recursos/js/jquery-2.0.2.js" ></script> 
 <script src="../recursos/js/bootstrap.js"></script> 
 <script src="../recursos/js/bootstrap.min.js"></script>
-<?php 
-	//codigo para guardar y volver a la pagina de tipoinformacion.php
-	if(isset($_POST["crear_uno"]) || isset($_POST["crear_otro"])){
-			 $insertar = "insert into tipoinformacion values(nextval('tipoinformacion_tipoinformacionid_seq'),'".$_POST['nombre']."','".$_POST['redactor']."');";
-			 $conex=conectar();
-			pg_query($conex,$insertar) or die (pg_last_error($conex));
-			if(isset($_POST["crear_uno"])){
-				iraURL('../administrator/tipoinfo.php');	
-			}else{
-				iraURL('../administrator/creartipoinfo.php');	
-				}	
-			llenarLog(1,"Tipo de Información");
-	
-	}
-	?>
+
 </body>
 </html>

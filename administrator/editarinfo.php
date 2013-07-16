@@ -7,6 +7,8 @@ $conn=conectar();
 if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
 	iraURL('../administrator/index.php');
 	}
+	
+$id=$_GET['id'];
 
 ?>
 
@@ -66,36 +68,53 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
       <div class="well well-large">
         <p>
         
+        <?php
+        	$cons="SELECT * FROM informacion WHERE informacionid=$id";
+			$resulta = pg_query ($conn, $cons) or die("Error en la consulta SQL");
+			
+			if($row=pg_fetch_array($resulta)){
+		?>
+        
 		<form enctype="multipart/form-data"  method="POST">
         
         	<table width="100%" class="table table-bordered">
             	<tr>
                 	<th>Título</th>
-                    <td><input id="titulo" name="titulo" type="text" required/></td>
+                    <td><input id="titulo" name="titulo" type="text" value="<?php echo $row['titulo']; ?>" required/></td>
                 </tr>
                 <tr>
                 	<th>Descripción</th>
-                    <td><textarea id="redactor" name="redactor"></textarea></td>
+                    <td><textarea id="redactor" name="redactor"><?php echo $row['descripcion']; ?></textarea></td>
                 </tr>
                 <tr>
                 	<th>Enlace</th>
-                    <td><input id="enlace" name="enlace" type="text" required/></td>
+                    <td><input id="enlace" name="enlace" type="text" value="<?php echo $row['enlace']; ?>" required/></td>
                 </tr>
                  <tr>
                 	<th>Imagen</th>
-                    <td><input id="imagen" name="imagen" type="file" required/> </td>
+                    <td><img width="200" height="100" src="<?php echo $row['imagen'];?> ">
+                    <input id="imagen" name="imagen" type="file"/> </td>
                 </tr>
                 <tr>
                 	<th>Menú</th>
                     <td><select id="menu" name="menu">
+                    <?php 
+						
+						$consu="SELECT * FROM menu WHERE menuid=".$row['menuid'];
+						$resulta1 = pg_query ($conn, $consu) or die("Error en la consulta SQL");
+						if($row1=pg_fetch_array($resulta1)){
+							echo '<option value="'.$row1['menuid'].'">'.$row1['nombre'].'</option>';
+                        
+                        }
+						?>
                     	<option value="0">Seleccione Opción</option>
                         <?php
 		
 						$SQL="SELECT * FROM menu";
-						$result = pg_query ($conn, $SQL ) or die("Error en la consulta SQL");
+						$resulta2 = pg_query ($conn, $SQL ) or die("Error en la consulta SQL");
 						
-						while($row=pg_fetch_array($result)){
-							echo '<option value="'.$row['menuid'].'">'.$row['nombre'].'</option>';
+						while($row2=pg_fetch_array($resulta2)){
+							echo '<option value="'.$row2['menuid'].'">'.$row2['nombre'].'</option>';
 
 							}
 
@@ -103,17 +122,26 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
                     </select></td>
                 </tr>
                 
-                 <tr>
+                <tr>
                 	<th>Tipo Información</th>
                     <td><select id="tipoinfo" name="tipoinfo">
+                    <?php 
+						
+						$consu1="SELECT * FROM tipoinformacion WHERE tipoinformacionid=".$row['tipoinformacionid'];
+						$resulta3 = pg_query ($conn, $consu1) or die("Error en la consulta SQL");
+						if($row3=pg_fetch_array($resulta3)){
+							echo '<option value="'.$row3['tipoinformacionid'].'">'.$row3['nombre'].'</option>';
+                        
+                        }
+						?>
                     	<option value="0">Seleccione Opción</option>
                         <?php
 		
 						$SQL="SELECT * FROM tipoinformacion";
-						$result = pg_query ($conn, $SQL ) or die("Error en la consulta SQL");
+						$resulta4= pg_query ($conn, $SQL ) or die("Error en la consulta SQL");
 						
-						while($row=pg_fetch_array($result)){
-							echo '<option value="'.$row['tipoinformacionid'].'">'.$row['nombre'].'</option>';
+						while($row4=pg_fetch_array($resulta4)){
+							echo '<option value="'.$row4['tipoinformacionid'].'">'.$row4['nombre'].'</option>';
 
 							}
 
@@ -121,18 +149,16 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
                     </select></td>
                 </tr>
                 
-                <tr> <td></td>
-                <td><button name="guardar" id="guardar" type="submit" class="btn-primary text-center">Guardar</button></td>
-                 </tr>
-                 
-                 <tr><td></td>
-                 <td><button id="guardar2" name="guardar2" class="btn-primary text-center" type="submit">Guardar y añadir otro</button></td></tr>
+                <tr>
+                	<td> </td> <td><button name="guardar" id="guardar" type="submit" class="btn-primary text-center">Modificar</button></td>
+                </tr>
                 
             </table>
         </form>
+     <?php }?>
 <?php
 
-if(isset($_POST["guardar"]) || isset($_POST["guardar2"])){
+if(isset($_POST["guardar"])){
 	
 	if(isset($_POST["redactor"]) && $_POST["redactor"]!="" ){
 	
@@ -142,11 +168,7 @@ if(isset($_POST["guardar"]) || isset($_POST["guardar2"])){
 		$menu=$_POST['menu'];
 		$tipoinfo=$_POST['tipoinfo'];
 	
-		$resultado=pg_query($conn,"INSERT INTO informacion values( nextval('informacion_informacionid_seq'),'$titulo','$descripcion','$enlace','','$menu','$tipoinfo')") or die(pg_last_error($conn));
-	
-		$sql_select="SELECT last_value FROM informacion_informacionid_seq;";
-		$results=pg_query($conn, $sql_select);
-		$arreglo=pg_fetch_array($results,0);
+		$resultado=pg_query($conn,"UPDATE informacion SET titulo='$titulo', descripcion='$descripcion', enlace='$enlace', menuid='$menu', tipoinformacionid='$tipoinfo' WHERE informacionid=$id") or die(pg_last_error($conn));
 	
 		if($_FILES['imagen']['name']!=""){
 		
@@ -160,7 +182,7 @@ if(isset($_POST["guardar"]) || isset($_POST["guardar2"])){
 		
 			$direccion="../recursos";
 			$tipo = explode('/',$_FILES['imagen']['type']);
-			$uploadfile =$direccion."/img/".$arreglo[0].".".$tipo[1];
+			$uploadfile =$direccion."/img/".$id.".".$tipo[1];
 			$error = $_FILES['imagen']['error']; 
 			$subido = false;
 		
@@ -215,7 +237,7 @@ if(isset($_POST["guardar"]) || isset($_POST["guardar2"])){
 				imagecopy($img1Recortada, $img1, 0, 0, ceil(($ancho_buscado3-640)/2), ceil(($alto_buscado3-640)/2), ceil(($ancho_buscado3-640)/2)+640, ceil(($alto_buscado3-480)/2)+480);
 				
 				imagejpeg($img1Recortada,$uploadfile,$calidad);				
-				$sql_update="update sucursal set imagen='".$uploadfile."' where informacionid=".$arreglo[0]."";
+				$sql_update="update informacion set imagen='".$uploadfile."' where informacionid=$id";
 			
 				$result= pg_query($conn, $sql_update);
 																													
@@ -223,15 +245,9 @@ if(isset($_POST["guardar"]) || isset($_POST["guardar2"])){
 		 }
 	
 		if($resultado && $result){
-			javaalert('Se Creo la Información');
-			llenarLog(1, "Creo Información");
-			if(isset($_POST["guardar1"])){
-				iraURL('../administrator/info.php');
-			}
-			else{
-				iraURL('../administrator/crearinfo.php');
-			}
-				
+			javaalert('Se Modifico la Información');
+			llenarLog(2, "Modifico Información");
+			iraURL('../administrator/info.php');	
 		}
 	}
 }
@@ -240,7 +256,7 @@ if(isset($_POST["guardar"]) || isset($_POST["guardar2"])){
       </div>
     </div>
     </div>
-  
+  </div>
 </div>
 
 <!-- Le javascript

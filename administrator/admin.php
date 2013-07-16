@@ -4,6 +4,10 @@ session_start();
 include("../recursos/funciones.php");
 $conn=conectar();
 
+if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
+	iraURL('../administrator/index.php');
+	}
+
 ?>
 
 <!DOCTYPE html>
@@ -53,15 +57,13 @@ $conn=conectar();
                        
     <div class="span3">
       <div style="text-align:center">
-        
-         <div class="btn-group btn-group-vertical">
-          
-              <button class="btn btn-primary dropdown-menu btn-large text-left" onClick="location.href='crearadmin.php'"> <span class="add-on"><i class="icon-plus "></i></span> Crear   </button>
-             <button class="btn btn-primary dropdown-menu btn-large text-left " onClick="location.href='principal.php'"> <span class="add-on"><i class="icon-arrow-left"></i></span> Atras   </button>
-        
-        </div>
+          <ul class="nav  nav-pills nav-stacked">
+             <li class="active"><a href="crearadmin.php"> <span class="add-on"><i class="icon-plus "></i></span> Crear </a></li>
+             <li><a href="principal.php"> <span class="add-on"><i class="icon-arrow-left"></i></span> Atras</a></li>          
+          </ul>
       </div>
     </div>
+    
     <div class="span9">
     <?php
 		
@@ -122,8 +124,8 @@ $conn=conectar();
 			echo '<td width="17%">'.$row["apellido"].'</td>';
 			echo '<td width="18%">'.$row["usuario"].'</td>';
 			echo '<td width="14%"> <a href="editaradmin.php?id='.$row["administradorid"].'&boton=editar"> <button class="btn btn-primary"  type="button" name="boton"> <span class="add-on"><i class="icon-pencil"></i> </span> Editar  </button>  </td></a>';
-			echo '<td width="15%"> <a href="editaradmin.php?id='.$row["administradorid"].'&boton=eliminar"> <button class="btn btn-primary"  type="button" name="boton"> <span class="add-on"><i class="icon-trash"></i> </span> Eliminar  </button>  </td></a>';
-			echo '<td width="12%"> <a href="editaradmin.php?id='.$row["administradorid"].'&boton=ver"> <button class="btn btn-primary"  type="button" name="boton"> <span class="add-on"><i class="icon-eye-open"></i> </span> Ver  </button>  </td></a>';
+			echo '<td width="15%"> <a href="eliminaradmin.php?id='.$row["administradorid"].'&boton=eliminar"> <button class="btn btn-primary"  type="button" name="boton"> <span class="add-on"><i class="icon-trash"></i> </span> Eliminar  </button>  </td></a>';
+			echo '<td width="12%"> <a href="veradmin.php?id='.$row["administradorid"].'&boton=ver"> <button class="btn btn-primary"  type="button" name="boton"> <span class="add-on"><i class="icon-eye-open"></i> </span> Ver  </button>  </td></a>';
 			echo '</tr>';
 			}
 		?>

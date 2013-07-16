@@ -4,18 +4,11 @@ session_start();
 include("../recursos/funciones.php");
 $conn=conectar();
 
-$id=$_GET['id'];
+if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
+	iraURL('../administrator/index.php');
+	}
 
-switch( $_GET['boton'] ) {
-case "eliminar": $SQL="DELETE FROM administrador WHERE administradorid=$id";
-		$result = pg_query ($conn, $SQL ) or die("Error en la consulta SQL");
-		javaalert("El administrador fue eliminado");
-		llenarLog(3, "Eliminar Administrador");
-		iraURL('../administrator/admin.php');
-		
-	
-break;
-}
+$id=$_GET['id'];
 
 ?>
 <!DOCTYPE html>
@@ -60,22 +53,20 @@ break;
 <div class="container">
    <div class="row-fluid">
                        
-    <div class="span3">
+   <div class="span3">
       <div style="text-align:center">
-        
-         <div class="btn-group btn-group-vertical">
-             
-             <button class="btn btn-primary dropdown-menu btn-large text-left " onClick="location.href='admin.php'"> <span class="add-on"><i class="icon-arrow-left"></i></span> Atras</button>
-        
-        </div>
+          <ul class="nav  nav-pills nav-stacked">
+              <li class="active"><a href="admin.php"> <span class="add-on"><i class="icon-arrow-left"></i></span> Atras</a></li>
+          </ul>
       </div>
     </div>
+    
     <div class="span9">
       <div class="well well-large">
         <p>
         
         <?php
-        	$cons="SELECT *FROM administrador WHERE administradorid=$id";
+        	$cons="SELECT * FROM administrador WHERE administradorid=$id";
 			$resulta = pg_query ($conn, $cons) or die("Error en la consulta SQL");
 			
 			if($row=pg_fetch_array($resulta)){
@@ -85,26 +76,30 @@ break;
         	<table width="100%" class="table table-bordered">
             	<tr>
                 	<th>Nombre</th>
-                    <td><input id="nombre" name="nombre" type="text" value="<?php echo $row['nombre']; ?>"/></td>
+                    <td><input id="nombre" name="nombre" type="text" value="<?php echo $row['nombre']; ?>" required/></td>
                 </tr>
                 <tr>
                 	<th>Apellido</th>
-                    <td><input id="apellido" name="apellido" type="text" value="<?php echo $row['apellido']; ?>"/></td>
+                    <td><input id="apellido" name="apellido" type="text" value="<?php echo $row['apellido']; ?>" required/></td>
                 </tr>
                 <tr>
                 	<th>Usuario</th>
-                    <td><input id="usuario" name="usuario" type="text" value="<?php echo $row['usuario']; ?>" /></td>
+                    <td><input id="usuario" name="usuario" type="text" value="<?php echo $row['usuario']; ?>" required/></td>
                 </tr>
                 <tr>
                 	<th>Contraseña</th>
-                    <td><input id="contrasena" name="contrasena" type="password" value="<?php echo $row['contrasena']; ?>"/></td>
+                    <td><input id="contrasena" name="contrasena" type="password" value="<?php echo $row['contrasena']; ?>" required/></td>
                 </tr>
+                <tr>
+                	<th>Confirmar contraseña</th>
+     				<td><input type="password" name="contrasena_c" id="contrasena_c" value="<?php echo $row['contrasena']; ?>" required/></td>
+     		 	</tr>
                 <tr>
                 	<th>Tipo Administrador</th>
                     <td><select id="tipoadmin" name="tipoadmin">
                     	<?php 
 						
-						$consu="SELECT *FROM tipoadministrador WHERE tipoadministradorid=".$row['tipoadministradorid'];
+						$consu="SELECT * FROM tipoadministrador WHERE tipoadministradorid=".$row['tipoadministradorid'];
 						$resulta1 = pg_query ($conn, $consu) or die("Error en la consulta SQL");
 						if($row1=pg_fetch_array($resulta1)){
 							echo '<option value="'.$row1['tipoadministradorid'].'">'.$row1['nombre'].'</option>';
@@ -115,23 +110,24 @@ break;
                         <?php
 		
 						$SQL="SELECT * FROM tipoadministrador";
-						$result = pg_query ($conn, $SQL ) or die("Error en la consulta SQL");
+						$resulta2 = pg_query ($conn, $SQL ) or die("Error en la consulta SQL");
 						
-						while($row=pg_fetch_array($result)){
-							echo '<option value="'.$row['tipoadministradorid'].'">'.$row['nombre'].'</option>';
+						while($row2=pg_fetch_array($resulta2)){
+							echo '<option value="'.$row2['tipoadministradorid'].'">'.$row2['nombre'].'</option>';
 
 							}
 
 						?>
                     </select></td>
                 </tr>
-                <?php }?>
+                
                 <tr>
                 	<td> </td> <td><button name="guardar" id="guardar" type="submit" class="btn-primary text-center">Modificar</button></td>
                 </tr>
                 
             </table>
         </form>
+        <?php }?>
 <?php
 
 if(isset($_POST["guardar"])){
@@ -141,16 +137,27 @@ if(isset($_POST["guardar"])){
 	$usuario=$_POST['usuario'];
 	$contrasena=$_POST['contrasena'];
 	$tipoadmin=$_POST['tipoadmin'];
-
-
-	$resultado=pg_query($conn,"UPDATE administrador SET nombre='$nombre', apellido='$apellido', usuario='$usuario', contrasena='$contrasena', tipoadministradorid='$tipoadmin' WHERE administradorid=$id") or die(pg_last_error($conn));
 	
-	if($resultado){
-			javaalert('Entro');
-			llenarLog(2, "Modifico Administrador");
-			iraURL('../administrator/admin.php');
-		}
+	$SQL="SELECT * FROM administrador where usuario='$usuario'";
+	$result = pg_query ($conn, $SQL ) or die("Error en la consulta SQL");
+	$registros= pg_num_rows($result);
+	
+	if($registros == 0){
 
+		if($_POST["contrasena"]==$_POST["contrasena_c"]){
+			$resultado=pg_query($conn,"UPDATE administrador SET nombre='$nombre', apellido='$apellido', usuario='$usuario', contrasena='$contrasena', tipoadministradorid='$tipoadmin' WHERE administradorid=$id") or die(pg_last_error($conn));
+	
+			if($resultado){
+				javaalert('Se Modifico el Administrador');
+				llenarLog(2, "Modifico Administrador");
+				iraURL('../administrator/admin.php');
+			}
+		}else{
+			javaalert("Las contraseñas no coinciden, por favor verifique");
+		}
+	}else{
+		javaalert("El nombre de usuario ya esta registrado, por favor verfique");
+	}
 }
 ?>
          </p>
