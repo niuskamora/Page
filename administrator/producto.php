@@ -87,15 +87,6 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
 	?>
       <div class="well well-large">
         <p>
-<<<<<<< HEAD
-		<table width="100%" class="table table-striped table-hover">
-      <th> Id  </th>
-      <th> Nombre </th>
-      <th> Descripción </th>
-      <th> Editar  </th>
-      <th> Eliminar  </th>
-      <th> Ver  </th>
-=======
 	<table width="100%" class="footable table-striped table-hover" data-page-size="5">
       <thead>
 				<tr>
@@ -123,7 +114,6 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
 				</tr>
 	 </thead>
   <tbody>
->>>>>>> efa8c8724c2b1b154d728836435ea7b929bbb1e1
       <?php    
 		for ($i=0;$i<$registros;$i++)
 			{
@@ -171,3 +161,5 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
 
 	</body>
 </html>
+</html>
+
