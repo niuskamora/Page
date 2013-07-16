@@ -215,7 +215,7 @@ if(isset($_POST["guardar"]) || isset($_POST["guardar2"])){
 				imagecopy($img1Recortada, $img1, 0, 0, ceil(($ancho_buscado3-640)/2), ceil(($alto_buscado3-640)/2), ceil(($ancho_buscado3-640)/2)+640, ceil(($alto_buscado3-480)/2)+480);
 				
 				imagejpeg($img1Recortada,$uploadfile,$calidad);				
-				$sql_update="update sucursal set imagen='".$uploadfile."' where informacionid=".$arreglo[0]."";
+				$sql_update="update informacion set imagen='".$uploadfile."' where informacionid=".$arreglo[0]."";
 			
 				$result= pg_query($conn, $sql_update);
 																													
