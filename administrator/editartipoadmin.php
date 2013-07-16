@@ -78,38 +78,31 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
 		$row = pg_fetch_array ($result);
 	   ?>
        <form method="post">
-	    <table class="footable table-striped table-hover" data-page-size="5">
-			  <thead>
-				<tr>
-				  <th data-class="expand" data-sort-initial="true" data-type="numeric">
-					<span>Nombre</span>
-				  </th>
-				  <th>
-					<span>Descripcion</span>
-				  </th>
-                
-				 
-				</tr>
-			  </thead>
-				<tbody>
-	   
-		
-      <?php   
-	  echo '<tr>';
-		echo '<td width="40%"> <input id="nombres" name="nombres"  type="text" value="'.$row["nombre"].'" contenteditable=true required/> </td>';
-			
-			echo ' <td width="60%"> <input id="descripcionn" name="descripcionn"  type="text" value="'.$row["descripcion"].'" contenteditable=true required/> </td>';
-			
-			
-			echo '</tr>';
-		?>
-       
-	
-
-</tbody>	  
-    </table>
+	    <div class="row-fluid">
+            <div class="span12">
+                 <div class="span6">
+                 Nombre                 
+                 </div>
+                 <div class="span6">
+                 <input id="nombres" name="nombres"  type="text" value="'.$row["nombre"].'" contenteditable=true required/>
+                 </div>
+               </div>
+             <div class="span12">
+                 <div class="span6">
+                 Descipcion                 
+                 </div>
+                 <div class="span6">
+         <input id="descripcionn" name="descripcionn"  type="text" value="'.$row["descripcion"].'" contenteditable=true required/>
+                   </div>
+               </div>   
+          
+        
+        </div>
+		  <div class="span12">
+          	
     <button id="guardar" name="guardar" class="btn-primary text-center" type="submit"> <span class="add-on"><i class="icon-pencil"></i></span>Guardar</button>
 
+       </div>
 	 </form> 
 
 

@@ -41,7 +41,8 @@
       </div>
       <div class="navbar navbar-inverse navbar-fixed-top">
         <div class="navbar-inner">
-          <div class="container"><a id="open" href="#nav" class="btn btn-navbar" data-toggle="collapse" data-target="#barrac"><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></a><a id="open2" href="#" class="btn btn-navbar" data-toggle="collapse" data-target="#login"><i class="icon-user"></i></a> <a class="brand visible-desktop" style="float:left" href="#"><img  src="recursos/img/logo.png" width="140" height="20"/></a>
+          <div class="container"><a id="open" href="#nav" class="btn btn-navbar" data-toggle="collapse" data-target="#barrac"><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></a>
+          <a id="open2" href="#" class="btn btn-navbar" data-toggle="collapse" data-target="#login"><i class="icon-user icon-white"></i></a> <a class="brand visible-desktop" style="float:left" href="#"><img  src="recursos/img/logo.png" width="140" height="20"/></a>
             <div id="barrac" class="nav-collapse collapse">
               <ul id="nav" class="nav slidernav">
                 <li class="active"><a href="#">Home</a></li>
