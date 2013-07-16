@@ -161,5 +161,4 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
 
 	</body>
 </html>
-</html>
 
