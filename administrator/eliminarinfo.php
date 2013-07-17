@@ -58,7 +58,7 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
     <div class="span3">
       <div style="text-align:center">
           <ul class="nav  nav-pills nav-stacked">
-             <li class="active"><a href="info.php"> <span class="add-on"><i class="icon-arrow-left"></i></span> Atras</a></li>          
+             <li class="active"><a href="info.php"> <span class="add-on"><i class="icon-arrow-left"></i></span> Atrás</a></li>          
           </ul>
       </div>
     </div>

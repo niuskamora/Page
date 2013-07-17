@@ -58,7 +58,7 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
       <div style="text-align:center">
           <ul class="nav  nav-pills nav-stacked">
               <li class="active"><a href="crearinfo.php"> <span class="add-on"><i class="icon-plus "></i></span> Crear </a></li>
-              <li><a href="principal.php"> <span class="add-on"><i class="icon-arrow-left"></i></span> Atras</a></li>          
+              <li><a href="principal.php"> <span class="add-on"><i class="icon-arrow-left"></i></span> Atrás</a></li>          
           </ul>
       </div>
     </div>
@@ -120,10 +120,10 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
 			echo '<td width="10%">'.$row["informacionid"].'</td>';
 			echo '<td width="15%">'.$row["titulo"].'</td>';
 			echo '<td width="18%">'.substr($row["descripcion"],0,40)."...".'</td>';
-			echo '<td width="17%">'.substr($row["enlace"],0,20)."...".'</td>';
+			echo '<td width="15%">'.substr($row["enlace"],0,20)."...".'</td>';
 			echo '<td width="14%"> <a href="editarinfo.php?id='.$row["informacionid"].'&boton=editar"> <button class="btn btn-primary"  type="button" name="boton"> <span class="add-on"><i class="icon-pencil"></i> </span> Editar  </button>  </td></a>';
 			echo '<td width="15%"> <a href="eliminarinfo.php?id='.$row["informacionid"].'&boton=eliminar"> <button class="btn btn-primary"  type="button" name="boton"> <span class="add-on"><i class="icon-trash"></i> </span> Eliminar  </button>  </td></a>';
-			echo '<td width="12%"> <a href="verinfo.php?id='.$row["informacionid"].'&boton=ver"> <button class="btn btn-primary"  type="button" name="boton"> <span class="add-on"><i class="icon-eye-open"></i> </span> Ver  </button>  </td></a>';
+			echo '<td width="14%"> <a href="verinfo.php?id='.$row["informacionid"].'&boton=ver"> <button class="btn btn-primary"  type="button" name="boton"> <span class="add-on"><i class="icon-eye-open"></i> </span> Ver  </button>  </td></a>';
 			echo '</tr>';
 			}
 		?>
