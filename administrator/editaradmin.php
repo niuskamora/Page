@@ -26,6 +26,7 @@ $id=$_GET['id'];
 </head>
 
 <body class="preview" id="top" data-spy="scroll" data-target=".subnav" data-offset="80">
+<form method="post">
 <div class="container">
   <div class="navbar">
     <div class="navbar-inner">
@@ -56,15 +57,10 @@ $id=$_GET['id'];
    <div class="span3">
       <div style="text-align:center">
           <ul class="nav  nav-pills nav-stacked">
-              <li class="active"><a href="admin.php"> <span class="add-on"><i class="icon-arrow-left"></i></span> Atras</a></li>
+              <li class="active"><a href="admin.php"> <span class="add-on"><i class="icon-arrow-left"></i></span> Atrás</a></li>
           </ul>
       </div>
     </div>
-    
-    <div class="span9">
-      <div class="well well-large">
-        <p>
-        
         <?php
         	$cons="SELECT * FROM administrador WHERE administradorid=$id";
 			$resulta = pg_query ($conn, $cons) or die("Error en la consulta SQL");
@@ -72,31 +68,20 @@ $id=$_GET['id'];
 			if($row=pg_fetch_array($resulta)){
 		?>
         
-		<form method="post">
-        	<table width="100%" class="table table-bordered">
-            	<tr>
-                	<th>Nombre</th>
-                    <td><input id="nombre" name="nombre" type="text" value="<?php echo $row['nombre']; ?>" required/></td>
-                </tr>
-                <tr>
-                	<th>Apellido</th>
-                    <td><input id="apellido" name="apellido" type="text" value="<?php echo $row['apellido']; ?>" required/></td>
-                </tr>
-                <tr>
-                	<th>Usuario</th>
-                    <td><input id="usuario" name="usuario" type="text" value="<?php echo $row['usuario']; ?>" required/></td>
-                </tr>
-                <tr>
-                	<th>Contraseña</th>
-                    <td><input id="contrasena" name="contrasena" type="password" value="<?php echo $row['contrasena']; ?>" required/></td>
-                </tr>
-                <tr>
-                	<th>Confirmar contraseña</th>
-     				<td><input type="password" name="contrasena_c" id="contrasena_c" value="<?php echo $row['contrasena']; ?>" required/></td>
-     		 	</tr>
-                <tr>
-                	<th>Tipo Administrador</th>
-                    <td><select id="tipoadmin" name="tipoadmin">
+		<div class="span9 well well-large">
+        <p>
+            <div class="span3 well well-small"><b>Nombre</b></div>
+            <div class="span6 well well-small"><input id="nombre" name="nombre" type="text" value="<?php echo $row['nombre']; ?>" required/></div>
+            <div class="span3 well well-small"><b>Apellido</b></div>
+            <div class="span6 well well-small"><input id="apellido" name="apellido" type="text" value="<?php echo $row['apellido']; ?>" required/></div>
+            <div class="span3 well well-small"><b>Usuario</b></div>
+            <div class="span6 well well-small"><input id="usuario" name="usuario" type="text" value="<?php echo $row['usuario']; ?>" required/></div>
+            <div class="span3 well well-small"><b>Contraseña</b></div>
+            <div class="span6 well well-small"><input id="contrasena" name="contrasena" type="password" value="<?php echo $row['contrasena']; ?>" required/></div>
+            <div class="span3 well well-small"><b>Confirmar Contrseña</b></div>
+            <div class="span6 well well-small"><input id="contrasena_c" name="contrasena_c" type="password" value="<?php echo $row['contrasena']; ?>" required/></div>
+			<div class="span3 well well-small"><b>Tipo de Administrador</b></div>
+            <div class="span6 well well-small"><select id="tipoadmin" name="tipoadmin">
                     	<?php 
 						
 						$consu="SELECT * FROM tipoadministrador WHERE tipoadministradorid=".$row['tipoadministradorid'];
@@ -118,15 +103,14 @@ $id=$_GET['id'];
 							}
 
 						?>
-                    </select></td>
-                </tr>
+                    </select></div>
+      <div class="span9 well well-small" align="center">
+      <button name="guardar" id="guardar" type="submit" class="btn btn-primary text-center">Modiificar</button>
+      </div>
                 
-                <tr>
-                	<td> </td> <td><button name="guardar" id="guardar" type="submit" class="btn-primary text-center">Modificar</button></td>
-                </tr>
-                
-            </table>
-        </form>
+         </p>
+    </div>
+    
         <?php }?>
 <?php
 
@@ -138,12 +122,6 @@ if(isset($_POST["guardar"])){
 	$contrasena=$_POST['contrasena'];
 	$tipoadmin=$_POST['tipoadmin'];
 	
-	$SQL="SELECT * FROM administrador where usuario='$usuario'";
-	$result = pg_query ($conn, $SQL ) or die("Error en la consulta SQL");
-	$registros= pg_num_rows($result);
-	
-	if($registros == 0){
-
 		if($_POST["contrasena"]==$_POST["contrasena_c"]){
 			$resultado=pg_query($conn,"UPDATE administrador SET nombre='$nombre', apellido='$apellido', usuario='$usuario', contrasena='$contrasena', tipoadministradorid='$tipoadmin' WHERE administradorid=$id") or die(pg_last_error($conn));
 	
@@ -155,16 +133,9 @@ if(isset($_POST["guardar"])){
 		}else{
 			javaalert("Las contraseñas no coinciden, por favor verifique");
 		}
-	}else{
-		javaalert("El nombre de usuario ya esta registrado, por favor verfique");
-	}
 }
 ?>
-         </p>
-      </div>
-    </div>
-    </div>
-  
+  </div>
 </div>
 
 <!-- Le javascript
@@ -172,5 +143,6 @@ if(isset($_POST["guardar"])){
 <script type="text/javascript" src="../recursos/js/jquery-2.0.2.js" ></script> 
 <script src="../recursos/js/bootstrap.js"></script> 
 <script src="../recursos/js/bootstrap.min.js"></script>
-	</body>
+</form>
+</body>
 </html>

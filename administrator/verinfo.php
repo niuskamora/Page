@@ -59,7 +59,7 @@ $id=$_GET['id'];
     <div class="span3">
       <div style="text-align:center">
           <ul class="nav  nav-pills nav-stacked">
-             <li class="active"><a href="info.php"> <span class="add-on"><i class="icon-arrow-left"></i></span> Atras</a></li>          
+             <li class="active"><a href="info.php"> <span class="add-on"><i class="icon-arrow-left"></i></span> Atrás</a></li>          
           </ul>
       </div>
     </div>
@@ -74,14 +74,34 @@ $id=$_GET['id'];
 			if($row=pg_fetch_array($resulta)){
 		?>
         
-			<div class="span3 well well-small">Ide</div>
+			<div class="span3 well well-small"><b>Id</b></div>
             <div class="span6 well well-small "><?php echo $row['informacionid'];?></div>
-            <div class="span3 well well-small">Título</div>
+            <div class="span3 well well-small"><b>Título</b></div>
             <div class="span6 well well-small"><?php echo $row['titulo'];?></div>
-            <div class="span3 well well-small">Descripción</div>
-            <div class="span6 well well-small"><?php echo $row['descripcion'];?></div>
-            <div class="span3 well well-small">Enlace</div>
+            <div class="span3 well well-small"><b>Descripción</b></div>
+            <div class="span6 well well-small" align="justify"><?php echo $row['descripcion'];?></div>
+            <div class="span3 well well-small"><b>Enlace</b></div>
             <div class="span6 well well-small"><?php echo $row['enlace'];?></div>
+            <div class="span3 well well-small"><b>Imagen</b></div>
+            <div class="span6 well well-small"><img src="<?php echo $row['imagen'];?>"></div>
+            
+            	<?php 
+				$cons1="SELECT * FROM menu WHERE menuid=".$row['menuid'];
+				$resulta2=pg_query ($conn, $cons1) or die("Error en la consulta SQL");
+				if($row1=pg_fetch_array($resulta2)){
+				?>
+            	<div class="span3 well well-small"><b>Menú</b></div>
+            	<div class="span6 well well-small"><?php echo $row1['nombre'];?></div>
+                <?php }?>
+                
+                <?php 
+				$cons1="SELECT * FROM tipoinformacion WHERE tipoinformacionid=".$row['tipoinformacionid'];
+				$resulta2=pg_query ($conn, $cons1) or die("Error en la consulta SQL");
+				if($row1=pg_fetch_array($resulta2)){
+				?>
+            	<div class="span3 well well-small"><b>Tipo de Información</b></div>
+            	<div class="span6 well well-small"><?php echo $row1['nombre'];?></div>
+                <?php }?>
      <?php }?>
 
          </p>

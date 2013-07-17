@@ -56,7 +56,7 @@ $id=$_GET['id'];
    <div class="span3">
       <div style="text-align:center">
           <ul class="nav  nav-pills nav-stacked">
-              <li class="active"><a href="admin.php"> <span class="add-on"><i class="icon-arrow-left"></i></span> Atras</a></li>
+              <li class="active"><a href="admin.php"> <span class="add-on"><i class="icon-arrow-left"></i></span> Atrás</a></li>
           </ul>
       </div>
     </div>
@@ -70,16 +70,41 @@ $id=$_GET['id'];
 			
 			if($row=pg_fetch_array($resulta)){
 		?>
-        	<div class="span3 well well-small">Ide</div>
+        	<div class="span3 well well-small"><b>Id</b></div>
             <div class="span6 well well-small "><?php echo $row['administradorid'];?></div>
-            <div class="span3 well well-small">Nombre</div>
+            <div class="span3 well well-small"><b>Nombre</b></div>
             <div class="span6 well well-small"><?php echo $row['nombre'];?></div>
-            <div class="span3 well well-small">Apellido</div>
+            <div class="span3 well well-small"><b>Apellido</b></div>
             <div class="span6 well well-small"><?php echo $row['apellido'];?></div>
-            <div class="span3 well well-small">Usuario</div>
+            <div class="span3 well well-small"><b>Usuario</b></div>
             <div class="span6 well well-small"><?php echo $row['usuario'];?></div>
-            <div class="span3 well well-small">Contraseña</div>
+            <div class="span3 well well-small"><b>Contraseña</b></div>
             <div class="span6 well well-small"><?php echo $row['contrasena'];?></div>
+            
+            	<?php
+				if($row['creadorid']!=''){
+				
+					$cons1="SELECT * FROM administrador WHERE administradorid=".$row['creadorid'];
+					$resulta2=pg_query ($conn, $cons1) or die("Error en la consulta SQL");
+					if($row1=pg_fetch_array($resulta2)){
+					?>
+            			<div class="span3 well well-small"><b>Creador</b></div>
+            			<div class="span6 well well-small"><?php echo $row1['nombre'];?></div>
+                	<?php }
+					
+				}else{?>
+                	<div class="span3 well well-small"><b>Creador</b></div>
+            		<div class="span6 well well-small">No posee creador</div>
+                <?php }?>
+                <?php 
+				$cons1="SELECT * FROM tipoadministrador WHERE tipoadministradorid=".$row['tipoadministradorid'];
+				$resulta2=pg_query ($conn, $cons1) or die("Error en la consulta SQL");
+				if($row1=pg_fetch_array($resulta2)){
+				?>
+            	<div class="span3 well well-small"><b>Tipo de Administrador</b></div>
+            	<div class="span6 well well-small"><?php echo $row1['nombre'];?></div>
+                <?php }?>
+                
         <?php }?>
          </p>
     </div>
