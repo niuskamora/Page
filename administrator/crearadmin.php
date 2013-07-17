@@ -73,7 +73,8 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
             <div class="span3 well well-small"><b>Confirmar Contrseña</b></div>
             <div class="span6 well well-small"><input id="contrasena_c" name="contrasena_c" type="password" required/></div>
 			<div class="span3 well well-small"><b>Tipo de Administrador</b></div>
-            <div class="span6 well well-small"><select id="tipoadmin" name="tipoadmin">
+            <div class="span6 well well-small">
+            <select id="tipoadmin" name="tipoadmin">
                     	<option value="0">Seleccione Opción</option>
                         <?php
 		
@@ -81,12 +82,13 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
 						$result = pg_query ($conn, $SQL ) or die("Error en la consulta SQL");
 						
 						while($row=pg_fetch_array($result)){
-							echo '<option value="'.$row['tipoadministradorid'].'">'.$row['nombre'].'</option>';
+							echo '<option value="'.$row['menuid'].'">'.$row['nombre'].'</option>';
 
 							}
 
 						?>
-                    </select></div>
+                    </select>
+                    </div>
       <div class="span9 well well-small" align="center">
       <button name="guardar" id="guardar" type="submit" class="btn btn-primary text-center">Guardar</button>
       <button id="guardar2" name="guardar2" class="btn btn-primary text-center" type="submit">Guardar y añadir otro</button>

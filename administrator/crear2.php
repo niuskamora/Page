@@ -58,7 +58,7 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
       <div style="text-align:center">
         
                  <ul class="nav  nav-pills nav-stacked">
-              <li class="active"><a href="menu.php"> <span class="add-on"><i class="icon-plus "></i></span> Atras </a></li>
+              <li class="active"><a href="menu.php"> <span class="add-on"><i class="icon-arrow-left"></i></span> Atras </a></li>
 
           </ul>
 
@@ -104,7 +104,9 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
 					enlace
 				  </th>
 
-
+ <th data-hide="phone" data-sort-ignore="true">
+					<span class="add-on"> <i class="icon-pencil"></i> </span> Editar 
+				  </th>
 				</tr>
 			  </thead>
 				<tbody>
@@ -124,7 +126,10 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
 				 echo '<tr>';
 			
 	      echo '<td width="16%">'.$row["nombre"].' </td> </a>';
-		   echo '<td width="16%">'.$row["submenu"].' </td> </a>';
+		   $SQL7="SELECT * FROM menu WHERE menuid=".$_GET["id"];
+		$result7 = pg_query ($conn, $SQL7 ) or die("Error en la consulta SQL");
+		$row7 = pg_fetch_array ($result7);
+		   echo '<td width="16%">'.$row7["nombre"].' </td> </a>';
 		 
 		  		 
 			$SQL3="SELECT nombre FROM administrador WHERE administradorid=".$row["administradorid"];
@@ -132,7 +137,7 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
 		$row3 = pg_fetch_array ($result3);
 		echo '<td width="15">'.$row3["nombre"].' </td>';
 		echo '<td width="15">'.$row["enlace"].' </td>';	 
-			
+			echo '<td width="14%"> <a href="editarmenu.php?id='.$row["menuid"].'&boton=editar"> <button class="btn btn-primary"  type="button" name="boton"> <span class="add-on"><i class="icon-pencil"></i> </span> Editar  </button>  </td></a>';
 			echo '</tr>';
             
 			
@@ -180,7 +185,7 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
 if(isset($_POST["guardar"])){
 		
 		$nombre=$_POST['nombre'];
-		$submenu=$_POST['submenu'];
+		$submenu=$_GET["id"];
 		$admin=$_SESSION["id_usuario"];
 		$enla=$_POST['enlace'];
        
@@ -188,8 +193,8 @@ if(isset($_POST["guardar"])){
 	
 	if($resultado){
 			
-			llenarLog(1, "Creo menu");
-			iraURL('../administrator/menu.php');
+			llenarLog(1, "Creo submenu");
+			iraURL('../administrator/crear2.php?id='.$_GET['id']);
 		}
 
 

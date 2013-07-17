@@ -37,7 +37,7 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
             <li><a href="producto.php">Producto</a></li>
             <li><a href="sucursal.php">Sucursal</a></li>
             <li><a href="tipoinfo.php">Tipo Infomación</a></li>
-            <li><a href="tipoadmin.php"> <em> <b> Tipo Administracion </b> </em>  </a></li>
+            <li><a href="tipoadmin.php"> <em> <b> Tipo Administrador </b> </em>  </a></li>
             <li><a href="cerrarsesion.php">Cerrar Sesión</a></li>
           </ul>
         </div>
@@ -55,7 +55,7 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
       <div style="text-align:center">
         
                   <ul class="nav  nav-pills nav-stacked">
-              <li class="active"><a href="rmenu.php"> <span class="add-on"><i class="icon-plus "></i></span> Atras </a></li>
+              <li class="active"><a href="tipoadmin.php"> <span class="add-on"><i class="icon-plus "></i></span> Atras </a></li>
 
           </ul>
 
