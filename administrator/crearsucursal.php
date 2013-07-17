@@ -21,6 +21,7 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
 <link href="../recursos/css/bootstrap.min.css" rel="stylesheet">
 <link href="../recursos/css/bootstrap-responsive.min.css" rel="stylesheet">
 <link href="../recursos/css/estiloadmin.css" rel="stylesheet">
+<link rel="stylesheet" href="../recursos/redactor/redactor.css" />
 </head>
 
 <body class="preview" id="top" data-spy="scroll" data-target=".subnav" data-offset="80">
@@ -89,7 +90,7 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
                 </tr>
                  <tr>
                 	<th>Descripcion</th>
-             <td><input id="descripcion" name="descripcion" type="text" value="" required/></td>
+             <td><textarea id="redactor" name="redactor"></textarea></td>
                 </tr>
                 <tr>
                 
@@ -113,22 +114,19 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
 		<?php
 		
 
-if(isset($_POST["guardar2"])){
+if(isset($_POST["guardar"])){
 	
 	$nombre=$_POST['nombres'];
 	$direccion=$_POST['direccion'];
 	$telefono=$_POST['telefono'];
 	$correo=$_POST['correo'];
-	$descripcion=$_POST['descripcion'];
+	$descripcion=$_POST['redactor'];
 	$latitud=$_POST['latitud'];
 	$longitud=$_POST['longitud'];
 	
-	$sql1="SELECT menuid FROM menu WHERE nombre='sucursal'";
-	$result1=pg_query($conn, $sql1);
-	$arregl1=pg_fetch_array($result1);
-	$menuid=$arregl1["menuid"];
+
 	
-	$resultado=pg_query($conn,"INSERT INTO sucursal values( nextval('sucursal_sucursalid_seq'),'$nombre','$direccion','$telefono','$correo','','$menuid','$latitud','$longitud','$descripcion')") or die(pg_last_error($conn));
+	$resultado=pg_query($conn,"INSERT INTO sucursal values( nextval('sucursal_sucursalid_seq'),'$nombre','$direccion','$telefono','$correo','','$latitud','$longitud','$descripcion')") or die(pg_last_error($conn));
 	
 	$sql_select="SELECT last_value FROM sucursal_sucursalid_seq;";
 	$results=pg_query($conn, $sql_select);
@@ -213,6 +211,104 @@ if(isset($_POST["guardar2"])){
 			iraURL('../administrator/sucursal.php');
 	}
 }
+
+if(isset($_POST["guardar2"])){
+	
+	$nombre=$_POST['nombres'];
+	$direccion=$_POST['direccion'];
+	$telefono=$_POST['telefono'];
+	$correo=$_POST['correo'];
+	$descripcion=$_POST['redactor'];
+	$latitud=$_POST['latitud'];
+	$longitud=$_POST['longitud'];
+	
+
+	
+	$resultado=pg_query($conn,"INSERT INTO sucursal values( nextval('sucursal_sucursalid_seq'),'$nombre','$direccion','$telefono','$correo','','$latitud','$longitud','$descripcion')") or die(pg_last_error($conn));
+	
+	$sql_select="SELECT last_value FROM sucursal_sucursalid_seq;";
+	$results=pg_query($conn, $sql_select);
+	$arreglo=pg_fetch_array($results,0);
+	
+	if($_FILES['imagen']['name']!=""){
+		
+		$caracteres = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz"; //posibles caracteres a usar
+		$numerodeletras=10; //numero de letras para generar el texto
+		$cadena = ""; //variable para almacenar la cadena generada
+		for($i=0;$i<$numerodeletras;$i++){
+    		$cadena .= substr($caracteres,rand(0,strlen($caracteres)),1); /*Extraemos 1 caracter de los caracteres 
+			entre el rango 0 a Numero de letras que tiene la cadena */
+		}
+		
+		$direccion="../recursos";
+		$tipo = explode('/',$_FILES['imagen']['type']);
+		$uploadfile =$direccion."/img/".$arreglo[0].".".$tipo[1];
+		$error = $_FILES['imagen']['error']; 
+		$subido = false;
+		
+		
+		if($error==UPLOAD_ERR_OK){ 
+			    $subido = copy($_FILES['imagen']['tmp_name'], $uploadfile); 
+				$rutaImagenOriginal=$uploadfile;
+				if($tipo[1]=="jpg" || $tipo[1]=="JPEG" || $tipo[1]=="JPG" || $tipo[1]=="jpeg"){
+					$img_original = imagecreatefromjpeg($rutaImagenOriginal);
+				}
+				if($tipo[1]=="png"){
+					$img_original = imagecreatefrompng($rutaImagenOriginal);
+				}
+
+				list($ancho,$alto)=getimagesize($rutaImagenOriginal);
+				$ancho_buscado3=0;
+				$alto_buscado3=0;	
+			
+			    if($ancho!=640){
+				   $ancho_buscado3=640;
+				   $alto_buscado3=ceil((640*$alto)/$ancho);					
+				}
+			
+				if($alto<=$ancho){
+				   $alto_buscado3=480;
+				   $ancho_buscado3=ceil((480*$ancho)/$alto);
+				}else{
+				   $ancho_buscado3=640;
+				   $alto_buscado3=ceil((640*$alto)/$ancho);
+				}	
+
+                if($alto_buscado3<480){
+				   $ancho_buscado3=ceil((480*$ancho_buscado3)/$alto_buscado3);
+				   $alto_buscado3=480;
+				}
+
+				if($ancho_buscado3<640){
+				   $alto_buscado3=ceil((640*$alto_buscado3)/$ancho_buscado3);
+				   $ancho_buscado3=640;	
+				}
+				
+                $tmp=imagecreatetruecolor($ancho_buscado3,$alto_buscado3);
+				imagecopyresampled($tmp,$img_original,0,0,0,0,$ancho_buscado3, $alto_buscado3,$ancho,$alto);
+				//Definimos la calidad de la imagen final
+				$calidad=100;
+				//Se crea la imagen final en el directorio indicado
+				imagejpeg($tmp,$uploadfile,$calidad);				
+										
+				$fichero=$uploadfile;			
+				$img1 = imagecreatefromjpeg($fichero);
+				$img1Recortada = imagecreatetruecolor (640, 480);
+				imagecopy($img1Recortada, $img1, 0, 0, ceil(($ancho_buscado3-640)/2), ceil(($alto_buscado3-640)/2), ceil(($ancho_buscado3-640)/2)+640, ceil(($alto_buscado3-480)/2)+480);
+				
+				imagejpeg($img1Recortada,$uploadfile,$calidad);				
+				$sql_update="update sucursal set imagen='".$uploadfile."' WHERE sucursalid=".$arreglo[0]."";
+			
+				$result= pg_query($conn, $sql_update);
+																													
+			}		
+		 }
+	
+	if($resultado && $result){
+			llenarLog(1, "Creo sucursal");
+			iraURL('../administrator/crearsucursal.php');
+	}
+}
 	    ?>
         
          </p>
@@ -227,5 +323,16 @@ if(isset($_POST["guardar2"])){
 <script type="text/javascript" src="../recursos/js/jquery-2.0.2.js" ></script> 
 <script src="../recursos/js/bootstrap.js"></script> 
 <script src="../recursos/js/bootstrap.min.js"></script>
+<script src="../recursos/redactor/redactor.js"></script>
+<script src="../recursos/redactor/redactor.min.js"></script>
+<script type="text/javascript">
+	$(document).ready(
+		function()
+		{
+			$('#redactor').redactor();
+		}
+	);
+	</script>
+</form>
 	</body>
 </html>
