@@ -73,7 +73,7 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
 
      	if($registros == 0){
     	?>
-    		<div class="alert alert-block">
+    		<div class="alert alert-block" align="center">
    			<h2 class="alert alert-block">Atención</h2>
     		<h4>No Existen Registros en Adminsitrador</h4>
    			</div>

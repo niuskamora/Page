@@ -78,8 +78,6 @@ $id=$_GET['id'];
             <div class="span6 well well-small"><?php echo $row['apellido'];?></div>
             <div class="span3 well well-small"><b>Usuario</b></div>
             <div class="span6 well well-small"><?php echo $row['usuario'];?></div>
-            <div class="span3 well well-small"><b>Contraseña</b></div>
-            <div class="span6 well well-small"><?php echo $row['contrasena'];?></div>
             
             	<?php
 				if($row['creadorid']!=''){

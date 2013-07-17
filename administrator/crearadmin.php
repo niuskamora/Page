@@ -91,6 +91,9 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
                     </div>
       <div class="span9 well well-small" align="center">
       <button name="guardar" id="guardar" type="submit" class="btn btn-primary text-center">Guardar</button>
+      </div>
+      
+      <div class="span9 well well-small" align="center">
       <button id="guardar2" name="guardar2" class="btn btn-primary text-center" type="submit">Guardar y añadir otro</button>
       </div>
                 
@@ -99,37 +102,42 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
 <?php
 
 if(isset($_POST["guardar"]) || isset($_POST["guardar2"])){
-	
-	$nombre=$_POST['nombre'];
-	$apellido=$_POST['apellido'];
-	$usuario=$_POST['usuario'];
-	$contrasena=$_POST['contrasena'];
-	$tipoadmin=$_POST['tipoadmin'];
 
-	$SQL="SELECT * FROM administrador where usuario='$usuario'";
-	$result = pg_query ($conn, $SQL ) or die("Error en la consulta SQL");
-	$registros= pg_num_rows($result);
+	if(isset($_POST["nombre"]) &&  isset($_POST["apellido"]) && isset($_POST["usuario"]) && isset($_POST["contrasena"]) && isset($_POST["contrasena_c"]) && $_POST["nombre"]!="" && $_POST["apellido"]!="" && $_POST["usuario"]!="" && $_POST["contrasena"]!="" && $_POST["contrasena_c"]!="" && $_POST["tipoadmin"]>0){
 	
-	if($registros == 0){
+		$nombre=$_POST['nombre'];
+		$apellido=$_POST['apellido'];
+		$usuario=$_POST['usuario'];
+		$contrasena=$_POST['contrasena'];
+		$tipoadmin=$_POST['tipoadmin'];
 
-		if($_POST["contrasena"]==$_POST["contrasena_c"]){
-			$resultado=pg_query($conn,"INSERT INTO administrador values( nextval('administrador_administradorid_seq'),'$nombre','$apellido','$usuario','$contrasena',".$_SESSION["id_usuario"].",'$tipoadmin')") or die(pg_last_error($conn));
+		$SQL="SELECT * FROM administrador where usuario='$usuario'";
+		$result = pg_query ($conn, $SQL ) or die("Error en la consulta SQL");
+		$registros= pg_num_rows($result);
 	
-			if($resultado){
-				javaalert('Se Creo un Administrador');
-				llenarLog(1, "Creo Administrador");
-				if(isset($_POST["guardar"])){
-					iraURL('../administrator/admin.php');
+		if($registros == 0){
+
+			if($_POST["contrasena"]==$_POST["contrasena_c"]){
+				$resultado=pg_query($conn,"INSERT INTO administrador values( nextval('administrador_administradorid_seq'),'$nombre','$apellido','$usuario','$contrasena',".$_SESSION["id_usuario"].",'$tipoadmin')") or die(pg_last_error($conn));
+	
+				if($resultado){
+					javaalert('Se Creo un Administrador');
+					llenarLog(1, "Administrador");
+					if(isset($_POST["guardar"])){
+						iraURL('../administrator/admin.php');
+					}
+					else{
+						iraURL('../administrator/crearadmin.php');
+					}
 				}
-				else{
-					iraURL('../administrator/crearadmin.php');
-				}
+			}else{
+				javaalert("Las contraseñas no coinciden, por favor verifique");
 			}
 		}else{
-			javaalert("Las contraseñas no coinciden, por favor verifique");
+			javaalert("El nombre de usuario ya esta registrado, por favor verfique");
 		}
 	}else{
-		javaalert("El nombre de usuario ya esta registrado, por favor verfique");
+		javaalert("Ingrese todos los campos");
 	}
 }
 ?>

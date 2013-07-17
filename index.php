@@ -1,3 +1,9 @@
+<?php
+session_start();
+
+include("recursos/funciones.php");
+$conn=conectar();
+?>
 <!DOCTYPE html>
 
 <head>
@@ -45,17 +51,7 @@
           <a id="open2" href="#" class="btn btn-navbar" data-toggle="collapse" data-target="#login"><i class="icon-user icon-white"></i></a> <a class="brand visible-desktop" style="float:left" href="#"><img  src="recursos/img/logop.png" width="140" height="20"/></a>
             <div id="barrac" class="nav-collapse collapse">
               <ul id="nav" class="nav slidernav">
-                <li class="active"><a href="#">Home</a></li>
-                <li><a href="#portfolio">Portfolio</a></li>
-                <li><a href="#product">Product</a></li>
-                <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">Equipos<b class="caret"></b></a>
-                  <ul class="dropdown-menu">
-                    <li><a href="#team">Teama</a></li>
-                    <li><a href="#team2">Teamb</a></li>
-                  </ul>
-                </li>
-                <li><a href="about.html">About</a></li>
-                <li><a href="#contact">Contact</a></li>
+              <?php   menu_principal(0,"home"); ?>  
               </ul>
             </div>
             <!--/.nav-collapse -->

@@ -73,13 +73,13 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
 		$row = pg_fetch_array ($result);
     ?>
     
-    <div class="well well-small alert alert-block">
+    <div class="well well-small alert alert-block" align="center">
     	<h2 class="alert alert-block">Atención</h2>
     	<h4>Desea Eliminar la Información</h4>
 
     </div>
 
-      <div class="well well-large">
+      <div class="well well-large" align="center">
       <br><br>
       
       <form method="post">
@@ -92,17 +92,13 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
 				  <th data-sort-ignore="true">
 					<span>Descripción</span>
 				  </th>
-                   <th data-sort-ignore="true">
-					<span>Enlace</span>
-				  </th>
 				</tr>
 			  </thead>
 	<tbody>
       <?php   
 	  		echo '<tr>';
-			echo '<td width="20%">  <label>'.$row["titulo"].' </label></td>';
-			echo ' <td width="50%"> <label>'.$row["descripcion"].' </label></td>';
-			echo ' <td width="30%"> <label>'.$row["enlace"].' </label></td>';
+			echo '<td width="20%"><label>'.$row["titulo"].'</label></td>';
+			echo '<td width="80%"><label align="justify">'.$row["descripcion"].'</label></td>';
 			echo '</tr>';
 		?>
 	</tbody>	  
@@ -111,14 +107,15 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
     <button id="si" name="si" class="btn-primary text-center " type="submit">  Si </button>
     <button id="no" name="no" class="btn-primary text-center " type="submit">  No </button>
 	 </form> 
-    
+     
+    </div>
      	<?php
 		
 	if(isset($_POST["si"])){
 		$SQL="DELETE FROM informacion WHERE informacionid=".$_GET['id'];
 		$result = pg_query ($conn, $SQL ) or die("Error en la consulta SQL");
-		javaalert("La información fue eliminada");
-		llenarLog(3, "Eliminar Información");
+		javaalert("La Información fue Eliminada");
+		llenarLog(3, "Información");
 		iraURL('../administrator/info.php');
 	}
 	

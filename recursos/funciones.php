@@ -115,4 +115,55 @@ function llenarLog($accion,$descripcion){
 pg_query($conex,"INSERT INTO bitacora values(nextval('bitacora_bitacoraid_seq'),'".$accion."',current_date,current_time,".$_SESSION["id_usuario"].",'".$descripcion."')") or die(pg_last_error($conex));
 
 }
+//Traer Menu principal
+function menu_principal($idm,$activo)
+{
+	
+	$conex = conectar();
+		
+			
+		$query="SELECT a.menuid,a.nombre,a.submenu,a.enlace,a.orden,count(b.menuid) as cant 
+         FROM menu a full join menu b on a.menuid=b.submenu WHERE a.submenu=".$idm."  group by a.menuid order by orden asc,nombre asc";
+		$Qmenu = pg_query($conex,$query) or die(pg_last_error($conex));
+		$numerof=pg_num_rows($Qmenu);
+		
+		if($numerof > 0){ 
+	
+		
+		      for($i=0;$i<$numerof;$i++)
+			  {
+				  	$row = pg_fetch_array($Qmenu,$i);
+	
+				     if($row['cant']==0)
+					 {
+						if(strtolower($activo)==strtolower($row['nombre']))
+						   echo '<li class="active"><a href="'.$row['enlace'].'">'.$row['nombre'].'</a></li>';
+               			else
+			  			  echo '<li><a href="'.$row['enlace'].'">'.$row['nombre'].'</a></li>';
+						 
+						 
+					 }
+					 else
+					 {
+						echo '<li class="dropdown">
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+						'.$row['nombre'].'
+						<b class="caret"></b></a>
+                        <ul class="dropdown-menu">';
+						menu_principal($row['menuid'],$activo);
+						echo ' </ul></li>';
+						
+						 
+						 
+					 }
+				  
+				  
+			  }
+		
+		
+		
+		  }
+	
+}
+
 ?>
