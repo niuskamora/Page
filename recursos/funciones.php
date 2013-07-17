@@ -123,7 +123,7 @@ function menu_principal($idm,$activo)
 		
 			
 		$query="SELECT a.menuid,a.nombre,a.submenu,a.enlace,a.orden,count(b.menuid) as cant 
-         FROM menu a full join menu b on a.menuid=b.submenu WHERE a.submenu=".$idm."  group by a.menuid order by orden asc";
+         FROM menu a full join menu b on a.menuid=b.submenu WHERE a.submenu=".$idm."  group by a.menuid order by orden asc,nombre asc";
 		$Qmenu = pg_query($conex,$query) or die(pg_last_error($conex));
 		$numerof=pg_num_rows($Qmenu);
 		

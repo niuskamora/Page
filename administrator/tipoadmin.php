@@ -130,8 +130,8 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
 			echo '<td width="10%">'.$row["tipoadministradorid"].'</td>';
 			echo '<td width="20%">'.$row["nombre"].'</td>';
 			echo '<td width="42%">'.$row["descripcion"].'</td>';
-			echo '<td width="14%"> <a href="editartipoadmin.php?id='.$row["tipoadministradorid"].'&boton=editar"> <button class="btn btn-primary"  type="button" name="boton"> <span class="add-on"><i class="icon-pencil"></i> </span> Editar  </button>  </td></a>';
-			echo '<td width="14%">  <a href="eliminartipoadmin.php?id='.$row["tipoadministradorid"].'&boton=eliminar"> <button class="btn btn-primary"  type="button"  name="boton"> <span class="add-on"><i class="icon-pencil"></i> </span> Eliminar  </button>  </td></a>';
+			echo '<td width="14%"> <a href="editartipoadmin.php?id='.$row["tipoadministradorid"].'&boton=editar"> <button class="btn btn-primary"  type="button" name="boton"> <span class="add-on"><i class="icon-pencil"></i> </span> Editar  </button>  </a></td>';
+			echo '<td width="14%">  <a href="eliminartipoadmin.php?id='.$row["tipoadministradorid"].'&boton=eliminar"> <button class="btn btn-primary"  type="button"  name="boton"> <span class="add-on"><i class="icon-pencil"></i> </span> Eliminar  </button> </a> </td>';
 			echo '</tr>';
             
 			}
