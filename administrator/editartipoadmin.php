@@ -79,22 +79,22 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
 	   ?>
        <form method="post">
 	    <div class="row-fluid">
-            <div class="span12">
-                 <div class="span6">
+         
+                 <div class="span4">
                  Nombre                 
                  </div>
-                 <div class="span6">
-                 <input id="nombres" name="nombres"  type="text" value="'.$row["nombre"].'" contenteditable=true required/>
+                 <div class="span4">
+                 <input id="nombres" name="nombres"  type="text" value="<?php $row["nombre"]?>" contenteditable=true required/>
                  </div>
                </div>
-             <div class="span12">
-                 <div class="span6">
+            
+                 <div class="span4">
                  Descipcion                 
                  </div>
-                 <div class="span6">
-         <input id="descripcionn" name="descripcionn"  type="text" value="'.$row["descripcion"].'" contenteditable=true required/>
+                 <div class="span4">
+         <input id="descripcionn" name="descripcionn"  type="text" value="<?php $row["descripcion"] ?>" contenteditable=true required/>
                    </div>
-               </div>   
+                 
           
         
         </div>

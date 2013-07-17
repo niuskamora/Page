@@ -118,6 +118,32 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
 
 			$row = pg_fetch_array ($result,$i );
 			
+			
+			
+			
+			 if($row["submenu"]!=$_GET['id']){
+				 echo '<tr>';
+			echo '<td width="10%">'.$row["menuid"].'</td>';
+			
+			$SQL2="SELECT nombre FROM menu WHERE menuid=".$_GET['id'];
+		$result2 = pg_query ($conn, $SQL2 ) or die("Error en la consulta SQL");
+		$row2 = pg_fetch_array ($result2);
+	      echo '<td width="16%">'.$row["nombre"].' </td> </a>';
+		  echo '<td width="16">'.$row2["nombre"].' </td>';
+		  		 
+			$SQL3="SELECT nombre FROM administrador WHERE administradorid=".$row["administradorid"];
+		$result3 = pg_query ($conn, $SQL3 ) or die("Error en la consulta SQL");
+		$row3 = pg_fetch_array ($result3);
+		echo '<td width="15">'.$row3["nombre"].' </td>';
+		echo '<td width="15">'.$row["enlace"].' </td>';	 
+			
+			echo '</tr>';
+            
+			
+			 }
+
+			}
+			
 			echo '<tr>';
 			
 			echo '<td width="16%"><input id="nombre" name="nombre" type="text" value="" contenteditable=true required/></td>';
@@ -132,7 +158,7 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
 		echo '<td width="15"><input id="enlace" name="enlace"  type="text" value="" contenteditable=true required/> </td>';	 
 		echo '</tr>';
             
-			}
+			
 			
     
 		?>

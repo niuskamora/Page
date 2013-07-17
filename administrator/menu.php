@@ -137,23 +137,16 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
 
 			$row = pg_fetch_array ($result,$i );
 			
+			
+			
+			
+			 if($row["submenu"]==""){
 			echo '<tr>';
 			echo '<td width="10%">'.$row["menuid"].'</td>';
-			
-			
-			 if($row["submenu"]!=""){
-			$SQL2="SELECT nombre FROM menu WHERE menuid=".$row["submenu"];
-		$result2 = pg_query ($conn, $SQL2 ) or die("Error en la consulta SQL");
-		$row2 = pg_fetch_array ($result2);
-	      echo '<td width="16%">'.$row["nombre"].' </td> </a>';
-		  echo '<td width="16">'.$row2["nombre"].' </td>';
-			 }else{
 				
 				 	echo '<td width="16%">'.$row["nombre"].'<a href="crear2.php?id='.$row["menuid"].'&boton=editar"> <i id="add" class="icon-plus" /> </td> </a>';
 				echo '<td width="20%">'.$row["submenu"].'</td>'; 
-			 }
-		 
-			$SQL3="SELECT nombre FROM administrador WHERE administradorid=".$row["administradorid"];
+				$SQL3="SELECT nombre FROM administrador WHERE administradorid=".$row["administradorid"];
 		$result3 = pg_query ($conn, $SQL3 ) or die("Error en la consulta SQL");
 		$row3 = pg_fetch_array ($result3);
 		echo '<td width="15">'.$row3["nombre"].' </td>';
@@ -161,6 +154,9 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
 			echo '<td width="14%"> <a href="editarmenu.php?id='.$row["menuid"].'&boton=editar"> <button class="btn btn-primary"  type="button" name="boton"> <span class="add-on"><i class="icon-pencil"></i> </span> Editar  </button>  </td></a>';
 			echo '<td width="14%">  <a href="eliminarmenu.php?id='.$row["menuid"].'&boton=eliminar"> <button class="btn btn-primary"  type="button"  name="boton"> <span class="add-on"><i class="icon-pencil"></i> </span> Eliminar  </button>  </td></a>';
 			echo '</tr>';
+			 }
+		 
+			
             
 			}
 			
