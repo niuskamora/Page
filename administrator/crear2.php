@@ -66,18 +66,17 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
         
       </div>
     </div>
-    <div class="span9">
+   
     
       <?php 
 		
-		$SQL="SELECT * FROM menu WHERE menuid=".$_GET['id'];
+		$SQL="SELECT * FROM menu";
 		$result = pg_query ($conn, $SQL ) or die("Error en la consulta SQL");
 		$registros= pg_num_rows($result);
 		
 	
 	?>
-    
-      <div class="well well-large">
+     <div class="span9 well well-large">
       <br><br>
       
       
@@ -121,15 +120,12 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
 			
 			
 			
-			 if($row["submenu"]!=$_GET['id']){
+			 if($row["submenu"]==$_GET['id']){
 				 echo '<tr>';
-			echo '<td width="10%">'.$row["menuid"].'</td>';
 			
-			$SQL2="SELECT nombre FROM menu WHERE menuid=".$_GET['id'];
-		$result2 = pg_query ($conn, $SQL2 ) or die("Error en la consulta SQL");
-		$row2 = pg_fetch_array ($result2);
 	      echo '<td width="16%">'.$row["nombre"].' </td> </a>';
-		  echo '<td width="16">'.$row2["nombre"].' </td>';
+		   echo '<td width="16%">'.$row["submenu"].' </td> </a>';
+		 
 		  		 
 			$SQL3="SELECT nombre FROM administrador WHERE administradorid=".$row["administradorid"];
 		$result3 = pg_query ($conn, $SQL3 ) or die("Error en la consulta SQL");
@@ -143,34 +139,39 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
 			 }
 
 			}
-			
-			echo '<tr>';
-			
-			echo '<td width="16%"><input id="nombre" name="nombre" type="text" value="" contenteditable=true required/></td>';
-			
-			$SQL2="SELECT * FROM menu WHERE menuid=".$_GET["id"];
-		$result2 = pg_query ($conn, $SQL2 ) or die("Error en la consulta SQL");
-		$row2 = pg_fetch_array ($result2);
-		echo '<td width="16">'.$row2["nombre"].' </td>';
-		echo '<input id="submenu" name="submenu"  type="hidden" value="'.$row2["menuid"].'" contenteditable=true required/>';
-			
-		echo '<td width="15">'.$_SESSION["id_usuario"].' </td>';
-		echo '<td width="15"><input id="enlace" name="enlace"  type="text" value="" contenteditable=true required/> </td>';	 
-		echo '</tr>';
-            
-			
-			
-    
+
 		?>
         </tbody>	  
     </table>
-           <button id="guardar" name="guardar" class="btn-primary text-center" type="submit"> <span class="add-on"><i class="icon-pencil"></i></span>Guardar</button>
+     
+    <div class="span9">   <ul id="pagination" class="footable-nav"><span>Pages:</span></ul></div>
+    <div class="offset11 span1"></div>
+    
+    		<div class="span3 well well-small"><b>Nombre</b></div>
+           <div class="span6 well well-small "><input id="nombre" name="nombre" type="text" value="" contenteditable=true required/> </div>
+           
+			<?php $SQL2="SELECT * FROM menu WHERE menuid=".$_GET["id"];
+		$result2 = pg_query ($conn, $SQL2 ) or die("Error en la consulta SQL");
+		$row2 = pg_fetch_array ($result2); ?>
+        
+            <div class="span3 well well-small"><b>Submenu</b></div>
+            <div class="span6 well well-small"><?php echo $row2["nombre"];?></div>
+            <div class="span3 well well-small"><b>Administrador</b></div>
+           <?php $SQL5="SELECT nombre FROM administrador WHERE administradorid=".$_SESSION["id_usuario"];
+		$result5 = pg_query ($conn, $SQL5 ) or die("Error en la consulta SQL");
+		$row5 = pg_fetch_array ($result5); ?>
+            <div class="span6 well well-small"><?php echo $row5["nombre"];?></div>
+            <div class="span3 well well-small"><b>Enlace</b></div>
+            <div class="span6 well well-small"><input id="enlace" name="enlace"  type="text" value="" contenteditable=true required/></div>
+            
+                <div align="center" class="span9 well well-small"><button id="guardar" name="guardar" class="btn-primary text-center" type="submit"> <span class="add-on"><i class="icon-pencil"></i></span>Guardar</button></div>
+           
 
 	 
 </form> 	
     
 
-    <ul id="pagination" class="footable-nav"><span>Pages:</span></ul>
+
 
 		
  	<?php
@@ -198,7 +199,7 @@ if(isset($_POST["guardar"])){
         
          </p>
       </div>
-    </div>
+    
     </div>
   
 </div>

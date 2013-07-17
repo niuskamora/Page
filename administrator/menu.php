@@ -108,8 +108,8 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
 				  <th>
 					<span>Nombre</span>
 				  </th>
-				  <th data-hide="phone" data-sort-ignore="true">
-					Submenu
+                  <th>
+					<span></span>
 				  </th>
                   	<th data-hide="phone" data-sort-ignore="true">
 					administrador
@@ -117,8 +117,6 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
                   <th data-hide="phone" data-sort-ignore="true">
 					enlace
 				  </th>
-
-
 				  <th data-hide="phone" data-sort-ignore="true">
 					<span class="add-on"> <i class="icon-pencil"></i> </span> Editar 
 				  </th>
@@ -136,31 +134,21 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
 			{
 
 			$row = pg_fetch_array ($result,$i );
-			
-			
-			
-			
 			 if($row["submenu"]==""){
 			echo '<tr>';
 			echo '<td width="10%">'.$row["menuid"].'</td>';
-				
-				 	echo '<td width="16%">'.$row["nombre"].'<a href="crear2.php?id='.$row["menuid"].'&boton=editar"> <i id="add" class="icon-plus" /> </td> </a>';
-				echo '<td width="20%">'.$row["submenu"].'</td>'; 
-				$SQL3="SELECT nombre FROM administrador WHERE administradorid=".$row["administradorid"];
+			echo '<td width="15%">'.$row["nombre"].' </td>';
+			echo'<td width="5%"> <a href="crear2.php?id='.$row["menuid"].'"> <i id="add" class="icon-plus" /> </td> </a>';
+			$SQL3="SELECT nombre FROM administrador WHERE administradorid=".$row["administradorid"];
 		$result3 = pg_query ($conn, $SQL3 ) or die("Error en la consulta SQL");
 		$row3 = pg_fetch_array ($result3);
 		echo '<td width="15">'.$row3["nombre"].' </td>';
 		echo '<td width="15">'.$row["enlace"].' </td>';	 
 			echo '<td width="14%"> <a href="editarmenu.php?id='.$row["menuid"].'&boton=editar"> <button class="btn btn-primary"  type="button" name="boton"> <span class="add-on"><i class="icon-pencil"></i> </span> Editar  </button>  </td></a>';
-			echo '<td width="14%">  <a href="eliminarmenu.php?id='.$row["menuid"].'&boton=eliminar"> <button class="btn btn-primary"  type="button"  name="boton"> <span class="add-on"><i class="icon-pencil"></i> </span> Eliminar  </button>  </td></a>';
+			echo '<td width="18%">  <a href="eliminarmenu.php?id='.$row["menuid"].'&boton=eliminar"> <button class="btn btn-primary"  type="button"  name="boton"> <span class="add-on"><i class="icon-pencil"></i> </span> Eliminar  </button>  </td></a>';
 			echo '</tr>';
-			 }
-		 
-			
-            
-			}
-			
-    
+		}
+}
 		?>
 	 </form> 	
 </tbody>	  
