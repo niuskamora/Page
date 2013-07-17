@@ -29,7 +29,6 @@ $id=$_GET['id'];
 </head>
 
 <body class="preview" id="top" data-spy="scroll" data-target=".subnav" data-offset="80">
-<form enctype="multipart/form-data" method="post">
 <div class="container">
   <div class="navbar">
     <div class="navbar-inner">
@@ -65,28 +64,59 @@ $id=$_GET['id'];
       </div>
     </div>
         
+     <div class="span9">
+      <div class="well well-large">
+        <p>
+        
         <?php
         	$cons="SELECT * FROM informacion WHERE informacionid=$id";
 			$resulta = pg_query ($conn, $cons) or die("Error en la consulta SQL");
 			
 			if($row=pg_fetch_array($resulta)){
 		?>
-        
-        <div class="span9 well well-large">
-        <p>
-        
-            <div class="span3 well well-small"><b>Título</b></div>
-            <div class="span6 well well-small"><input id="titulo" name="titulo" type="text" value="<?php echo $row['titulo']; ?>" required/></div>
-            <div class="span3 well well-small"><b>Descripción</b></div>
-            <div class="span6 well well-small"><textarea id="redactor" name="redactor"><?php echo $row['descripcion']; ?></textarea></div>
-            <div class="span3 well well-small"><b>Enlace</b></div>
-            <div class="span6 well well-small"><input id="enlace" name="enlace" type="text" value="<?php echo $row['enlace']; ?>" required/></div>
-            <div class="span3 well well-small"><b>Imagen</b></div>
-            <div class="span6 well well-small">
-            	<img width="200" height="100" src="<?php echo $row['imagen'];?> ">
-                <input id="imagen" name="imagen" type="file" required/></div>
-            <div class="span3 well well-small"><b>Menú</b></div>
-            <div class="span6 well well-small"><select id="menu" name="menu">
+	
+      <form enctype="multipart/form-data" method="post">
+          <div class="row-fluid">
+            <dl class="dl-horizontal">
+              <dt>
+                <div class=" well well-small" align="left">Título</div>
+              </dt>
+              <dd>
+                <div class=" well well-small">
+                  <input id="titulo" name="titulo" type="text" value="<?php echo $row['titulo']; ?>" contenteditable="true" required/>
+                </div>
+              </dd>
+              <dt>
+                <div class=" well well-small" align="left">Descripción</div>
+              </dt>
+              <dd>
+                <div class="well well-small">
+                  <textarea id="redactor" name="redactor" contenteditable="true"><?php echo $row['descripcion']; ?></textarea>
+                </div>
+              </dd>
+              <dt>
+                <div class=" well well-small" align="left">Enlace</div>
+              </dt>
+              <dd>
+                <div class="well well-small">
+                  <input id="enlace" name="enlace" type="text" value="<?php echo $row['enlace']; ?>" contenteditable="true" required/>
+                </div>
+              </dd>
+              <dt>
+                <div class=" well well-small" align="left">Imagen</div>
+              </dt>
+              <dd>
+                <div class="well well-small">
+                  <img width="200" height="100" src="<?php echo $row['imagen'];?> ">
+                <input id="imagen" name="imagen" type="file" contenteditable="true" />
+                </div>
+              </dd>
+              <dt>
+                <div class=" well well-small" align="left">Menú</div>
+              </dt>
+              <dd>
+                <div class="well well-small">
+                  <select id="menu" name="menu" contenteditable="true">
                     <?php 
 						
 						$consu="SELECT * FROM menu WHERE menuid=".$row['menuid'];
@@ -108,9 +138,15 @@ $id=$_GET['id'];
 							}
 
 						?>
-                    </select></div>
-            <div class="span3 well well-small"><b>Tipo de Información</b></div>
-            <div class="span6 well well-small"><select id="tipoinfo" name="tipoinfo">
+                    </select>
+                </div>
+              </dd>
+              <dt>
+                <div class=" well well-small" align="left">Tipo Información</div>
+              </dt>
+              <dd>
+                <div class="well well-small">
+                  <select id="tipoinfo" name="tipoinfo" contenteditable="true">
                     <?php 
 						
 						$consu1="SELECT * FROM tipoinformacion WHERE tipoinformacionid=".$row['tipoinformacionid'];
@@ -132,19 +168,22 @@ $id=$_GET['id'];
 							}
 
 						?>
-                    </select></div>
-                <div class="span9 well well-small" align="center">
-      <button name="guardar" id="guardar" type="submit" class="btn btn-primary text-center">Modificar</button>
-      </div>
-     </p>
-  </div>
-		
-     <?php }?>
+                    </select>
+                </div>
+              </dd>
+                <div class="well well-small" align="center">
+                  <button id="guardar" name="guardar" class="btn btn-primary text-center" type="submit">Modificar</button>
+                </div>
+            </dl>
+          </div>
+        </form>
+    
+        <?php }?>
 <?php
 
 if(isset($_POST["guardar"])){
 	
-	if(isset($_POST["redactor"]) && $_POST["redactor"]!="" ){
+	if(isset($_POST["titulo"]) && isset($_POST["redactor"]) && isset($_POST["enlace"]) && $_POST["titulo"]!="" && $_POST["redactor"]!="" && $_POST["enlace"]!="" && $_POST["menu"]>0 && $_POST["tipoinfo"]>0){
 	
 		$titulo=$_POST['titulo'];
 		$descripcion=$_POST['redactor'];
@@ -228,15 +267,20 @@ if(isset($_POST["guardar"])){
 			}		
 		 }
 	
-		if($resultado && $result){
+		if($resultado || $result){
 			javaalert('Se Modifico la Información');
-			llenarLog(2, "Modifico Información");
+			llenarLog(2, "Información");
 			iraURL('../administrator/info.php');	
 		}
+	}else{
+		javaalert("Ingrese todos los campos");
 	}
 }
 ?>
-  </div>
+  </p>
+    </div>
+   </div>
+ </div>
 </div>
 
 <!-- Le javascript

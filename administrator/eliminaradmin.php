@@ -87,7 +87,7 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
 		if($registros2!=0 || $registros3!=0 || $registros4!=0){
 		 ?>  
             
-            <div class="well alert alert-danger">
+            <div class="well alert alert-danger" align="center">
     			<h2 class="alert alert-danger">Atención</h2>
     			<h4>No se puede Eliminar el Administrador</h4>
 	 		</div>
@@ -99,7 +99,7 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
 		
     ?>
     
-    <div class="well well-small alert alert-block">
+    <div class="well well-small alert alert-block" align="center">
     	<h2 class="alert alert-block">Atención</h2>
     	<h4>Desea Eliminar el Administrador</h4>
     </div>
@@ -112,22 +112,18 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
 			  <thead>
 				<tr>
 				  <th data-sort-ignore="true">
-					<span>Nombre</span>
+					<span>Nombre y Apellido</span>
 				  </th>
 				  <th data-sort-ignore="true">
-					<span>Apellido</span>
-				  </th>
-                   <th data-sort-ignore="true">
-					<span>Usuario</span>
+					<span>Nombre de Usuario</span>
 				  </th>
 				</tr>
 			  </thead>
 	<tbody>
       <?php   
 	  		echo '<tr>';
-			echo '<td width="30%">  <label>'.$row["nombre"].' </label></td>';
-			echo ' <td width="30%"> <label>'.$row["apellido"].' </label></td>';
-			echo ' <td width="40%"> <label>'.$row["usuario"].' </label></td>';
+			echo '<td width="50%"><label>'.$row["nombre"].'  '.$row["apellido"].'</label></td>';
+			echo '<td width="50%"><label>'.$row["usuario"].'</label></td>';
 			echo '</tr>';
 		?>
 	</tbody>	  
@@ -137,14 +133,15 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
     <button id="no" name="no" class="btn-primary text-center " type="submit">  No </button>
 	 </form> 
     
+    </div>
      	<?php
 		}
 		
 	if(isset($_POST["si"])){
 		$SQL="DELETE FROM administrador WHERE administradorid=".$_GET['id'];
 		$result = pg_query ($conn, $SQL ) or die("Error en la consulta SQL");
-		javaalert("El administrador fue eliminado");
-		llenarLog(3, "Eliminar Administrador");
+		javaalert("El Administrador fue Eliminado");
+		llenarLog(3, "Administrador");
 		iraURL('../administrator/admin.php');
 	}
 	

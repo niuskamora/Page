@@ -104,8 +104,11 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
 
 						?>
                     </select></div>
-                <div class="span9 well well-small" align="center">
+                 <div class="span9 well well-small" align="center">
       <button name="guardar" id="guardar" type="submit" class="btn btn-primary text-center">Guardar</button>
+      </div>
+      
+      <div class="span9 well well-small" align="center">
       <button id="guardar2" name="guardar2" class="btn btn-primary text-center" type="submit">Guardar y añadir otro</button>
       </div>
      </p>
@@ -115,7 +118,7 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
 
 if(isset($_POST["guardar"]) || isset($_POST["guardar2"])){
 	
-	if(isset($_POST["redactor"]) && $_POST["redactor"]!="" ){
+	if(isset($_POST["titulo"]) && isset($_POST["redactor"]) && isset($_POST["enlace"]) && isset($_POST["imagen"]) && $_POST["titulo"]!="" && $_POST["redactor"]!="" && $_POST["enlace"]!="" && $_POST["imagen"]!="" && $_POST["menu"]>0 && $_POST["tipoinfo"]>0){
 	
 		$titulo=$_POST['titulo'];
 		$descripcion=$_POST['redactor'];
@@ -205,7 +208,7 @@ if(isset($_POST["guardar"]) || isset($_POST["guardar2"])){
 	
 		if($resultado && $result){
 			javaalert('Se Creo la Información');
-			llenarLog(1, "Creo Información");
+			llenarLog(1, "Información");
 			if(isset($_POST["guardar1"])){
 				iraURL('../administrator/info.php');
 			}
@@ -214,6 +217,8 @@ if(isset($_POST["guardar"]) || isset($_POST["guardar2"])){
 			}
 				
 		}
+	}else{
+		javaalert("Ingrese todos los campos");
 	}
 }
 ?>

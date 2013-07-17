@@ -26,7 +26,6 @@ $id=$_GET['id'];
 </head>
 
 <body class="preview" id="top" data-spy="scroll" data-target=".subnav" data-offset="80">
-<form method="post">
 <div class="container">
   <div class="navbar">
     <div class="navbar-inner">
@@ -61,6 +60,11 @@ $id=$_GET['id'];
           </ul>
       </div>
     </div>
+    
+    <div class="span9">
+      <div class="well well-large">
+        <p>
+        
         <?php
         	$cons="SELECT * FROM administrador WHERE administradorid=$id";
 			$resulta = pg_query ($conn, $cons) or die("Error en la consulta SQL");
@@ -68,20 +72,56 @@ $id=$_GET['id'];
 			if($row=pg_fetch_array($resulta)){
 		?>
         
-		<div class="span9 well well-large">
-        <p>
-            <div class="span3 well well-small"><b>Nombre</b></div>
-            <div class="span6 well well-small"><input id="nombre" name="nombre" type="text" value="<?php echo $row['nombre']; ?>" required/></div>
-            <div class="span3 well well-small"><b>Apellido</b></div>
-            <div class="span6 well well-small"><input id="apellido" name="apellido" type="text" value="<?php echo $row['apellido']; ?>" required/></div>
-            <div class="span3 well well-small"><b>Usuario</b></div>
-            <div class="span6 well well-small"><input id="usuario" name="usuario" type="text" value="<?php echo $row['usuario']; ?>" required/></div>
-            <div class="span3 well well-small"><b>Contraseña</b></div>
-            <div class="span6 well well-small"><input id="contrasena" name="contrasena" type="password" value="<?php echo $row['contrasena']; ?>" required/></div>
-            <div class="span3 well well-small"><b>Confirmar Contrseña</b></div>
-            <div class="span6 well well-small"><input id="contrasena_c" name="contrasena_c" type="password" value="<?php echo $row['contrasena']; ?>" required/></div>
-			<div class="span3 well well-small"><b>Tipo de Administrador</b></div>
-            <div class="span6 well well-small"><select id="tipoadmin" name="tipoadmin">
+	
+            <form method="post">
+          <div class="row-fluid">
+            <dl class="dl-horizontal">
+              <dt>
+                <div class=" well well-small" align="left">Nombre</div>
+              </dt>
+              <dd>
+                <div class=" well well-small" align="left">
+                  <input id="nombre" name="nombre" type="text" value="<?php echo $row['nombre']; ?>" contenteditable="true" required/>
+                </div>
+              </dd>
+              <dt>
+                <div class=" well well-small" align="left">Apellido</div>
+              </dt>
+              <dd>
+                <div class="well well-small">
+                  <input id="apellido" name="apellido" type="text" value="<?php echo $row['apellido']; ?>" contenteditable="true" required/>
+                </div>
+              </dd>
+              <dt>
+                <div class=" well well-small" align="left">Usuario</div>
+              </dt>
+              <dd>
+                <div class="well well-small">
+                  <input id="usuario" name="usuario" type="text" value="<?php echo $row['usuario']; ?>" contenteditable="true" required/>
+                </div>
+              </dd>
+              <dt>
+                <div class=" well well-small" align="left">Contaseña</div>
+              </dt>
+              <dd>
+                <div class="well well-small">
+                  <input id="contrasena" name="contrasena" type="password" value="<?php echo $row['contrasena']; ?>" contenteditable="true" required/>
+                </div>
+              </dd>
+              <dt>
+                <div class=" well well-small" align="left">Confirmar Contaseña</div>
+              </dt>
+              <dd>
+                <div class="well well-small">
+                  <input id="contrasena_c" name="contrasena_c" type="password" value="<?php echo $row['contrasena']; ?>" contenteditable="true" required/>
+                </div>
+              </dd>
+              <dt>
+                <div class=" well well-small" align="left">Tipo Administrador</div>
+              </dt>
+              <dd>
+                <div class="well well-small">
+                  <select id="tipoadmin" name="tipoadmin" contenteditable="true">
                     	<?php 
 						
 						$consu="SELECT * FROM tipoadministrador WHERE tipoadministradorid=".$row['tipoadministradorid'];
@@ -103,39 +143,59 @@ $id=$_GET['id'];
 							}
 
 						?>
-                    </select></div>
-      <div class="span9 well well-small" align="center">
-      <button name="guardar" id="guardar" type="submit" class="btn btn-primary text-center">Modiificar</button>
-      </div>
-                
-         </p>
-    </div>
+                    </select>
+                </div>
+              </dd>
+                <div class="well well-small" align="center">
+                  <button id="guardar" name="guardar" class="btn btn-primary text-center" type="submit">Modificar</button>
+                </div>
+            </dl>
+          </div>
+        </form>
     
         <?php }?>
 <?php
 
 if(isset($_POST["guardar"])){
 	
-	$nombre=$_POST['nombre'];
-	$apellido=$_POST['apellido'];
-	$usuario=$_POST['usuario'];
-	$contrasena=$_POST['contrasena'];
-	$tipoadmin=$_POST['tipoadmin'];
+	if(isset($_POST["nombre"]) &&  isset($_POST["apellido"]) && isset($_POST["usuario"]) && isset($_POST["contrasena"]) && isset($_POST["contrasena_c"]) && $_POST["nombre"]!="" && $_POST["apellido"]!="" && $_POST["usuario"]!="" && $_POST["contrasena"]!="" && $_POST["contrasena_c"]!="" && $_POST["tipoadmin"]>0){
 	
-		if($_POST["contrasena"]==$_POST["contrasena_c"]){
-			$resultado=pg_query($conn,"UPDATE administrador SET nombre='$nombre', apellido='$apellido', usuario='$usuario', contrasena='$contrasena', tipoadministradorid='$tipoadmin' WHERE administradorid=$id") or die(pg_last_error($conn));
+		$nombre=$_POST['nombre'];
+		$apellido=$_POST['apellido'];
+		$usuario=$_POST['usuario'];
+		$contrasena=$_POST['contrasena'];
+		$tipoadmin=$_POST['tipoadmin'];
+		
+		$SQL="SELECT * FROM administrador where usuario='$usuario' and administradorid!=".$row['administradorid'];
+		$result = pg_query ($conn, $SQL ) or die("Error en la consulta SQL");
+		$registros= pg_num_rows($result);
 	
-			if($resultado){
-				javaalert('Se Modifico el Administrador');
-				llenarLog(2, "Modifico Administrador");
-				iraURL('../administrator/admin.php');
+		if($registros == 0){
+	
+			if($_POST["contrasena"]==$_POST["contrasena_c"]){
+				$resultado=pg_query($conn,"UPDATE administrador SET nombre='$nombre', apellido='$apellido', usuario='$usuario', contrasena='$contrasena', tipoadministradorid='$tipoadmin' WHERE administradorid=$id") or die(pg_last_error($conn));
+	
+				if($resultado){
+					javaalert('Se Modifico el Administrador');
+					llenarLog(2, "Administrador");
+					iraURL('../administrator/admin.php');
+				}
+			}else{
+				javaalert("Las contraseñas no coinciden, por favor verifique");
 			}
 		}else{
-			javaalert("Las contraseñas no coinciden, por favor verifique");
+			javaalert("El nombre de usuario ya esta registrado, por favor verfique");
 		}
+	
+	}else{
+		javaalert("Ingrese todos los campos");
+	}
 }
 ?>
-  </div>
+  	</p>
+    </div>
+   </div>
+ </div>
 </div>
 
 <!-- Le javascript
@@ -143,6 +203,5 @@ if(isset($_POST["guardar"])){
 <script type="text/javascript" src="../recursos/js/jquery-2.0.2.js" ></script> 
 <script src="../recursos/js/bootstrap.js"></script> 
 <script src="../recursos/js/bootstrap.min.js"></script>
-</form>
 </body>
 </html>
