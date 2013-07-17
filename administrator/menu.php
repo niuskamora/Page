@@ -134,7 +134,7 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
 			{
 
 			$row = pg_fetch_array ($result,$i );
-			 if($row["submenu"]==""){
+			 if($row["submenu"]=="0"){
 			echo '<tr>';
 			echo '<td width="10%">'.$row["menuid"].'</td>';
 			echo '<td width="15%">'.$row["nombre"].' </td>';

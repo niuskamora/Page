@@ -88,27 +88,7 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
 	//mostrar resultados
 	?>
     <form method="post">
-	 <table class="footable table-striped table-hover" data-page-size="5">
-			  <thead>
-				<tr>
-				  <th data-class="expand" data-sort-initial="true" data-type="numeric">
-				
-					<span>Nombre</span>
-				  </th>
-				  <th data-hide="phone" data-sort-ignore="true">
-					Submenu
-				  </th>
-                  	<th data-hide="phone" data-sort-ignore="true">
-					administrador
-				  </th>
-                  <th data-hide="phone" data-sort-ignore="true">
-					enlace
-				  </th>
-
-
-				</tr>
-			  </thead>
-				<tbody>
+	
      
    
       <?php   
@@ -117,42 +97,88 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
 			{
 
 			$row = pg_fetch_array ($result,$i );
-			
-			echo '<tr>';
-			
-			echo '<td width="16%"><input id="nombre" name="nombre"  type="text" value="'.$row["nombre"].'" contenteditable=true required/></td>';
-			 if($row["submenu"]!=""){
-			$SQL2="SELECT nombre FROM menu WHERE menuid=".$row["submenu"];
+			?>
+		
+		
+		
+		  <div class="row-fluid">
+            <dl class="dl-horizontal">
+              <dt>
+                <div class=" well well-small"> Nombre </div>
+              </dt>
+              <dd>
+                <div class=" well well-small">
+                 <input id="nombre" name="nombre"  type="text" value="<?php echo $row["nombre"]?>" contenteditable=true required/>
+                </div>
+              </dd>
+              <dt>
+                <div class=" well well-small"> submenu </div>
+              </dt>
+              <dd>
+                <div class="well well-small">
+                <?php
+				
+				 if($row["submenu"]!="0"){
+			$SQL2="SELECT * FROM menu WHERE menuid=".$row["submenu"];
 		$result2 = pg_query ($conn, $SQL2 ) or die("Error en la consulta SQL");
 		$row2 = pg_fetch_array ($result2);
-		echo '<td width="16">'.$row2["nombre"].' </td>';
+	 echo $row2["nombre"];
 			 }else{
-				echo '<td width="20%">'.$row["submenu"].'</td>'; 
+				 echo $row["submenu"];
 			 }
-		 
-			$SQL3="SELECT nombre FROM administrador WHERE administradorid=".$row["administradorid"];
+				
+				?>
+ </div>
+              </dd>
+              
+               <dt>
+                <div class=" well well-small"> Administrador</div>
+              </dt>
+              <dd>
+                <div class=" well well-small">
+                <?php
+				
+				$SQL3="SELECT nombre FROM administrador WHERE administradorid=".$row["administradorid"];
 		$result3 = pg_query ($conn, $SQL3 ) or die("Error en la consulta SQL");
 		$row3 = pg_fetch_array ($result3);
-		echo '<td width="15">'.$row3["nombre"].' </td>';
-		echo '<td width="15"><input id="enlace" name="enlace"  type="text" value="'.$row["enlace"].'" contenteditable=true required/> </td>';	 
-		echo '</tr>';
-            
+				
+				 echo $row3["nombre"]?>
+				 
+                </div>
+              </dd>
+              <dt> </dt>
+              <dd>
+              
+              <dt>
+                <div class=" well well-small">Enlace</div>
+              </dt>
+              <dd>
+                <div class=" well well-small">
+                 <input id="nombre" name="enlace"  type="text" value="<?php echo $row["enlace"] ?>" contenteditable=true required/>
+                </div>
+              </dd>
+                <div class="well well-small">
+                  <button id="guardar" name="guardar" class="btn-primary text-center" type="submit"> <span class="add-on"><i class="icon-pencil"></i></span>Guardar</button>
+                </div>
+              </dd>
+            </dl>
+          </div>
+		
+		
+		
+            <?php
 			}
 			
     
 		?>
-        </tbody>	  
-    </table>
-           <button id="guardar" name="guardar" class="btn-primary text-center" type="submit"> <span class="add-on"><i class="icon-pencil"></i></span>Guardar</button>
-
+        
+      
+       
+          
 	 
 </form> 	
     
-
-    <ul id="pagination" class="footable-nav"><span>Pages:</span></ul>
-
-		
- 	<?php
+	<?php
 	
 		
 if(isset($_POST["guardar"])){

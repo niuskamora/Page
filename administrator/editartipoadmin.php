@@ -76,7 +76,7 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
               </dt>
               <dd>
                 <div class=" well well-small">
-                  <input id="nombre" name="nombre"  type="text" value="<?php echo $row['nombre']?>" contenteditable=true required/>
+                  <input id="nombre" name="nombre"  type="text" value="<?php echo $row['nombre']?>" contenteditable="true" required/>
                 </div>
               </dd>
               <dt>
@@ -84,7 +84,7 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
               </dt>
               <dd>
                 <div class="well well-small">
-                  <input id="descripcion" name="descripcionn"  type="text" value="<?php echo $row['descripcion']?>" contenteditable=true required/>
+                  <input id="descripcion" name="descripcionn"  type="text" value="<?php echo $row['descripcion']?>" contenteditable="true" required/>
                 </div>
               </dd>
               <dt> </dt>
