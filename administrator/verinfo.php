@@ -107,7 +107,7 @@ $id=$_GET['id'];
          </p>
     </div>
     </div>
-  </div>
+    
 </div>
 
 <!-- Le javascript

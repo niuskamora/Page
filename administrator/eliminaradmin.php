@@ -111,13 +111,13 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
 	    <table class="footable table-striped table-hover" data-page-size="5">
 			  <thead>
 				<tr>
-				  <th data-class="expand" data-sort-initial="true" data-type="numeric">
+				  <th data-sort-ignore="true">
 					<span>Nombre</span>
 				  </th>
-				  <th>
+				  <th data-sort-ignore="true">
 					<span>Apellido</span>
 				  </th>
-                   <th>
+                   <th data-sort-ignore="true">
 					<span>Usuario</span>
 				  </th>
 				</tr>

@@ -27,6 +27,7 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
 </head>
 
 <body class="preview" id="top" data-spy="scroll" data-target=".subnav" data-offset="80">
+<form enctype="multipart/form-data" method="post">
 <div class="container">
   <div class="navbar">
     <div class="navbar-inner">
@@ -57,37 +58,24 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
     <div class="span3">
       <div style="text-align:center">
           <ul class="nav  nav-pills nav-stacked">
-             <li class="active"><a href="info.php"> <span class="add-on"><i class="icon-arrow-left"></i></span> Atras</a></li>          
+             <li class="active"><a href="info.php"> <span class="add-on"><i class="icon-arrow-left"></i></span> Atrás</a></li>          
           </ul>
       </div>
     </div>
-    
-    <div class="span9">
-      <div class="well well-large">
+        
+        <div class="span9 well well-large">
         <p>
         
-		<form enctype="multipart/form-data"  method="POST">
-        
-        	<table width="100%" class="table table-bordered">
-            	<tr>
-                	<th>Título</th>
-                    <td><input id="titulo" name="titulo" type="text" required/></td>
-                </tr>
-                <tr>
-                	<th>Descripción</th>
-                    <td><textarea id="redactor" name="redactor"></textarea></td>
-                </tr>
-                <tr>
-                	<th>Enlace</th>
-                    <td><input id="enlace" name="enlace" type="text" required/></td>
-                </tr>
-                 <tr>
-                	<th>Imagen</th>
-                    <td><input id="imagen" name="imagen" type="file" required/> </td>
-                </tr>
-                <tr>
-                	<th>Menú</th>
-                    <td><select id="menu" name="menu">
+            <div class="span3 well well-small"><b>Título</b></div>
+            <div class="span6 well well-small"><input id="titulo" name="titulo" type="text" required/></div>
+            <div class="span3 well well-small"><b>Descripción</b></div>
+            <div class="span6 well well-small"><textarea id="redactor" name="redactor"></textarea></div>
+            <div class="span3 well well-small"><b>Enlace</b></div>
+            <div class="span6 well well-small"><input id="enlace" name="enlace" type="text" required/></div>
+            <div class="span3 well well-small"><b>Imagen</b></div>
+            <div class="span6 well well-small"><input id="imagen" name="imagen" type="file" required/></div>
+            <div class="span3 well well-small"><b>Menú</b></div>
+            <div class="span6 well well-small"><select id="menu" name="menu">
                     	<option value="0">Seleccione Opción</option>
                         <?php
 		
@@ -100,12 +88,9 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
 							}
 
 						?>
-                    </select></td>
-                </tr>
-                
-                 <tr>
-                	<th>Tipo Información</th>
-                    <td><select id="tipoinfo" name="tipoinfo">
+                    </select></div>
+            <div class="span3 well well-small"><b>Tipo de Información</b></div>
+            <div class="span6 well well-small"><select id="tipoinfo" name="tipoinfo">
                     	<option value="0">Seleccione Opción</option>
                         <?php
 		
@@ -118,18 +103,14 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
 							}
 
 						?>
-                    </select></td>
-                </tr>
-                
-                <tr> <td></td>
-                <td><button name="guardar" id="guardar" type="submit" class="btn-primary text-center">Guardar</button></td>
-                 </tr>
-                 
-                 <tr><td></td>
-                 <td><button id="guardar2" name="guardar2" class="btn-primary text-center" type="submit">Guardar y añadir otro</button></td></tr>
-                
-            </table>
-        </form>
+                    </select></div>
+                <div class="span9 well well-small" align="center">
+      <button name="guardar" id="guardar" type="submit" class="btn btn-primary text-center">Guardar</button>
+      <button id="guardar2" name="guardar2" class="btn btn-primary text-center" type="submit">Guardar y añadir otro</button>
+      </div>
+     </p>
+  </div>
+		
 <?php
 
 if(isset($_POST["guardar"]) || isset($_POST["guardar2"])){
@@ -236,11 +217,7 @@ if(isset($_POST["guardar"]) || isset($_POST["guardar2"])){
 	}
 }
 ?>
-         </p>
-      </div>
-    </div>
-    </div>
-  
+</div>  
 </div>
 
 <!-- Le javascript
@@ -258,5 +235,6 @@ if(isset($_POST["guardar"]) || isset($_POST["guardar2"])){
 		}
 	);
 	</script>
+</form>
 </body>
 </html>

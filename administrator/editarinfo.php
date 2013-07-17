@@ -29,6 +29,7 @@ $id=$_GET['id'];
 </head>
 
 <body class="preview" id="top" data-spy="scroll" data-target=".subnav" data-offset="80">
+<form enctype="multipart/form-data" method="post">
 <div class="container">
   <div class="navbar">
     <div class="navbar-inner">
@@ -59,14 +60,10 @@ $id=$_GET['id'];
     <div class="span3">
       <div style="text-align:center">
           <ul class="nav  nav-pills nav-stacked">
-             <li class="active"><a href="info.php"> <span class="add-on"><i class="icon-arrow-left"></i></span> Atras</a></li>          
+             <li class="active"><a href="info.php"> <span class="add-on"><i class="icon-arrow-left"></i></span> Atrás</a></li>          
           </ul>
       </div>
     </div>
-    
-    <div class="span9">
-      <div class="well well-large">
-        <p>
         
         <?php
         	$cons="SELECT * FROM informacion WHERE informacionid=$id";
@@ -75,29 +72,21 @@ $id=$_GET['id'];
 			if($row=pg_fetch_array($resulta)){
 		?>
         
-		<form enctype="multipart/form-data"  method="POST">
+        <div class="span9 well well-large">
+        <p>
         
-        	<table width="100%" class="table table-bordered">
-            	<tr>
-                	<th>Título</th>
-                    <td><input id="titulo" name="titulo" type="text" value="<?php echo $row['titulo']; ?>" required/></td>
-                </tr>
-                <tr>
-                	<th>Descripción</th>
-                    <td><textarea id="redactor" name="redactor"><?php echo $row['descripcion']; ?></textarea></td>
-                </tr>
-                <tr>
-                	<th>Enlace</th>
-                    <td><input id="enlace" name="enlace" type="text" value="<?php echo $row['enlace']; ?>" required/></td>
-                </tr>
-                 <tr>
-                	<th>Imagen</th>
-                    <td><img width="200" height="100" src="<?php echo $row['imagen'];?> ">
-                    <input id="imagen" name="imagen" type="file"/> </td>
-                </tr>
-                <tr>
-                	<th>Menú</th>
-                    <td><select id="menu" name="menu">
+            <div class="span3 well well-small"><b>Título</b></div>
+            <div class="span6 well well-small"><input id="titulo" name="titulo" type="text" value="<?php echo $row['titulo']; ?>" required/></div>
+            <div class="span3 well well-small"><b>Descripción</b></div>
+            <div class="span6 well well-small"><textarea id="redactor" name="redactor"><?php echo $row['descripcion']; ?></textarea></div>
+            <div class="span3 well well-small"><b>Enlace</b></div>
+            <div class="span6 well well-small"><input id="enlace" name="enlace" type="text" value="<?php echo $row['enlace']; ?>" required/></div>
+            <div class="span3 well well-small"><b>Imagen</b></div>
+            <div class="span6 well well-small">
+            	<img width="200" height="100" src="<?php echo $row['imagen'];?> ">
+                <input id="imagen" name="imagen" type="file" required/></div>
+            <div class="span3 well well-small"><b>Menú</b></div>
+            <div class="span6 well well-small"><select id="menu" name="menu">
                     <?php 
 						
 						$consu="SELECT * FROM menu WHERE menuid=".$row['menuid'];
@@ -119,12 +108,9 @@ $id=$_GET['id'];
 							}
 
 						?>
-                    </select></td>
-                </tr>
-                
-                <tr>
-                	<th>Tipo Información</th>
-                    <td><select id="tipoinfo" name="tipoinfo">
+                    </select></div>
+            <div class="span3 well well-small"><b>Tipo de Información</b></div>
+            <div class="span6 well well-small"><select id="tipoinfo" name="tipoinfo">
                     <?php 
 						
 						$consu1="SELECT * FROM tipoinformacion WHERE tipoinformacionid=".$row['tipoinformacionid'];
@@ -146,15 +132,13 @@ $id=$_GET['id'];
 							}
 
 						?>
-                    </select></td>
-                </tr>
-                
-                <tr>
-                	<td> </td> <td><button name="guardar" id="guardar" type="submit" class="btn-primary text-center">Modificar</button></td>
-                </tr>
-                
-            </table>
-        </form>
+                    </select></div>
+                <div class="span9 well well-small" align="center">
+      <button name="guardar" id="guardar" type="submit" class="btn btn-primary text-center">Modificar</button>
+      </div>
+     </p>
+  </div>
+		
      <?php }?>
 <?php
 
@@ -252,10 +236,6 @@ if(isset($_POST["guardar"])){
 	}
 }
 ?>
-         </p>
-      </div>
-    </div>
-    </div>
   </div>
 </div>
 

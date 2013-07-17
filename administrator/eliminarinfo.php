@@ -86,13 +86,13 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
 	    <table class="footable table-striped table-hover" data-page-size="5">
 			  <thead>
 				<tr>
-				  <th data-class="expand" data-sort-initial="true" data-type="numeric">
+				  <th data-sort-ignore="true">
 					<span>Título</span>
 				  </th>
-				  <th>
+				  <th data-sort-ignore="true">
 					<span>Descripción</span>
 				  </th>
-                   <th>
+                   <th data-sort-ignore="true">
 					<span>Enlace</span>
 				  </th>
 				</tr>
@@ -100,9 +100,9 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
 	<tbody>
       <?php   
 	  		echo '<tr>';
-			echo '<td width="30%">  <label>'.$row["titulo"].' </label></td>';
-			echo ' <td width="30%"> <label>'.$row["descripcion"].' </label></td>';
-			echo ' <td width="40%"> <label>'.$row["enlace"].' </label></td>';
+			echo '<td width="20%">  <label>'.$row["titulo"].' </label></td>';
+			echo ' <td width="50%"> <label>'.$row["descripcion"].' </label></td>';
+			echo ' <td width="30%"> <label>'.$row["enlace"].' </label></td>';
 			echo '</tr>';
 		?>
 	</tbody>	  
