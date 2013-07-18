@@ -30,12 +30,12 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
         <div id="barrap" class="nav-collapse collapse">
           <ul class="nav slidernav">
             <li><a href="admin.php">Administrador</a></li>
-            <li><a href="usuario.php">Usuario</a></li>
+            <li><a href="usuario.php"><em> <b>Usuario</b> </em></a></li>
             <li><a href="menu.php">Menú</a></li>
             <li><a href="info.php">Información</a></li>
             <li><a href="producto.php">Producto</a></li>
             <li><a href="sucursal.php">Sucursal</a></li>
-            <li><a href="tipoinfo.php"><em> <b>Tipo Infomación </b> </em></a></li>
+            <li><a href="tipoinfo.php">Tipo Infomación </a></li>
             <li><a href="tipoadmin.php">Tipo Administrador</a></li>
             <li><a href="cerrarsesion.php">Cerrar Sesión</a></li>
           </ul>
@@ -53,14 +53,14 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
    <div class="span3">
       <div style="text-align:center">
           <ul class="nav  nav-pills nav-stacked">
-             <li class="active"><a href="tipoinfo.php"> <span class="add-on"><i class="icon-arrow-left"></i></span> Atrás</a></li> 
+             <li class="active"><a href="usuario.php"> <span class="add-on"><i class="icon-arrow-left"></i></span> Atrás</a></li> 
           </ul>
       </div>
     </div>
     <div class="span9">
       <div class="well well-large">
        <?php
-        	$cons="SELECT * FROM tipoinformacion WHERE tipoinformacionid=".$_GET['id'];
+        	$cons="SELECT * FROM usuario WHERE usuarioid=".$_GET['id'];
 			$resulta = pg_query ($conn, $cons) or die("Error en la consulta SQL");
 			$row=pg_fetch_array($resulta)
 		?>
@@ -76,11 +76,47 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
                 </div>
               </dd>
               <dt>
-                <div class=" well well-small" align="left"> Descripción </div>
+                <div class=" well well-small" align="left"> Apellido </div>
               </dt>
               <dd>
                 <div class="well well-small">
-                  <input id="descripcion" name="descripcion"  type="text" value="<?php echo $row['descripcion']?>" contenteditable=true required/>
+<input type="text" name="apellido" id="apellido" value="<?php echo $row['apellido']?>" required/>
+                </div>
+              </dd>
+                </dd>
+              <dt>
+                <div class=" well well-small" align="left">Dirección</div>
+              </dt>
+              <dd>
+                <div class="well well-small">
+<input type="text" name="direccion" id="direccion" value="<?php echo $row['direccion']?>" required/>
+                </div>
+              </dd>
+                </dd>
+              <dt>
+                <div class=" well well-small" align="left"> Nombre de Usuario</div>
+              </dt>
+              <dd>
+                <div class="well well-small">
+<input type="text" name="usuario" id="usuario" value="<?php echo $row['usuario']?>" required/>
+                </div>
+              </dd>
+                </dd>
+              <dt>
+                <div class=" well well-small" align="left"> Contraseña </div>
+              </dt>
+              <dd>
+                <div class="well well-small">
+<input type="password" name="contrasena" id="contrasena" value="<?php echo $row['contrasena']?>" required/>
+                </div>
+              </dd>
+                </dd>
+              <dt>
+                <div class=" well well-small" align="left"> Confirmar ontraseña</div>
+              </dt>
+              <dd>
+                <div class="well well-small">
+<input type="password" name="contrasena_c" id="contrasena_c" value="<?php echo $row['contrasena']?>" required/>
                 </div>
               </dd>
                 <div class="well well-small" align="center">
@@ -105,14 +141,34 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
    <?php
 		
 if(isset($_POST["guardar"])){
-		$id=$_GET['id'];
-		$nombre=$_POST['nombre'];
-		$descripcion=$_POST['descripcion'];
-        $resultado=pg_query($conn,"UPDATE tipoinformacion SET nombre='$nombre', descripcion='$descripcion' where tipoinformacionid=$id") or die(pg_last_error($conn));
-		if($resultado){
-			llenarLog(2, "tipo de información");
-javaalert("El tipo de información fue modificado con éxito");
-iraURL("tipoinfo.php");
+		if(isset($_POST["nombre"]) &&  isset($_POST["apellido"]) && isset($_POST["direccion"]) && isset($_POST["usuario"]) && isset($_POST["contrasena"]) && isset($_POST["contrasena_c"]) && $_POST["nombre"]!="" && $_POST["apellido"]!="" && $_POST["direccion"]!="" && $_POST["usuario"]!="" && $_POST["contrasena"]!="" && $_POST["contrasena_c"]!=""){
+		$SQL="SELECT * FROM usuario where usuario='".$_POST["usuario"]."' and usuarioid!=".$_GET['id'];
+		$result = pg_query ($conn, $SQL ) or die("Error en la consulta SQL");
+		$registros= pg_num_rows($result);
+		if($registros == 0){
+			if($_POST["contrasena"]==$_POST["contrasena_c"]){
+					$id=$_GET['id'];
+					$nombre=$_POST['nombre'];
+					$apellido=$_POST['apellido'];
+					$direccion=$_POST['direccion'];
+					$usuario=$_POST['usuario'];
+					$contrasena=$_POST['contrasena'];
+					$resultado=pg_query($conn,"UPDATE usuario SET nombre='$nombre', apellido='$apellido' , direccion='$usuario', usuario='$usuario', contrasena='$contrasena' where usuarioid=$id") or die(pg_last_error($conn));
+					if($resultado){
+						llenarLog(2, "Usuario");
+						javaalert("El usuario fue modificado con éxito");
+						iraURL("usuario.php");
+					}
+			}else{
+					javaalert("Las contraseñas no coinciden, por favor verifique");
+				}		
+		}else{
+			javaalert("El nombre de usuario ya esta registrado, por favor verifique");
+
+		}			
+		}else{
+						javaalert("Debe agregar todos los campos, por favor verifique");
+
 		}
 }
 ?>

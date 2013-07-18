@@ -55,16 +55,16 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
    <div class="row-fluid">
                        
     <div class="span3">
-      <div style="text-align:center">
+          <div style="text-align:center">
         
-         <div class="btn-group btn-group-vertical">
-          
-             <button class="btn btn-primary dropdown-menu btn-large text-left" onclick="location.href='../administrator/creartipoinfo.php'"> <span class="add-on"><i class="icon-plus "></i></span> Crear   </button>
+          <ul class="nav  nav-pills nav-stacked">
+              <li class="active"><a href="creartipoinfo.php"> <span class="add-on"><i class="icon-plus "></i></span> Crear </a></li>
+              <li><a href="principal.php"> <span class="add-on"><i class="icon-arrow-left"></i></span> Atras</a></li>
             
-             
-             <button class="btn btn-primary dropdown-menu btn-large text-left " onclick="location.href='../administrator/principal.php'"> <span class="add-on"><i class="icon-arrow-left"></i></span> Atras   </button>
+          </ul>
+          
+
         
-        </div>
       </div>
     </div>
     <div class="span9">
@@ -74,7 +74,7 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
 		$registros= pg_num_rows($result);
 	if($registros == 0){
     ?>
-    <div class="alert alert-block" >
+    <div class="alert alert-block" align="center">
     <h2 class="alert alert-block">Atención  
     <h4>No existen registros en tipo de Información</h4>
     </h2>
@@ -128,11 +128,7 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
 <?php 
 	}
 ?>
-		    <ul id="pagination" class="footable-nav"><span>Pages:</span></ul>
-
-        
-        
-         </p>
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                </p>
       </div>
     </div>
     </div>

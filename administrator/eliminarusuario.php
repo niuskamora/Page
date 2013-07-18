@@ -3,6 +3,7 @@ session_start();
 
 include("../recursos/funciones.php");
 $conn=conectar();
+
 if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
 	iraURL('../administrator/index.php');
 	}
@@ -22,8 +23,8 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
 <link href="../recursos/css/bootstrap-responsive.min.css" rel="stylesheet">
 <link href="../recursos/css/estiloadmin.css" rel="stylesheet">
 <link href="../recursos/footable/css/footable-0.1.css" rel="stylesheet" type="text/css" />
-  <link href="../recursos/footable/css/footable.sortable-0.1.css" rel="stylesheet" type="text/css" />
-  <link href="../recursos/footable/css/footable.paginate.css" rel="stylesheet" type="text/css" />
+<link href="../recursos/footable/css/footable.sortable-0.1.css" rel="stylesheet" type="text/css" />
+<link href="../recursos/footable/css/footable.paginate.css" rel="stylesheet" type="text/css" />
 </head>
 
 <body class="preview" id="top" data-spy="scroll" data-target=".subnav" data-offset="80">
@@ -34,13 +35,14 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
         <div id="barrap" class="nav-collapse collapse">
           <ul class="nav slidernav">
             <li><a href="admin.php">Administrador</a></li>
-            <li><a href="usuario.php"><em> <b>Usuario</b> </em></a></li>
+            <li><a href="usuario.php"><em><b>Usuario</b></em></a></li>
             <li><a href="menu.php">Menú</a></li>
             <li><a href="info.php">Información</a></li>
             <li><a href="producto.php">Producto</a></li>
             <li><a href="sucursal.php">Sucursal</a></li>
-<li><a href="tipoinfo.php">Tipo Infomación</a></li>            <li><a href="tipoadmin.php">Tipo Administrador</a></li>
-            <li><a href="cerrarsesion.php">Cerrar Sesión</a></li>
+            <li><a href="tipoinfo.php" >Tipo Infomación</a></li>
+            <li><a href="tipoadmin.php">Tipo Administrador</a></li>
+            <li><a href="index.php">Cerrar Sesión</a></li>
           </ul>
         </div>
         <!-- /.nav-collapse --> 
@@ -54,21 +56,16 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
    <div class="row-fluid">
                        
     <div class="span3">
-     <div style="text-align:center">
-        
-         <div class="btn-group btn-group-vertical">
-          
-             <button class="btn btn-primary dropdown-menu btn-large text-left" onclick="location.href='../administrator/crearusuario.php'"> <span class="add-on"><i class="icon-plus "></i></span> Crear   </button>
-            
-             
-             <button class="btn btn-primary dropdown-menu btn-large text-left " onclick="location.href='../administrator/principal.php'"> <span class="add-on"><i class="icon-arrow-left" ></i></span> Atras   </button>
-        
-        </div>
+      <div style="text-align:center">
+          <ul class="nav  nav-pills nav-stacked">
+             <li class="active"><a href="usuario.php"> <span class="add-on"><i class="icon-arrow-left"></i></span> Atrás</a></li> 
+          </ul>
       </div>
     </div>
+    
     <div class="span9">
    
-      <?php 
+        <?php 
 		
 		 $SQL="SELECT * FROM usuario WHERE usuarioid=".$_GET['id'];
 		$result = pg_query ($conn, $SQL ) or die("Error en la consulta SQL");
@@ -82,12 +79,12 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
 		
 		if($registros2!=0){
 		 
-			?>  
+			?>   
             
-    <div class="well alert alert-danger">
-    <h2 class="alert alert-danger">Atención</h2>
-    <h4>No se puede eliminar el registro </h4>
-	 </div>
+            <div class="well alert alert-danger">
+    			<h2 class="alert alert-danger" align="center">Atención</h2>
+    			<h4 align="center">No se puede eliminar el registro </h4>
+	 		</div>
      
      
      <?php
@@ -96,14 +93,9 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
 		
     ?>
     
-    
-    
-    
-    
     <div class="well well-small alert alert-block">
-    <h2 class="alert alert-block">Atención</h2>
-    <h4>¿Desea eliminar el registro? </h4>
-   
+    	<h2 class="alert alert-block" align="center">Atención</h2>
+    	<h4 align="center">¿Desea eliminar el registro? </h4>
     </div>
 
       <div class="well well-large">
@@ -113,29 +105,28 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
 	    <table class="footable table-striped table-hover" data-page-size="5">
 			  <thead>
 				<tr>
-				    <th data-hide="phone" data-sort-ignore="true">
+				  <th data-sort-ignore="true">
 					<span>Nombre</span>
 				  </th>
-				  <th data-hide="phone" data-sort-ignore="true">
-					Descripción
+				  <th data-sort-ignore="true">
+					<span>Apellido</span>
 				  </th>
 				</tr>
 			  </thead>
 	<tbody>
       <?php   
-	  echo '<tr>';
-			echo '<td width="40%">  <label>'.$row[1].' </label></td>';			
-			echo ' <td width="60%"> <label>'.$row[2].' </label></td>';			
+	  		echo '<tr>';
+			echo '<td width="30%">  <label>'.$row["nombre"].' </label></td>';
+			echo ' <td width="30%"> <label>'.$row["apellido"].' </label></td>';
 			echo '</tr>';
 		?>
-    </tbody>	  
+	</tbody>	  
     </table>
     
-    <button id="si" name="si" class="btn-primary text-center " type="submit">  Si  </button>
-     <button id="no" name="no" class="btn-primary text-center " type="submit">  No </button>
+    <button id="si" name="si" class="btn-primary text-center " type="submit">  Si </button>
+    <button id="no" name="no" class="btn-primary text-center " type="submit">  No </button>
 	 </form> 
-    
-     	<?php
+	<?php
 		}
 		
 if(isset($_POST["si"])){
@@ -150,22 +141,21 @@ if(isset($_POST["no"])){
 	
 }
 ?>
+      
+
 <!-- Le javascript
 ================================================== --> 
-
 <script type="text/javascript" src="../recursos/js/jquery-2.0.2.js" ></script> 
 <script src="../recursos/js/bootstrap.js"></script> 
 <script src="../recursos/js/bootstrap.min.js"></script>
- <script src="../recursos/footable/js/footable.js" type="text/javascript"></script>
-  <script src="../recursos/footable/js/footable.paginate.js" type="text/javascript"></script>
-  <script src="../recursos/footable/js/footable.sortable.js" type="text/javascript"></script>
+<script src="../recursos/footable/js/footable.js" type="text/javascript"></script>
+<script src="../recursos/footable/js/footable.paginate.js" type="text/javascript"></script>
+<script src="../recursos/footable/js/footable.sortable.js" type="text/javascript"></script>
  
   <script type="text/javascript">
     $(function() {
       $('table').footable();
     });
   </script>
- 
- 
 	</body>
 </html>

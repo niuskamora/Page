@@ -18,6 +18,7 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
 <meta charset="utf-8">
 <link href="../recursos/css/bootstrap.css" rel="stylesheet">
 <link href="../recursos/css/bootstrap.min.css" rel="stylesheet">
+<link href="../recursoscss/bootstrap-responsive.css" rel="stylesheet">
 <link href="../recursos/css/bootstrap-responsive.min.css" rel="stylesheet">
 <link href="../recursos/css/estiloadmin.css" rel="stylesheet">
 <link href="../recursos/footable/css/footable-0.1.css" rel="stylesheet" type="text/css" />
@@ -54,16 +55,16 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
    <div class="row-fluid">
                        
     <div class="span3">
-      <div style="text-align:center">
+          <div style="text-align:center">
         
-         <div class="btn-group btn-group-vertical">
-          
-             <button class="btn btn-primary dropdown-menu btn-large text-left" onclick="location.href='../administrator/crearusuario.php'"> <span class="add-on"><i class="icon-plus "></i></span> Crear   </button>
+          <ul class="nav  nav-pills nav-stacked">
+              <li class="active"><a href="crearusuario.php"> <span class="add-on"><i class="icon-plus "></i></span> Crear </a></li>
+              <li><a href="principal.php"> <span class="add-on"><i class="icon-arrow-left"></i></span> Atras</a></li>
             
-             
-             <button class="btn btn-primary dropdown-menu btn-large text-left " onclick="location.href='../administrator/principal.php'"> <span class="add-on"><i class="icon-arrow-left" ></i></span> Atras   </button>
+          </ul>
+          
+
         
-        </div>
       </div>
     </div>
     <div class="span9">
@@ -73,7 +74,7 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
 		$registros= pg_num_rows($result);
 	if($registros == 0){
     ?>
-    <div class="alert alert-block" >
+    <div class="alert alert-block" align="center">
    <h2 class="alert alert-block">Atención  
     <h4>No existen registros en usuario</h4>
     </h2>
@@ -119,7 +120,7 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
 			echo '<td width="15%">'.$row[1].'</td>';
 			echo '<td width="15%">'.$row[2].'</td>';
 			echo '<td width="22%">'.$row[3].'</td>';
-			echo '<td width="13%"> <button class="btn btn-primary"> <span class="add-on"><i class="icon-pencil"></i> </span> Editar  </button> </td>';
+			echo '<td width="13%"><a href="editarusuario.php?id='.$row[0].'&boton=editar"> <button class="btn btn-primary"> <span class="add-on"><i class="icon-pencil"></i> </span> Editar  </button> </td>';
 			echo '<td width="14%"><a href="eliminarusuario.php?id='.$row[0].'&boton=eliminar"> <button class="btn btn-primary" type="button"  name="eliminar"> <span class="add-on"><i class="icon-trash"></i></span> Eliminar</button> </td>';
 			echo '<td width="11%"> <button class="btn btn-primary"> <span class="add-on"><i class="icon-eye-open"></i></span> Ver</button> </td>';
 			echo '</tr>';
@@ -130,7 +131,7 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
 <?php 
 	}
 ?>
-		 <ul id="pagination" class="footable-nav"><span>Pages:</span></ul>
+		 
         
         
          </p>
@@ -145,7 +146,7 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
 <script type="text/javascript" src="../recursos/js/jquery-2.0.2.js" ></script> 
 <script src="../recursos/js/bootstrap.js"></script> 
 <script src="../recursos/js/bootstrap.min.js"></script>
-<script src="../recursos/footable/js/footable.js" type="text/javascript"></script>
+ <script src="../recursos/footable/js/footable.js" type="text/javascript"></script>
   <script src="../recursos/footable/js/footable.paginate.js" type="text/javascript"></script>
   <script src="../recursos/footable/js/footable.sortable.js" type="text/javascript"></script>
  
