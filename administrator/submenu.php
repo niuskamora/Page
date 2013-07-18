@@ -167,7 +167,7 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
 		?>
         </tbody>	  
     </table>
-      <div class="span9">   <ul id="pagination" class="footable-nav"><span>Pages:</span></ul></div>
+      <div class="span12">   <ul id="pagination" class="footable-nav"><span>Pages:</span></ul></div>
      <?php }else{  ?>
 		 <div class="well alert alert-block">
    
@@ -177,34 +177,60 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
 		 
 	<?php } ?>
      
-   
-    <div class="offset11 span1"></div>
-    
-    		<div class="span3 well well-small"><b>Nombre</b></div>
-           <div class="span6 well well-small "><input id="nombre" name="nombre" type="text" value="" contenteditable=true required/> </div>
+   </br>
+   </br>
+   <button type="button" class="btn btn-warning" data-toggle="collapse" data-target="#demo">
+    Presione Aquí para crear
+</button>
+ 
+<div id="demo" class="collapse">
+      <div class="row-fluid">
+            <dl class="dl-horizontal">
+              <dt>
+                <div class=" well well-small"><b>Nombre</b></div>
+              </dt>
+              <dd>
+                <div class=" well well-small">
+           <input id="nombre" name="nombre" type="text" value="" contenteditable=true required/> 
+            </div>
+            </dd>
+           
            
 			<?php $SQL2="SELECT * FROM menu WHERE menuid=".$_GET["id"];
 		$result2 = pg_query ($conn, $SQL2 ) or die("Error en la consulta SQL");
 		$row2 = pg_fetch_array ($result2); ?>
         
-            <div class="span3 well well-small"><b>Submenu</b></div>
-            <div class="span6 well well-small"><?php echo $row2["nombre"];?></div>
-            <div class="span3 well well-small"><b>Administrador</b></div>
+             <dt>
+                <div class=" well well-small"><b>Submenu</b></div>
+              </dt>
+              <dd>
+                <div class=" well well-small"><?php echo $row2["nombre"];?></div>
+              </dd>
+            <dt>
+                <div class=" well well-small"><b>Administrador</b></div></dt>
            <?php $SQL5="SELECT nombre FROM administrador WHERE administradorid=".$_SESSION["id_usuario"];
 		$result5 = pg_query ($conn, $SQL5 ) or die("Error en la consulta SQL");
 		$row5 = pg_fetch_array ($result5); ?>
-            <div class="span6 well well-small"><?php echo $row5["nombre"];?></div>
-            <div class="span3 well well-small"><b>Enlace</b></div>
-            <div class="span6 well well-small"><input id="enlace" name="enlace"  type="text" value="" contenteditable=true required/></div>
-            
-                <div align="center" class="span9 well well-small"><button id="guardar" name="guardar" class="btn btn-primary text-center" type="submit"> Guardar</button></div>
-           
-
+             <dd>
+                <div class=" well well-small"><?php echo $row5["nombre"];?></div>
+             </dd>  
+           <dt>
+                <div class=" well well-small"><b>Enlace</b></div></dt>
+             <dd>
+                <div class=" well well-small"><input id="enlace" name="enlace"  type="text" value="" contenteditable=true required/></div>
+                </dd>
+             <dd>
+                <div align="left" class="well well-small"><button id="guardar" name="guardar" class="btn btn-primary text-center" type="submit"> Guardar</button>
+                 </div>
+              </dd>
+            </dl>
+       </div>        
+  </div>
 	 
 </form> 	
     
 
-
+  </div>
 
 		
  	<?php
@@ -225,7 +251,7 @@ if(isset($_POST["guardar"])){
 	if($resultado){
 			
 			llenarLog(1, "Creo submenu");
-			iraURL('../administrator/crear2.php?id='.$_GET['id']);
+			iraURL('../administrator/submenu.php?id='.$_GET['id']);
 		}
 	}else{
 		javaalert("Debe llenar todos los campos obligatorios");

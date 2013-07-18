@@ -157,6 +157,7 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
                  <input id="nombre" name="enlace"  type="text" value="<?php echo $row["enlace"] ?>" contenteditable=true required/>
                 </div>
               </dd>
+               <dd>
                 <div align="center" class="well well-small">
                   <button id="guardar" name="guardar" class="btn btn-primary text-center" type="submit"> Guardar</button>
                 </div>
