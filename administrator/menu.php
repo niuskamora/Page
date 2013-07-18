@@ -148,7 +148,7 @@ if(isset($_GET['b']))
 				</tr>
 			  </thead>
 				<tbody>
-    <form action="editartipoadmin.php" method="get"> 
+    <form  method="get"> 
    
       <?php   
 	  
@@ -160,7 +160,7 @@ if(isset($_GET['b']))
 			echo '<tr>';
 			echo '<td width="10%">'.$row["menuid"].'</td>';
 			echo '<td width="15%">'.$row["nombre"].' </td>';
-			echo'<td width="5%"> <a href="crear2.php?id='.$row["menuid"].'"> <i id="add" class="icon-plus" /> </td> </a>';
+			echo'<td width="5%"> <a href="submenu.php?id='.$row["menuid"].'"> <i id="add" class="icon-plus" /> </td> </a>';
 			$SQL3="SELECT nombre FROM administrador WHERE administradorid=".$row["administradorid"];
 		$result3 = pg_query ($conn, $SQL3 ) or die("Error en la consulta SQL");
 		$row3 = pg_fetch_array ($result3);

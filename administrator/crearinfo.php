@@ -67,22 +67,24 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
         <p>
         
             <div class="span3 well well-small"><b>Título</b></div>
-            <div class="span6 well well-small"><input id="titulo" name="titulo" type="text" required autofocus/></div>
+            <div class="span6 well well-small"><input id="titulo" name="titulo" type="text" maxlength="249" pattern="[A-Za-z,ñ,Ñ,á,é,í,ó,ú,Á,É,Í,Ó,Ú, ]{1,249}" required autofocus/></div>
             <div class="span3 well well-small"><b>Descripción</b></div>
-            <div class="span6 well well-small"><textarea id="redactor" name="redactor"></textarea></div>
+            <div class="span6 well well-small"><textarea id="redactor" name="redactor" maxlength="2499" pattern="[A-Za-z,ñ,Ñ,á,é,í,ó,ú,Á,É,Í,Ó,Ú, ]{1,2499}"></textarea></div>
             <div class="span3 well well-small"><b>Enlace</b></div>
-            <div class="span6 well well-small"><input id="enlace" name="enlace" type="text"/></div>
+            <div class="span6 well well-small"><input id="enlace" name="enlace" type="text" maxlength="249" pattern="[A-Za-z,ñ,Ñ,á,é,í,ó,ú,Á,É,Í,Ó,Ú, ]{1,249}"/></div>
             <div class="span3 well well-small"><b>Imagen</b></div>
-            <div class="span6 well well-small">
-            		<input id="imagen" name="imagen" type="file"/>
-                    </br>
-                    <h5>Seleccione el tamaño</h5>
-                    50x50
-                    <input name="op" id="op" type="radio" value="1" checked />
-                    320x240
-                    <input name="op" id="op" type="radio" value="2"/>
-                    640x480
-                    <input name="op" id="op" type="radio" value="3"/>
+            <div class="span6 well well-small"><input id="imagen" name="imagen" type="file"/>
+            	</br>
+                <h5>Seleccione el tamaño</h5>
+                <div>50x50
+                	<input name="op" id="op" type="radio" value="1" checked/>
+                </div>
+                <div>320x240
+                	<input name="op" id="op" type="radio" value="2"/>
+                </div>
+                <div>640x480
+                	<input name="op" id="op" type="radio" value="3"/>
+                </div>
             </div>
             <div class="span3 well well-small"><b>Tipo de Información</b></div>
             <div class="span6 well well-small"><select id="tipoinfo" name="tipoinfo">

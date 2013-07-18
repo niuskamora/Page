@@ -165,5 +165,17 @@ function menu_principal($idm,$activo)
 		  }
 	
 }
+function obtenerQuote()
+{
+	$conex = conectar();
+	$query="select informacion.titulo,informacion.descripcion
+from informacion,tipoinformacion 
+where lower(tipoinformacion.nombre)='quotes' and informacion.tipoinformacionid=tipoinformacion.tipoinformacionid
+order by random() limit 1 ;";
+	$Qmenu = pg_query($conex,$query) or die(pg_last_error($conex));
+	return $row = pg_fetch_array($Qmenu,0);
+	
+	
+}
 
 ?>
