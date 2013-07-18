@@ -65,21 +65,38 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
       <div class="well well-large">
         <p>
         
-		<form method="post">
-        	<table width="100%" class="table table-bordered">
-            	<tr>
-                	<th>Nombre</th>
-                    <td><input title="Se necesita un nombre" id="nombres" name="nombres" type="text" value="" required/></td>
-                </tr>
-                <tr>
-                	<th>Descripcion</th>
-             <td><input id="descripcionn" name="descripcionn" type="text" value="" required/></td>
-                </tr>
-                <tr>
-                	<td> </td> <td><button id="guardar" name="guardar" class="btn-primary text-center" type="submit">Guardar</button></td>
-                </tr>
-                <td> </td> <td><button id="guardar2" name="guardar2" class="btn-primary text-center" type="submit">Guardar y añadir otro</button></td>
-            </table>
+		 <form method="post">
+          <div class="row-fluid">
+            <dl class="dl-horizontal">
+              <dt>
+                <div class=" well well-small"> Nombre </div>
+              </dt>
+              <dd>
+                <div class=" well well-small">
+                  <input id="nombre" name="nombre"  type="text" value="" contenteditable="true" required/>
+                </div>
+              </dd>
+              <dt>
+                <div class=" well well-small"> Descripcion </div>
+              </dt>
+              <dd>
+                <div class="well well-small">
+                  <input id="descripcion" name="descripcionn"  type="text" value="" contenteditable="true" required/>
+                </div>
+              </dd>
+              <dt> </dt>
+              <dd>
+                <div class="well well-small">
+                  <button id="guardar" name="guardar" class="btn-primary text-center" type="submit"> <span class="add-on"><i class="icon-pencil"></i></span>Guardar</button>
+                </div>
+              </dd>
+              <dd>
+                <div class="well well-small">
+                  <button id="guardar2" name="guardar2" class="btn-primary text-center" type="submit"> <span class="add-on"><i class="icon-pencil"></i></span>Guardar y añadir otro</button>
+                </div>
+              </dd>
+            </dl>
+          </div>
         </form>
 		<?php
 		

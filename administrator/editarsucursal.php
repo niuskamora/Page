@@ -59,13 +59,15 @@ $id=$_GET['id'];
     <div class="span3">
       <div style="text-align:center">
           <ul class="nav  nav-pills nav-stacked">
-             <li class="active"><a href="info.php"> <span class="add-on"><i class="icon-arrow-left"></i></span> Atrás</a></li>          
+             <li class="active"><a href="sucursal.php"> <span class="add-on"><i class="icon-arrow-left"></i></span> Atrás</a></li>          
           </ul>
       </div>
     </div>
-    
+           <form enctype="multipart/form-data"  method="POST">
     <div class="span9 well well-large">
         <p>
+ 
+
         
         <?php
         	$cons="SELECT * FROM sucursal WHERE sucursalid=$id";
@@ -74,10 +76,9 @@ $id=$_GET['id'];
 			if($row=pg_fetch_array($resulta)){
 		?>
         
-			<div class="span3 well well-small"><b>Id</b></div>
-            <div class="span6 well well-small "><input id="direccion" name="direccion" type="text" value="<?php echo $row['sucursalid'];?>" required/></div>
+			
             <div class="span3 well well-small"><b>nombre</b></div>
-            <div class="span6 well well-small"><input id="direccion" name="direccion" type="text" value="<?php echo $row['nombre'];?>" required/></div>
+            <div class="span6 well well-small"><input id="nombre" name="nombre" type="text" value="<?php echo $row['nombre'];?>" required/></div>
             <div class="span3 well well-small"><b>Dirección</b></div>
             <div class="span6 well well-small" align="justify"><input id="direccion" name="direccion" type="text" value="<?php echo $row['direccion'];?>" required/></div>
             <div class="span3 well well-small"><b>Telefono</b></div>
@@ -103,7 +104,7 @@ $id=$_GET['id'];
     <?php
 	if(isset($_POST["guardar"])){
 	
-	$nombre=$_POST['nombres'];
+	$nombres=$_POST['nombre'];
 	$direccion=$_POST['direccion'];
 	$telefono=$_POST['telefono'];
 	$correo=$_POST['correo'];
@@ -113,7 +114,7 @@ $id=$_GET['id'];
 	
 
 	
-	$resultado=pg_query($conn,"UPDATE sucursal SET sucursal nombre='$nombre',direccion='$direccion',telefono='$telefono',correo='$correo','',latitud='$latitud',longitud='$longitud',descripcion='$descripcion')") or die(pg_last_error($conn));
+	$resultado=pg_query($conn,"UPDATE sucursal SET  nombre='$nombres',direccion='$direccion',telefono='$telefono',correo='$correo',latitud='$latitud',longitud='$longitud',descripcion='$descripcion' where sucursalid=$id") or die(pg_last_error($conn));
 	
 
 	$arreglo=$id;
@@ -185,15 +186,15 @@ $id=$_GET['id'];
 				imagecopy($img1Recortada, $img1, 0, 0, ceil(($ancho_buscado3-640)/2), ceil(($alto_buscado3-640)/2), ceil(($ancho_buscado3-640)/2)+640, ceil(($alto_buscado3-480)/2)+480);
 				
 				imagejpeg($img1Recortada,$uploadfile,$calidad);				
-				$sql_update="update sucursal set imagen='".$uploadfile."' WHERE sucursalid=".$arreglo[0]."";
+				$sql_update="update sucursal set imagen='".$uploadfile."' WHERE sucursalid=".$arreglo."";
 			
 				$result= pg_query($conn, $sql_update);
 																													
 			}		
 		 }
 	
-	if($resultado && $result){
-			llenarLog(1, "Creo sucursal");
+	if($resultado){
+			llenarLog(1, "edito sucursal");
 			iraURL('../administrator/sucursal.php');
 	}
 }
