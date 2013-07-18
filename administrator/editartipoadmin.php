@@ -76,7 +76,7 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
               </dt>
               <dd>
                 <div class=" well well-small">
-                  <input id="nombre" name="nombre"  type="text" value="<?php echo $row['nombre']?>" contenteditable="true" required/>
+                  <input id="nombre" name="nombre"  type="text" value="<?php echo $row['nombre']?>" contenteditable="true" maxlength="30" required/>
                 </div>
               </dd>
               <dt>
@@ -84,13 +84,13 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
               </dt>
               <dd>
                 <div class="well well-small">
-                  <input id="descripcion" name="descripcionn"  type="text" value="<?php echo $row['descripcion']?>" contenteditable="true" required/>
+                  <input id="descripcion" name="descripcion"  type="text" value="<?php echo $row['descripcion']?>"  maxlength="240" contenteditable="true" required/>
                 </div>
               </dd>
               <dt> </dt>
               <dd>
                 <div class="well well-small">
-                  <button id="guardar" name="guardar" class="btn-primary text-center" type="submit"> <span class="add-on"><i class="icon-pencil"></i></span>Guardar</button>
+                  <button  id="guardar" name="guardar" class="btn btn-primary text-center" type="submit"> </i></span>Modificar</button>
                 </div>
               </dd>
             </dl>
@@ -99,15 +99,20 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
         <?php
 		
 if(isset($_POST["guardar"])){
+	
+	if($_POST["nombre"]!='' && $_POST["descripcion"]!=''){
 		$id=$_GET['id'];
-		$nombre=$_POST['nombres'];
-		$descripcion=$_POST['descripcionn'];
+		$nombre=$_POST['nombre'];
+		$descripcion=$_POST['descripcion'];
         $resultado=pg_query($conn,"UPDATE tipoadministrador SET nombre='$nombre', descripcion='$descripcion' where tipoadministradorid=$id") or die(pg_last_error($conn));
 		if($resultado){
 			llenarLog(2, "Modifico tipo de administrador");
-javaalert("El tipo de administrador fue modificado con exito");
 iraURL("tipoadmin.php");
 		}
+		
+		}else{
+		javaalert("Debe llenar todos los campos obligatorios");
+	}
 }
 ?>
         </p>

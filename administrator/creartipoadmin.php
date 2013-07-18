@@ -73,7 +73,7 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
               </dt>
               <dd>
                 <div class=" well well-small">
-                  <input id="nombre" name="nombre"  type="text" value="" contenteditable="true" required/>
+                  <input id="nombre" name="nombre"  type="text" value="" contenteditable="true" maxlength="30" required/>
                 </div>
               </dd>
               <dt>
@@ -81,18 +81,18 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
               </dt>
               <dd>
                 <div class="well well-small">
-                  <input id="descripcion" name="descripcionn"  type="text" value="" contenteditable="true" required/>
+                  <input id="descripcion" name="descripcion"  type="text" value="" contenteditable="true" maxlength="240" required/>
                 </div>
               </dd>
               <dt> </dt>
               <dd>
                 <div class="well well-small">
-                  <button id="guardar" name="guardar" class="btn-primary text-center" type="submit"> <span class="add-on"><i class="icon-pencil"></i></span>Guardar</button>
+                  <button id="guardar" name="guardar" class="btn btn-primary text-center" type="submit"> </span>Guardar</button>
                 </div>
               </dd>
               <dd>
                 <div class="well well-small">
-                  <button id="guardar2" name="guardar2" class="btn-primary text-center" type="submit"> <span class="add-on"><i class="icon-pencil"></i></span>Guardar y añadir otro</button>
+                  <button id="guardar2" name="guardar2" class="btn btn-primary text-center" type="submit"> </span>Guardar y añadir otro</button>
                 </div>
               </dd>
             </dl>
@@ -101,24 +101,31 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
 		<?php
 		
 if(isset($_POST["guardar"])){
+	
+	if($_POST["nombre"]!='' && $_POST["descripcion"]!=''){
 
-		$nombre=$_POST['nombres'];
-		$descripcion=$_POST['descripcionn'];
+		$nombre=$_POST['nombre'];
+		$descripcion=$_POST['descripcion'];
         pg_query($conn,"INSERT INTO tipoadministrador values( nextval('tipoadministrador_tipoadministradorid_seq'),'$nombre','$descripcion')") or die(pg_last_error($conn));
 javaalert("El tipo de administrador fue creado con exito");
 iraURL("tipoadmin.php");
+	}else{
+		javaalert("Debe llenar todos los campos obligatorios");
+	}
 	
 }
 
 if(isset($_POST["guardar2"])){
+	if($_POST["nombre"]!='' && $_POST["descripcion"]!=''){
 	
-	
-		$nombre=$_POST['nombres'];
-		$descripcion=$_POST['descripcionn'];
+		$nombre=$_POST['nombre'];
+		$descripcion=$_POST['descripcion'];
         pg_query($conn,"INSERT INTO tipoadministrador values( nextval('tipoadministrador_tipoadministradorid_seq'),'$nombre','$descripcion')") or die(pg_last_error($conn));
 llenarLog(1, "creo tipo Administrador");
-javaalert("El tipo de administrador fue creado con exito");
 iraURL("creartipoadmin.php");
+}else{
+		javaalert("Debe llenar todos los campos obligatorios");
+	}
 	
 }
 
