@@ -67,9 +67,28 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
     <?php
 		
 		$SQL="SELECT * FROM informacion";
+		if(isset($_GET['t']))
+		{
+			
+		   $SQL=$SQL." where tipoinformacionid=".$_GET['t'];	
+			
+		}
 		$result = pg_query ($conn, $SQL ) or die("Error en la consulta SQL");
 		$registros= pg_num_rows($result);
-
+		$cons1="SELECT * FROM tipoinformacion order by nombre asc";
+	    $resulta2=pg_query ($conn, $cons1) or die("Error en la consulta SQL");
+		?>
+         <div class="well well-small">
+    <ul class="breadcrumb">
+    <li><a href="info.php">Todos</a> <span class="divider">/</span></li>
+    <?php for($i=0;$i<pg_num_rows($resulta2);$i++) {
+		$tip=pg_fetch_array($resulta2,$i);
+		?>
+  <li><a href="info.php?t=<?php echo $tip[0]; ?>"><?php echo $tip[1]; ?></a> <span class="divider">/</span></li>
+   <?php }?>
+</ul>
+</div>
+		<?php
      	if($registros == 0){
     	?>
     		<div class="alert alert-block" align="center">
@@ -77,8 +96,9 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
     		<h4>No Existen Registros en Información</h4>
    			</div>
      <?php 
-		}else{
+		}else{		
 	?>
+   
     
       <div class="well well-large">
         <p>

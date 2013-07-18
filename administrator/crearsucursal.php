@@ -55,12 +55,11 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
     <div class="span3">
       <div style="text-align:center">
         
-         <div class="btn-group btn-group-vertical">
+         
         <ul class="nav  nav-pills nav-stacked">
              <li class="active"><a href="sucursal.php"> <span class="add-on"><i class="icon-arrow-left"></i></span> Atrás</a></li>          
           </ul>
-        
-        </div>
+      
       </div>
     </div>
     <div class="span9 well well-large">
@@ -140,7 +139,7 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
   
 
                <div align="center" class="span12 well well-small"> 
-                	<button id="guardar" name="guardar" class="btn-primary text-center" type="submit">Guardar</button></div>
+                	<button id="guardar" name="guardar" class="btn btn-primary text-center" type="submit">Guardar</button></div>
                 
             
         </form>

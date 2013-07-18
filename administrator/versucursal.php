@@ -38,9 +38,9 @@ $id=$_GET['id'];
             <li><a href="admin.php">Administrador</a></li>
             <li><a href="usuario.php">Usuario</a></li>
             <li><a href="menu.php">Menú</a></li>
-            <li><a href="info.php"> <em> <b>Información </b> </em> </a></li>
+            <li><a href="info.php"> Información  </a></li>
             <li><a href="producto.php">Producto</a></li>
-            <li><a href="sucursal.php">Sucursal</a></li>
+            <li><a href="sucursal.php"><em> <b>Sucursal</b> </em></a></li>
             <li><a href="tipoinfo.php">Tipo Infomación</a></li>
             <li><a href="tipoadmin.php">Tipo Administrador</a></li>
             <li><a href="cerrarsesion.php">Cerrar Sesión</a></li>
@@ -59,7 +59,7 @@ $id=$_GET['id'];
     <div class="span3">
       <div style="text-align:center">
           <ul class="nav  nav-pills nav-stacked">
-             <li class="active"><a href="info.php"> <span class="add-on"><i class="icon-arrow-left"></i></span> Atrás</a></li>          
+             <li class="active"><a href="sucursal.php"> <span class="add-on"><i class="icon-arrow-left"></i></span> Atrás</a></li>          
           </ul>
       </div>
     </div>

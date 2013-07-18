@@ -159,7 +159,7 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
               </dd>
                <dd>
                 <div align="center" class="well well-small">
-                  <button id="guardar" name="guardar" class="btn btn-primary text-center" type="submit"> Guardar</button>
+                  <button id="guardar" name="guardar" class="btn btn-primary text-center" type="submit"> Modificar</button>
                 </div>
               </dd>
             </dl>

@@ -38,9 +38,9 @@ $id=$_GET['id'];
             <li><a href="admin.php">Administrador</a></li>
             <li><a href="usuario.php">Usuario</a></li>
             <li><a href="menu.php">Menú</a></li>
-            <li><a href="info.php"> <em> <b>Información </b> </em> </a></li>
+            <li><a href="info.php"> Información  </a></li>
             <li><a href="producto.php">Producto</a></li>
-            <li><a href="sucursal.php">Sucursal</a></li>
+            <li><a href="sucursal.php"><em> <b>Sucursal </b> </em></a></li>
             <li><a href="tipoinfo.php">Tipo Infomación</a></li>
             <li><a href="tipoadmin.php">Tipo Administrador</a></li>
             <li><a href="cerrarsesion.php">Cerrar Sesión</a></li>
@@ -72,11 +72,9 @@ $id=$_GET['id'];
         <?php
         	$cons="SELECT * FROM sucursal WHERE sucursalid=$id";
 			$resulta = pg_query ($conn, $cons) or die("Error en la consulta SQL");
-			
 			if($row=pg_fetch_array($resulta)){
 		?>
-        
-			
+
             <div class="span3 well well-small"><b>nombre</b></div>
             <div class="span6 well well-small"><input id="nombre" name="nombre" type="text" value="<?php echo $row['nombre'];?>" required/></div>
             <div class="span3 well well-small"><b>Dirección</b></div>
@@ -92,15 +90,15 @@ $id=$_GET['id'];
                 <div class="span3 well well-small"><b>Longitud</b></div>
             	<div class="span6 well well-small"><input id="longitud" name="longitud" type="text" placeholder="-12.234534" value="<?php echo $row['longitud'];?>" pattern="[+,-][0-9]{1,3}[.][0-9]{6}" required/></div>
                 <div class="span3 well well-small"><b>Descripción</b></div>
-            	<div class="span6 well well-small"><textarea id="redactor" name="redactor"  required><?php echo $row['descripcion'];?></textarea> </div>
+            	<div align="justify" class="span6 well well-small"><textarea id="redactor" name="redactor"  required><?php echo $row['descripcion'];?></textarea> </div>
                 
      <?php }?>
 
                <div align="center" class="span12 well well-small"> 
-                	<button id="guardar" name="guardar" class="btn-primary text-center" type="submit">Guardar</button></div>
+                	<button id="guardar" name="guardar" class="btn btn-primary text-center" type="submit">Modificar</button></div>
                 
-    </div>
-    </div>
+   		</div>
+    
     <?php
 	if(isset($_POST["guardar"])){
 	
@@ -115,8 +113,6 @@ $id=$_GET['id'];
 
 	
 	$resultado=pg_query($conn,"UPDATE sucursal SET  nombre='$nombres',direccion='$direccion',telefono='$telefono',correo='$correo',latitud='$latitud',longitud='$longitud',descripcion='$descripcion' where sucursalid=$id") or die(pg_last_error($conn));
-	
-
 	$arreglo=$id;
 	
 	if($_FILES['imagen']['name']!=""){
@@ -200,7 +196,7 @@ $id=$_GET['id'];
 }
 	?>
 	
-</div>
+
 
 <!-- Le javascript
 ================================================== --> 

@@ -59,7 +59,7 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
         
           <ul class="nav  nav-pills nav-stacked">
               <li class="active"><a href="crearsucursal.php"> <span class="add-on"><i class="icon-plus "></i></span> Crear </a></li>
-              <li><a href="principal.php"> <span class="add-on"><i class="icon-arrow-left"></i></span> Atras</a></li>
+              <li><a href="principal.php"> <span class="add-on"><i class="icon-arrow-left"></i></span> Atrás</a></li>
             
           </ul>
           
@@ -78,7 +78,7 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
 	if($registros == 0){
     ?>
     <div class="well alert alert-block">
-    <h2 class="alert alert-block">Atención</h2>
+    <h2 style="color:rgb(255,255,255)" class="alert alert-block">Atención</h2>
     <h4>No existen registros en Surcursal</h4>
     </div>
      <?php 
