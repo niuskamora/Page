@@ -87,7 +87,7 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
 	?>
     
       <div class="well well-large">
-      <br><br>
+  
       
       
         <p>
@@ -147,11 +147,12 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
 	 </form> 	
 </tbody>	  
     </table>
+    <ul id="pagination" class="footable-nav"><span>Pages:</span></ul>
     <?php
     }
 	?>
 
-    <ul id="pagination" class="footable-nav"><span>Pages:</span></ul>
+    
 
 		
         

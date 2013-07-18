@@ -56,8 +56,9 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
       <div style="text-align:center">
         
          <div class="btn-group btn-group-vertical">
-             
-             <button class="btn btn-primary dropdown-menu btn-large text-left " onClick="location.href='tipoadmin.php'"> <span class="add-on"><i class="icon-arrow-left"></i></span> Atras</button>
+        <ul class="nav  nav-pills nav-stacked">
+             <li class="active"><a href="sucursal.php"> <span class="add-on"><i class="icon-arrow-left"></i></span> Atrás</a></li>          
+          </ul>
         
         </div>
       </div>
@@ -68,80 +69,72 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
 			<form enctype="multipart/form-data"  method="POST">
         <div class="row-fluid">
             <dl class="dl-horizontal">
-              <dt>
-              <div class="span3 well well-small"><b>Id</b></div>
-              </dt>
-              <dd>
-             
-                <div class="span6 well well-small "><input id="direccion" name="direccion" type="text" value="" required/></div>
-                </div>
-              </dd>
+              
               
               <dt>
-              <div class="span3 well well-small"><b>nombre</b></div>
+              <div class="well well-small"><b>nombre</b></div>
               </dt>
               <dd>
-                 <div class="span6 well well-small"><input id="direccion" name="direccion" type="text" value="" required/></div>
-                </div>
+                 <div class="well well-small"><input id="nombre" name="nombre" type="text" value="" required/></div>
+              
               </dd>
               
               
                 <dt>
-           <div class="span3 well well-small"><b>Dirección</b></div>
+           <div class="well well-small"><b>Dirección</b></div>
               </dt>
               <dd>
-                  <div class="span6 well well-small" align="justify"><input id="direccion" name="direccion" type="text" value="" required/></div>
-                </div>
+                  <div class="well well-small" align="justify"><input id="direccion" name="direccion" type="text" value="" required/></div>
+                
               </dd>
               
                <dt>
-            <div class="span3 well well-small"><b>Telefono</b></div>
+            <div class="well well-small"><b>Telefono</b></div>
               </dt>
               <dd>
-                 <div class="span6 well well-small"><input title="telefono"  pattern="[0-9]{11}" id="telefono" name="telefono" type="tel" placeholder="Ej. 02761234567" maxlength="11" value="" required/></div>
-                </div>
+                 <div class="well well-small"><input title="telefono"  pattern="[0-9]{11}" id="telefono" name="telefono" type="tel" placeholder="Ej. 02761234567" maxlength="11" value="" required/></div>
+                
               </dd>
               
               <dt>
-            <div class="span3 well well-small"><b>Correo</b></div>
+            <div class="well well-small"><b>Correo</b></div>
               </dt>
               <dd>
-                 <div class="span6 well well-small"><input id="correo" placeholder="ejemplo@correo.com" name="correo" type="email" value="" required/></div>
-                </div>
+                 <div class=" well well-small"><input id="correo" placeholder="ejemplo@correo.com" name="correo" type="email" value="" required/></div>
+               
               </dd>
 
            <dt>
-            <div class="span3 well well-small"><b>Imagen</b></div>
+            <div class=" well well-small"><b>Imagen</b></div>
               </dt>
               <dd>
-<div class="span6 well well-small"><input id="imagen" name="imagen" type="file" required/></div>
-                  </div>
+<div class=" well well-small"><input id="imagen" name="imagen" type="file" required/></div>
+                  
               </dd>
 
             <dt>
-            <div class="span3 well well-small"><b>Latitud</b></div>
+            <div class="well well-small"><b>Latitud</b></div>
               </dt>
               <dd>
-<div class="span6 well well-small"><input id="latitud" name="latitud" type="text" placeholder="+38.234534" pattern="[+,-][0-9]{1,3}[.][0-9]{6}"  value="" required/></div>
-                  </div>
+<div class="well well-small"><input id="latitud" name="latitud" type="text" placeholder="+38.234534" pattern="[+,-][0-9]{1,3}[.][0-9]{6}"  value="" required/></div>
+                 
               </dd>
            
           <dt>
-            <div class="span3 well well-small"><b>Longitud</b></div>
+            <div class="well well-small"><b>Longitud</b></div>
               </dt>
               <dd>
-<div class="span6 well well-small"><input id="longitud" name="longitud" type="text" placeholder="-12.234534" value="" pattern="[+,-][0-9]{1,3}[.][0-9]{6}" required/></div>
-                  </div>
+<div class="well well-small"><input id="longitud" name="longitud" type="text" placeholder="-12.234534" value="" pattern="[+,-][0-9]{1,3}[.][0-9]{6}" required/></div>
+                
               </dd>
            
            
              <dt>
-          <div class="span3 well well-small"><b>Descripción</b></div>
+          <div class="well well-small"><b>Descripción</b></div>
               </dt>
               <dd>
-<div class="span6 well well-small"><textarea id="redactor" name="redactor"  required></textarea> </div>
+<div class=" well well-small"><textarea id="redactor" name="redactor"  required></textarea> </div>
                 
-                  </div>
               </dd>
           
   
@@ -158,7 +151,7 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
 
 if(isset($_POST["guardar"])){
 	
-	$nombre=$_POST['nombres'];
+	$nombre=$_POST['nombre'];
 	$direccion=$_POST['direccion'];
 	$telefono=$_POST['telefono'];
 	$correo=$_POST['correo'];
@@ -358,7 +351,7 @@ if(isset($_POST["guardar2"])){
     </div>
     </div>
   
-</div>
+
 
 <!-- Le javascript
 ================================================== --> 

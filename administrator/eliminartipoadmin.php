@@ -58,13 +58,9 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
       <div style="text-align:center">
         
             <ul class="nav  nav-pills nav-stacked">
-              <li class="active"><a href="tipoadmin.php"> <span class="add-on"><i class="icon-plus "></i></span> Atras </a></li>
-
-          </ul>
-
-          
-
-        
+              <li class="active"><a href="tipoadmin.php"> <span class="add-on"><i class="icon-arrow-left"></i></span> Atrás </a></li>
+			</ul>
+            
       </div>
     </div>
     <div class="span9">
@@ -138,8 +134,8 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
  </tbody>	  
     </table>
     
-    <button id="si" name="si" class="btn-primary text-center " type="submit">  Si  </button>
-     <button id="no" name="no" class="btn-primary text-center " type="submit">  No </button>
+    <button id="si" name="si" class=" btn btn-primary text-center " type="submit">  Si  </button>
+     <button id="no" name="no" class="btn btn-primary text-center " type="submit">  No </button>
 	 </form> 
     
      	<?php

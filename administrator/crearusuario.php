@@ -67,7 +67,7 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
             <div class="span3 well well-small"><b>Dirección</b></div>
             <div class="span6 well well-small"><input type="text" name="direccion" id="direccion" required/></div>
             <div class="span3 well well-small"><b>Nombre de Usuario</b></div>
-            <div class="span6 well well-small"><input type="text" name="usuario" id="usuario" required/></div>
+            <div class="span6 well well-small"><input type="text" name="usuario" id="usuario" pattern="pattern="[A-Z]{1}" required/></div>
              <div class="span3 well well-small"><b>Contraseña</b></div>
             <div class="span6 well well-small"><input type="password" name="contrasena" id="contrasena" required/></div>
              <div class="span3 well well-small"><b>Confirmar contraseña</b></div>

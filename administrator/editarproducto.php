@@ -67,7 +67,7 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
 			$resulta = pg_query ($conn, $cons) or die("Error en la consulta SQL");
 			$row=pg_fetch_array($resulta)
 		?>
-     <form method="post">
+      <form enctype="multipart/form-data" method="post">
           <div class="row-fluid">
             <dl class="dl-horizontal">
               <dt>
@@ -75,7 +75,7 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
               </dt>
               <dd>
                 <div class=" well well-small">
-                  <input id="nombre" name="nombre"  type="text" value="<?php echo $row['nombre']?>" contenteditable=true required/>
+                  <input id="nombre" name="nombre"  type="text" value="<?php echo $row['nombre'];?>" contenteditable=true required/>
                 </div>
               </dd>
               <dt>
@@ -83,7 +83,7 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
               </dt>
               <dd>
                 <div class="well well-small">
-                <textarea id="redactor" name="redactor"><?php echo $row['descripcion']?></textarea>
+                <textarea id="redactor" name="redactor" contenteditable="true"><?php echo $row['descripcion'];?></textarea>
                 </div>
               </dd>
                <dt>
@@ -91,7 +91,7 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
               </dt>
               <dd>
                 <div class=" well well-small">
-                  <input id="enlace" name="enlace"  type="text" value="<?php echo $row['enlace']?>" contenteditable=true required/>
+                  <input id="enlace" name="enlace"  type="text" value="<?php echo $row['enlace'];?>" contenteditable=true required/>
                 </div>
               </dd>
                <dt>
@@ -100,7 +100,7 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
               <dd>
                 <div class=" well well-small">
                             	<img width="200" height="100" src="<?php echo $row['imagen'];?> ">
-			<input id="imagen" name="imagen" type="file" required/>
+			<input id="imagen" name="imagen" type="file" />
                 </div>
               </dd>
                 <div class="well well-small" align="center">
@@ -139,12 +139,11 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
 if(isset($_POST["guardar"])){
 		$id=$_GET['id'];
 		$nombre=$_POST['nombre'];
-		$descripcion=$_POST['descripcion'];
+		$descripcion=$_POST['redactor'];
 		$enlace=$_POST['enlace'];
         $resultado=pg_query($conn,"UPDATE producto SET nombre='$nombre', descripcion='$descripcion' , enlace='$enlace' where productoid=$id") or die(pg_last_error($conn));
 		if($resultado){
-		if($_FILES['imagen']['name']!=""){
-		
+		if($_FILES['imagen']['name']!=""){		
 		$caracteres = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz"; //posibles caracteres a usar
 		$numerodeletras=10; //numero de letras para generar el texto
 		$cadena = ""; //variable para almacenar la cadena generada
@@ -155,12 +154,12 @@ if(isset($_POST["guardar"])){
 		
 		$direccion="../recursos";
 		$tipo = explode('/',$_FILES['imagen']['type']);
-		$uploadfile =$direccion."/img/".$arreglo[0].".".$tipo[1];
+		$uploadfile =$direccion."/img/".$id.".".$tipo[1];
 		$error = $_FILES['imagen']['error']; 
 		$subido = false;
 		
 		
-		if($error==UPLOAD_ERR_OK){ 
+		if($error==UPLOAD_ERR_OK){
 			    $subido = copy($_FILES['imagen']['tmp_name'], $uploadfile); 
 				$rutaImagenOriginal=$uploadfile;
 				if($tipo[1]=="jpg" || $tipo[1]=="JPEG" || $tipo[1]=="JPG" || $tipo[1]=="jpeg"){
@@ -211,7 +210,6 @@ if(isset($_POST["guardar"])){
 				
 				imagejpeg($img1Recortada,$uploadfile,$calidad);				
 				$sql_update="update PRODUCTO set imagen='".$uploadfile."' where productoid=".$_GET['id'];
-			
 				$result= pg_query($conn, $sql_update);
 																													
 			}		
