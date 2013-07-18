@@ -25,6 +25,7 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
 </head>
 
 <body class="preview" id="top" data-spy="scroll" data-target=".subnav" data-offset="80">
+<form method="post">
 <div class="container">
   <div class="navbar">
     <div class="navbar-inner">
@@ -53,34 +54,25 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
    <div class="row-fluid">
                        
     <div class="span3">
-      <div style="text-align:center">
-        
-         <div class="btn-group btn-group-vertical">
-           <button class="btn btn-primary dropdown-menu btn-large text-left " onclick="location.href='../administrator/tipoinfo.php'"> <span class="add-on"><i class="icon-arrow-left"></i></span> Atras   </button>
-        
-        </div>
+      <div style="text-align:center">        
+                  <ul class="nav  nav-pills nav-stacked">
+              <li class="active"><a href="tipoinfo.php"> <span class="add-on"><i class="icon-arrow-left"></i></span> Atrás </a></li>
+          </ul>
       </div>
     </div>
-    <div class="span9">
-      <div class="well well-large">
-      <form method="post">
-  <table class="table table-striped table-hover">
-	      <th> Nombre </th>
-	      <td> <input type="text" name="nombre" id="nombre" required/></td>
-      </tr>
-	  <tr>
-	    <th> Descripción </th>
-	    <td>  <input type="text" id="redactor" name="redactor" required/></td>
-      </tr>
-       <tr>
-	    <td></td>
-	    <td><button class="btn btn-primary" id="crear_uno" name="crear_uno" type="submit">Guardar</button>
-       <button class="btn btn-primary" id="crear_otro" name="crear_otro" type="submit">Guardar y añadir otro</button></td>
-      </tr>
-      
-</table>
- </form >
-      </div>
+                 
+
+   <div class="span9 well well-large" >
+ 			<p>
+        <div class="span3 well well-small"><b>Nombre</b></div>
+            <div class="span6 well well-small "><input type="text" name="nombre" id="nombre" required/></div>
+            <div class="span3 well well-small"><b>Descripción</b></div>
+            <div class="span6 well well-small"> <input type="text" id="redactor" name="redactor" required/></div>
+          <div class="span9 well well-small" align="center"><button class="btn btn-primary" id="crear_uno" name="crear_uno" type="submit">Guardar</button></div>
+			<div class="span9 well well-small" align="center"> <button class="btn btn-primary" id="crear_otro" name="crear_otro" type="submit">Guardar y añadir otro</button></div>
+
+            </p>
+    </div>
     </div>
     </div>
   
@@ -94,17 +86,24 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
 <?php 
 	//codigo para guardar y volver a la pagina de tipoinformacion.php
 	if(isset($_POST["crear_uno"]) || isset($_POST["crear_otro"])){
-			 $insertar = "insert into tipoinformacion values(nextval('tipoinformacion_tipoinformacionid_seq'),'".$_POST['nombre']."','".$_POST['redactor']."');";
-			 $conex=conectar();
-			pg_query($conex,$insertar) or die (pg_last_error($conex));
-			if(isset($_POST["crear_uno"])){
-				iraURL('../administrator/tipoinfo.php');	
+		if(isset($_POST["nombre"]) && isset($_POST["descripcion"]) && $_POST["nombre"]!="" && $_POST["descripcion"]!="" ){
+				$insertar = "insert into tipoinformacion values(nextval('tipoinformacion_tipoinformacionid_seq'),'".$_POST['nombre']."','".$_POST['redactor']."');";
+				$conex=conectar();
+				pg_query($conex,$insertar) or die (pg_last_error($conex));
+				if(isset($_POST["crear_uno"])){
+					iraURL('../administrator/tipoinfo.php');	
+				}else{
+					iraURL('../administrator/creartipoinfo.php');	
+					}	
+				llenarLog(1,"Tipo de Información");
 			}else{
-				iraURL('../administrator/creartipoinfo.php');	
-				}	
-			llenarLog(1,"Tipo de Información");
+				javaalert("Debe agregar todos los campos, por favor verifique");
+			}
+			 
 	
 	}
 	?>
+      
+   </form>
 </body>
 </html>

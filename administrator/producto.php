@@ -18,6 +18,7 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
 <meta charset="utf-8">
 <link href="../recursos/css/bootstrap.css" rel="stylesheet">
 <link href="../recursos/css/bootstrap.min.css" rel="stylesheet">
+<link href="../recursoscss/bootstrap-responsive.css" rel="stylesheet">
 <link href="../recursos/css/bootstrap-responsive.min.css" rel="stylesheet">
 <link href="../recursos/css/estiloadmin.css" rel="stylesheet">
 <link href="../recursos/footable/css/footable-0.1.css" rel="stylesheet" type="text/css" />
@@ -55,16 +56,12 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
    <div class="row-fluid">
                        
     <div class="span3">
-      <div style="text-align:center">
+       <div style="text-align:center">
         
-         <div class="btn-group btn-group-vertical">
-          
-             <button class="btn btn-primary dropdown-menu btn-large text-left" onclick="location.href='../administrator/crearproducto.php'"> <span class="add-on"><i class="icon-plus "></i></span> Crear   </button>
-            
-             
-             <button class="btn btn-primary dropdown-menu btn-large text-left " onclick="location.href='../administrator/principal.php'"> <span class="add-on"><i class="icon-arrow-left"></i></span> Atras   </button>
-        
-        </div>
+          <ul class="nav  nav-pills nav-stacked">
+              <li class="active"><a href="crearproducto.php"> <span class="add-on"><i class="icon-plus "></i></span> Crear </a></li>
+              <li><a href="principal.php"> <span class="add-on"><i class="icon-arrow-left"></i></span> Atras</a></li>
+          </ul>
       </div>
     </div>
     <div class="span9">
@@ -75,7 +72,7 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
 
 	if($registros == 0){
     ?>
-    <div class="alert alert-block" >
+    <div class="alert alert-block" align="center">
     <h2 class="alert alert-block">Atención  
     <h4>No existen registros en producto</h4>
     </h2>
@@ -125,7 +122,7 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
 			echo '<td width="15%">'.$row[1].'</td>';
 			echo '<td width="22%">'.substr($row[2],0,30)."...".'</td>';
 			echo '<td width="15%">'.$row[3].'</td>';
-			echo '<td width="13%"> <button class="btn btn-primary"> <span class="add-on"><i class="icon-pencil"></i> </span> Editar  </button> </td>';
+			echo '<td width="13%"><a href="editarproducto.php?id='.$row[0].'&boton=editar"><button class="btn btn-primary"> <span class="add-on"><i class="icon-pencil"></i> </span> Editar  </button> </td>';
 			echo '<td width="14%"><a href="eliminarproducto.php?id='.$row[0].'&boton=eliminar"> <button class="btn btn-primary" type="button"  name="eliminar"> <span class="add-on"><i class="icon-trash"></i></span> Eliminar</button> </td>';
 			echo '<td width="11%"> <button class="btn btn-primary"> <span class="add-on"><i class="icon-eye-open"></i></span> Ver</button> </td>';
 			echo '</tr>';
@@ -136,8 +133,7 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
 <?php 
 	}
 ?>
-		    <ul id="pagination" class="footable-nav"><span>Pages:</span></ul>
-         </p>
+</p>
       </div>
     </div>
     </div>
@@ -161,4 +157,3 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
 
 	</body>
 </html>
-

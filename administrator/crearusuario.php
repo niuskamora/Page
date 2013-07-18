@@ -23,6 +23,7 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
 </head>
 
 <body class="preview" id="top" data-spy="scroll" data-target=".subnav" data-offset="80">
+  <form method="post">
 <div class="container">
   <div class="navbar">
     <div class="navbar-inner">
@@ -51,50 +52,30 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
    <div class="row-fluid">
                        
     <div class="span3">
-      <div style="text-align:center">
-        
-         <div class="btn-group btn-group-vertical">
-           <button class="btn btn-primary dropdown-menu btn-large text-left " onclick="location.href='../administrator/usuario.php'"> <span class="add-on"><i class="icon-arrow-left"></i></span> Atras   </button>
-        
+        <div style="text-align:center">        
+                  <ul class="nav  nav-pills nav-stacked">
+            		  <li class="active"><a href="usuario.php"> <span class="add-on"><i class="icon-arrow-left"></i></span> Atrás </a></li>
+        		  </ul>
         </div>
-      </div>
     </div>
-    <div class="span9">
-      <div class="well well-large">
-      <form method="post">
-  <table class="table table-striped table-hover">
-	      <th> Nombre </th>
-	      <td> <input type="text" name="nombre" id="nombre" required/></td>
-      </tr>
-	  <tr>
-	    <th>Apellido</th>
-	 <td> <input type="text" name="apellido" id="apellido" required/></td>
-      </tr>
-      	  <tr>
-	    <th>Dirección</th>
-	 <td> <input type="text" name="direccion" id="direccion" required/></td>
-      </tr>	 
-       <tr>
-	    <th>Nombre de Usuario</th>
-	 <td> <input type="text" name="usuario" id="usuario" required/></td>
-      </tr>
-    <tr>
-	    <th>Contraseña</th>
-     <td><input type="password" name="contrasena" id="contrasena" required/></td>
-      </tr>
-       <tr>
-	    <th>Confirmar contraseña</th>
-     <td><input type="password" name="contrasena_c" id="contrasena_c" required/></td>
-      </tr>      
-       <tr>
-	    <td></td>
-	    <td><button class="btn btn-primary" id="crear_uno" name="crear_uno" type="submit">Guardar</button>
-       <button class="btn btn-primary" id="crear_otro" name="crear_otro" type="submit">Guardar y añadir otro</button></td>
-      </tr>
-      
-</table>
- </form >
-      </div>
+    <div class="span9 well well-large" >
+ 			<p>
+             <div class="span3 well well-small"><b>Nombre</b></div>
+            <div class="span6 well well-small "><input type="text" name="nombre" id="nombre" required/></div>
+             <div class="span3 well well-small"><b>Apellido</b></div>
+            <div class="span6 well well-small "><input type="text" name="apellido" id="apellido" required/></div>
+            <div class="span3 well well-small"><b>Dirección</b></div>
+            <div class="span6 well well-small"><input type="text" name="direccion" id="direccion" required/></div>
+            <div class="span3 well well-small"><b>Nombre de Usuario</b></div>
+            <div class="span6 well well-small"><input type="text" name="usuario" id="usuario" required/></div>
+             <div class="span3 well well-small"><b>Contraseña</b></div>
+            <div class="span6 well well-small"><input type="password" name="contrasena" id="contrasena" required/></div>
+             <div class="span3 well well-small"><b>Confirmar contraseña</b></div>
+            <div class="span6 well well-small"><input type="password" name="contrasena_c" id="contrasena_c" required/></div>
+            <div class="span9 well well-small" align="center"><button class="btn btn-primary" id="crear_uno" name="crear_uno" type="submit">Guardar</button></div>
+			<div class="span9 well well-small" align="center"> <button class="btn btn-primary" id="crear_otro" name="crear_otro" type="submit">Guardar y añadir otro</button></div>
+
+            </p>
     </div>
     </div>
   
@@ -108,6 +89,8 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
 
 <?php 
 	//codigo para guardar
+	if(isset($_POST["crear_uno"]) || isset($_POST["crear_otro"])){
+
 	if(isset($_POST["nombre"]) &&  isset($_POST["apellido"]) && isset($_POST["direccion"]) && isset($_POST["usuario"]) && isset($_POST["contrasena"]) && isset($_POST["contrasena_c"]) && $_POST["nombre"]!="" && $_POST["apellido"]!="" && $_POST["direccion"]!="" && $_POST["usuario"]!="" && $_POST["contrasena"]!="" && $_POST["contrasena_c"]!=""){
 		$SQL="SELECT * FROM usuario where usuario='".$_POST["usuario"]."'";
 		$result = pg_query ($conn, $SQL ) or die("Error en la consulta SQL");
@@ -126,10 +109,18 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
 				}else{
 					javaalert("Las contraseñas no coinciden, por favor verifique");
 				}
-			}else{
-			javaalert("El nombre de usuario ya esta registrado, por favor verfique");
-			}	
-	}
+		}//fin de $registros
+		else{
+			javaalert("El nombre de usuario ya esta registrado, por favor verifique");
+		}
+	}//fin de isset
+	else{
+				javaalert("Debe agregar todos los campos, por favor verifique");
+			}
+			
+			
+		}				
 	?>
+     </form>
 </body>
 </html>
