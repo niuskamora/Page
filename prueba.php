@@ -5,12 +5,10 @@
 <title>Documento sin título</title>
 </head>
 
-<<<<<<< HEAD
-La linea de NIUSK
-=======
+
 La linea de NIUSKA!
->>>>>>> bc94db34fa6bf01efe2b
-Mi linea
+
+>>>>>>> bc94cee87244fa6bf01efe2b
 
 donde yo quiera
 
