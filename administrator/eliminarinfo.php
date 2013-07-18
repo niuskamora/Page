@@ -74,7 +74,7 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
     ?>
     
     <div class="well well-small alert alert-block" align="center">
-    	<h2 class="alert alert-block">Atención</h2>
+    	<h2 style="color:rgb(255,255,255)"> Atención</h2>
     	<h4>Desea Eliminar la Información</h4>
 
     </div>
