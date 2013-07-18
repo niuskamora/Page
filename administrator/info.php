@@ -118,17 +118,17 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
 			
 			echo '<tr>';
 			echo '<td width="10%">'.$row["informacionid"].'</td>';
-			echo '<td width="15%">'.$row["titulo"].'</td>';
-			echo '<td width="18%">'.substr($row["descripcion"],0,40)."...".'</td>';
+			echo '<td width="14%">'.$row["titulo"].'</td>';
+			echo '<td width="20%">'.substr($row["descripcion"],0,40)."...".'</td>';
 			
 				$cons1="SELECT * FROM tipoinformacion WHERE tipoinformacionid=".$row['tipoinformacionid'];
 				$resulta2=pg_query ($conn, $cons1) or die("Error en la consulta SQL");
 				if($row1=pg_fetch_array($resulta2)){
-					echo '<td width="15%">'.$row1["nombre"].'</td>';
+					echo '<td width="14%">'.$row1["nombre"].'</td>';
 				}
 			echo '<td width="14%"> <a href="editarinfo.php?id='.$row["informacionid"].'&boton=editar"> <button class="btn btn-primary"  type="button" name="boton"> <span class="add-on"><i class="icon-pencil"></i> </span> Editar  </button>  </td></a>';
 			echo '<td width="15%"> <a href="eliminarinfo.php?id='.$row["informacionid"].'&boton=eliminar"> <button class="btn btn-primary"  type="button" name="boton"> <span class="add-on"><i class="icon-trash"></i> </span> Eliminar  </button>  </td></a>';
-			echo '<td width="14%"> <a href="verinfo.php?id='.$row["informacionid"].'&boton=ver"> <button class="btn btn-primary"  type="button" name="boton"> <span class="add-on"><i class="icon-eye-open"></i> </span> Ver  </button>  </td></a>';
+			echo '<td width="11%"> <a href="verinfo.php?id='.$row["informacionid"].'&boton=ver"> <button class="btn btn-primary"  type="button" name="boton"> <span class="add-on"><i class="icon-eye-open"></i> </span> Ver  </button>  </td></a>';
 			echo '</tr>';
 			}
 		?>

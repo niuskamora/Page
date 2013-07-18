@@ -83,7 +83,7 @@ $id=$_GET['id'];
               </dt>
               <dd>
                 <div class=" well well-small">
-                  <input id="titulo" name="titulo" type="text" value="<?php echo $row['titulo']; ?>" contenteditable="true" required/>
+                  <input id="titulo" name="titulo" type="text" value="<?php echo $row['titulo']; ?>" contenteditable="true" required autofocus/>
                 </div>
               </dd>
               <dt>

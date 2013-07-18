@@ -89,11 +89,7 @@ $id=$_GET['id'];
             			<div class="span3 well well-small"><b>Creador</b></div>
             			<div class="span6 well well-small"><?php echo $row1['nombre'];?></div>
                 	<?php }
-					
-				}else{?>
-                	<div class="span3 well well-small"><b>Creador</b></div>
-            		<div class="span6 well well-small">No posee creador</div>
-                <?php }?>
+                }?>
                 <?php 
 				$cons1="SELECT * FROM tipoadministrador WHERE tipoadministradorid=".$row['tipoadministradorid'];
 				$resulta2=pg_query ($conn, $cons1) or die("Error en la consulta SQL");
