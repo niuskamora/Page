@@ -35,7 +35,7 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
           <ul class="nav slidernav">
             <li><a href="admin.php">Administrador</a></li>
             <li><a href="usuario.php">Usuario</a></li>
-            <li><a href="menu.php">Menú</a></li>
+            <li><a href="menu.php"><em> <b> Menú </b> </em></a></li>
             <li><a href="info.php">Información</a></li>
             <li><a href="producto.php">Producto</a></li>
             <li><a href="sucursal.php">Sucursal</a></li>
@@ -58,7 +58,7 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
       <div style="text-align:center">
         
           <ul class="nav  nav-pills nav-stacked">
-              <li class="active"><a href="menu.php"> <span class="add-on"><i class="icon-align-left"></i></span> Atras </a></li>
+              <li class="active"><a href="menu.php"> <span class="add-on"><i class="icon-arrow-left"></i></span> Atrás </a></li>
 
           </ul>
           
@@ -80,20 +80,14 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
 		$result2 = pg_query ($conn, $SQL2 ) or die("Error en la consulta SQL");
 		$registros2= pg_num_rows($result2);
 		
-		$SQL4="SELECT * FROM informacion WHERE menuid=".$_GET['id'];
-		$result4 = pg_query ($conn, $SQL4 ) or die("Error en la consulta SQL");
-		$registros4= pg_num_rows($result4);
+	
 		
-		$SQL5="SELECT * FROM sucursal WHERE menuid=".$_GET['id'];
-		$result5 = pg_query ($conn, $SQL5 ) or die("Error en la consulta SQL");
-		$registros5= pg_num_rows($result5);
-		
-		if($registros2!=0 || $registros4!=0 || $registros5!=0){
+		if($registros2!=0){
 		 
 			?>  
             
             <div class="well alert alert-danger">
-    <h2 class="alert alert-danger">Atención</h2>
+    <h2 style="color:rgb(255,255,255)"> Atención</h2>
     <h4>no se puede eliminar el registro </h4>
 	 </div>
      
@@ -109,7 +103,7 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
     
     
     <div class="well well-small alert alert-block">
-    <h2 class="alert alert-block">Atención</h2>
+    <h2 style="color:rgb(255,255,255)"> Atención</h2>
     <h4>Desea eliminar el registro </h4>
    
     </div>
@@ -149,8 +143,8 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
  </tbody>	  
     </table>
     
-    <button id="si" name="si" class="btn-primary text-center " type="submit">  Si  </button>
-     <button id="no" name="no" class="btn-primary text-center " type="submit">  No </button>
+    <button id="si" name="si" class="btn btn-primary text-center " type="submit">  Si  </button>
+     <button id="no" name="no" class="btn btn-primary text-center " type="submit">  No </button>
 	 </form> 
     
      	<?php

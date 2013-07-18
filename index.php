@@ -7,8 +7,7 @@ $conn=conectar();
 <!DOCTYPE html>
 
 <head>
-<title>Pangea Technologies</title>
-<title>Nuevo proyecto con Bootstrap 2.0</title>
+<title>:: Pangea Technologies ::</title>
 <meta name="description" content="Pagina Web"/>
 <meta name="author" content="Pangea Technologies"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -57,7 +56,6 @@ $conn=conectar();
             <!--/.nav-collapse -->
             <div id="login" class="nav-collapse collapse">
               <ul id="log" class="nav pull-right">
-                <li><a href="/users/sign_up">Registrarse</a></li>
                 <li class="divider-vertical"></li>
                 <li><a href="/users/sign_up">Iniciar sesion</a></li>
               </ul>
@@ -117,15 +115,19 @@ $conn=conectar();
   </div>
 </div>
 <div id="cont2" class="container" >
+<?php 
+ $frase=obtenerQuote();
+
+?>
   <div id="intro">
     <div class="container">
-      <h1> "I make 50 cents for showing up ... and the other 50 cents is based on my performance" </h1>
+      <h1> "<?php echo $frase[1]; ?>" </h1>
     </div>
   </div>
   <br>
   <h2 class="section_header">
     <hr class="left visible-desktop">
-    <span>Steve Jobs</span>
+    <span><?php echo $frase[0]; ?></span>
     <hr class="right visible-desktop">
   </h2>
   <br>

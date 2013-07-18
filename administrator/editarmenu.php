@@ -34,7 +34,7 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
         <div id="barrap" class="nav-collapse collapse">
           <ul class="nav slidernav">
             <li><a href="admin.php">Administrador</a></li>
-            <li><a href="usuario">Usuario</a></li>
+            <li><a href="usuario.php">Usuario</a></li>
             <li><a href="menu.php"> <em><b>Menú</b></em></a></li>
             <li><a href="info.php">Información</a></li>
             <li><a href="producto.php">Producto</a></li>
@@ -58,7 +58,7 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
       <div style="text-align:center">
         
                  <ul class="nav  nav-pills nav-stacked">
-              <li class="active"><a href="menu.php"> <span class="add-on"><i class="icon-arrow-left"></i></span> Atras </a></li>
+              <li class="active"><a href="menu.php"> <span class="add-on"><i class="icon-arrow-left"></i></span> Atrás </a></li>
 
           </ul>
 
@@ -78,7 +78,7 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
 	?>
     
       <div class="well well-large">
-      <br><br>
+   
       
       
         <p>
@@ -157,8 +157,9 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
                  <input id="nombre" name="enlace"  type="text" value="<?php echo $row["enlace"] ?>" contenteditable=true required/>
                 </div>
               </dd>
-                <div class="well well-small">
-                  <button id="guardar" name="guardar" class="btn-primary text-center" type="submit"> <span class="add-on"><i class="icon-pencil"></i></span>Guardar</button>
+               <dd>
+                <div align="center" class="well well-small">
+                  <button id="guardar" name="guardar" class="btn btn-primary text-center" type="submit"> Guardar</button>
                 </div>
               </dd>
             </dl>
