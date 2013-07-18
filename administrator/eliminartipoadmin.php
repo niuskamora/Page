@@ -81,8 +81,8 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
 		 
 			?>  
             
-            <div class="well alert alert-danger">
-    <h2 class="alert alert-danger">Atención</h2>
+            <div align="center" class="well alert alert-danger">
+    <h2 align="center" style="color:rgb(255,255,255)" class="alert alert-danger">Atención</h2>
     <h4>no se puede eliminar el registro </h4>
 	 </div>
      
@@ -97,8 +97,8 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
     
     
     
-    <div class="well well-small alert alert-block">
-    <h2 class="alert alert-block">Atención</h2>
+    <div align="center" class="well well-small alert alert-block">
+    <h2 align="center" style="color:rgb(255,255,255)" class="alert alert-block">Atención</h2>
     <h4>Desea eliminar el registro </h4>
    
     </div>

@@ -38,7 +38,7 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
             <li><a href="menu.php">Menú</a></li>
             <li><a href="info.php">Información</a></li>
             <li><a href="producto.php">Producto</a></li>
-            <li><a href="sucursal.php">Sucursal</a></li>
+            <li><a href="sucursal.php"><em><b>Sucursal</b></em></a></li>
             <li><a href="tipoinfo.php">Tipo Infomación</a></li>
             <li><a href="tipoadmin.php">Tipo Administrador</a></li>
             <li><a href="cerrarsesion.php">Cerrar Sesión</a></li>
@@ -59,7 +59,7 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
         
           <ul class="nav  nav-pills nav-stacked">
               <li class="active"><a href="crearmenu.php"> <span class="add-on"><i class="icon-plus "></i></span> Crear </a></li>
-              <li><a href="menu.php"> <span class="add-on"><i class="icon-arrow-left"></i></span> Atras</a></li>
+              <li><a href="sucursal.php"> <span class="add-on"><i class="icon-arrow-left"></i></span> Atrás</a></li>
             
           </ul>
           
@@ -82,8 +82,8 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
 		 
 			?>  
             
-            <div class="well alert alert-danger">
-    <h2 class="alert alert-danger">Atención</h2>
+            <div  align="center" class="well alert alert-danger">
+    <h2 align="center" style="color:rgb(255,255,255)" class="alert alert-danger">Atención</h2>
     <h4>no se puede eliminar el registro de sucursal</h4>
 	 </div>
      
@@ -98,8 +98,8 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
     
     
     
-    <div class="well well-small alert alert-block">
-    <h2 class="alert alert-block">Atención</h2>
+    <div align="center" class="well well-small alert alert-block">
+    <h2 align="center" style="color:rgb(255,255,255)" class="alert alert-block">Atención</h2>
     <h4>Desea eliminar el registro de sucursal</h4>
    
     </div>
@@ -139,8 +139,8 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
  </tbody>	  
     </table>
     
-    <button id="si" name="si" class="btn-primary text-center " type="submit">  Si  </button>
-     <button id="no" name="no" class="btn-primary text-center " type="submit">  No </button>
+    <button id="si" name="si" class="btn btn-primary text-center " type="submit">  Si  </button>
+     <button id="no" name="no" class="btn btn-primary text-center " type="submit">  No </button>
 	 </form> 
     
      	<?php
