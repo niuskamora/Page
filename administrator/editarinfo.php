@@ -99,7 +99,7 @@ $id=$_GET['id'];
               </dt>
               <dd>
                 <div class="well well-small">
-                  <input id="enlace" name="enlace" type="text" value="<?php echo $row['enlace']; ?>" contenteditable="true" required/>
+                  <input id="enlace" name="enlace" type="text" value="<?php echo $row['enlace']; ?>" contenteditable="true" />
                 </div>
               </dd>
               <dt>
@@ -107,40 +107,19 @@ $id=$_GET['id'];
               </dt>
               <dd>
                 <div class="well well-small">
-                  <img width="200" height="100" src="<?php echo $row['imagen'];?> ">
-                <input id="imagen" name="imagen" type="file" contenteditable="true" />
+                  <img src="<?php echo $row['imagen'];?> ">
+                	<input id="imagen" name="imagen" type="file" contenteditable="true" />
+                	</br>
+                    <h5>Seleccione el tamaño</h5>
+                    50x50
+                    <input name="op" id="op" type="radio" value="1" checked />
+                    320x240
+                    <input name="op" id="op" type="radio" value="2"/>
+                    640x480
+                    <input name="op" id="op" type="radio" value="3"/>
                 </div>
               </dd>
-              <dt>
-                <div class=" well well-small" align="left">Menú</div>
-              </dt>
               <dd>
-                <div class="well well-small">
-                  <select id="menu" name="menu" contenteditable="true">
-                    <?php 
-						
-						$consu="SELECT * FROM menu WHERE menuid=".$row['menuid'];
-						$resulta1 = pg_query ($conn, $consu) or die("Error en la consulta SQL");
-						if($row1=pg_fetch_array($resulta1)){
-							echo '<option value="'.$row1['menuid'].'">'.$row1['nombre'].'</option>';
-                        
-                        }
-						?>
-                    	<option value="0">Seleccione Opción</option>
-                        <?php
-		
-						$SQL="SELECT * FROM menu";
-						$resulta2 = pg_query ($conn, $SQL ) or die("Error en la consulta SQL");
-						
-						while($row2=pg_fetch_array($resulta2)){
-							echo '<option value="'.$row2['menuid'].'">'.$row2['nombre'].'</option>';
-
-							}
-
-						?>
-                    </select>
-                </div>
-              </dd>
               <dt>
                 <div class=" well well-small" align="left">Tipo Información</div>
               </dt>
@@ -183,15 +162,30 @@ $id=$_GET['id'];
 
 if(isset($_POST["guardar"])){
 	
-	if(isset($_POST["titulo"]) && isset($_POST["redactor"]) && isset($_POST["enlace"]) && $_POST["titulo"]!="" && $_POST["redactor"]!="" && $_POST["enlace"]!="" && $_POST["menu"]>0 && $_POST["tipoinfo"]>0){
+	if(isset($_POST["titulo"]) && isset($_POST["redactor"]) && $_POST["titulo"]!="" && $_POST["redactor"]!="" && $_POST["tipoinfo"]>0){
 	
 		$titulo=$_POST['titulo'];
 		$descripcion=$_POST['redactor'];
 		$enlace=$_POST['enlace'];
-		$menu=$_POST['menu'];
 		$tipoinfo=$_POST['tipoinfo'];
 	
-		$resultado=pg_query($conn,"UPDATE informacion SET titulo='$titulo', descripcion='$descripcion', enlace='$enlace', menuid='$menu', tipoinformacionid='$tipoinfo' WHERE informacionid=$id") or die(pg_last_error($conn));
+		if(isset($_POST["op"])){
+		
+			if($_POST["op"]==1){
+				$an=50;
+				$al=50;
+			}
+			if($_POST["op"]==2){
+				$an=320;
+				$al=240;
+			}
+			if($_POST["op"]==3){
+				$an=640;
+				$al=480;
+			}
+		}
+	
+		$resultado=pg_query($conn,"UPDATE informacion SET titulo='$titulo', descripcion='$descripcion', enlace='$enlace', tipoinformacionid='$tipoinfo' WHERE informacionid=$id") or die(pg_last_error($conn));
 	
 		if($_FILES['imagen']['name']!=""){
 		
@@ -209,7 +203,6 @@ if(isset($_POST["guardar"])){
 			$error = $_FILES['imagen']['error']; 
 			$subido = false;
 		
-		
 			if($error==UPLOAD_ERR_OK){ 
 			    $subido = copy($_FILES['imagen']['tmp_name'], $uploadfile); 
 				$rutaImagenOriginal=$uploadfile;
@@ -224,27 +217,27 @@ if(isset($_POST["guardar"])){
 				$ancho_buscado3=0;
 				$alto_buscado3=0;	
 			
-			    if($ancho!=640){
-				   $ancho_buscado3=640;
-				   $alto_buscado3=ceil((640*$alto)/$ancho);					
+			    if($ancho!=$an){
+				   $ancho_buscado3=$an;
+				   $alto_buscado3=ceil(($an*$alto)/$ancho);					
 				}
 			
 				if($alto<=$ancho){
-				   $alto_buscado3=480;
-				   $ancho_buscado3=ceil((480*$ancho)/$alto);
+				   $alto_buscado3=$al;
+				   $ancho_buscado3=ceil(($al*$ancho)/$alto);
 				}else{
-				   $ancho_buscado3=640;
-				   $alto_buscado3=ceil((640*$alto)/$ancho);
+				   $ancho_buscado3=$an;
+				   $alto_buscado3=ceil(($an*$alto)/$ancho);
 				}	
 
-                if($alto_buscado3<480){
-				   $ancho_buscado3=ceil((480*$ancho_buscado3)/$alto_buscado3);
-				   $alto_buscado3=480;
+                if($alto_buscado3<$an){
+				   $ancho_buscado3=ceil(($an*$ancho_buscado3)/$alto_buscado3);
+				   $alto_buscado3=$an;
 				}
 
-				if($ancho_buscado3<640){
-				   $alto_buscado3=ceil((640*$alto_buscado3)/$ancho_buscado3);
-				   $ancho_buscado3=640;	
+				if($ancho_buscado3<$al){
+				   $alto_buscado3=ceil(($al*$alto_buscado3)/$ancho_buscado3);
+				   $ancho_buscado3=$al;	
 				}
 				
                 $tmp=imagecreatetruecolor($ancho_buscado3,$alto_buscado3);
@@ -256,15 +249,15 @@ if(isset($_POST["guardar"])){
 										
 				$fichero=$uploadfile;			
 				$img1 = imagecreatefromjpeg($fichero);
-				$img1Recortada = imagecreatetruecolor (640, 480);
-				imagecopy($img1Recortada, $img1, 0, 0, ceil(($ancho_buscado3-640)/2), ceil(($alto_buscado3-640)/2), ceil(($ancho_buscado3-640)/2)+640, ceil(($alto_buscado3-480)/2)+480);
+				$img1Recortada = imagecreatetruecolor ($an, $al);
+				imagecopy($img1Recortada, $img1, 0, 0, ceil(($ancho_buscado3-$an)/2), ceil(($alto_buscado3-$al)/2), ceil(($ancho_buscado3-$an)/2)+$an, ceil(($alto_buscado3-$al)/2)+$al);
 				
 				imagejpeg($img1Recortada,$uploadfile,$calidad);				
-				$sql_update="update informacion set imagen='".$uploadfile."' where informacionid=$id";
+				$sql_update="update informacion set imagen='".$uploadfile."' where informacionid=".$arreglo[0]."";
 			
 				$result= pg_query($conn, $sql_update);
 																													
-			}		
+			}
 		 }
 	
 		if($resultado || $result){

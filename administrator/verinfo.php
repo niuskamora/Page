@@ -80,21 +80,17 @@ $id=$_GET['id'];
             <div class="span6 well well-small"><?php echo $row['titulo'];?></div>
             <div class="span3 well well-small"><b>Descripción</b></div>
             <div class="span6 well well-small" align="justify"><?php echo $row['descripcion'];?></div>
-            <div class="span3 well well-small"><b>Enlace</b></div>
-            <div class="span6 well well-small"><?php echo $row['enlace'];?></div>
-            <div class="span3 well well-small"><b>Imagen</b></div>
-            <div class="span6 well well-small"><img src="<?php echo $row['imagen'];?>"></div>
+            <?php if($row['enlace']!=""){?>
+            	<div class="span3 well well-small"><b>Enlace</b></div>
+            	<div class="span6 well well-small"><?php echo $row['enlace'];?></div>
+            <?php } ?>
             
-            	<?php 
-				$cons1="SELECT * FROM menu WHERE menuid=".$row['menuid'];
-				$resulta2=pg_query ($conn, $cons1) or die("Error en la consulta SQL");
-				if($row1=pg_fetch_array($resulta2)){
-				?>
-            	<div class="span3 well well-small"><b>Menú</b></div>
-            	<div class="span6 well well-small"><?php echo $row1['nombre'];?></div>
-                <?php }?>
-                
-                <?php 
+            <?php if($row['imagen']!=""){?>
+            	<div class="span3 well well-small"><b>Imagen</b></div>
+            	<div class="span6 well well-small"><img src="<?php echo $row['imagen'];?>"></div>
+            <?php } ?>
+            	
+                 <?php 
 				$cons1="SELECT * FROM tipoinformacion WHERE tipoinformacionid=".$row['tipoinformacionid'];
 				$resulta2=pg_query ($conn, $cons1) or die("Error en la consulta SQL");
 				if($row1=pg_fetch_array($resulta2)){
@@ -102,6 +98,16 @@ $id=$_GET['id'];
             	<div class="span3 well well-small"><b>Tipo de Información</b></div>
             	<div class="span6 well well-small"><?php echo $row1['nombre'];?></div>
                 <?php }?>
+                
+            	<?php 
+				$cons1="SELECT * FROM administrador WHERE administradorid=".$_SESSION["id_usuario"];
+				$resulta2=pg_query ($conn, $cons1) or die("Error en la consulta SQL");
+				if($row1=pg_fetch_array($resulta2)){
+				?>
+            	<div class="span3 well well-small"><b>Administrador</b></div>
+            	<div class="span6 well well-small"><?php echo $row1['nombre'].' '.$row1['apellido'];?></div>
+                <?php }?>
+               
      <?php }?>
 
          </p>

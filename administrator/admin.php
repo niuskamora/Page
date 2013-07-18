@@ -134,9 +134,9 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
     </tbody>
 </table>
 
+ <ul id="pagination" class="footable-nav"><span>Pages:</span></ul>
 <?php } ?>
 
- <ul id="pagination" class="footable-nav"><span>Pages:</span></ul>
          </p>
       </div>
     </div>
