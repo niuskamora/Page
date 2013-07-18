@@ -62,55 +62,97 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
         </div>
       </div>
     </div>
-    <div class="span9">
-      <div class="well well-large">
+    <div class="span9 well well-large">
         <p>
-        
+     
 			<form enctype="multipart/form-data"  method="POST">
-        	<table width="100%" class="table table-bordered">
-            	<tr>
-                	<th>Nombre</th>
-                    <td><input title="Se necesita un nombre" id="nombres" name="nombres" type="text" value="" required/></td>
-                </tr>
-                <tr>
-                	<th>Dirección</th>
-             <td><input id="direccion" name="direccion" type="text" value="" required/></td>
-                </tr>
-                <tr>
-                	<th>telefono</th>
-                    <td><input title="telefono"  pattern="[0-9]{11}" id="telefono" name="telefono" type="tel" placeholder="Ej. 02761234567" maxlength="11" value="" required/></td>
-                </tr>
-                <tr>
-                	<th>correo</th>
-             <td><input id="correo" placeholder="ejemplo@correo.com" name="correo" type="email" value="" required/></td>
-                </tr>
-                 <tr>
-                	<th>Imagen</th>
-             <td><input id="imagen" name="imagen" type="file"/> </td>
-                </tr>
-                 <tr>
-                	<th>Descripcion</th>
-             <td><textarea id="redactor" name="redactor"></textarea></td>
-                </tr>
-                <tr>
+        <div class="row-fluid">
+            <dl class="dl-horizontal">
+              <dt>
+              <div class="span3 well well-small"><b>Id</b></div>
+              </dt>
+              <dd>
+             
+                <div class="span6 well well-small "><input id="direccion" name="direccion" type="text" value="" required/></div>
+                </div>
+              </dd>
+              
+              <dt>
+              <div class="span3 well well-small"><b>nombre</b></div>
+              </dt>
+              <dd>
+                 <div class="span6 well well-small"><input id="direccion" name="direccion" type="text" value="" required/></div>
+                </div>
+              </dd>
+              
+              
+                <dt>
+           <div class="span3 well well-small"><b>Dirección</b></div>
+              </dt>
+              <dd>
+                  <div class="span6 well well-small" align="justify"><input id="direccion" name="direccion" type="text" value="" required/></div>
+                </div>
+              </dd>
+              
+               <dt>
+            <div class="span3 well well-small"><b>Telefono</b></div>
+              </dt>
+              <dd>
+                 <div class="span6 well well-small"><input title="telefono"  pattern="[0-9]{11}" id="telefono" name="telefono" type="tel" placeholder="Ej. 02761234567" maxlength="11" value="" required/></div>
+                </div>
+              </dd>
+              
+              <dt>
+            <div class="span3 well well-small"><b>Correo</b></div>
+              </dt>
+              <dd>
+                 <div class="span6 well well-small"><input id="correo" placeholder="ejemplo@correo.com" name="correo" type="email" value="" required/></div>
+                </div>
+              </dd>
+
+           <dt>
+            <div class="span3 well well-small"><b>Imagen</b></div>
+              </dt>
+              <dd>
+<div class="span6 well well-small"><input id="imagen" name="imagen" type="file" required/></div>
+                  </div>
+              </dd>
+
+            <dt>
+            <div class="span3 well well-small"><b>Latitud</b></div>
+              </dt>
+              <dd>
+<div class="span6 well well-small"><input id="latitud" name="latitud" type="text" placeholder="+38.234534" pattern="[+,-][0-9]{1,3}[.][0-9]{6}"  value="" required/></div>
+                  </div>
+              </dd>
+           
+          <dt>
+            <div class="span3 well well-small"><b>Longitud</b></div>
+              </dt>
+              <dd>
+<div class="span6 well well-small"><input id="longitud" name="longitud" type="text" placeholder="-12.234534" value="" pattern="[+,-][0-9]{1,3}[.][0-9]{6}" required/></div>
+                  </div>
+              </dd>
+           
+           
+             <dt>
+          <div class="span3 well well-small"><b>Descripción</b></div>
+              </dt>
+              <dd>
+<div class="span6 well well-small"><textarea id="redactor" name="redactor"  required></textarea> </div>
                 
-                <tr>
-                	<th>latitud</th>
-             <td><input id="latitud" name="latitud" type="text" placeholder="+38.234534" pattern="[+,-][0-9]{1,3}[.][0-9]{6}"  value="" required/></td>
-                </tr>
-                 <tr>
-                	<th>longitud</th>
-             <td><input id="longitud" name="longitud" type="text" placeholder="-12.234534" value="" pattern="[+,-][0-9]{1,3}[.][0-9]{6}" required/></td>
-                </tr>
-                <tr>
+                  </div>
+              </dd>
+          
+  
+
+               <div align="center" class="span12 well well-small"> 
+                	<button id="guardar" name="guardar" class="btn-primary text-center" type="submit">Guardar</button></div>
                 
-                	<td> </td> <td><button id="guardar" name="guardar" class="btn-primary text-center" type="submit">Guardar</button></td>
-                </tr>
-                <td> </td> <td><button id="guardar2" name="guardar2" class="btn-primary text-center" type="submit">Guardar y añadir otro</button></td>
-            </table>
-            
             
         </form>
+       
+   
 		<?php
 		
 

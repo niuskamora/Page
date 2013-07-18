@@ -83,7 +83,7 @@ $id=$_GET['id'];
             <div class="span3 well well-small"><b>Telefono</b></div>
             <div class="span6 well well-small"><input title="telefono"  pattern="[0-9]{11}" id="telefono" name="telefono" type="tel" placeholder="Ej. 02761234567" maxlength="11" value="<?php echo $row['telefono'];?>" required/></div>
             <div class="span3 well well-small"><b>Correo</b></div>
-            <div class="span6 well well-small"><input id="correo" placeholder="ejemplo@correo.com" name="correo" type="email" value=<?php echo $row['correo'];?>"" required/></div>
+            <div class="span6 well well-small"><input id="correo" placeholder="ejemplo@correo.com" name="correo" type="email" value="<?php echo $row['correo'];?>" required/></div>
             <div class="span3 well well-small"><b>Imagen</b></div>
             <div class="span6 well well-small"><img src="<?php echo $row['imagen'];?>"><input id="imagen" name="imagen" type="file" required/></div>
            <div class="span3 well well-small"><b>Latitud</b></div>
