@@ -55,7 +55,7 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
     <div class="span3">
       <div style="text-align:center">
         <ul class="nav  nav-pills nav-stacked">
-          <li class="active"><a href="tipoadmin.php"> <span class="add-on"><i class="icon-arrow-left "></i></span> Atras </a></li>
+          <li class="active"><a href="tipoadmin.php"> <span class="add-on"><i class="icon-arrow-left "></i></span> Atrás </a></li>
         </ul>
       </div>
     </div>
@@ -76,7 +76,7 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
               </dt>
               <dd>
                 <div class=" well well-small">
-                  <input id="nombre" name="nombre"  type="text" value="<?php echo $row['nombre']?>" contenteditable="true" maxlength="30" required/>
+                  <input id="nombre" name="nombre"  type="text" value="<?php echo $row['nombre']?>" contenteditable="true" maxlength="30" required autofocus/>
                 </div>
               </dd>
               <dt>
@@ -107,6 +107,7 @@ if(isset($_POST["guardar"])){
         $resultado=pg_query($conn,"UPDATE tipoadministrador SET nombre='$nombre', descripcion='$descripcion' where tipoadministradorid=$id") or die(pg_last_error($conn));
 		if($resultado){
 			llenarLog(2, "Modifico tipo de administrador");
+			javaalert("tipo de información fue editado con exito");
 iraURL("tipoadmin.php");
 		}
 		

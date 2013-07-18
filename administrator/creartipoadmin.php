@@ -31,7 +31,7 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
         <div id="barrap" class="nav-collapse collapse">
          <ul class="nav slidernav">
              <li><a href="admin.php">Administrador</a></li>
-            <li><a href="usuario">Usuario</a></li>
+            <li><a href="usuario.php">Usuario</a></li>
             <li><a href="menu.php">Menú</a></li>
             <li><a href="info.php">Información</a></li>
             <li><a href="producto.php">Producto</a></li>
@@ -55,7 +55,7 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
       <div style="text-align:center">
         
                   <ul class="nav  nav-pills nav-stacked">
-              <li class="active"><a href="tipoadmin.php"> <span class="add-on"><i class="icon-plus "></i></span> Atras </a></li>
+              <li class="active"><a href="tipoadmin.php"> <span class="add-on"><i class="icon-arrow-left"></i></span> Atrás </a></li>
 
           </ul>
 
@@ -73,7 +73,7 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
               </dt>
               <dd>
                 <div class=" well well-small">
-                  <input id="nombre" name="nombre"  type="text" value="" contenteditable="true" maxlength="30" required/>
+                  <input id="nombre" name="nombre"  type="text" value="" contenteditable="true" maxlength="30" required autofocus/>
                 </div>
               </dd>
               <dt>
@@ -122,6 +122,7 @@ if(isset($_POST["guardar2"])){
 		$descripcion=$_POST['descripcion'];
         pg_query($conn,"INSERT INTO tipoadministrador values( nextval('tipoadministrador_tipoadministradorid_seq'),'$nombre','$descripcion')") or die(pg_last_error($conn));
 llenarLog(1, "creo tipo Administrador");
+javaalert("El tipo de información fue creado con exito");
 iraURL("creartipoadmin.php");
 }else{
 		javaalert("Debe llenar todos los campos obligatorios");

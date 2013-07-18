@@ -34,7 +34,7 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
         <div id="barrap" class="nav-collapse collapse">
           <ul class="nav slidernav">
             <li><a href="admin.php">Administrador</a></li>
-            <li><a href="usuario">Usuario</a></li>
+            <li><a href="usuario.php">Usuario</a></li>
             <li><a href="menu.php"> <em><b>Menú</b></em></a></li>
             <li><a href="info.php">Información</a></li>
             <li><a href="producto.php">Producto</a></li>
@@ -58,7 +58,7 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
       <div style="text-align:center">
         
                  <ul class="nav  nav-pills nav-stacked">
-              <li class="active"><a href="menu.php"> <span class="add-on"><i class="icon-arrow-left"></i></span> Atras </a></li>
+              <li class="active"><a href="menu.php"> <span class="add-on"><i class="icon-arrow-left"></i></span> Atrás </a></li>
 
           </ul>
 
@@ -73,20 +73,32 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
 		$SQL="SELECT * FROM menu";
 		$result = pg_query ($conn, $SQL ) or die("Error en la consulta SQL");
 		$registros= pg_num_rows($result);
-		
+		$aux=0;
+		  
+		for ($i=0;$i<$registros;$i++)
+			{
+			$row = pg_fetch_array ($result,$i );
+			
+			if($row["submenu"]==$_GET['id']){
+				$aux=$aux+1;
+			 }
+			}
 	
 	?>
      <div class="span9 well well-large">
-      <br><br>
-      
-      
+  
         <p>
         <?php
 		
 
 	//mostrar resultados
+	
 	?>
     <form method="post">
+    <?php
+    if($aux!=0){
+		
+		?>
 	 <table class="footable table-striped table-hover" data-page-size="5">
 			  <thead>
 				<tr>
@@ -107,13 +119,19 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
  <th data-hide="phone" data-sort-ignore="true">
 					<span class="add-on"> <i class="icon-pencil"></i> </span> Editar 
 				  </th>
+                   <th data-hide="phone" data-sort-ignore="true">
+					<span class="add-on"> <i class="icon-trash"></i> </span> Eliminar
+				  </th>
 				</tr>
 			  </thead>
 				<tbody>
      
    
-      <?php   
-	  
+      <?php 
+	  $SQL="SELECT * FROM menu";
+		$result = pg_query ($conn, $SQL ) or die("Error en la consulta SQL");
+		$registros= pg_num_rows($result);  
+	  $registros= pg_num_rows($result);
 		for ($i=0;$i<$registros;$i++)
 			{
 
@@ -135,9 +153,10 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
 			$SQL3="SELECT nombre FROM administrador WHERE administradorid=".$row["administradorid"];
 		$result3 = pg_query ($conn, $SQL3 ) or die("Error en la consulta SQL");
 		$row3 = pg_fetch_array ($result3);
-		echo '<td width="15">'.$row3["nombre"].' </td>';
-		echo '<td width="15">'.$row["enlace"].' </td>';	 
-			echo '<td width="14%"> <a href="editarmenu.php?id='.$row["menuid"].'&boton=editar"> <button class="btn btn-primary"  type="button" name="boton"> <span class="add-on"><i class="icon-pencil"></i> </span> Editar  </button>  </td></a>';
+		echo '<td width="30">'.$row3["nombre"].' </td>';
+		echo '<td width="30">'.$row["enlace"].' </td>';	 
+			echo '<td width="15%"> <a href="editarmenu.php?id='.$row["menuid"].'&boton=editar"> <button class="btn btn-primary"  type="button" name="boton"> <span class="add-on"><i class="icon-pencil"></i> </span> Editar  </button>  </td></a>';
+			echo '<td width="15%">  <a href="eliminarmenu.php?id='.$row["menuid"].'&boton=eliminar"> <button class="btn btn-primary"  type="button"  name="boton"> <span class="add-on"><i class="icon-trash"></i> </span> Eliminar  </button>  </td></a>';
 			echo '</tr>';
             
 			
@@ -148,8 +167,17 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
 		?>
         </tbody>	  
     </table>
+      <div class="span9">   <ul id="pagination" class="footable-nav"><span>Pages:</span></ul></div>
+     <?php }else{  ?>
+		 <div class="well alert alert-block">
+   
+    <h4>No existen submenú </h4>
+    </div>
+		 
+		 
+	<?php } ?>
      
-    <div class="span9">   <ul id="pagination" class="footable-nav"><span>Pages:</span></ul></div>
+   
     <div class="offset11 span1"></div>
     
     		<div class="span3 well well-small"><b>Nombre</b></div>
@@ -169,7 +197,7 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
             <div class="span3 well well-small"><b>Enlace</b></div>
             <div class="span6 well well-small"><input id="enlace" name="enlace"  type="text" value="" contenteditable=true required/></div>
             
-                <div align="center" class="span9 well well-small"><button id="guardar" name="guardar" class="btn-primary text-center" type="submit"> <span class="add-on"><i class="icon-pencil"></i></span>Guardar</button></div>
+                <div align="center" class="span9 well well-small"><button id="guardar" name="guardar" class="btn btn-primary text-center" type="submit"> Guardar</button></div>
            
 
 	 
@@ -183,11 +211,14 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
 	
 		
 if(isset($_POST["guardar"])){
+	
+	if($_POST["nombre"]!='' && $_POST["enlace"]!=''){
 		
 		$nombre=$_POST['nombre'];
 		$submenu=$_GET["id"];
 		$admin=$_SESSION["id_usuario"];
 		$enla=$_POST['enlace'];
+		
        
 	$resultado=pg_query($conn,"INSERT INTO menu values( nextval('menu_menuid_seq'),'$nombre','$submenu','$admin','$enla')") or die(pg_last_error($conn));
 	
@@ -196,7 +227,9 @@ if(isset($_POST["guardar"])){
 			llenarLog(1, "Creo submenu");
 			iraURL('../administrator/crear2.php?id='.$_GET['id']);
 		}
-
+	}else{
+		javaalert("Debe llenar todos los campos obligatorios");
+		}
 
 }
 ?>
