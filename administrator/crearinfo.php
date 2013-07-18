@@ -67,28 +67,23 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
         <p>
         
             <div class="span3 well well-small"><b>Título</b></div>
-            <div class="span6 well well-small"><input id="titulo" name="titulo" type="text" required/></div>
+            <div class="span6 well well-small"><input id="titulo" name="titulo" type="text" required autofocus/></div>
             <div class="span3 well well-small"><b>Descripción</b></div>
             <div class="span6 well well-small"><textarea id="redactor" name="redactor"></textarea></div>
             <div class="span3 well well-small"><b>Enlace</b></div>
-            <div class="span6 well well-small"><input id="enlace" name="enlace" type="text" required/></div>
+            <div class="span6 well well-small"><input id="enlace" name="enlace" type="text"/></div>
             <div class="span3 well well-small"><b>Imagen</b></div>
-            <div class="span6 well well-small"><input id="imagen" name="imagen" type="file" required/></div>
-            <div class="span3 well well-small"><b>Menú</b></div>
-            <div class="span6 well well-small"><select id="menu" name="menu">
-                    	<option value="0">Seleccione Opción</option>
-                        <?php
-		
-						$SQL="SELECT * FROM menu";
-						$result = pg_query ($conn, $SQL ) or die("Error en la consulta SQL");
-						
-						while($row=pg_fetch_array($result)){
-							echo '<option value="'.$row['menuid'].'">'.$row['nombre'].'</option>';
-
-							}
-
-						?>
-                    </select></div>
+            <div class="span6 well well-small">
+            		<input id="imagen" name="imagen" type="file"/>
+                    </br>
+                    <h5>Seleccione el tamaño</h5>
+                    50x50
+                    <input name="op" id="op" type="radio" value="1" checked />
+                    320x240
+                    <input name="op" id="op" type="radio" value="2"/>
+                    640x480
+                    <input name="op" id="op" type="radio" value="3"/>
+            </div>
             <div class="span3 well well-small"><b>Tipo de Información</b></div>
             <div class="span6 well well-small"><select id="tipoinfo" name="tipoinfo">
                     	<option value="0">Seleccione Opción</option>
@@ -118,15 +113,30 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
 
 if(isset($_POST["guardar"]) || isset($_POST["guardar2"])){
 	
-	if(isset($_POST["titulo"]) && isset($_POST["redactor"]) && isset($_POST["enlace"]) && isset($_POST["imagen"]) && $_POST["titulo"]!="" && $_POST["redactor"]!="" && $_POST["enlace"]!="" && $_POST["imagen"]!="" && $_POST["menu"]>0 && $_POST["tipoinfo"]>0){
+	if(isset($_POST["titulo"]) && isset($_POST["redactor"]) && $_POST["titulo"]!="" && $_POST["redactor"]!="" && $_POST["tipoinfo"]>0){
 	
 		$titulo=$_POST['titulo'];
 		$descripcion=$_POST['redactor'];
 		$enlace=$_POST['enlace'];
-		$menu=$_POST['menu'];
 		$tipoinfo=$_POST['tipoinfo'];
+		
+		if(isset($_POST["op"])){
+		
+			if($_POST["op"]==1){
+				$an=50;
+				$al=50;
+			}
+			if($_POST["op"]==2){
+				$an=320;
+				$al=240;
+			}
+			if($_POST["op"]==3){
+				$an=640;
+				$al=480;
+			}
+		}
 	
-		$resultado=pg_query($conn,"INSERT INTO informacion values( nextval('informacion_informacionid_seq'),'$titulo','$descripcion','$enlace','','$menu','$tipoinfo')") or die(pg_last_error($conn));
+		$resultado=pg_query($conn,"INSERT INTO informacion values( nextval('informacion_informacionid_seq'),'$titulo','$descripcion','$enlace','','$tipoinfo',".$_SESSION["id_usuario"].")") or die(pg_last_error($conn));
 	
 		$sql_select="SELECT last_value FROM informacion_informacionid_seq;";
 		$results=pg_query($conn, $sql_select);
@@ -148,7 +158,6 @@ if(isset($_POST["guardar"]) || isset($_POST["guardar2"])){
 			$error = $_FILES['imagen']['error']; 
 			$subido = false;
 		
-		
 			if($error==UPLOAD_ERR_OK){ 
 			    $subido = copy($_FILES['imagen']['tmp_name'], $uploadfile); 
 				$rutaImagenOriginal=$uploadfile;
@@ -163,27 +172,27 @@ if(isset($_POST["guardar"]) || isset($_POST["guardar2"])){
 				$ancho_buscado3=0;
 				$alto_buscado3=0;	
 			
-			    if($ancho!=640){
-				   $ancho_buscado3=640;
-				   $alto_buscado3=ceil((640*$alto)/$ancho);					
+			    if($ancho!=$an){
+				   $ancho_buscado3=$an;
+				   $alto_buscado3=ceil(($an*$alto)/$ancho);					
 				}
 			
 				if($alto<=$ancho){
-				   $alto_buscado3=480;
-				   $ancho_buscado3=ceil((480*$ancho)/$alto);
+				   $alto_buscado3=$al;
+				   $ancho_buscado3=ceil(($al*$ancho)/$alto);
 				}else{
-				   $ancho_buscado3=640;
-				   $alto_buscado3=ceil((640*$alto)/$ancho);
+				   $ancho_buscado3=$an;
+				   $alto_buscado3=ceil(($an*$alto)/$ancho);
 				}	
 
-                if($alto_buscado3<480){
-				   $ancho_buscado3=ceil((480*$ancho_buscado3)/$alto_buscado3);
-				   $alto_buscado3=480;
+                if($alto_buscado3<$an){
+				   $ancho_buscado3=ceil(($an*$ancho_buscado3)/$alto_buscado3);
+				   $alto_buscado3=$an;
 				}
 
-				if($ancho_buscado3<640){
-				   $alto_buscado3=ceil((640*$alto_buscado3)/$ancho_buscado3);
-				   $ancho_buscado3=640;	
+				if($ancho_buscado3<$al){
+				   $alto_buscado3=ceil(($al*$alto_buscado3)/$ancho_buscado3);
+				   $ancho_buscado3=$al;	
 				}
 				
                 $tmp=imagecreatetruecolor($ancho_buscado3,$alto_buscado3);
@@ -195,8 +204,8 @@ if(isset($_POST["guardar"]) || isset($_POST["guardar2"])){
 										
 				$fichero=$uploadfile;			
 				$img1 = imagecreatefromjpeg($fichero);
-				$img1Recortada = imagecreatetruecolor (640, 480);
-				imagecopy($img1Recortada, $img1, 0, 0, ceil(($ancho_buscado3-640)/2), ceil(($alto_buscado3-640)/2), ceil(($ancho_buscado3-640)/2)+640, ceil(($alto_buscado3-480)/2)+480);
+				$img1Recortada = imagecreatetruecolor ($an, $al);
+				imagecopy($img1Recortada, $img1, 0, 0, ceil(($ancho_buscado3-$an)/2), ceil(($alto_buscado3-$al)/2), ceil(($ancho_buscado3-$an)/2)+$an, ceil(($alto_buscado3-$al)/2)+$al);
 				
 				imagejpeg($img1Recortada,$uploadfile,$calidad);				
 				$sql_update="update informacion set imagen='".$uploadfile."' where informacionid=".$arreglo[0]."";

@@ -76,7 +76,7 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
 		$result2 = pg_query ($conn, $SQL2 ) or die("Error en la consulta SQL");
 		$registros2= pg_num_rows($result2);
 		
-		$SQL3="SELECT * FROM menu WHERE administradorid=".$_GET['id'];
+		$SQL3="SELECT * FROM informacion WHERE administradorid=".$_GET['id'];
 		$result3 = pg_query ($conn, $SQL3 ) or die("Error en la consulta SQL");
 		$registros3= pg_num_rows($result3);
 		
@@ -95,7 +95,7 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
      
      <?php
 		  }
-		else if($registros2==0){
+		else if($registros2==0 || $registros3==0 || $registros4==0){
 		
     ?>
     
@@ -129,8 +129,8 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
 	</tbody>	  
     </table>
     
-    <button id="si" name="si" class="btn-primary text-center " type="submit">  Si </button>
-    <button id="no" name="no" class="btn-primary text-center " type="submit">  No </button>
+    <button id="si" name="si" class="btn btn-primary text-center" type="submit">  Si </button>
+    <button id="no" name="no" class="btn btn-primary text-center" type="submit">  No </button>
 	 </form> 
     
     </div>

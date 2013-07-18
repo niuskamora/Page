@@ -61,17 +61,17 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
     <div class="span9 well well-large" >
  			<p>
              <div class="span3 well well-small"><b>Nombre</b></div>
-            <div class="span6 well well-small "><input type="text" name="nombre" id="nombre" required/></div>
+            <div class="span6 well well-small "><input type="text" name="nombre" id="nombre" maxlength="34" pattern="[A-Za-z,ñ,Ñ,á,é,í,ó,ú,Á,É,Í,Ó,Ú, ]{1,34}" autofocus required/></div>
              <div class="span3 well well-small"><b>Apellido</b></div>
-            <div class="span6 well well-small "><input type="text" name="apellido" id="apellido" required/></div>
+            <div class="span6 well well-small "><input type="text" name="apellido" id="apellido" maxlength="34" pattern="[A-Za-z,ñ,Ñ,á,é,í,ó,ú,Á,É,Í,Ó,Ú, ]{1,34}" required/></div>
             <div class="span3 well well-small"><b>Dirección</b></div>
-            <div class="span6 well well-small"><input type="text" name="direccion" id="direccion" required/></div>
+            <div class="span6 well well-small"><input type="text" name="direccion" id="direccion" maxlength="254" required/></div>
             <div class="span3 well well-small"><b>Nombre de Usuario</b></div>
-            <div class="span6 well well-small"><input type="text" name="usuario" id="usuario" pattern="pattern="[A-Z]{1}" required/></div>
+            <div class="span6 well well-small"><input type="text" name="usuario" id="usuario" maxlength="34" pattern="[A-Z,Ñ]{1}[a-z,.,ñ]{1,33}" required/></div>
              <div class="span3 well well-small"><b>Contraseña</b></div>
-            <div class="span6 well well-small"><input type="password" name="contrasena" id="contrasena" required/></div>
+            <div class="span6 well well-small"><input type="password" name="contrasena" id="contrasena" maxlength="34" required/></div>
              <div class="span3 well well-small"><b>Confirmar contraseña</b></div>
-            <div class="span6 well well-small"><input type="password" name="contrasena_c" id="contrasena_c" required/></div>
+            <div class="span6 well well-small"><input type="password" name="contrasena_c" id="contrasena_c" maxlength="34" required/></div>
             <div class="span9 well well-small" align="center"><button class="btn btn-primary" id="crear_uno" name="crear_uno" type="submit">Guardar</button></div>
 			<div class="span9 well well-small" align="center"> <button class="btn btn-primary" id="crear_otro" name="crear_otro" type="submit">Guardar y añadir otro</button></div>
 

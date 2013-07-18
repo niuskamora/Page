@@ -79,7 +79,7 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
 
     </div>
 
-      <div class="well well-large" align="center">
+      <div class="well well-large">
       <br><br>
       
       <form method="post">
@@ -104,8 +104,8 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
 	</tbody>	  
     </table>
     
-    <button id="si" name="si" class="btn-primary text-center " type="submit">  Si </button>
-    <button id="no" name="no" class="btn-primary text-center " type="submit">  No </button>
+    <button id="si" name="si" class="btn btn-primary text-center" type="submit">  Si </button>
+    <button id="no" name="no" class="btn btn-primary text-center" type="submit">  No </button>
 	 </form> 
      
     </div>
