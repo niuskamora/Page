@@ -107,7 +107,7 @@ $id=$_GET['id'];
               </dt>
               <dd>
                 <div class="well well-small">
-                  <input id="usuario" name="usuario" type="text" value="<?php echo $row['usuario']; ?>" contenteditable="true" maxlength="34" pattern="[A-Z,Ñ]{1}[a-z,.,ñ]{1,33}" required/>
+                  <input id="usuario" name="usuario" type="text" value="<?php echo $row['usuario']; ?>" contenteditable="true" placeholder="Ej. Nombre.apellido" maxlength="34" pattern="[A-ZÑ]{1}[a-z.ñ0-9]{1,33}" required/>
                 </div>
               </dd>
               <dt>
@@ -115,7 +115,7 @@ $id=$_GET['id'];
               </dt>
               <dd>
                 <div class="well well-small">
-                  <input id="contrasena" name="contrasena" type="password" value="<?php echo $row['contrasena']; ?>" contenteditable="true" required/>
+                  <input id="contrasena" name="contrasena" type="password" value="<?php echo $row['contrasena']; ?>" contenteditable="true" pattern="[A-Za-z.0-9]{1,34}" required/>
                 </div>
               </dd>
               <dt>
@@ -123,7 +123,7 @@ $id=$_GET['id'];
               </dt>
               <dd>
                 <div class="well well-small">
-                  <input id="contrasena_c" name="contrasena_c" type="password" value="<?php echo $row['contrasena']; ?>" contenteditable="true" required/>
+                  <input id="contrasena_c" name="contrasena_c" type="password" value="<?php echo $row['contrasena']; ?>" contenteditable="true" pattern="[A-Za-z.0-9]{1,34}" required/>
                 </div>
               </dd>
               <dt>

@@ -72,6 +72,7 @@ $conn=conectar();
 </div>
 <div class="container" style="background-color:white;">
  <!-- aqui estaba el carusel-->
+ <br>
  <div> 
  	<h2 class="well" align="left">
   		Nosotros
