@@ -67,11 +67,11 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
         <p>
         
             <div class="span3 well well-small"><b>Título</b></div>
-            <div class="span6 well well-small"><input id="titulo" name="titulo" type="text" maxlength="249" pattern="[A-Za-z,ñ,Ñ,á,é,í,ó,ú,Á,É,Í,Ó,Ú, ]{1,249}" required autofocus/></div>
+            <div class="span6 well well-small"><input id="titulo" name="titulo" type="text" maxlength="249" pattern="[A-Za-z,ñ,Ñ,á,é,í,ó,ú,Á,É,Í,Ó,Ú, 0-9]{1,249}" required autofocus/></div>
             <div class="span3 well well-small"><b>Descripción</b></div>
-            <div class="span6 well well-small"><textarea id="redactor" name="redactor" maxlength="2499" pattern="[A-Za-z,ñ,Ñ,á,é,í,ó,ú,Á,É,Í,Ó,Ú, ]{1,2499}"></textarea></div>
+            <div class="span6 well well-small"><textarea id="redactor" name="redactor" maxlength="2499"></textarea></div>
             <div class="span3 well well-small"><b>Enlace</b></div>
-            <div class="span6 well well-small"><input id="enlace" name="enlace" type="text" maxlength="249" pattern="[A-Za-z,ñ,Ñ,á,é,í,ó,ú,Á,É,Í,Ó,Ú, ]{1,249}"/></div>
+            <div class="span6 well well-small"><input id="enlace" name="enlace" type="text" maxlength="249"/></div>
             <div class="span3 well well-small"><b>Imagen</b></div>
             <div class="span6 well well-small"><input id="imagen" name="imagen" type="file"/>
             	</br>

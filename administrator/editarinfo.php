@@ -83,7 +83,7 @@ $id=$_GET['id'];
               </dt>
               <dd>
                 <div class=" well well-small">
-                  <input id="titulo" name="titulo" type="text" value="<?php echo $row['titulo']; ?>" contenteditable="true"  maxlength="249" pattern="[A-Za-z,ñ,Ñ,á,é,í,ó,ú,Á,É,Í,Ó,Ú, ]{1,249}" required/>
+                  <input id="titulo" name="titulo" type="text" value="<?php echo $row['titulo']; ?>" contenteditable="true"  maxlength="249" pattern="[A-Za-z,ñ,Ñ,á,é,í,ó,ú,Á,É,Í,Ó,Ú, 0-9]{1,249}" required/>
                 </div>
               </dd>
               <dt>
@@ -91,7 +91,7 @@ $id=$_GET['id'];
               </dt>
               <dd>
                 <div class="well well-small">
-                  <textarea id="redactor" name="redactor" contenteditable="true"  maxlength="2499" pattern="[A-Za-z,ñ,Ñ,á,é,í,ó,ú,Á,É,Í,Ó,Ú, ]{1,2499}"><?php echo $row['descripcion']; ?></textarea>
+                  <textarea id="redactor" name="redactor" contenteditable="true"  maxlength="2499"><?php echo $row['descripcion']; ?></textarea>
                 </div>
               </dd>
               <dt>
@@ -99,7 +99,7 @@ $id=$_GET['id'];
               </dt>
               <dd>
                 <div class="well well-small">
-                  <input id="enlace" name="enlace" type="text" value="<?php echo $row['enlace']; ?>" contenteditable="true"  maxlength="249" pattern="[A-Za-z,ñ,Ñ,á,é,í,ó,ú,Á,É,Í,Ó,Ú, ]{1,249}"/>
+                  <input id="enlace" name="enlace" type="text" value="<?php echo $row['enlace']; ?>" contenteditable="true"  maxlength="249"/>
                 </div>
               </dd>
               <dt>

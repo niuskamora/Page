@@ -81,7 +81,7 @@ $id=$_GET['id'];
               </dt>
               <dd>
                 <div class=" well well-small" align="left">
-                  <input id="nombre" name="nombre" type="text" value="<?php echo $row['nombre']; ?>" contenteditable="true" maxlength="34" pattern="[A-Za-z,ñ,Ñ,á,é,í,ó,ú,Á,É,Í,Ó,Ú, ]{1,34}" required/>
+                  <input id="nombre" name="nombre" type="text" value="<?php echo $row['nombre']; ?>" contenteditable="true" maxlength="34" pattern="[A-Za-z,ñ,Ñ,á,é,í,ó,ú,Á,É,Í,Ó,Ú]{1,34}" required/>
                 </div>
               </dd>
               <dt>
@@ -89,7 +89,7 @@ $id=$_GET['id'];
               </dt>
               <dd>
                 <div class="well well-small">
-                  <input id="apellido" name="apellido" type="text" value="<?php echo $row['apellido']; ?>" contenteditable="true" maxlength="34" pattern="[A-Za-z,ñ,Ñ,á,é,í,ó,ú,Á,É,Í,Ó,Ú, ]{1,34}" required/>
+                  <input id="apellido" name="apellido" type="text" value="<?php echo $row['apellido']; ?>" contenteditable="true" maxlength="34" pattern="[A-Za-z,ñ,Ñ,á,é,í,ó,ú,Á,É,Í,Ó,Ú]{1,34}" required/>
                 </div>
               </dd>
               <dt>
