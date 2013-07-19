@@ -2,7 +2,7 @@
 
 //conexión de la base de dattos  
 function conectar(){{  
-	   if (!($conexion = pg_connect("dbname=pangeapage port=5432 user=postgres password=eva"))){
+	   if (!($conexion = pg_connect("host=192.168.1.101  dbname=pangeapage port=5432 user=postgres password=p4ng34"))){
 	       echo "No pudo conectarse al servidor";
 	       exit();
 	   }
