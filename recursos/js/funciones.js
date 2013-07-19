@@ -40,7 +40,7 @@ $(function () {
 
                 $magicLine
                         .width($('#nav').find('.active').width())
-                        .css('left', $('#nav').find('.active a').position().left)
+                        .css('left', $('#nav').find('.active').position().left)
                         .data('origLeft', $magicLine.position().left)
                         .data('origWidth', $magicLine.width());
 
