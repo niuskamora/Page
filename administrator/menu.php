@@ -57,7 +57,7 @@ if(isset($_GET['b']))
                 <li><a href="usuario.php">Usuario</a></li>
               </ul>
             </li>
-            <li><a href="menu.php"> <em><b>Menú</b></em></a></li>
+            <li><a href="menu.php"> Menú</a></li>
             <li><a href="producto.php">Producto</a></li>
             <li><a href="sucursal.php">Sucursal</a></li>
             <li class="dropdown">
