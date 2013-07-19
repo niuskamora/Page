@@ -107,8 +107,8 @@ $id=$_GET['id'];
               </dt>
               <dd>
                 <div class="well well-small">
-                  <img src="<?php echo $row['imagen'];?> ">
-                	<input id="imagen" name="imagen" type="file" contenteditable="true" />
+                  <img src="<?php echo "../".$row['imagen'];?> ">
+                	<input id="imagen" name="imagen" type="file" contenteditable="true"/>
                 	</br>
                     <h5>Seleccione el tamaño</h5>
                     50x50
@@ -198,8 +198,10 @@ if(isset($_POST["guardar"])){
 			}
 		
 			$direccion="../recursos";
+			$direccion2="recursos";
 			$tipo = explode('/',$_FILES['imagen']['type']);
 			$uploadfile =$direccion."/img/".$id.".".$tipo[1];
+			$uploadfile2 =$direccion2."/img/".$id.".".$tipo[1];
 			$error = $_FILES['imagen']['error']; 
 			$subido = false;
 		
@@ -253,12 +255,15 @@ if(isset($_POST["guardar"])){
 				imagecopy($img1Recortada, $img1, 0, 0, ceil(($ancho_buscado3-$an)/2), ceil(($alto_buscado3-$al)/2), ceil(($ancho_buscado3-$an)/2)+$an, ceil(($alto_buscado3-$al)/2)+$al);
 				
 				imagejpeg($img1Recortada,$uploadfile,$calidad);				
-				$sql_update="update informacion set imagen='".$uploadfile."' where informacionid=".$arreglo[0]."";
+				$sql_update="update informacion set imagen='".$uploadfile2."' where informacionid=$id";
 			
 				$result= pg_query($conn, $sql_update);
 																													
 			}
 		 }
+		 if($result){
+			 	javaalert("Modifico");
+			 }
 	
 		if($resultado || $result){
 			javaalert('Se Modifico la Información');

@@ -87,7 +87,7 @@ $id=$_GET['id'];
             
             <?php if($row['imagen']!=""){?>
             	<div class="span3 well well-small"><b>Imagen</b></div>
-            	<div class="span6 well well-small"><img src="<?php echo $row['imagen'];?>"></div>
+            	<div class="span6 well well-small"><img src="<?php echo "../".$row['imagen'];?>"></div>
             <?php } ?>
             	
                  <?php 
