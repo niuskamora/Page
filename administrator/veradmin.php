@@ -36,7 +36,7 @@ $id=$_GET['id'];
               <ul class="dropdown-menu">
                 <li><a href="tipoadmin.php"> Tipo Administrador </a></li>
                 <li><a href="admin.php">Administrador</a></li>
-                <li><a href="usuario">Usuario</a></li>
+                <li><a href="usuario.php">Usuario</a></li>
               </ul>
             </li>
             <li><a href="menu.php"> <em><b>Menú</b></em></a></li>
