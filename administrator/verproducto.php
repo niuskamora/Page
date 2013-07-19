@@ -3,9 +3,13 @@ session_start();
 
 include("../recursos/funciones.php");
 $conn=conectar();
+
 if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
 	iraURL('../administrator/index.php');
 	}
+	
+$id=$_GET['id'];
+
 ?>
 
 <!DOCTYPE html>
@@ -20,6 +24,8 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
 <link href="../recursos/css/bootstrap.min.css" rel="stylesheet">
 <link href="../recursos/css/bootstrap-responsive.min.css" rel="stylesheet">
 <link href="../recursos/css/estiloadmin.css" rel="stylesheet">
+<!-- Importanto plantilla del Redactor -->
+	<link rel="stylesheet" href="../recursos/redactor/redactor.css" />
 </head>
 
 <body class="preview" id="top" data-spy="scroll" data-target=".subnav" data-offset="80">
@@ -32,10 +38,10 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
             <li><a href="admin.php">Administrador</a></li>
             <li><a href="usuario.php">Usuario</a></li>
             <li><a href="menu.php">Menú</a></li>
-            <li><a href="info.php">Información</a></li>
+            <li><a href="info.php"> <em> <b>Información </b> </em> </a></li>
             <li><a href="producto.php">Producto</a></li>
             <li><a href="sucursal.php">Sucursal</a></li>
-            <li><a href="tipoinfo.php"><em> <b>Tipo Infomación </b> </em></a></li>
+            <li><a href="tipoinfo.php">Tipo Infomación</a></li>
             <li><a href="tipoadmin.php">Tipo Administrador</a></li>
             <li><a href="cerrarsesion.php">Cerrar Sesión</a></li>
           </ul>
@@ -50,51 +56,37 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
 <div class="container">
    <div class="row-fluid">
                        
-   <div class="span3">
+    <div class="span3">
       <div style="text-align:center">
           <ul class="nav  nav-pills nav-stacked">
-             <li class="active"><a href="tipoinfo.php"> <span class="add-on"><i class="icon-arrow-left"></i></span> Atrás</a></li> 
+             <li class="active"><a href="producto.php"> <span class="add-on"><i class="icon-arrow-left"></i></span> Atrás</a></li>          
           </ul>
       </div>
     </div>
-    <div class="span9">
-      <div class="well well-large">
-       <?php
-        	$cons="SELECT * FROM tipoinformacion WHERE tipoinformacionid=".$_GET['id'];
+    
+    <div class="span9 well well-large">
+        <p>
+        
+        <?php
+        	$cons="SELECT * FROM producto WHERE productoid=$id";
 			$resulta = pg_query ($conn, $cons) or die("Error en la consulta SQL");
-			$row=pg_fetch_array($resulta)
+			if($row=pg_fetch_array($resulta)){
 		?>
-     <form method="post">
-          <div class="row-fluid">
-            <dl class="dl-horizontal">
-              <dt>
-                <div class=" well well-small" align="left"> Nombre </div>
-              </dt>
-              <dd>
-                <div class=" well well-small">
-                  <input id="nombre" name="nombre"  type="text" value="<?php echo $row['nombre']?>" maxlength="34" contenteditable=true required/>
-                </div>
-              </dd>
-              <dt>
-                <div class=" well well-small" align="left"> Descripción </div>
-              </dt>
-              <dd>
-                <div class="well well-small">
-                  <input id="descripcion" name="descripcion"  type="text" value="<?php echo $row['descripcion']?>" maxlength="249" contenteditable=true required/>
-                </div>
-              </dd>
-                <div class="well well-small" align="center">
-                  <button id="guardar" name="guardar" class="btn btn-primary" type="submit"> <span class="add-on"></span>Modificar</button>
-                </div>
-             
-            </dl>
-          </div>
-        </form>
-
-      </div>
+			<div class="span3 well well-small"><b>Id</b></div>
+            <div class="span6 well well-small "><?php echo $row['productoid'];?></div>
+            <div class="span3 well well-small"><b>Nombre</b></div>
+            <div class="span6 well well-small"><?php echo $row['nombre'];?></div>
+            <div class="span3 well well-small"><b>Descripción</b></div>
+            <div class="span6 well well-small" align="justify"><?php echo $row['descripcion'];?></div>
+            <div class="span3 well well-small"><b>Enlace</b></div>
+            <div class="span6 well well-small"><?php echo $row['enlace'];?></div>            
+            <div class="span3 well well-small"><b>Imagen</b></div>
+            <div class="span6 well well-small"><img src="<?php echo "../".$row['imagen'];?>"></div>               
+     <?php }?>
+         </p>
     </div>
     </div>
-  
+    
 </div>
 
 <!-- Le javascript
@@ -102,23 +94,15 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
 <script type="text/javascript" src="../recursos/js/jquery-2.0.2.js" ></script> 
 <script src="../recursos/js/bootstrap.js"></script> 
 <script src="../recursos/js/bootstrap.min.js"></script>
-   <?php
-		
-if(isset($_POST["guardar"])){
-	if(isset($_POST["nombre"]) && isset($_POST["descripcion"]) && $_POST["nombre"]!="" && $_POST["descripcion"]!="" ){
-		$id=$_GET['id'];
-		$nombre=$_POST['nombre'];
-		$descripcion=$_POST['descripcion'];
-        $resultado=pg_query($conn,"UPDATE tipoinformacion SET nombre='$nombre', descripcion='$descripcion' where tipoinformacionid=$id") or die(pg_last_error($conn));
-		if($resultado){
-			llenarLog(2, "tipo de información");
-			javaalert("El tipo de información fue modificado con éxito");
-			iraURL("tipoinfo.php");
+<script src="../recursos/redactor/redactor.js"></script>
+<script src="../recursos/redactor/redactor.min.js"></script>
+<script type="text/javascript">
+	$(document).ready(
+		function()
+		{
+			$('#redactor').redactor();
 		}
-	}else{
-				javaalert("Debe agregar todos los campos, por favor verifique");
-	}
-}
-?>
+	);
+	</script>
 </body>
 </html>

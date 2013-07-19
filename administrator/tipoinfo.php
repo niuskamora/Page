@@ -59,7 +59,7 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
         
           <ul class="nav  nav-pills nav-stacked">
               <li class="active"><a href="creartipoinfo.php"> <span class="add-on"><i class="icon-plus "></i></span> Crear </a></li>
-              <li><a href="principal.php"> <span class="add-on"><i class="icon-arrow-left"></i></span> Atras</a></li>
+              <li><a href="principal.php"> <span class="add-on"><i class="icon-arrow-left"></i></span> Atrás</a></li>
             
           </ul>
           
@@ -125,6 +125,8 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
 	</tbody>	
     </form> 
 </table>
+ <ul id="pagination" class="footable-nav"><span>Pages:</span></ul>
+
 <?php 
 	}
 ?>

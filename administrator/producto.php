@@ -60,7 +60,7 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
         
           <ul class="nav  nav-pills nav-stacked">
               <li class="active"><a href="crearproducto.php"> <span class="add-on"><i class="icon-plus "></i></span> Crear </a></li>
-              <li><a href="principal.php"> <span class="add-on"><i class="icon-arrow-left"></i></span> Atras</a></li>
+              <li><a href="principal.php"> <span class="add-on"><i class="icon-arrow-left"></i></span> Atrás</a></li>
           </ul>
       </div>
     </div>
@@ -124,12 +124,14 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
 			echo '<td width="15%">'.$row[3].'</td>';
 			echo '<td width="13%"><a href="editarproducto.php?id='.$row[0].'&boton=editar"><button class="btn btn-primary"> <span class="add-on"><i class="icon-pencil"></i> </span> Editar  </button> </td>';
 			echo '<td width="14%"><a href="eliminarproducto.php?id='.$row[0].'&boton=eliminar"> <button class="btn btn-primary" type="button"  name="eliminar"> <span class="add-on"><i class="icon-trash"></i></span> Eliminar</button> </td>';
-			echo '<td width="11%"> <button class="btn btn-primary"> <span class="add-on"><i class="icon-eye-open"></i></span> Ver</button> </td>';
+			echo '<td width="11%"><a href="verproducto.php?id='.$row[0].'&boton=ver"> <button class="btn btn-primary"> <span class="add-on"><i class="icon-eye-open"></i></span> Ver</button> </td>';
 			echo '</tr>';
 			}
 		?>
 	</tbody>	
 </table>
+ <ul id="pagination" class="footable-nav"><span>Pages:</span></ul>
+
 <?php 
 	}
 ?>

@@ -72,7 +72,7 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
               </dt>
               <dd>
                 <div class=" well well-small">
-                  <input id="nombre" name="nombre"  type="text" value="<?php echo $row['nombre']?>" contenteditable=true required/>
+                  <input id="nombre" name="nombre"  type="text" value="<?php echo $row['nombre']?>"  maxlength="34" pattern="[A-Za-zñÑáéíóúÁÉÍÓÚ ]{1,34}" autofocus contenteditable=true required/>
                 </div>
               </dd>
               <dt>
@@ -80,7 +80,7 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
               </dt>
               <dd>
                 <div class="well well-small">
-<input type="text" name="apellido" id="apellido" value="<?php echo $row['apellido']?>" required/>
+<input type="text" name="apellido" id="apellido" value="<?php echo $row['apellido']?>" maxlength="34" pattern="[A-Za-zñÑáéíóúÁÉÍÓÚ ]{1,34}" required/>
                 </div>
               </dd>
                 </dd>
@@ -89,7 +89,7 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
               </dt>
               <dd>
                 <div class="well well-small">
-<input type="text" name="direccion" id="direccion" value="<?php echo $row['direccion']?>" required/>
+<input type="text" name="direccion" id="direccion" value="<?php echo $row['direccion']?>" maxlength="254" required/>
                 </div>
               </dd>
                 </dd>
@@ -98,7 +98,7 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
               </dt>
               <dd>
                 <div class="well well-small">
-<input type="text" name="usuario" id="usuario" value="<?php echo $row['usuario']?>" required/>
+<input type="text" name="usuario" id="usuario" value="<?php echo $row['usuario']?>" maxlength="34" pattern="[A-ZÑ]{1}[a-z.ñ0-9]{1,33}" required/>
                 </div>
               </dd>
                 </dd>
@@ -107,7 +107,7 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
               </dt>
               <dd>
                 <div class="well well-small">
-<input type="password" name="contrasena" id="contrasena" value="<?php echo $row['contrasena']?>" required/>
+<input type="password" name="contrasena" id="contrasena" value="<?php echo $row['contrasena']?>" maxlength="34" pattern="[A-Za-z.0-9]{1,34}" required/>
                 </div>
               </dd>
                 </dd>
@@ -116,7 +116,7 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
               </dt>
               <dd>
                 <div class="well well-small">
-<input type="password" name="contrasena_c" id="contrasena_c" value="<?php echo $row['contrasena']?>" required/>
+<input type="password" name="contrasena_c" id="contrasena_c" value="<?php echo $row['contrasena']?>" maxlength="34" pattern="[A-Za-z.0-9]{1,34}" required/>
                 </div>
               </dd>
                 <div class="well well-small" align="center">
@@ -153,7 +153,7 @@ if(isset($_POST["guardar"])){
 					$direccion=$_POST['direccion'];
 					$usuario=$_POST['usuario'];
 					$contrasena=$_POST['contrasena'];
-					$resultado=pg_query($conn,"UPDATE usuario SET nombre='$nombre', apellido='$apellido' , direccion='$usuario', usuario='$usuario', contrasena='$contrasena' where usuarioid=$id") or die(pg_last_error($conn));
+					$resultado=pg_query($conn,"UPDATE usuario SET nombre='$nombre', apellido='$apellido' , direccion='$direccion', usuario='$usuario', contrasena='$contrasena' where usuarioid=$id") or die(pg_last_error($conn));
 					if($resultado){
 						llenarLog(2, "Usuario");
 						javaalert("El usuario fue modificado con éxito");

@@ -65,9 +65,9 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
    <div class="span9 well well-large" >
  			<p>
         <div class="span3 well well-small"><b>Nombre</b></div>
-            <div class="span6 well well-small "><input type="text" name="nombre" id="nombre" required/></div>
+            <div class="span6 well well-small "><input type="text" name="nombre" id="nombre" maxlength="34" required/></div>
             <div class="span3 well well-small"><b>Descripción</b></div>
-            <div class="span6 well well-small"> <input type="text" id="redactor" name="redactor" required/></div>
+            <div class="span6 well well-small"> <input type="text" id="descripcion" name="descripcion" maxlength="249" required/></div>
           <div class="span9 well well-small" align="center"><button class="btn btn-primary" id="crear_uno" name="crear_uno" type="submit">Guardar</button></div>
 			<div class="span9 well well-small" align="center"> <button class="btn btn-primary" id="crear_otro" name="crear_otro" type="submit">Guardar y añadir otro</button></div>
 
@@ -87,7 +87,7 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
 	//codigo para guardar y volver a la pagina de tipoinformacion.php
 	if(isset($_POST["crear_uno"]) || isset($_POST["crear_otro"])){
 		if(isset($_POST["nombre"]) && isset($_POST["descripcion"]) && $_POST["nombre"]!="" && $_POST["descripcion"]!="" ){
-				$insertar = "insert into tipoinformacion values(nextval('tipoinformacion_tipoinformacionid_seq'),'".$_POST['nombre']."','".$_POST['redactor']."');";
+				$insertar = "insert into tipoinformacion values(nextval('tipoinformacion_tipoinformacionid_seq'),'".$_POST['nombre']."','".$_POST['descripcion']."');";
 				$conex=conectar();
 				pg_query($conex,$insertar) or die (pg_last_error($conex));
 				if(isset($_POST["crear_uno"])){
@@ -99,8 +99,6 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
 			}else{
 				javaalert("Debe agregar todos los campos, por favor verifique");
 			}
-			 
-	
 	}
 	?>
       
