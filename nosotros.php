@@ -72,9 +72,10 @@ $conn=conectar();
 </div>
 <div class="container" style="background-color:white;">
  <!-- aqui estaba el carusel-->
- <br>
- <div> 
+ 
+ <div>
  	<h2 class="well" align="left">
+    	<br>
   		Nosotros
   	</h2>
   </div>
@@ -89,8 +90,10 @@ $conn=conectar();
 			
 	if($row1=pg_fetch_array($resulta1)){
 		?>
-    	<div class="span8" align="justify"><?php echo $row1['descripcion'];?></div>
-        <div class="span3"><img src="<?php echo $row1['imagen'];?>"></div>
+    	<div class="span9" align="justify"><?php echo $row1['descripcion'];?></div>
+        <?php if($row1['imagen']!=""){ ?>
+        	<div class="span2"><img src="<?php echo $row1['imagen'];?>"></div>
+		<?php }?>
     <?php }?>
     </p>
     </div>
@@ -109,7 +112,32 @@ $conn=conectar();
 			
 	if($row1=pg_fetch_array($resulta1)){
 		?>
-    	<div class="span8" align="justify"><?php echo $row1['descripcion'];?></div>
+    	<div class="span9" align="justify"><?php echo $row1['descripcion'];?></div>
+        <?php if($row1['imagen']!=""){ ?>
+        	<div class="span2"><img src="<?php echo $row1['imagen'];?>"></div>
+        <?php }?>
+    <?php }?>
+    </p>
+    </div>
+  </div>
+  
+  <div class="row-fluid">
+  <div class="span12">
+  <br>
+   <h2 class="well">
+  	Visión
+  </h2>
+  <p>
+   <?php
+   	$cons1="SELECT * FROM informacion WHERE tipoinformacionid='5' and titulo='Visión'";
+	$resulta1 = pg_query ($conn, $cons1) or die("Error en la consulta SQL");
+			
+	if($row1=pg_fetch_array($resulta1)){
+		?>
+    	<div class="span9" align="justify"><?php echo $row1['descripcion'];?></div>
+        <?php if($row1['imagen']!=""){ ?>
+        	<div class="span2"><img src="<?php echo $row1['imagen'];?>"></div>
+        <?php }?>
     <?php }?>
     </p>
     </div>

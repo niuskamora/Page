@@ -232,7 +232,7 @@ if(isset($_POST["guardar"]) || isset($_POST["guardar2"])){
 		if($resultado && $result){
 			javaalert('Se Creo la Información');
 			llenarLog(1, "Información");
-			if(isset($_POST["guardar1"])){
+			if(isset($_POST["guardar"])){
 				iraURL('../administrator/info.php');
 			}
 			else{
