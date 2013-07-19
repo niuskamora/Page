@@ -34,15 +34,25 @@ $id=$_GET['id'];
     <div class="navbar-inner">
       <div class="container" style="width: auto;"> <a class="btn btn-navbar" href="#nav" data-toggle="collapse" data-target="#barrap"> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </a> <a  class="brand" id="brand-admin" href="#">PANGEATECH</a>
         <div id="barrap" class="nav-collapse collapse">
-          <ul class="nav slidernav">
-            <li><a href="admin.php">Administrador</a></li>
-            <li><a href="usuario.php">Usuario</a></li>
-            <li><a href="menu.php">Menú</a></li>
-            <li><a href="info.php"> <em> <b>Información </b> </em> </a></li>
+          <ul class="nav">
+            <li class="dropdown"> <a  class="dropdown-toggle" data-target="#" data-toggle="dropdown"> Gestion Usuarios <b class="caret"></b> </a>
+              <ul class="dropdown-menu">
+                <li><a href="tipoadmin.php"> Tipo Administrador </a></li>
+                <li><a href="admin.php">Administrador</a></li>
+                <li><a href="usuario">Usuario</a></li>
+              </ul>
+            </li>
+            <li><a href="menu.php"> <em><b>Menú</b></em></a></li>
             <li><a href="producto.php">Producto</a></li>
             <li><a href="sucursal.php">Sucursal</a></li>
-            <li><a href="tipoinfo.php">Tipo Infomación</a></li>
-            <li><a href="tipoadmin.php">Tipo Administrador</a></li>
+            <li class="dropdown">
+             <a  class="dropdown-toggle" data-target="#" data-toggle="dropdown">
+              Gestion Informacion <b class="caret"></b> </a>
+              <ul class="dropdown-menu">
+                <li><a href="tipoinfo.php">Tipo Infomación</a></li>
+                <li><a href="info.php">Información</a></li>
+              </ul>
+            </li>
             <li><a href="cerrarsesion.php">Cerrar Sesión</a></li>
           </ul>
         </div>
@@ -83,7 +93,7 @@ $id=$_GET['id'];
               </dt>
               <dd>
                 <div class=" well well-small">
-                  <input id="titulo" name="titulo" type="text" value="<?php echo $row['titulo']; ?>" contenteditable="true"  maxlength="249" pattern="[A-Za-z,ñ,Ñ,á,é,í,ó,ú,Á,É,Í,Ó,Ú, ]{1,249}" required/>
+                  <input id="titulo" name="titulo" type="text" value="<?php echo $row['titulo']; ?>" contenteditable="true"  maxlength="249" pattern="[A-Za-z,ñ,Ñ,á,é,í,ó,ú,Á,É,Í,Ó,Ú, 0-9]{1,249}" required/>
                 </div>
               </dd>
               <dt>
@@ -91,7 +101,7 @@ $id=$_GET['id'];
               </dt>
               <dd>
                 <div class="well well-small">
-                  <textarea id="redactor" name="redactor" contenteditable="true"  maxlength="2499" pattern="[A-Za-z,ñ,Ñ,á,é,í,ó,ú,Á,É,Í,Ó,Ú, ]{1,2499}"><?php echo $row['descripcion']; ?></textarea>
+                  <textarea id="redactor" name="redactor" contenteditable="true"  maxlength="2499"><?php echo $row['descripcion']; ?></textarea>
                 </div>
               </dd>
               <dt>
@@ -99,7 +109,7 @@ $id=$_GET['id'];
               </dt>
               <dd>
                 <div class="well well-small">
-                  <input id="enlace" name="enlace" type="text" value="<?php echo $row['enlace']; ?>" contenteditable="true"  maxlength="249" pattern="[A-Za-z,ñ,Ñ,á,é,í,ó,ú,Á,É,Í,Ó,Ú, ]{1,249}"/>
+                  <input id="enlace" name="enlace" type="text" value="<?php echo $row['enlace']; ?>" contenteditable="true"  maxlength="249"/>
                 </div>
               </dd>
               <dt>
@@ -280,7 +290,7 @@ if(isset($_POST["guardar"])){
 ================================================== --> 
 <script type="text/javascript" src="../recursos/js/jquery-2.0.2.js" ></script> 
 <script src="../recursos/js/bootstrap.js"></script> 
-<script src="../recursos/js/bootstrap.min.js"></script>
+
 <script src="../recursos/redactor/redactor.js"></script>
 <script src="../recursos/redactor/redactor.min.js"></script>
 <script type="text/javascript">
