@@ -31,27 +31,18 @@ $id=$_GET['id'];
     <div class="navbar-inner">
       <div class="container" style="width: auto;"> <a class="btn btn-navbar" href="#nav" data-toggle="collapse" data-target="#barrap"> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </a> <a  class="brand" id="brand-admin" href="#">PANGEATECH</a>
         <div id="barrap" class="nav-collapse collapse">
-          <ul class="nav">
-            <li class="dropdown"> <a  class="dropdown-toggle" data-target="#" data-toggle="dropdown"> Gestion Usuarios <b class="caret"></b> </a>
-              <ul class="dropdown-menu">
-                <li><a href="tipoadmin.php"> Tipo Administrador </a></li>
-                <li><a href="admin.php">Administrador</a></li>
-                <li><a href="usuario">Usuario</a></li>
-              </ul>
-            </li>
-            <li><a href="menu.php"> <em><b>Menú</b></em></a></li>
+          <ul class="nav slidernav">
+            <li><a href="admin.php">  Administrador </a></li>
+            <li><a href="usuario.php"><em> <b>Usuario</b> </em> </a></li>
+            <li><a href="menu.php">Menú</a></li>
+            <li><a href="info.php">Información</a></li>
             <li><a href="producto.php">Producto</a></li>
             <li><a href="sucursal.php">Sucursal</a></li>
-            <li class="dropdown">
-             <a  class="dropdown-toggle" data-target="#" data-toggle="dropdown">
-              Gestion Informacion <b class="caret"></b> </a>
-              <ul class="dropdown-menu">
-                <li><a href="tipoinfo.php">Tipo Infomación</a></li>
-                <li><a href="info.php">Información</a></li>
-              </ul>
-            </li>
-            <li><a href="cerrarsesion.php">Cerrar Sesión</a></li>
-          </ul> </div>
+            <li><a href="tipoinfo.php">Tipo Infomación</a></li>
+            <li><a href="tipoadmin.php">Tipo Administrador</a></li>
+            <li><a href="index.php">Cerrar Sesión</a></li>
+          </ul>
+        </div>
         <!-- /.nav-collapse --> 
       </div>
     </div>
@@ -65,7 +56,7 @@ $id=$_GET['id'];
    <div class="span3">
       <div style="text-align:center">
           <ul class="nav  nav-pills nav-stacked">
-              <li class="active"><a href="admin.php"> <span class="add-on"><i class="icon-arrow-left"></i></span> Atrás</a></li>
+              <li class="active"><a href="usuario.php"> <span class="add-on"><i class="icon-arrow-left"></i></span> Atrás</a></li>
           </ul>
       </div>
     </div>
@@ -74,40 +65,21 @@ $id=$_GET['id'];
         <p>
         
         <?php
-        	$cons="SELECT * FROM administrador WHERE administradorid=$id";
+        	$cons="SELECT * FROM usuario WHERE usuarioid=$id";
 			$resulta = pg_query ($conn, $cons) or die("Error en la consulta SQL");
 			
 			if($row=pg_fetch_array($resulta)){
 		?>
         	<div class="span3 well well-small"><b>Id</b></div>
-            <div class="span6 well well-small "><?php echo $row['administradorid'];?></div>
+            <div class="span6 well well-small "><?php echo $row['usuarioid'];?></div>
             <div class="span3 well well-small"><b>Nombre</b></div>
             <div class="span6 well well-small"><?php echo $row['nombre'];?></div>
             <div class="span3 well well-small"><b>Apellido</b></div>
             <div class="span6 well well-small"><?php echo $row['apellido'];?></div>
-            <div class="span3 well well-small"><b>Usuario</b></div>
+            <div class="span3 well well-small"><b>Dirección</b></div>
+            <div class="span6 well well-small"><?php echo $row['direccion'];?></div>
+             <div class="span3 well well-small"><b>Usuario</b></div>
             <div class="span6 well well-small"><?php echo $row['usuario'];?></div>
-            
-            	<?php
-				if($row['creadorid']!=''){
-				
-					$cons1="SELECT * FROM administrador WHERE administradorid=".$row['creadorid'];
-					$resulta2=pg_query ($conn, $cons1) or die("Error en la consulta SQL");
-					if($row1=pg_fetch_array($resulta2)){
-					?>
-            			<div class="span3 well well-small"><b>Creador</b></div>
-            			<div class="span6 well well-small"><?php echo $row1['nombre'];?></div>
-                	<?php }
-                }?>
-                <?php 
-				$cons1="SELECT * FROM tipoadministrador WHERE tipoadministradorid=".$row['tipoadministradorid'];
-				$resulta2=pg_query ($conn, $cons1) or die("Error en la consulta SQL");
-				if($row1=pg_fetch_array($resulta2)){
-				?>
-            	<div class="span3 well well-small"><b>Tipo de Administrador</b></div>
-            	<div class="span6 well well-small"><?php echo $row1['nombre'];?></div>
-                <?php }?>
-                
         <?php }?>
          </p>
     </div>
@@ -119,6 +91,6 @@ $id=$_GET['id'];
 ================================================== --> 
 <script type="text/javascript" src="../recursos/js/jquery-2.0.2.js" ></script> 
 <script src="../recursos/js/bootstrap.js"></script> 
-
+<script src="../recursos/js/bootstrap.min.js"></script>
 	</body>
 </html>
