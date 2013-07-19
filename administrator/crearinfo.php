@@ -38,10 +38,10 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
               <ul class="dropdown-menu">
                 <li><a href="tipoadmin.php"> Tipo Administrador </a></li>
                 <li><a href="admin.php">Administrador</a></li>
-                <li><a href="usuario">Usuario</a></li>
+                <li><a href="usuario.php">Usuario</a></li>
               </ul>
             </li>
-            <li><a href="menu.php"> <em><b>Menú</b></em></a></li>
+            <li><a href="menu.php"> Menú</a></li>
             <li><a href="producto.php">Producto</a></li>
             <li><a href="sucursal.php">Sucursal</a></li>
             <li class="dropdown">
@@ -165,8 +165,10 @@ if(isset($_POST["guardar"]) || isset($_POST["guardar2"])){
 			}
 		
 			$direccion="../recursos";
+			$direccion2="recursos";
 			$tipo = explode('/',$_FILES['imagen']['type']);
 			$uploadfile =$direccion."/img/".$arreglo[0].".".$tipo[1];
+			$uploadfile2 =$direccion2."/img/".$arreglo[0].".".$tipo[1];
 			$error = $_FILES['imagen']['error']; 
 			$subido = false;
 		
@@ -220,7 +222,7 @@ if(isset($_POST["guardar"]) || isset($_POST["guardar2"])){
 				imagecopy($img1Recortada, $img1, 0, 0, ceil(($ancho_buscado3-$an)/2), ceil(($alto_buscado3-$al)/2), ceil(($ancho_buscado3-$an)/2)+$an, ceil(($alto_buscado3-$al)/2)+$al);
 				
 				imagejpeg($img1Recortada,$uploadfile,$calidad);				
-				$sql_update="update informacion set imagen='".$uploadfile."' where informacionid=".$arreglo[0]."";
+				$sql_update="update informacion set imagen='".$uploadfile2."' where informacionid=".$arreglo[0]."";
 			
 				$result= pg_query($conn, $sql_update);
 																													

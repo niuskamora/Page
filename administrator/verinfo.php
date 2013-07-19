@@ -39,10 +39,10 @@ $id=$_GET['id'];
               <ul class="dropdown-menu">
                 <li><a href="tipoadmin.php"> Tipo Administrador </a></li>
                 <li><a href="admin.php">Administrador</a></li>
-                <li><a href="usuario">Usuario</a></li>
+                <li><a href="usuario.php">Usuario</a></li>
               </ul>
             </li>
-            <li><a href="menu.php"> <em><b>Menú</b></em></a></li>
+            <li><a href="menu.php"> Menú</a></li>
             <li><a href="producto.php">Producto</a></li>
             <li><a href="sucursal.php">Sucursal</a></li>
             <li class="dropdown">
@@ -97,7 +97,7 @@ $id=$_GET['id'];
             
             <?php if($row['imagen']!=""){?>
             	<div class="span3 well well-small"><b>Imagen</b></div>
-            	<div class="span6 well well-small"><img src="<?php echo $row['imagen'];?>"></div>
+            	<div class="span6 well well-small"><img src="<?php echo "../".$row['imagen'];?>"></div>
             <?php } ?>
             	
                  <?php 
