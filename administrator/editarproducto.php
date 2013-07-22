@@ -31,15 +31,25 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
     <div class="navbar-inner">
       <div class="container" style="width: auto;"> <a class="btn btn-navbar" href="#nav" data-toggle="collapse" data-target="#barrap"> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </a> <a  class="brand" id="brand-admin" href="#">PANGEATECH</a>
         <div id="barrap" class="nav-collapse collapse">
-          <ul class="nav slidernav">
-            <li><a href="admin.php">Administrador</a></li>
-            <li><a href="usuario.php">Usuario</a></li>
-            <li><a href="menu.php">Menú</a></li>
-            <li><a href="info.php">Información</a></li>
-            <li><a href="producto.php"><em> <b>Producto </b> </em></a></li>
+          <ul class="nav">
+            <li class="dropdown"> <a  class="dropdown-toggle" data-target="#" data-toggle="dropdown"> Gestion Usuarios <b class="caret"></b> </a>
+              <ul class="dropdown-menu">
+                <li><a href="tipoadmin.php"> Tipo Administrador </a></li>
+                <li><a href="admin.php">Administrador</a></li>
+                <li><a href="usuario.php">Usuario</a></li>
+              </ul>
+            </li>
+            <li><a href="menu.php"> Menú</a></li>
+            <li><a href="producto.php">Producto</a></li>
             <li><a href="sucursal.php">Sucursal</a></li>
-            <li><a href="tipoinfo.php">Tipo Infomación</a></li>
-            <li><a href="tipoadmin.php">Tipo Administrador</a></li>
+            <li class="dropdown">
+             <a  class="dropdown-toggle" data-target="#" data-toggle="dropdown">
+              Gestion Informacion <b class="caret"></b> </a>
+              <ul class="dropdown-menu">
+                <li><a href="tipoinfo.php">Tipo Infomación</a></li>
+                <li><a href="info.php">Información</a></li>
+              </ul>
+            </li>
             <li><a href="cerrarsesion.php">Cerrar Sesión</a></li>
           </ul>
         </div>
@@ -75,7 +85,7 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
               </dt>
               <dd>
                 <div class=" well well-small">
-                  <input id="nombre" name="nombre"  type="text" value="<?php echo $row['nombre'];?>" contenteditable=true required/>
+                  <input id="nombre" name="nombre"  type="text" value="<?php echo $row['nombre'];?>" maxlength="34" contenteditable=true required/>
                 </div>
               </dd>
               <dt>
@@ -83,7 +93,7 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
               </dt>
               <dd>
                 <div class="well well-small">
-                <textarea id="redactor" name="redactor" contenteditable="true"><?php echo $row['descripcion'];?></textarea>
+                <textarea id="redactor" name="redactor" contenteditable="true" maxlength="2499" required><?php echo $row['descripcion'];?></textarea>
                 </div>
               </dd>
                <dt>
@@ -91,7 +101,7 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
               </dt>
               <dd>
                 <div class=" well well-small">
-                  <input id="enlace" name="enlace"  type="text" value="<?php echo $row['enlace'];?>" contenteditable=true required/>
+                  <input id="enlace" name="enlace"  type="text" value="<?php echo $row['enlace'];?>" maxlength="249" contenteditable=true required/>
                 </div>
               </dd>
                <dt>
@@ -99,8 +109,13 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
               </dt>
               <dd>
                 <div class=" well well-small">
+<<<<<<< HEAD
                             	<img width="200" height="100" src="<?php echo "../".$row['imagen'];?> ">
 			<input id="imagen" name="imagen" type="file" />
+=======
+                  <img width="200" height="100" src="<?php echo "../".$row['imagen'];?> ">
+			<input id="imagen" name="imagen" type="file" maxlength="249"/>
+>>>>>>> 8c31fd2af5080e7037cfb91b2e0e036704a6a4db
                 </div>
               </dd>
                 <div class="well well-small" align="center">
@@ -121,7 +136,7 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
 ================================================== --> 
 <script type="text/javascript" src="../recursos/js/jquery-2.0.2.js" ></script> 
 <script src="../recursos/js/bootstrap.js"></script> 
-<script src="../recursos/js/bootstrap.min.js"></script>
+
 <!--Jquery para el Redactor
 ================================================== --> 
 <script src="../recursos/redactor/redactor.js"></script>
@@ -137,6 +152,8 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
    <?php
 		
 if(isset($_POST["guardar"])){
+	if(isset($_POST["nombre"]) && $_POST["nombre"]!="" && isset($_POST["redactor"]) && $_POST["redactor"]!="" && isset($_POST["enlace"]) && $_POST["enlace"]!="" ){		
+
 		$id=$_GET['id'];
 		$nombre=$_POST['nombre'];
 		$descripcion=$_POST['redactor'];
@@ -152,10 +169,19 @@ if(isset($_POST["guardar"])){
 			entre el rango 0 a Numero de letras que tiene la cadena */
 		}
 		
+<<<<<<< HEAD
 		$direccion="../recursos";
 		$direccion2="recursos";
 		$tipo = explode('/',$_FILES['imagen']['type']);
 		$uploadfile =$direccion."/img/".$arreglo[0].".".$tipo[1];
+=======
+		$direccion="../recursos"; //para cargar
+		$direccion2="recursos";//para guardar		
+		$tipo = explode('/',$_FILES['imagen']['type']);
+		$uploadfile =$direccion."/img/".$id.".".$tipo[1];
+		$uploadfile2 =$direccion2."/img/".$id.".".$tipo[1];
+
+>>>>>>> 8c31fd2af5080e7037cfb91b2e0e036704a6a4db
 		$error = $_FILES['imagen']['error']; 
 		$subido = false;
 		
@@ -215,15 +241,14 @@ if(isset($_POST["guardar"])){
 				$result= pg_query($conn, $sql_update);
 																													
 			}		
-		 }
-			
-			
-			
-			
-			llenarLog(2, "Producto");
-javaalert("El producto fue modificado con éxito");
-iraURL("producto.php");
-		}
+		 }			
+		llenarLog(2, "Producto");
+		javaalert("El producto fue modificado con éxito");
+		iraURL("producto.php");
+				}
+	}else{
+			javaalert("Debe agregar todos los campos, por favor verifique");
+		}	
 }
 ?>
 </body>

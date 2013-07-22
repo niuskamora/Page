@@ -28,15 +28,25 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
     <div class="navbar-inner">
       <div class="container" style="width: auto;"> <a class="btn btn-navbar" href="#nav" data-toggle="collapse" data-target="#barrap"> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </a> <a  class="brand" id="brand-admin" href="#">PANGEATECH</a>
         <div id="barrap" class="nav-collapse collapse">
-          <ul class="nav slidernav">
-            <li><a href="admin.php">Administrador</a></li>
-            <li><a href="usuario.php"><em> <b>Usuario</b> </em></a></li>
-            <li><a href="menu.php">Menú</a></li>
-            <li><a href="info.php">Información</a></li>
+          <ul class="nav">
+            <li class="dropdown"> <a  class="dropdown-toggle" data-target="#" data-toggle="dropdown"> Gestion Usuarios <b class="caret"></b> </a>
+              <ul class="dropdown-menu">
+                <li><a href="tipoadmin.php"> Tipo Administrador </a></li>
+                <li><a href="admin.php">Administrador</a></li>
+                <li><a href="usuario.php">Usuario</a></li>
+              </ul>
+            </li>
+            <li><a href="menu.php"> Menú</a></li>
             <li><a href="producto.php">Producto</a></li>
             <li><a href="sucursal.php">Sucursal</a></li>
-            <li><a href="tipoinfo.php">Tipo Infomación </a></li>
-            <li><a href="tipoadmin.php">Tipo Administrador</a></li>
+            <li class="dropdown">
+             <a  class="dropdown-toggle" data-target="#" data-toggle="dropdown">
+              Gestion Informacion <b class="caret"></b> </a>
+              <ul class="dropdown-menu">
+                <li><a href="tipoinfo.php">Tipo Infomación</a></li>
+                <li><a href="info.php">Información</a></li>
+              </ul>
+            </li>
             <li><a href="cerrarsesion.php">Cerrar Sesión</a></li>
           </ul>
         </div>
@@ -72,7 +82,7 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
               </dt>
               <dd>
                 <div class=" well well-small">
-                  <input id="nombre" name="nombre"  type="text" value="<?php echo $row['nombre']?>" contenteditable=true required/>
+                  <input id="nombre" name="nombre"  type="text" value="<?php echo $row['nombre']?>"  maxlength="34" pattern="[A-Za-zñÑáéíóúÁÉÍÓÚ ]{1,34}" autofocus contenteditable=true required/>
                 </div>
               </dd>
               <dt>
@@ -80,7 +90,7 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
               </dt>
               <dd>
                 <div class="well well-small">
-<input type="text" name="apellido" id="apellido" value="<?php echo $row['apellido']?>" required/>
+<input type="text" name="apellido" id="apellido" value="<?php echo $row['apellido']?>" maxlength="34" pattern="[A-Za-zñÑáéíóúÁÉÍÓÚ ]{1,34}" required/>
                 </div>
               </dd>
                 </dd>
@@ -89,7 +99,7 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
               </dt>
               <dd>
                 <div class="well well-small">
-<input type="text" name="direccion" id="direccion" value="<?php echo $row['direccion']?>" required/>
+<input type="text" name="direccion" id="direccion" value="<?php echo $row['direccion']?>" maxlength="254" required/>
                 </div>
               </dd>
                 </dd>
@@ -98,7 +108,7 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
               </dt>
               <dd>
                 <div class="well well-small">
-<input type="text" name="usuario" id="usuario" value="<?php echo $row['usuario']?>" required/>
+<input type="text" name="usuario" id="usuario" value="<?php echo $row['usuario']?>" maxlength="34" pattern="[A-ZÑ]{1}[a-z.ñ0-9]{1,33}" required/>
                 </div>
               </dd>
                 </dd>
@@ -107,7 +117,7 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
               </dt>
               <dd>
                 <div class="well well-small">
-<input type="password" name="contrasena" id="contrasena" value="<?php echo $row['contrasena']?>" required/>
+<input type="password" name="contrasena" id="contrasena" value="<?php echo $row['contrasena']?>" maxlength="34" pattern="[A-Za-z.0-9]{1,34}" required/>
                 </div>
               </dd>
                 </dd>
@@ -116,7 +126,7 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
               </dt>
               <dd>
                 <div class="well well-small">
-<input type="password" name="contrasena_c" id="contrasena_c" value="<?php echo $row['contrasena']?>" required/>
+<input type="password" name="contrasena_c" id="contrasena_c" value="<?php echo $row['contrasena']?>" maxlength="34" pattern="[A-Za-z.0-9]{1,34}" required/>
                 </div>
               </dd>
                 <div class="well well-small" align="center">
@@ -137,7 +147,7 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
 ================================================== --> 
 <script type="text/javascript" src="../recursos/js/jquery-2.0.2.js" ></script> 
 <script src="../recursos/js/bootstrap.js"></script> 
-<script src="../recursos/js/bootstrap.min.js"></script>
+
    <?php
 		
 if(isset($_POST["guardar"])){
@@ -153,7 +163,7 @@ if(isset($_POST["guardar"])){
 					$direccion=$_POST['direccion'];
 					$usuario=$_POST['usuario'];
 					$contrasena=$_POST['contrasena'];
-					$resultado=pg_query($conn,"UPDATE usuario SET nombre='$nombre', apellido='$apellido' , direccion='$usuario', usuario='$usuario', contrasena='$contrasena' where usuarioid=$id") or die(pg_last_error($conn));
+					$resultado=pg_query($conn,"UPDATE usuario SET nombre='$nombre', apellido='$apellido' , direccion='$direccion', usuario='$usuario', contrasena='$contrasena' where usuarioid=$id") or die(pg_last_error($conn));
 					if($resultado){
 						llenarLog(2, "Usuario");
 						javaalert("El usuario fue modificado con éxito");

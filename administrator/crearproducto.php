@@ -33,16 +33,26 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
     <div class="navbar-inner">
       <div class="container" style="width: auto;"> <a class="btn btn-navbar" href="#nav" data-toggle="collapse" data-target="#barrap"> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </a> <a  class="brand" id="brand-admin" href="#">PANGEATECH</a>
         <div id="barrap" class="nav-collapse collapse">
-          <ul class="nav slidernav">
-            <li><a href="admin.php">Administrador</a></li>
-            <li><a href="usuario.php">Usuario</a></li>
-            <li><a href="menu.php">Menú</a></li>
-            <li><a href="info.php">Información</a></li>
-            <li><a href="producto.php"><em> <b>Producto</b> </em></a></li>
+         <ul class="nav">
+            <li class="dropdown"> <a  class="dropdown-toggle" data-target="#" data-toggle="dropdown"> Gestion Usuarios <b class="caret"></b> </a>
+              <ul class="dropdown-menu">
+                <li><a href="tipoadmin.php"> Tipo Administrador </a></li>
+                <li><a href="admin.php">Administrador</a></li>
+                <li><a href="usuario.php">Usuario</a></li>
+              </ul>
+            </li>
+            <li><a href="menu.php"> Menú</a></li>
+            <li><a href="producto.php">Producto</a></li>
             <li><a href="sucursal.php">Sucursal</a></li>
-            <li><a href="tipoinfo.php">Tipo Infomación </a></li>
-            <li><a href="tipoadmin.php">Tipo Administrador</a></li>
-             <li><a href="cerrarsesion.php">Cerrar Sesión</a></li>
+            <li class="dropdown">
+             <a  class="dropdown-toggle" data-target="#" data-toggle="dropdown">
+              Gestion Informacion <b class="caret"></b> </a>
+              <ul class="dropdown-menu">
+                <li><a href="tipoinfo.php">Tipo Infomación</a></li>
+                <li><a href="info.php">Información</a></li>
+              </ul>
+            </li>
+            <li><a href="cerrarsesion.php">Cerrar Sesión</a></li>
           </ul>
         </div>
         <!-- /.nav-collapse --> 
@@ -65,13 +75,13 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
      <div class="span9 well well-large" >
  			<p>
         <div class="span3 well well-small"><b>Nombre</b></div>
-            <div class="span6 well well-small "><input type="text" name="nombre" id="nombre" required/></div>
+            <div class="span6 well well-small "><input type="text" name="nombre" id="nombre" maxlength="34" required/></div>
             <div class="span3 well well-small"><b>Descripción</b></div>
-            <div class="span6 well well-small"><textarea id="redactor" name="redactor" ></textarea></div>
+            <div class="span6 well well-small"><textarea id="redactor" name="redactor" maxlength="2499" required></textarea></div>
              <div class="span3 well well-small"><b>Enlace</b></div>
-            <div class="span6 well well-small"><input type="text" name="enlace" id="enlace" required/></div>
+            <div class="span6 well well-small"><input type="text" name="enlace" id="enlace" maxlength="249" required/></div>
              <div class="span3 well well-small"><b>Imagen</b></div>
-            <div class="span6 well well-small"><input id="imagen" name="imagen" type="file" required/></div>
+            <div class="span6 well well-small"><input id="imagen" name="imagen" type="file" maxlength="249" required/></div>
             <div class="span9 well well-small" align="center"><button class="btn btn-primary" id="crear_uno" name="crear_uno" type="submit">Guardar</button></div>
 			<div class="span9 well well-small" align="center"> <button class="btn btn-primary" id="crear_otro" name="crear_otro" type="submit">Guardar y añadir otro</button></div>
 
@@ -88,7 +98,7 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
 
 <script type="text/javascript" src="../recursos/js/jquery-2.0.2.js" ></script> 
 <script src="../recursos/js/bootstrap.js"></script> 
-<script src="../recursos/js/bootstrap.min.js"></script>
+
 <!--Jquery para el Redactor
 ================================================== --> 
 <script src="../recursos/redactor/redactor.js"></script>
@@ -123,9 +133,11 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
 						entre el rango 0 a Numero de letras que tiene la cadena */
 					}
 					
-					$direccion="../recursos";
+					$direccion="../recursos"; //para cargar
+					$direccion2="recursos";//para guardar
 					$tipo = explode('/',$_FILES['imagen']['type']);
 					$uploadfile =$direccion."/img/".$arreglo[0].".".$tipo[1];
+					$uploadfile2 =$direccion2."/img/".$arreglo[0].".".$tipo[1];
 					$error = $_FILES['imagen']['error']; 
 					$subido = false;
 					
@@ -180,7 +192,7 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
 							imagecopy($img1Recortada, $img1, 0, 0, ceil(($ancho_buscado3-640)/2), ceil(($alto_buscado3-640)/2), ceil(($ancho_buscado3-640)/2)+640, ceil(($alto_buscado3-480)/2)+480);
 							
 							imagejpeg($img1Recortada,$uploadfile,$calidad);				
-							$sql_update="update PRODUCTO set imagen='".$uploadfile."' where productoid=".$arreglo[0]."";
+							$sql_update="update PRODUCTO set imagen='".$uploadfile2."' where productoid=".$arreglo[0]."";
 						
 							$result= pg_query($conn, $sql_update);
 																																

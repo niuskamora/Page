@@ -28,15 +28,25 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
     <div class="navbar-inner">
       <div class="container" style="width: auto;"> <a class="btn btn-navbar" href="#nav" data-toggle="collapse" data-target="#barrap"> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </a> <a  class="brand" id="brand-admin" href="#">PANGEATECH</a>
         <div id="barrap" class="nav-collapse collapse">
-          <ul class="nav slidernav">
-            <li><a href="admin.php">Administrador</a></li>
-            <li><a href="usuario.php">Usuario</a></li>
-            <li><a href="menu.php">Menú</a></li>
-            <li><a href="info.php">Información</a></li>
+          <ul class="nav">
+            <li class="dropdown"> <a  class="dropdown-toggle" data-target="#" data-toggle="dropdown"> Gestion Usuarios <b class="caret"></b> </a>
+              <ul class="dropdown-menu">
+                <li><a href="tipoadmin.php"> Tipo Administrador </a></li>
+                <li><a href="admin.php">Administrador</a></li>
+                <li><a href="usuario.php">Usuario</a></li>
+              </ul>
+            </li>
+            <li><a href="menu.php"> Menú</a></li>
             <li><a href="producto.php">Producto</a></li>
             <li><a href="sucursal.php">Sucursal</a></li>
-            <li><a href="tipoinfo.php"><em> <b>Tipo Infomación </b> </em></a></li>
-            <li><a href="tipoadmin.php">Tipo Administrador</a></li>
+            <li class="dropdown">
+             <a  class="dropdown-toggle" data-target="#" data-toggle="dropdown">
+              Gestion Informacion <b class="caret"></b> </a>
+              <ul class="dropdown-menu">
+                <li><a href="tipoinfo.php">Tipo Infomación</a></li>
+                <li><a href="info.php">Información</a></li>
+              </ul>
+            </li>
             <li><a href="cerrarsesion.php">Cerrar Sesión</a></li>
           </ul>
         </div>
@@ -72,7 +82,7 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
               </dt>
               <dd>
                 <div class=" well well-small">
-                  <input id="nombre" name="nombre"  type="text" value="<?php echo $row['nombre']?>" contenteditable=true required/>
+                  <input id="nombre" name="nombre"  type="text" value="<?php echo $row['nombre']?>" maxlength="34" contenteditable=true required/>
                 </div>
               </dd>
               <dt>
@@ -80,7 +90,7 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
               </dt>
               <dd>
                 <div class="well well-small">
-                  <input id="descripcion" name="descripcion"  type="text" value="<?php echo $row['descripcion']?>" contenteditable=true required/>
+                  <input id="descripcion" name="descripcion"  type="text" value="<?php echo $row['descripcion']?>" maxlength="249" contenteditable=true required/>
                 </div>
               </dd>
                 <div class="well well-small" align="center">
@@ -101,19 +111,23 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
 ================================================== --> 
 <script type="text/javascript" src="../recursos/js/jquery-2.0.2.js" ></script> 
 <script src="../recursos/js/bootstrap.js"></script> 
-<script src="../recursos/js/bootstrap.min.js"></script>
+
    <?php
 		
 if(isset($_POST["guardar"])){
+	if(isset($_POST["nombre"]) && isset($_POST["descripcion"]) && $_POST["nombre"]!="" && $_POST["descripcion"]!="" ){
 		$id=$_GET['id'];
 		$nombre=$_POST['nombre'];
 		$descripcion=$_POST['descripcion'];
         $resultado=pg_query($conn,"UPDATE tipoinformacion SET nombre='$nombre', descripcion='$descripcion' where tipoinformacionid=$id") or die(pg_last_error($conn));
 		if($resultado){
 			llenarLog(2, "tipo de información");
-javaalert("El tipo de información fue modificado con éxito");
-iraURL("tipoinfo.php");
+			javaalert("El tipo de información fue modificado con éxito");
+			iraURL("tipoinfo.php");
 		}
+	}else{
+				javaalert("Debe agregar todos los campos, por favor verifique");
+	}
 }
 ?>
 </body>

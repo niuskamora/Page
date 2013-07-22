@@ -34,15 +34,25 @@ $id=$_GET['id'];
     <div class="navbar-inner">
       <div class="container" style="width: auto;"> <a class="btn btn-navbar" href="#nav" data-toggle="collapse" data-target="#barrap"> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </a> <a  class="brand" id="brand-admin" href="#">PANGEATECH</a>
         <div id="barrap" class="nav-collapse collapse">
-          <ul class="nav slidernav">
-            <li><a href="admin.php">Administrador</a></li>
-            <li><a href="usuario.php">Usuario</a></li>
-            <li><a href="menu.php">Menú</a></li>
-            <li><a href="info.php"> <em> <b>Información </b> </em> </a></li>
+          <ul class="nav">
+            <li class="dropdown"> <a  class="dropdown-toggle" data-target="#" data-toggle="dropdown"> Gestion Usuarios <b class="caret"></b> </a>
+              <ul class="dropdown-menu">
+                <li><a href="tipoadmin.php"> Tipo Administrador </a></li>
+                <li><a href="admin.php">Administrador</a></li>
+                <li><a href="usuario.php">Usuario</a></li>
+              </ul>
+            </li>
+            <li><a href="menu.php"> Menú</a></li>
             <li><a href="producto.php">Producto</a></li>
             <li><a href="sucursal.php">Sucursal</a></li>
-            <li><a href="tipoinfo.php">Tipo Infomación</a></li>
-            <li><a href="tipoadmin.php">Tipo Administrador</a></li>
+            <li class="dropdown">
+             <a  class="dropdown-toggle" data-target="#" data-toggle="dropdown">
+              Gestion Informacion <b class="caret"></b> </a>
+              <ul class="dropdown-menu">
+                <li><a href="tipoinfo.php">Tipo Infomación</a></li>
+                <li><a href="info.php">Información</a></li>
+              </ul>
+            </li>
             <li><a href="cerrarsesion.php">Cerrar Sesión</a></li>
           </ul>
         </div>
@@ -83,7 +93,7 @@ $id=$_GET['id'];
               </dt>
               <dd>
                 <div class=" well well-small">
-                  <input id="titulo" name="titulo" type="text" value="<?php echo $row['titulo']; ?>" contenteditable="true"  maxlength="249" pattern="[A-Za-z,ñ,Ñ,á,é,í,ó,ú,Á,É,Í,Ó,Ú, ]{1,249}" required/>
+                  <input id="titulo" name="titulo" type="text" value="<?php echo $row['titulo']; ?>" contenteditable="true"  maxlength="249" pattern="[A-Za-z,ñ,Ñ,á,é,í,ó,ú,Á,É,Í,Ó,Ú, 0-9]{1,249}" required/>
                 </div>
               </dd>
               <dt>
@@ -91,7 +101,7 @@ $id=$_GET['id'];
               </dt>
               <dd>
                 <div class="well well-small">
-                  <textarea id="redactor" name="redactor" contenteditable="true"  maxlength="2499" pattern="[A-Za-z,ñ,Ñ,á,é,í,ó,ú,Á,É,Í,Ó,Ú, ]{1,2499}"><?php echo $row['descripcion']; ?></textarea>
+                  <textarea id="redactor" name="redactor" contenteditable="true"  maxlength="2499"><?php echo $row['descripcion']; ?></textarea>
                 </div>
               </dd>
               <dt>
@@ -99,7 +109,7 @@ $id=$_GET['id'];
               </dt>
               <dd>
                 <div class="well well-small">
-                  <input id="enlace" name="enlace" type="text" value="<?php echo $row['enlace']; ?>" contenteditable="true"  maxlength="249" pattern="[A-Za-z,ñ,Ñ,á,é,í,ó,ú,Á,É,Í,Ó,Ú, ]{1,249}"/>
+                  <input id="enlace" name="enlace" type="text" value="<?php echo $row['enlace']; ?>" contenteditable="true"  maxlength="249"/>
                 </div>
               </dd>
               <dt>
@@ -107,8 +117,8 @@ $id=$_GET['id'];
               </dt>
               <dd>
                 <div class="well well-small">
-                  <img src="<?php echo $row['imagen'];?> ">
-                	<input id="imagen" name="imagen" type="file" contenteditable="true" />
+                  <img src="<?php echo "../".$row['imagen'];?> ">
+                	<input id="imagen" name="imagen" type="file" contenteditable="true"/>
                 	</br>
                     <h5>Seleccione el tamaño</h5>
                     50x50
@@ -190,16 +200,18 @@ if(isset($_POST["guardar"])){
 		if($_FILES['imagen']['name']!=""){
 		
 			$caracteres = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz"; //posibles caracteres a usar
-			$numerodeletras=10; //numero de letras para generar el texto
+			$numerodeletras=5; //numero de letras para generar el texto
 			$cadena = ""; //variable para almacenar la cadena generada
 			for($i=0;$i<$numerodeletras;$i++){
     			$cadena .= substr($caracteres,rand(0,strlen($caracteres)),1); /*Extraemos 1 caracter de los caracteres 
 				entre el rango 0 a Numero de letras que tiene la cadena */
 			}
 		
-			$direccion="../recursos";
+			$direccion="../recursos/img/informacion";
+			$direccion2="recursos/img/informacion";
 			$tipo = explode('/',$_FILES['imagen']['type']);
-			$uploadfile =$direccion."/img/".$id.".".$tipo[1];
+			$uploadfile =$direccion."/".$cadena.".".$tipo[1];
+			$uploadfile2 =$direccion2."/".$cadena.".".$tipo[1];
 			$error = $_FILES['imagen']['error']; 
 			$subido = false;
 		
@@ -253,14 +265,14 @@ if(isset($_POST["guardar"])){
 				imagecopy($img1Recortada, $img1, 0, 0, ceil(($ancho_buscado3-$an)/2), ceil(($alto_buscado3-$al)/2), ceil(($ancho_buscado3-$an)/2)+$an, ceil(($alto_buscado3-$al)/2)+$al);
 				
 				imagejpeg($img1Recortada,$uploadfile,$calidad);				
-				$sql_update="update informacion set imagen='".$uploadfile."' where informacionid=".$arreglo[0]."";
+				$sql_update="update informacion set imagen='".$uploadfile2."' where informacionid=$id";
 			
 				$result= pg_query($conn, $sql_update);
 																													
 			}
 		 }
-	
-		if($resultado || $result){
+		 
+		 if($resultado || $result){
 			javaalert('Se Modifico la Información');
 			llenarLog(2, "Información");
 			iraURL('../administrator/info.php');	
@@ -280,7 +292,7 @@ if(isset($_POST["guardar"])){
 ================================================== --> 
 <script type="text/javascript" src="../recursos/js/jquery-2.0.2.js" ></script> 
 <script src="../recursos/js/bootstrap.js"></script> 
-<script src="../recursos/js/bootstrap.min.js"></script>
+
 <script src="../recursos/redactor/redactor.js"></script>
 <script src="../recursos/redactor/redactor.min.js"></script>
 <script type="text/javascript">
