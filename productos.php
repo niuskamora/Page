@@ -52,7 +52,8 @@ $conn=conectar();
           <a id="open2" href="#" class="btn btn-navbar" data-toggle="collapse" data-target="#login"><i class="icon-user icon-white"></i></a> <a class="brand visible-desktop" style="float:left" href="#"><img  src="recursos/img/logop.png" width="140" height="20"/></a>
             <div id="barrac" class="nav-collapse collapse">
               <ul id="nav" class="nav slidernav">
-          
+                        <?php   menu_principal(0,"home"); ?>  
+
               </ul>
             </div>
             <!--/.nav-collapse -->
@@ -76,32 +77,49 @@ $conn=conectar();
  	<h2 class="well" align="left">
   		Productos
   	</h2>
+       <p>Pangeatech pone a su disposición el mejor software adpatable a su empresa. Continue leyendo y enterese acerca de nuestros principales productos.</p>
+
   </div>
  
  <div class="row-fluid">
-  <div class="span12">
-  <br>
-      
-        
-      <div class="well" style="padding: 8px 0;">
-        <ul class="nav nav-list">
-          <li class="nav-header">List header</li>
-          <li class="active"><a href="#">Home</a></li>
-          <li><a href="#">Library</a></li>
-          <li><a href="#">Applications</a></li>
-          <li class="nav-header">Another list header</li>
-          <li><a href="#">Profile</a></li>
-          <li><a href="#">Settings</a></li>
-          <li class="divider"></li>
-          <li><a href="#">Help</a></li>
-        </ul>
+ 
+         <?php 
+		$SQL="SELECT * FROM producto";
+		$result = pg_query ($conn, $SQL ) or die("Error en la consulta SQL");
+		$registros= pg_num_rows($result);	
+		if($registros != 0){				 
+		
+		for ($i=0;$i<$registros;$i++)
+			{	
+			$row = pg_fetch_array ($result,$i);
+			echo '
+			<div class="span12 well-large">
+			<div class="span1"></div>
+			<div class="span10 well well-small" align="center">
+			<div class="span2"><img width="100" height="100" src="'.$row[4].'"> </div>
+			<div class="span8" align="justify"><p><b>'.$row[1].'</b></p>'.substr($row[2],0,200)."...".'<p><a href="verproducto.php?id='.$row[0].'&boton=ver">ver más</a></p></div>
+			</div>
+			<div class="span1"></div>			
+			 </div>
+			';
+			}
+		?>
+       
+    <?php 
+		}else{
+		
+	?>
+     <div class="alert alert-block" align="center">
+    <h2 class="alert alert-block">Atención  
+    <h4>No existen registros en producto</h4>
+    </h2>
     </div>
-  </div>
- </div>
- <div class="row-fluid">
-  </div>
- 
+    <?php 
+	}
+	?>
+  <!--cierre de div  row flui -->
 </div>
+</div><!--cierre de div container -->
 <div id="cont2" class="container" >
 
   <h2 class="section_header">

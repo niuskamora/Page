@@ -3,7 +3,9 @@ session_start();
 
 include("recursos/funciones.php");
 $conn=conectar();
-
+if(!isset($_GET['id'])){
+	iraURL('index.php');
+	}
 
 ?>
 <!DOCTYPE html>
@@ -52,7 +54,8 @@ $conn=conectar();
           <a id="open2" href="#" class="btn btn-navbar" data-toggle="collapse" data-target="#login"><i class="icon-user icon-white"></i></a> <a class="brand visible-desktop" style="float:left" href="#"><img  src="recursos/img/logop.png" width="140" height="20"/></a>
             <div id="barrac" class="nav-collapse collapse">
               <ul id="nav" class="nav slidernav">
-              <?php   menu_principal(0,"home"); ?>  
+                                  <?php   menu_principal(0,"home"); ?>  
+
               </ul>
             </div>
             <!--/.nav-collapse -->
@@ -71,59 +74,32 @@ $conn=conectar();
   </div>
 </div>
 <div class="container" style="background-color:white;">
- <!-- aqui estaba el carusel-->
- 
-<br>
-<br>
-<br>
- <?php
-   	$cons1="SELECT * FROM informacion WHERE tipoinformacionid=".$_GET['id']." ORDER BY informacionid";
-	$resulta1 = pg_query ($conn, $cons1) or die("Error en la consulta SQL");
-	$registros= pg_num_rows($resulta1);
-
-if($registros != 0){
-	for ($i=0;$i<$registros;$i++){
-		$row1 = pg_fetch_array ($resulta1,$i);
-		if($row1['titulo']=="Nosotros"){?>
- 
-		<div> <h2 id="in" align="left" class="well"><?php echo $row1['titulo']?></h2></div>
- 
- 		<div class="row-fluid">
-  		<div class="span12">
-  		<br>
-  		<p>
-			<div class="span9" align="justify"><?php echo $row1['descripcion'];?></div>
-      		<?php if($row1['imagen']!=""){ ?>
-       			<div class="span2"><img src="<?php echo $row1['imagen'];?>"></div>
-			<?php }?> 
-    	</p>
-    </div>
+  <?php
+   	$consulta="SELECT * FROM producto WHERE productoid=".$_GET['id'];
+	$resulta = pg_query ($conn, $consulta) or die("Error en la consulta SQL");
+			
+	if($row=pg_fetch_array($resulta)){
+		?>
+ <div> 
+ 	<h2 class="well" align="left">
+  		<?php echo $row['nombre'];  ?>
+  	</h2>
   </div>
- <?php }else {?>
-	<div> <h2 id="in" align="left" class="well"><?php echo $row1['titulo']?></h2></div>
  
- 	<div class="row-fluid">
-  	<div class="span12">
-  	<br>
-  	<p>
-    	<?php if($row1['titulo']!="Valores"){?>
-			<div class="span9" align="justify"><?php echo $row1['descripcion'];?></div>
-      	<?php if($row1['imagen']!=""){ ?>
-       		<div class="span2"><img src="<?php echo $row1['imagen'];?>"></div>
-		<?php } 
-		
-		}else {?>
-			<div align="justify" class="span10">
-            <img src="<?php echo $row1['imagen']?>">
-            </div>
-       <?php }?> 
+ <div class="row-fluid">
+  <div class="span12">
+  <br>
+   <p>
+  
+    		<div class="span9" align="justify"><?php echo $row['descripcion'];?></div>
+        	<div class="span2"><img src="<?php echo $row['imagen'];?>"></div>
+    <?php }?>
     </p>
-    </div>
   </div>
- <?php }
-	}
-}
- ?>
+ </div>
+ <div class="row-fluid">
+  </div>
+ 
 </div>
 <div id="cont2" class="container" >
 

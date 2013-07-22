@@ -75,11 +75,11 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
      <div class="span9 well well-large" >
  			<p>
         <div class="span3 well well-small"><b>Nombre</b></div>
-            <div class="span6 well well-small "><input type="text" name="nombre" id="nombre" maxlength="34" required/></div>
+            <div class="span6 well well-small "><input type="text" name="nombre" id="nombre" maxlength="34" title="Ingrese el nombre" placeholder="Ej. Sistema de Comercialización" autofocus required/></div>
             <div class="span3 well well-small"><b>Descripción</b></div>
             <div class="span6 well well-small"><textarea id="redactor" name="redactor" maxlength="2499" required></textarea></div>
              <div class="span3 well well-small"><b>Enlace</b></div>
-            <div class="span6 well well-small"><input type="text" name="enlace" id="enlace" maxlength="249" required/></div>
+            <div class="span6 well well-small"><input type="text" name="enlace" id="enlace" maxlength="249" title="Ingrese el enlace" placeholder="Ej. http:/..."  required/></div>
              <div class="span3 well well-small"><b>Imagen</b></div>
             <div class="span6 well well-small"><input id="imagen" name="imagen" type="file" maxlength="249" required/></div>
             <div class="span9 well well-small" align="center"><button class="btn btn-primary" id="crear_uno" name="crear_uno" type="submit">Guardar</button></div>
@@ -126,7 +126,7 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
 				if($_FILES['imagen']['name']!=""){
 					
 					$caracteres = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz"; //posibles caracteres a usar
-					$numerodeletras=10; //numero de letras para generar el texto
+					$numerodeletras=5; //numero de letras para generar el texto
 					$cadena = ""; //variable para almacenar la cadena generada
 					for($i=0;$i<$numerodeletras;$i++){
 						$cadena .= substr($caracteres,rand(0,strlen($caracteres)),1); /*Extraemos 1 caracter de los caracteres 
@@ -136,8 +136,8 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
 					$direccion="../recursos"; //para cargar
 					$direccion2="recursos";//para guardar
 					$tipo = explode('/',$_FILES['imagen']['type']);
-					$uploadfile =$direccion."/img/producto/".$arreglo[0].".".$tipo[1];
-					$uploadfile2 =$direccion2."/img/producto/".$arreglo[0].".".$tipo[1];
+					$uploadfile =$direccion."/img/producto/".$cadena.".".$tipo[1];
+					$uploadfile2 =$direccion2."/img/producto/".$cadena.".".$tipo[1];
 					$error = $_FILES['imagen']['error']; 
 					$subido = false;
 					
