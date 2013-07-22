@@ -2,7 +2,8 @@
 session_start();
 
 include("recursos/funciones.php");
-$conn=conectar();
+
+$sucursal=obtenerSucursal($_GET['ids']);
 ?>
 <!DOCTYPE html>
 
@@ -20,11 +21,16 @@ $conn=conectar();
 <style></style>
 <link rel=StyleSheet href="recursos/css/bootstrap-responsive.min.css" type="text/css" />
 <link rel=StyleSheet href="recursos/slide/jquery.pageslide.css" type="text/css" />
-<head>
-<body>
 <script type="text/javascript" src="recursos/js/jquery-2.0.2.js" ></script> 
 <script type="text/javascript" src="recursos/js/bootstrap.min.js" ></script> 
 <script type="text/javascript" src="recursos/slide/jquery.pageslide.min.js" ></script> 
+<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?sensor=false&amp;libraries=places"></script>
+
+</head>
+<body onLoad="setTimeout('initialize( <?php echo $sucursal[6]; ?>, <?php echo $sucursal[7]; ?>)',1000);">
+
+
+     
 <a href="#" class="scrolltop" style="display: none;"> <span>up</span> </a>
 <div  class="container-fluid" style="background-image: url('recursos/img/back.jpg'); background-repeat: repeat;">
 <div id="fullp">
@@ -69,35 +75,79 @@ $conn=conectar();
   </div>
 </div>
 <div class="container" style="background-color:white;">
-  <div id="hero2" class="visible-desktop">
+  <div id="hero2" >
     <div class="container">
       <div class="row-fluid animated fadeInDown">
+        <div class="span12"> </div>
         <div class="span12 ">
-           <div class="span1">
-            
-            </div>
-            <div class="span3">
-            Sucursal
-            </div>
-            <div class="span8">
-            </div>
+           <div class="span1"></div>
+           <div class="span10">
+               <div class="span3">
+                 <img src="<?php echo $sucursal[5]; ?>" class="img-rounded" />
+               </div>
+               <div class="span9 well well-small">
+                   <div class="span12">
+                        <div class="span4"> 
+                            <h3>
+                               <?php echo $sucursal[1]; ?>
+                            </h3>
+                        </div>
+                       
+                   </div> 
+                   
+                  
+                    <div class="span8">
+                       <p style="font-size:18px;"> <?php echo $sucursal[8]; ?></p>
+                    </div>
+                    <div class="span3"> </div>
+                
+                </div>
+           </div>     
+          <div class="span1"></div>
         </div>
+        <div class="span12 ">
+           <div class="span1"></div>
+           <div class="span10">
+               <div id="derecha" class="span3">
+              
+               </div>
+               <div class="span9 well well-small">
+                   <div class="span12">
+                        <div class="span3"> 
+                            <h3>
+                               Contacto
+                            </h3>
+                        </div>
+                       
+                   </div> 
+                   
+                  
+                    <div class="span9">
+                       <p style="font-size:18px;"> 
+                     	 <address>
+                        <?php echo $sucursal[2]; ?> <br>
+                          <abbr title="Telefono">P:</abbr> <?php echo $sucursal[3]; ?>
+                        </address>
+                         
+                        <address>
+                          <strong>Correo Electronico</strong><br>
+                          <a href="mailto:#"><?php echo $sucursal[4]; ?></a>
+                        </address>
+                       
+                       
+                       </p>
+                    </div>
+                    <div class="span3"> </div>
+                
+                </div>
+           </div>     
+          <div class="span1"></div>
+        </div>
+        
       </div>
     </div>
   </div>
-  <div id="hero" class="hidden-desktop">
-    <div class="container">
-      <div class="row animated fadeInDown">
-        <div class="span12">
-          <div class="span6 animated fadeInDownBig">
-            <h2>Servicios</h2>
-            <p>A través de nuestros servicios tecnológicos ponemos a disposición una gama de soluciones adecuada a las necesidades de su organización, contamos con un grupo de profesionales altamente capacitados con valores, dispuestos a trabajar de la mano para ayudarle a potenciar su negocio.</p>
-          </div>
-          <div class="span6 animated slide2 fadeInUpBig" style="text-align:center"><img style="width:70%;"   src="recursos/img/servitest.png" /> </div>
-        </div>
-      </div>
-    </div>
-  </div>
+  
 </div>
 <div id="cont2" class="container" >
 <?php 
@@ -317,7 +367,12 @@ $conn=conectar();
 </div>
 <script type="text/javascript" src="recursos/circular/js/jquery.contentcarousel.js"></script> 
 <script type="text/javascript" src="recursos/js/funciones.js" ></script> 
+
 <script type="text/javascript" src="recursos/circular/js/jquery.easing.1.3.js"></script> 
+ <script>
+           
+            google.maps.event.addDomListener(window, 'load', initialize);               
+</script>  
 <!-- the jScrollPane script -->
 
 <body>
