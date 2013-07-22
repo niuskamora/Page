@@ -82,7 +82,7 @@ $conn=conectar();
                         	<?php $SQL="SELECT * FROM  informacion WHERE  tipoinformacionid=".$_GET['id'];
 		$result = pg_query ($conn, $SQL ) or die("Error en la consulta SQL");
 		$registros= pg_num_rows($result);
-		
+		$m=0;
 	if($registros != 0){
 		?>
 		<div class="accordion" id="accordion2">
@@ -93,26 +93,31 @@ $conn=conectar();
 				
 				if($row['titulo']=="Servicios"){
 					?>
-					
-							<li class="nav-header">Servicios</li>
-							<li class=""><a href="#intro">Servicios </a></li>
+					<br>
+							<li class="nav-header">Pangeatech</li>
+							<li class=""><a href="#in">Pangeatech</a></li>
                             <?php
 							}else{
-							?>
-							<li class="nav-header">Portfolio Websites</li>
-							<li class="active"><a href="#c<?php echo $row['informacionid'] ?>" >Portfolio Version 1</a></li>
-							<li class=""><a href="#Portfolio2">Portfolio Version 2</a></li>
-						</ul>
-                       <?php } 
+							 
+							 $m=$m+1;
+							if($m==1){
+								?> <li class="nav-header">Servicios</li> 
+                           <?php  }else{ ?>
+							<li class=""><a href="#<?php echo $row['informacionid'] ?>" > <?php echo $row['titulo']?></a></li>
+							
+						
+                       <?php }
+					    } 
                         } 
 					 }
 						?>
+                        </ul>
 					</nav>
 				</aside>
 </div>
 <div class="span10">
  <br>
-  <div> <h2 align="left " class="well "> Servicios</h2> </div>
+  <div> <h2 id="in" align="left " class="well "> Servicios</h2> </div>
   
   
   
@@ -130,7 +135,7 @@ $conn=conectar();
 				if($row['titulo']=="Servicios"){
 					?>
 					  <div class="span12">
-					   <div id="intro" align="justify" class="span8">
+					   <div  align="justify" class="span8">
                         <?php echo $row['descripcion'] ?>
                        </div>
 					   <div class="span3">
@@ -160,8 +165,8 @@ $conn=conectar();
 					 ?>
 
   
- <div class="accordion-group">
-    <div class="accordion-heading">
+ <div id="<?php echo $row['informacionid'] ?>" class="accordion-group">
+    <div  class="accordion-heading">
       <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#c<?php echo $row['informacionid'] ?>">
       <?php echo $row['titulo']?>
         
@@ -179,9 +184,9 @@ $conn=conectar();
 					  </div>
       </div>
     </div>
-  </div>
+
                  
-      </div>
+      
   
 
 
@@ -195,7 +200,9 @@ $conn=conectar();
  
 			}
 			?>
+            </div>
 			</div>
+              </div>
             
             
             <?php
@@ -204,222 +211,7 @@ $conn=conectar();
 
 </div>
 </div>
-<div id="cont2" class="container" >
-<?php 
-// $frase=obtenerQuote();
 
-?>
-  <div id="intro">
-    <div class="container">
-     <!-- aqui iba la frase -->
-    </div>
-  </div>
-  <br>
-  <h2 class="section_header">
-    <hr class="left visible-desktop">
-    <span><!-- aqui iba el autor --></span>
-    <hr class="right visible-desktop">
-  </h2>
-  <br>
-  <div class="row-fluid">
-    <div class="span12 visible-desktop" style="padding:5px">
-      <div id="ca-container" class="ca-container">
-        <div class="ca-wrapper">
-          <div class="ca-item ca-item-1">
-            <div class="ca-item-main">
-              <div class="ca-icon"></div>
-              <h2>Portafolio</h2>
-              <h4> <span class="ca-quote">&ldquo;</span> <span>
-                <p>Destacando nuevas soluciones para un mercado tan cambiante, pangea technologies ofrece un abanico de posibilidades.</p>
-                <p><a class="btn" href="#">Portafolio</a></p>
-                </span> </h4>
-            </div>
-            <div class="ca-content-wrapper">
-              <div class="ca-content">
-                <h6>Animals are not commodities</h6>
-                <a href="#" class="ca-close">close</a>
-                <div class="ca-content-text">
-                  <p>I am so happy, my dear friend, so absorbed in the exquisite sense of mere tranquil existence, that I neglect my talents. I should be incapable of drawing a single stroke at the present moment; and yet I feel that I never was a greater artist than now.</p>
-                  <p>When, while the lovely valley teems with vapour around me, and the meridian sun strikes the upper surface of the impenetrable foliage of my trees, and but a few stray gleams steal into the inner sanctuary, I throw myself down among the tall grass by the trickling stream;</p>
-                  <p>She packed her seven versalia, put her initial into the belt and made herself on the way.</p>
-                </div>
-              </div>
-            </div>
-          </div>
-          <!--fin del primero -->
-          
-          <div class="ca-item ca-item-2">
-            <div class="ca-item-main">
-              <div class="ca-icon"></div>
-              <h2>Productos</h2>
-              <h4> <span class="ca-quote">&ldquo;</span> <span>
-                <p>Pangea Technologies mantiene una gama de productos adaptadas a las necesidades del entorno empresarial.</p>
-                <p><a class="btn" href="#">Ver Productos</a></p>
-                </span> </h4>
-            </div>
-            <div class="ca-content-wrapper">
-              <div class="ca-content">
-                <h6>Animals are not commodities</h6>
-                <a href="#" class="ca-close">close</a>
-                <div class="ca-content-text">
-                  <p>I am so happy, my dear friend, so absorbed in the exquisite sense of mere tranquil existence, that I neglect my talents. I should be incapable of drawing a single stroke at the present moment; and yet I feel that I never was a greater artist than now.</p>
-                  <p>When, while the lovely valley teems with vapour around me, and the meridian sun strikes the upper surface of the impenetrable foliage of my trees, and but a few stray gleams steal into the inner sanctuary, I throw myself down among the tall grass by the trickling stream;</p>
-                  <p>She packed her seven versalia, put her initial into the belt and made herself on the way.</p>
-                </div>
-              </div>
-            </div>
-          </div>
-          <!--fin del segundo -->
-          
-          <div class="ca-item ca-item-3">
-            <div class="ca-item-main">
-              <div class="ca-icon"></div>
-              <h2>Equipo</h2>
-              <h4> <span class="ca-quote">&ldquo;</span> <span>
-                <p>Desarrolladores y Analistas capacitados en un gran numero de areas para proveer soporte en nuevas tecnologias.</p>
-                </span> </h4>
-            </div>
-            <div class="ca-content-wrapper">
-              <div class="ca-content">
-                <h6>Animals are not commodities</h6>
-                <a href="#" class="ca-close">close</a>
-                <div class="ca-content-text">
-                  <p>I am so happy, my dear friend, so absorbed in the exquisite sense of mere tranquil existence, that I neglect my talents. I should be incapable of drawing a single stroke at the present moment; and yet I feel that I never was a greater artist than now.</p>
-                  <p>When, while the lovely valley teems with vapour around me, and the meridian sun strikes the upper surface of the impenetrable foliage of my trees, and but a few stray gleams steal into the inner sanctuary, I throw myself down among the tall grass by the trickling stream;</p>
-                  <p>She packed her seven versalia, put her initial into the belt and made herself on the way.</p>
-                </div>
-              </div>
-            </div>
-          </div>
-          <!--fin del tercero -->
-          <div class="ca-item ca-item-4">
-            <div class="ca-item-main">
-              <div class="ca-icon"></div>
-              <h2>Sucursales</h2>
-              <h4> <span class="ca-quote">&ldquo;</span> <span>
-                <p>Puntos de encuentro extendidos por toda venezuela con atencion garantizada.</p>
-                </span> </h4>
-            </div>
-            <div class="ca-content-wrapper">
-              <div class="ca-content">
-                <h6>Animals are not commodities</h6>
-                <a href="#" class="ca-close">close</a>
-                <div class="ca-content-text">
-                  <p>I am so happy, my dear friend, so absorbed in the exquisite sense of mere tranquil existence, that I neglect my talents. I should be incapable of drawing a single stroke at the present moment; and yet I feel that I never was a greater artist than now.</p>
-                  <p>When, while the lovely valley teems with vapour around me, and the meridian sun strikes the upper surface of the impenetrable foliage of my trees, and but a few stray gleams steal into the inner sanctuary, I throw myself down among the tall grass by the trickling stream;</p>
-                  <p>She packed her seven versalia, put her initial into the belt and made herself on the way.</p>
-                </div>
-              </div>
-            </div>
-          </div>
-          <!--fin del cuarto --> 
-        </div>
-      </div>
-      <hr/>
-    </div>
-    <div class="span12 hidden-desktop" style="padding:5px">
-      <div class="span4 ca-item ca-item-1">
-        <div class="ca-item-main">
-          <div class="ca-icon"></div>
-          <h2>Portafolio</h2>
-          <h4> <span class="ca-quote">&ldquo;</span> <span>
-            <p>Destacando nuevas soluciones para un mercado tan cambiante, pangea technologies ofrece un abanico de posibilidades.</p>
-            <p><a class="btn" href="#">Portafolio</a></p>
-            </span> </h4>
-        </div>
-        <div class="ca-content-wrapper">
-          <div class="ca-content">
-            <h6>Animals are not commodities</h6>
-            <a href="#" class="ca-close">close</a>
-            <div class="ca-content-text">
-              <p>I am so happy, my dear friend, so absorbed in the exquisite sense of mere tranquil existence, that I neglect my talents. I should be incapable of drawing a single stroke at the present moment; and yet I feel that I never was a greater artist than now.</p>
-              <p>When, while the lovely valley teems with vapour around me, and the meridian sun strikes the upper surface of the impenetrable foliage of my trees, and but a few stray gleams steal into the inner sanctuary, I throw myself down among the tall grass by the trickling stream;</p>
-              <p>She packed her seven versalia, put her initial into the belt and made herself on the way.</p>
-            </div>
-          </div>
-        </div>
-      </div>
-      <!--fin del primero -->
-      
-      <div class="span4 ca-item ca-item-2">
-        <div class="ca-item-main">
-          <div class="ca-icon"></div>
-          <h2>Productos</h2>
-          <h4> <span class="ca-quote">&ldquo;</span> <span>
-            <p>Pangea Technologies mantiene una gama de productos adaptadas a las necesidades del entorno empresarial.</p>
-            <p><a class="btn" href="#">Ver Productos</a></p>
-            </span> </h4>
-        </div>
-        <div class="ca-content-wrapper">
-          <div class="ca-content">
-            <h6>Animals are not commodities</h6>
-            <a href="#" class="ca-close">close</a>
-            <div class="ca-content-text">
-              <p>I am so happy, my dear friend, so absorbed in the exquisite sense of mere tranquil existence, that I neglect my talents. I should be incapable of drawing a single stroke at the present moment; and yet I feel that I never was a greater artist than now.</p>
-              <p>When, while the lovely valley teems with vapour around me, and the meridian sun strikes the upper surface of the impenetrable foliage of my trees, and but a few stray gleams steal into the inner sanctuary, I throw myself down among the tall grass by the trickling stream;</p>
-              <p>She packed her seven versalia, put her initial into the belt and made herself on the way.</p>
-            </div>
-          </div>
-        </div>
-      </div>
-      <!--fin del segundo -->
-      
-      <div class="span4 ca-item ca-item-3">
-        <div class="ca-item-main">
-          <div class="ca-icon"></div>
-          <h2>Equipo</h2>
-          <h4> <span class="ca-quote">&ldquo;</span> <span>
-            <p>Desarrolladores y Analistas capacitados en un gran numero de areas para proveer soporte en nuevas tecnologias.</p>
-            </span> </h4>
-        </div>
-        <div class="ca-content-wrapper">
-          <div class="ca-content">
-            <h6>Animals are not commodities</h6>
-            <a href="#" class="ca-close">close</a>
-            <div class="ca-content-text">
-              <p>I am so happy, my dear friend, so absorbed in the exquisite sense of mere tranquil existence, that I neglect my talents. I should be incapable of drawing a single stroke at the present moment; and yet I feel that I never was a greater artist than now.</p>
-              <p>When, while the lovely valley teems with vapour around me, and the meridian sun strikes the upper surface of the impenetrable foliage of my trees, and but a few stray gleams steal into the inner sanctuary, I throw myself down among the tall grass by the trickling stream;</p>
-              <p>She packed her seven versalia, put her initial into the belt and made herself on the way.</p>
-            </div>
-          </div>
-        </div>
-      </div>
-      <!--fin del tercero -->
-      <div class="span4 ca-item ca-item-4">
-        <div class="ca-item-main">
-          <div class="ca-icon"></div>
-          <h2>Sucursales</h2>
-          <h4> <span class="ca-quote">&ldquo;</span> <span>
-            <p>Puntos de encuentro extendidos por toda venezuela con atencion garantizada.</p>
-            </span> </h4>
-        </div>
-        <div class="ca-content-wrapper">
-          <div class="ca-content">
-            <h6>Animals are not commodities</h6>
-            <a href="#" class="ca-close">close</a>
-            <div class="ca-content-text">
-              <p>I am so happy, my dear friend, so absorbed in the exquisite sense of mere tranquil existence, that I neglect my talents. I should be incapable of drawing a single stroke at the present moment; and yet I feel that I never was a greater artist than now.</p>
-              <p>When, while the lovely valley teems with vapour around me, and the meridian sun strikes the upper surface of the impenetrable foliage of my trees, and but a few stray gleams steal into the inner sanctuary, I throw myself down among the tall grass by the trickling stream;</p>
-              <p>She packed her seven versalia, put her initial into the belt and made herself on the way.</p>
-            </div>
-          </div>
-        </div>
-      </div>
-      <!--fin del cuarto -->
-      <hr/>
-    </div>
-    <!-- /container -->
-    
-    <div id="footer" class="container" style="background-color: white; text-align: center;">
-      <div class="container">
-        <div class="well well-small">
-          <p class="muted credit">Pangea Technologies | RIF: J-29521849-0
-            Copyright © 2013. All rights reserved.</p>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
 <script type="text/javascript" src="recursos/circular/js/jquery.contentcarousel.js"></script> 
 <script type="text/javascript" src="recursos/js/funciones.js" ></script> 
 <script type="text/javascript" src="recursos/circular/js/jquery.easing.1.3.js"></script> 
