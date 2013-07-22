@@ -200,18 +200,18 @@ if(isset($_POST["guardar"])){
 		if($_FILES['imagen']['name']!=""){
 		
 			$caracteres = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz"; //posibles caracteres a usar
-			$numerodeletras=10; //numero de letras para generar el texto
+			$numerodeletras=5; //numero de letras para generar el texto
 			$cadena = ""; //variable para almacenar la cadena generada
 			for($i=0;$i<$numerodeletras;$i++){
     			$cadena .= substr($caracteres,rand(0,strlen($caracteres)),1); /*Extraemos 1 caracter de los caracteres 
 				entre el rango 0 a Numero de letras que tiene la cadena */
 			}
 		
-			$direccion="../recursos";
-			$direccion2="recursos";
+			$direccion="../recursos/img/informacion";
+			$direccion2="recursos/img/informacion";
 			$tipo = explode('/',$_FILES['imagen']['type']);
-			$uploadfile =$direccion."/img/".$id.".".$tipo[1];
-			$uploadfile2 =$direccion2."/img/".$id.".".$tipo[1];
+			$uploadfile =$direccion."/".$cadena.".".$tipo[1];
+			$uploadfile2 =$direccion2."/".$cadena.".".$tipo[1];
 			$error = $_FILES['imagen']['error']; 
 			$subido = false;
 		
@@ -271,11 +271,8 @@ if(isset($_POST["guardar"])){
 																													
 			}
 		 }
-		 if($result){
-			 	javaalert("Modifico");
-			 }
-	
-		if($resultado || $result){
+		 
+		 if($resultado || $result){
 			javaalert('Se Modifico la Información');
 			llenarLog(2, "Información");
 			iraURL('../administrator/info.php');	

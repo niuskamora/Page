@@ -94,7 +94,7 @@ $id=$_GET['id'];
             <div class="span3 well well-small"><b>Correo</b></div>
             <div class="span6 well well-small"><input id="correo" placeholder="ejemplo@correo.com" name="correo" type="email" value="<?php echo $row['correo'];?>" required/></div>
             <div class="span3 well well-small"><b>Imagen</b></div>
-            <div class="span6 well well-small"><img src="<?php echo $row['imagen'];?>"><input id="imagen" name="imagen" type="file" required/></div>
+            <div class="span6 well well-small"><img src="<?php echo "../".$row['imagen'];?>"><input id="imagen" name="imagen" type="file" /></div>
            <div class="span3 well well-small"><b>Latitud</b></div>
             	<div class="span6 well well-small"><input id="latitud" name="latitud" type="text" placeholder="+38.234534" pattern="[+,-][0-9]{1,3}[.][0-9]{6}"  value="<?php echo $row['latitud'];?>" required/></div>
                 <div class="span3 well well-small"><b>Longitud</b></div>
@@ -136,10 +136,13 @@ $id=$_GET['id'];
 		}
 		
 		$direccion="../recursos";
+		$direccion2="recursos";
 		$tipo = explode('/',$_FILES['imagen']['type']);
-		$uploadfile =$direccion."/img/".$arreglo.".".$tipo[1];
+		$uploadfile =$direccion."/img/".$arreglo[0].".".$tipo[1];
 		$error = $_FILES['imagen']['error']; 
 		$subido = false;
+		
+		$uploadfile2 =$direccion2."/img/".$arreglo[0].".".$tipo[1];
 		
 		
 		if($error==UPLOAD_ERR_OK){ 
@@ -192,7 +195,7 @@ $id=$_GET['id'];
 				imagecopy($img1Recortada, $img1, 0, 0, ceil(($ancho_buscado3-640)/2), ceil(($alto_buscado3-640)/2), ceil(($ancho_buscado3-640)/2)+640, ceil(($alto_buscado3-480)/2)+480);
 				
 				imagejpeg($img1Recortada,$uploadfile,$calidad);				
-				$sql_update="update sucursal set imagen='".$uploadfile."' WHERE sucursalid=".$arreglo."";
+				$sql_update="update sucursal set imagen='".$uploadfile2."' WHERE sucursalid=".$arreglo."";
 			
 				$result= pg_query($conn, $sql_update);
 																													

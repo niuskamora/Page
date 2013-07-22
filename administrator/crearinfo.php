@@ -157,18 +157,18 @@ if(isset($_POST["guardar"]) || isset($_POST["guardar2"])){
 		if($_FILES['imagen']['name']!=""){
 		
 			$caracteres = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz"; //posibles caracteres a usar
-			$numerodeletras=10; //numero de letras para generar el texto
+			$numerodeletras=5; //numero de letras para generar el texto
 			$cadena = ""; //variable para almacenar la cadena generada
 			for($i=0;$i<$numerodeletras;$i++){
     			$cadena .= substr($caracteres,rand(0,strlen($caracteres)),1); /*Extraemos 1 caracter de los caracteres 
 				entre el rango 0 a Numero de letras que tiene la cadena */
 			}
 		
-			$direccion="../recursos";
-			$direccion2="recursos";
+			$direccion="../recursos/img/informacion";
+			$direccion2="recursos/img/informacion";
 			$tipo = explode('/',$_FILES['imagen']['type']);
-			$uploadfile =$direccion."/img/".$arreglo[0].".".$tipo[1];
-			$uploadfile2 =$direccion2."/img/".$arreglo[0].".".$tipo[1];
+			$uploadfile =$direccion."/".$cadena.".".$tipo[1];
+			$uploadfile2 =$direccion2."/".$cadena.".".$tipo[1];
 			$error = $_FILES['imagen']['error']; 
 			$subido = false;
 		
@@ -232,7 +232,7 @@ if(isset($_POST["guardar"]) || isset($_POST["guardar2"])){
 		if($resultado && $result){
 			javaalert('Se Creo la Información');
 			llenarLog(1, "Información");
-			if(isset($_POST["guardar1"])){
+			if(isset($_POST["guardar"])){
 				iraURL('../administrator/info.php');
 			}
 			else{

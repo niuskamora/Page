@@ -69,8 +69,42 @@ $conn=conectar();
   </div>
 </div>
 <div class="container" style="background-color:white;">
- <!-- aqui estaba el carusel-->
+  
+  <h2>  Servicios <h2>
+  
+  <?php
+  
+  
+		
+		$SQL="SELECT * FROM  informacion WHERE  tipoinformacionid=".$_GET['id'];
+		$result = pg_query ($conn, $SQL ) or die("Error en la consulta SQL");
+		$registros= pg_num_rows($result);
+		
+	if($registros != 0){
+			for ($i=0;$i<$registros;$i++)
+			{
+
+			$row = pg_fetch_array ($result,$i);
+  
+  ?>
+  
+  <button type="button" class="btn btn-warning" data-toggle="collapse" data-target="#demo<?php $row["id"] ?>">
+    <?php $row["nombre"]  ?>
+</button>
+ 
+<div id="demo<?php $row["id"] ?>" class="collapse">
+      <div class="row-fluid">
+      <span> 
+      
+      </div>
+      </div>
+
 </div>
+
+<?php 
+			}
+	}
+?>
 <div id="cont2" class="container" >
 <?php 
 // $frase=obtenerQuote();

@@ -31,25 +31,15 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
     <div class="navbar-inner">
       <div class="container" style="width: auto;"> <a class="btn btn-navbar" href="#nav" data-toggle="collapse" data-target="#barrap"> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </a> <a  class="brand" id="brand-admin" href="#">PANGEATECH</a>
         <div id="barrap" class="nav-collapse collapse">
-          <ul class="nav">
-            <li class="dropdown"> <a  class="dropdown-toggle" data-target="#" data-toggle="dropdown"> Gestion Usuarios <b class="caret"></b> </a>
-              <ul class="dropdown-menu">
-                <li><a href="tipoadmin.php"> Tipo Administrador </a></li>
-                <li><a href="admin.php">Administrador</a></li>
-                <li><a href="usuario.php">Usuario</a></li>
-              </ul>
-            </li>
-            <li><a href="menu.php"> Menú</a></li>
-            <li><a href="producto.php">Producto</a></li>
+          <ul class="nav slidernav">
+            <li><a href="admin.php">Administrador</a></li>
+            <li><a href="usuario.php">Usuario</a></li>
+            <li><a href="menu.php">Menú</a></li>
+            <li><a href="info.php">Información</a></li>
+            <li><a href="producto.php"><em> <b>Producto </b> </em></a></li>
             <li><a href="sucursal.php">Sucursal</a></li>
-            <li class="dropdown">
-             <a  class="dropdown-toggle" data-target="#" data-toggle="dropdown">
-              Gestion Informacion <b class="caret"></b> </a>
-              <ul class="dropdown-menu">
-                <li><a href="tipoinfo.php">Tipo Infomación</a></li>
-                <li><a href="info.php">Información</a></li>
-              </ul>
-            </li>
+            <li><a href="tipoinfo.php">Tipo Infomación</a></li>
+            <li><a href="tipoadmin.php">Tipo Administrador</a></li>
             <li><a href="cerrarsesion.php">Cerrar Sesión</a></li>
           </ul>
         </div>
@@ -164,15 +154,22 @@ if(isset($_POST["guardar"])){
 			entre el rango 0 a Numero de letras que tiene la cadena */
 		}
 		
+<<<<<<< HEAD
+		$direccion2="recursos";
+		$tipo = explode('/',$_FILES['imagen']['type']);
+		$uploadfile =$direccion."/img/".$arreglo[0].".".$tipo[1];
+=======
 		$direccion="../recursos"; //para cargar
 		$direccion2="recursos";//para guardar		
 		$tipo = explode('/',$_FILES['imagen']['type']);
 		$uploadfile =$direccion."/img/producto/".$id.".".$tipo[1];
 		$uploadfile2 =$direccion2."/img/producto/".$id.".".$tipo[1];
 
+>>>>>>> 8c31fd2af5080e7037cfb91b2e0e036704a6a4db
 		$error = $_FILES['imagen']['error']; 
 		$subido = false;
 		
+		$uploadfile2 =$direccion."/img/".$arreglo[0].".".$tipo[1];
 		
 		if($error==UPLOAD_ERR_OK){
 			    $subido = copy($_FILES['imagen']['tmp_name'], $uploadfile); 
@@ -224,18 +221,19 @@ if(isset($_POST["guardar"])){
 				imagecopy($img1Recortada, $img1, 0, 0, ceil(($ancho_buscado3-640)/2), ceil(($alto_buscado3-640)/2), ceil(($ancho_buscado3-640)/2)+640, ceil(($alto_buscado3-480)/2)+480);
 				
 				imagejpeg($img1Recortada,$uploadfile,$calidad);				
-				$sql_update="update PRODUCTO set imagen='".$uploadfile2."' where productoid=".$_GET['id'];
+				$sql_update="update PRODUCTO set imagen='".$uploadfile."' where productoid=".$_GET['id'];
 				$result= pg_query($conn, $sql_update);
 																													
 			}		
-		 }			
-		llenarLog(2, "Producto");
-		javaalert("El producto fue modificado con éxito");
-		iraURL("producto.php");
-				}
-	}else{
-			javaalert("Debe agregar todos los campos, por favor verifique");
-		}	
+		 }
+			
+			
+			
+			
+			llenarLog(2, "Producto");
+javaalert("El producto fue modificado con éxito");
+iraURL("producto.php");
+		}
 }
 ?>
 </body>

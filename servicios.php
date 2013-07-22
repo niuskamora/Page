@@ -3,8 +3,6 @@ session_start();
 
 include("recursos/funciones.php");
 $conn=conectar();
-
-
 ?>
 <!DOCTYPE html>
 
@@ -71,86 +69,118 @@ $conn=conectar();
   </div>
 </div>
 <div class="container" style="background-color:white;">
- <!-- aqui estaba el carusel-->
- 
- <div>
- 	<h2 class="well" align="left">
-    	<br>
-  		Nosotros
-  	</h2>
-  </div>
- 
- <div class="row-fluid">
-  <div class="span12">
-  <br>
-  <p>
-   <?php
-   	$cons1="SELECT * FROM informacion WHERE tipoinformacionid='5' and titulo='Nosotros'";
-	$resulta1 = pg_query ($conn, $cons1) or die("Error en la consulta SQL");
-			
-	if($row1=pg_fetch_array($resulta1)){
-		?>
-    	<div class="span9" align="justify"><?php echo $row1['descripcion'];?></div>
-        <?php if($row1['imagen']!=""){ ?>
-        	<div class="span2"><img src="<?php echo $row1['imagen'];?>"></div>
-		<?php }?>
-    <?php }?>
-    </p>
-    </div>
-  </div>
-  
-  <div class="row-fluid">
-  <div class="span12">
-  <br>
-   <h2 class="well">
-  	Misión
-  </h2>
-  <p>
-   <?php
-   	$cons1="SELECT * FROM informacion WHERE tipoinformacionid='5' and titulo='Misión'";
-	$resulta1 = pg_query ($conn, $cons1) or die("Error en la consulta SQL");
-			
-	if($row1=pg_fetch_array($resulta1)){
-		?>
-    	<div class="span9" align="justify"><?php echo $row1['descripcion'];?></div>
-        <?php if($row1['imagen']!=""){ ?>
-        	<div class="span2"><img src="<?php echo $row1['imagen'];?>"></div>
-        <?php }?>
-    <?php }?>
-    </p>
-    </div>
-  </div>
-  
-  <div class="row-fluid">
-  <div class="span12">
-  <br>
-   <h2 class="well">
-  	Visión
-  </h2>
-  <p>
-   <?php
-   	$cons1="SELECT * FROM informacion WHERE tipoinformacionid='5' and titulo='Visión'";
-	$resulta1 = pg_query ($conn, $cons1) or die("Error en la consulta SQL");
-			
-	if($row1=pg_fetch_array($resulta1)){
-		?>
-    	<div class="span9" align="justify"><?php echo $row1['descripcion'];?></div>
-        <?php if($row1['imagen']!=""){ ?>
-        	<div class="span2"><img src="<?php echo $row1['imagen'];?>"></div>
-        <?php }?>
-    <?php }?>
-    </p>
-    </div>
-  </div>
- 
-</div>
-<div id="cont2" class="container" >
 
-  <h2 class="section_header">
-    <span><!-- aqui iba el autor --></span>
-  </h2>
-   
+
+
+ <br>
+  <div> <h2 align="left " class="well "> Servicios</h2> </div>
   
+  
+  
+  <?php  
+		
+		$SQL="SELECT * FROM  informacion WHERE  tipoinformacionid=".$_GET['id'];
+		$result = pg_query ($conn, $SQL ) or die("Error en la consulta SQL");
+		$registros= pg_num_rows($result);
+		
+	if($registros != 0){
+			for ($i=0;$i<$registros;$i++)
+			{
+				$row = pg_fetch_array ($result,$i);
+				
+				if($row['titulo']=="Servicios"){
+					?>
+					  <div class="span12">
+					   <div align="justify" class="span8">
+                        <?php echo $row['descripcion'] ?>
+                       </div>
+					   <div class="span3">
+                      <img src="<?php echo $row['imagen']?>">
+                       </div>
+					  </div>
+                      
+                    <?php
+					
+				}
+			}
+			
+			$SQL="SELECT * FROM  informacion WHERE  tipoinformacionid=".$_GET['id'];
+		$result = pg_query ($conn, $SQL ) or die("Error en la consulta SQL");
+		$registros= pg_num_rows($result);
+		
+	if($registros != 0){
+		?>
+		<div class="accordion" id="accordion2">
+        <?php
+			for ($i=0;$i<$registros;$i++)
+			{
+				$row = pg_fetch_array ($result,$i);
+				
+				if($row['titulo']!="Servicios"){
+					
+					 ?>
+
+  
+ <div class="accordion-group">
+    <div class="accordion-heading">
+      <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#c<?php echo $row['informacionid'] ?>">
+      <?php echo $row['titulo']?>
+        
+      </a>
+    </div>
+    <div id="c<?php echo $row['informacionid']?>" class="accordion-body collapse">
+      <div class="accordion-inner">
+        <div class="span11 well">
+					    <div align="justify" class="span7">
+                        <?php echo $row['descripcion'] ?>
+                       </div> 
+					   <div class="span3">
+                      <img src="<?php echo $row['imagen']?>">
+                       </div>
+					  </div>
+      </div>
+    </div>
+  </div>
+                 
+      </div>
+  
+
+
+ 
+<?php 
+					
+					}
+
+			
+			}
+ 
+			}
+			?>
+			</div>
+            
+            
+            <?php
+	}
+?>
+
+
+  
+<div id="cont2" class="container" >
+<?php 
+// $frase=obtenerQuote();
+
+?>
+  <div id="intro">
+    <div class="container">
+   
+    </div>
+  </div>
+  <br>
+  <h2 class="section_header">
+ 
+    <span><!-- aqui iba el autor --></span>
+ 
+  </h2>
   <br>
   <div class="row-fluid">
     <div class="span12 visible-desktop" style="padding:5px">
@@ -170,7 +200,10 @@ $conn=conectar();
                 <h6>Animals are not commodities</h6>
                 <a href="#" class="ca-close">close</a>
                 <div class="ca-content-text">
-                 </div>
+                  <p>I am so happy, my dear friend, so absorbed in the exquisite sense of mere tranquil existence, that I neglect my talents. I should be incapable of drawing a single stroke at the present moment; and yet I feel that I never was a greater artist than now.</p>
+                  <p>When, while the lovely valley teems with vapour around me, and the meridian sun strikes the upper surface of the impenetrable foliage of my trees, and but a few stray gleams steal into the inner sanctuary, I throw myself down among the tall grass by the trickling stream;</p>
+                  <p>She packed her seven versalia, put her initial into the belt and made herself on the way.</p>
+                </div>
               </div>
             </div>
           </div>
@@ -190,6 +223,9 @@ $conn=conectar();
                 <h6>Animals are not commodities</h6>
                 <a href="#" class="ca-close">close</a>
                 <div class="ca-content-text">
+                  <p>I am so happy, my dear friend, so absorbed in the exquisite sense of mere tranquil existence, that I neglect my talents. I should be incapable of drawing a single stroke at the present moment; and yet I feel that I never was a greater artist than now.</p>
+                  <p>When, while the lovely valley teems with vapour around me, and the meridian sun strikes the upper surface of the impenetrable foliage of my trees, and but a few stray gleams steal into the inner sanctuary, I throw myself down among the tall grass by the trickling stream;</p>
+                  <p>She packed her seven versalia, put her initial into the belt and made herself on the way.</p>
                 </div>
               </div>
             </div>
@@ -209,6 +245,9 @@ $conn=conectar();
                 <h6>Animals are not commodities</h6>
                 <a href="#" class="ca-close">close</a>
                 <div class="ca-content-text">
+                  <p>I am so happy, my dear friend, so absorbed in the exquisite sense of mere tranquil existence, that I neglect my talents. I should be incapable of drawing a single stroke at the present moment; and yet I feel that I never was a greater artist than now.</p>
+                  <p>When, while the lovely valley teems with vapour around me, and the meridian sun strikes the upper surface of the impenetrable foliage of my trees, and but a few stray gleams steal into the inner sanctuary, I throw myself down among the tall grass by the trickling stream;</p>
+                  <p>She packed her seven versalia, put her initial into the belt and made herself on the way.</p>
                 </div>
               </div>
             </div>
@@ -227,6 +266,9 @@ $conn=conectar();
                 <h6>Animals are not commodities</h6>
                 <a href="#" class="ca-close">close</a>
                 <div class="ca-content-text">
+                  <p>I am so happy, my dear friend, so absorbed in the exquisite sense of mere tranquil existence, that I neglect my talents. I should be incapable of drawing a single stroke at the present moment; and yet I feel that I never was a greater artist than now.</p>
+                  <p>When, while the lovely valley teems with vapour around me, and the meridian sun strikes the upper surface of the impenetrable foliage of my trees, and but a few stray gleams steal into the inner sanctuary, I throw myself down among the tall grass by the trickling stream;</p>
+                  <p>She packed her seven versalia, put her initial into the belt and made herself on the way.</p>
                 </div>
               </div>
             </div>
@@ -251,6 +293,9 @@ $conn=conectar();
             <h6>Animals are not commodities</h6>
             <a href="#" class="ca-close">close</a>
             <div class="ca-content-text">
+              <p>I am so happy, my dear friend, so absorbed in the exquisite sense of mere tranquil existence, that I neglect my talents. I should be incapable of drawing a single stroke at the present moment; and yet I feel that I never was a greater artist than now.</p>
+              <p>When, while the lovely valley teems with vapour around me, and the meridian sun strikes the upper surface of the impenetrable foliage of my trees, and but a few stray gleams steal into the inner sanctuary, I throw myself down among the tall grass by the trickling stream;</p>
+              <p>She packed her seven versalia, put her initial into the belt and made herself on the way.</p>
             </div>
           </div>
         </div>
@@ -271,6 +316,9 @@ $conn=conectar();
             <h6>Animals are not commodities</h6>
             <a href="#" class="ca-close">close</a>
             <div class="ca-content-text">
+              <p>I am so happy, my dear friend, so absorbed in the exquisite sense of mere tranquil existence, that I neglect my talents. I should be incapable of drawing a single stroke at the present moment; and yet I feel that I never was a greater artist than now.</p>
+              <p>When, while the lovely valley teems with vapour around me, and the meridian sun strikes the upper surface of the impenetrable foliage of my trees, and but a few stray gleams steal into the inner sanctuary, I throw myself down among the tall grass by the trickling stream;</p>
+              <p>She packed her seven versalia, put her initial into the belt and made herself on the way.</p>
             </div>
           </div>
         </div>
@@ -290,6 +338,9 @@ $conn=conectar();
             <h6>Animals are not commodities</h6>
             <a href="#" class="ca-close">close</a>
             <div class="ca-content-text">
+              <p>I am so happy, my dear friend, so absorbed in the exquisite sense of mere tranquil existence, that I neglect my talents. I should be incapable of drawing a single stroke at the present moment; and yet I feel that I never was a greater artist than now.</p>
+              <p>When, while the lovely valley teems with vapour around me, and the meridian sun strikes the upper surface of the impenetrable foliage of my trees, and but a few stray gleams steal into the inner sanctuary, I throw myself down among the tall grass by the trickling stream;</p>
+              <p>She packed her seven versalia, put her initial into the belt and made herself on the way.</p>
             </div>
           </div>
         </div>
@@ -308,6 +359,9 @@ $conn=conectar();
             <h6>Animals are not commodities</h6>
             <a href="#" class="ca-close">close</a>
             <div class="ca-content-text">
+              <p>I am so happy, my dear friend, so absorbed in the exquisite sense of mere tranquil existence, that I neglect my talents. I should be incapable of drawing a single stroke at the present moment; and yet I feel that I never was a greater artist than now.</p>
+              <p>When, while the lovely valley teems with vapour around me, and the meridian sun strikes the upper surface of the impenetrable foliage of my trees, and but a few stray gleams steal into the inner sanctuary, I throw myself down among the tall grass by the trickling stream;</p>
+              <p>She packed her seven versalia, put her initial into the belt and made herself on the way.</p>
             </div>
           </div>
         </div>
