@@ -177,5 +177,16 @@ order by random() limit 1 ;";
 	
 	
 }
+function obtenerSucursal($id)
+{
+	
+	$conex = conectar();
+	$query="select * from sucursal where sucursalid=".$id;
+	$Qmenu = pg_query($conex,$query) or die(pg_last_error($conex));
+	return $row = pg_fetch_array($Qmenu,0);
+	
+	
+	
+}
 
 ?>
