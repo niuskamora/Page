@@ -184,21 +184,21 @@ if(isset($_POST["guardar"])){
 	if($_FILES['imagen']['name']!=""){
 		
 		$caracteres = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz"; //posibles caracteres a usar
-		$numerodeletras=10; //numero de letras para generar el texto
+		$numerodeletras=15; //numero de letras para generar el texto
 		$cadena = ""; //variable para almacenar la cadena generada
 		for($i=0;$i<$numerodeletras;$i++){
     		$cadena .= substr($caracteres,rand(0,strlen($caracteres)),1); /*Extraemos 1 caracter de los caracteres 
 			entre el rango 0 a Numero de letras que tiene la cadena */
 		}
 		
-	$direccion="../recursos";
-		$direccion5="recursos";
+	$direccion="../recursos/img/sucursal";
+		$direccion2="recursos/img/sucursal";
 		$tipo = explode('/',$_FILES['imagen']['type']);
-		$uploadfile =$direccion."/img/".$arreglo[0].".".$tipo[1];
+		$uploadfile =$direccion."/".$cadena.".".$tipo[1];
 		$error = $_FILES['imagen']['error']; 
 		$subido = false;
 		
-		$uploadfile5 =$direccion5."/img/".$arreglo[0].".".$tipo[1];
+		$uploadfile5 =$direccion5."/".$cadena.".".$tipo[1];
 		
 		
 		if($error==UPLOAD_ERR_OK){ 
@@ -285,21 +285,21 @@ if(isset($_POST["guardar2"])){
 	if($_FILES['imagen']['name']!=""){
 		
 		$caracteres = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz"; //posibles caracteres a usar
-		$numerodeletras=10; //numero de letras para generar el texto
+		$numerodeletras=5; //numero de letras para generar el texto
 		$cadena = ""; //variable para almacenar la cadena generada
 		for($i=0;$i<$numerodeletras;$i++){
     		$cadena .= substr($caracteres,rand(0,strlen($caracteres)),1); /*Extraemos 1 caracter de los caracteres 
 			entre el rango 0 a Numero de letras que tiene la cadena */
 		}
 		
-		$direccion="../recursos";
-		$direccion5="recursos";
+		$direccion="../recursos/img/sucursal";
+		$direccion2="recursos/img/sucursal";
 		$tipo = explode('/',$_FILES['imagen']['type']);
-		$uploadfile =$direccion."/img/".$arreglo[0].".".$tipo[1];
+		$uploadfile =$direccion."/".$cadena.".".$tipo[1];
 		$error = $_FILES['imagen']['error']; 
 		$subido = false;
 		
-		$uploadfile5 =$direccion5."/img/".$arreglo[0].".".$tipo[1];
+		$uploadfile5 =$direccion5."/".$cadena.".".$tipo[1];
 		
 		if($error==UPLOAD_ERR_OK){ 
 			    $subido = copy($_FILES['imagen']['tmp_name'], $uploadfile); 

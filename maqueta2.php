@@ -71,7 +71,46 @@ $conn=conectar();
 <div class="container" style="background-color:white;">
 
 
+<div class=" row-fluid span12">
 
+<div class="span2">
+
+<aside class="span2 well affix" data-spy="affix">
+					<nav id="website-nav" class="sidebar-nav">
+						<ul id="website-nav" class="nav nav-list">
+                        
+                        	<?php $SQL="SELECT * FROM  informacion WHERE  tipoinformacionid=".$_GET['id'];
+		$result = pg_query ($conn, $SQL ) or die("Error en la consulta SQL");
+		$registros= pg_num_rows($result);
+		
+	if($registros != 0){
+		?>
+		<div class="accordion" id="accordion2">
+        <?php
+			for ($i=0;$i<$registros;$i++)
+			{
+				$row = pg_fetch_array ($result,$i);
+				
+				if($row['titulo']=="Servicios"){
+					?>
+					
+							<li class="nav-header">Servicios</li>
+							<li class=""><a href="#intro">Servicios </a></li>
+                            <?php
+							}else{
+							?>
+							<li class="nav-header">Portfolio Websites</li>
+							<li class="active"><a href="#c<?php echo $row['informacionid'] ?>" >Portfolio Version 1</a></li>
+							<li class=""><a href="#Portfolio2">Portfolio Version 2</a></li>
+						</ul>
+                       <?php } 
+                        } 
+					 }
+						?>
+					</nav>
+				</aside>
+</div>
+<div class="span10">
  <br>
   <div> <h2 align="left " class="well "> Servicios</h2> </div>
   
@@ -91,7 +130,7 @@ $conn=conectar();
 				if($row['titulo']=="Servicios"){
 					?>
 					  <div class="span12">
-					   <div align="justify" class="span8">
+					   <div id="intro" align="justify" class="span8">
                         <?php echo $row['descripcion'] ?>
                        </div>
 					   <div class="span3">
@@ -163,7 +202,8 @@ $conn=conectar();
 	}
 ?>
 
-
+</div>
+</div>
 <div id="cont2" class="container" >
 <?php 
 // $frase=obtenerQuote();
