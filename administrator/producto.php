@@ -75,11 +75,10 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
       </div>
     </div>
     <div class="span9">
-      <?php 
-		$SQL="SELECT * FROM producto";
-		$result = pg_query ($conn, $SQL ) or die("Error en la consulta SQL");
-		$registros= pg_num_rows($result);
-
+    <?php 
+	$SQL="SELECT * FROM producto";
+	$result = pg_query ($conn, $SQL ) or die("Error en la consulta SQL");
+	$registros= pg_num_rows($result);
 	if($registros == 0){
     ?>
     <div class="alert alert-block" align="center">
@@ -130,7 +129,7 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
 			echo '<tr>';
 			echo '<td width="10%">'.$row[0].'</td>';
 			echo '<td width="15%">'.$row[1].'</td>';
-			echo '<td width="22%">'.substr($row[2],0,30)."...".'</td>';
+			echo '<td width="22%">'.substr($row[2],0,40)."...".'</td>';
 			echo '<td width="15%">'.$row[3].'</td>';
 			echo '<td width="13%"><a href="editarproducto.php?id='.$row[0].'&boton=editar"><button class="btn btn-primary"> <span class="add-on"><i class="icon-pencil"></i> </span> Editar  </button> </td>';
 			echo '<td width="14%"><a href="eliminarproducto.php?id='.$row[0].'&boton=eliminar"> <button class="btn btn-primary" type="button"  name="eliminar"> <span class="add-on"><i class="icon-trash"></i></span> Eliminar</button> </td>';

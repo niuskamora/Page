@@ -71,17 +71,17 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
     <div class="span9 well well-large" >
  			<p>
             <div class="span3 well well-small"><b>Nombre</b></div>
-            <div class="span6 well well-small "><input type="text" name="nombre" id="nombre"  maxlength="34" pattern="[A-Za-zñÑáéíóúÁÉÍÓÚ ]{1,34}" placeholder="Ingrese el nombre" autofocus required/></div>
+            <div class="span6 well well-small "><input type="text" name="nombre" id="nombre"  maxlength="34" pattern="[A-Za-zñÑáéíóúÁÉÍÓÚ ]{1,34}" title="Ingrese el nombre" placeholder="Ej. Luz Mariela" autofocus required/></div>
             <div class="span3 well well-small"><b>Apellido</b></div>
-            <div class="span6 well well-small "><input type="text" name="apellido" id="apellido" maxlength="34" pattern="[A-Za-zñÑáéíóúÁÉÍÓÚ ]{1,34}" placeholder="Ingrese el apellido" required/></div>
+            <div class="span6 well well-small "><input type="text" name="apellido" id="apellido" maxlength="34" pattern="[A-Za-zñÑáéíóúÁÉÍÓÚ ]{1,34}" title="Ingrese el apellido" placeholder="Ej. Suarez Hernandez" required/></div>
             <div class="span3 well well-small"><b>Dirección</b></div>
-            <div class="span6 well well-small"><input type="text" name="direccion" id="direccion" maxlength="254" required/></div>
+            <div class="span6 well well-small"><input type="text" name="direccion" id="direccion" maxlength="254" placeholder="Ej. Carrera 10 # 8-5" title="Ingrese la dirección" required/></div>
             <div class="span3 well well-small"><b>Nombre de Usuario</b></div>
-            <div class="span6 well well-small"><input type="text" name="usuarioo" id="usuarioo" placeholder=" El formato es Mayúscula(letras o números) Ej. Mariela.arboleda2541" maxlength="34" pattern="[A-ZÑ]{1}[a-z.ñ0-9]{1,33}"  required/></div>
+            <div class="span6 well well-small"><input type="text" name="usuarioo" id="usuarioo" placeholder="Ej. Mariela.arboleda2541" title="El formato es Mayúscula(letras, puntos o números)" maxlength="34" pattern="[A-ZÑ]{1}[a-z.ñ0-9]{1,33}"  required/></div>
             <div class="span3 well well-small"><b>Contraseña</b></div>
-            <div class="span6 well well-small"><input type="password" name="contrasena" id="contrasena" maxlength="34" pattern="[A-Za-z.0-9]{1,34}" placeholder="Debe agregar letras, puntos o números" required/></div>
+            <div class="span6 well well-small"><input type="password" name="contrasena" id="contrasena" maxlength="34" pattern="[A-Za-z.0-9]{1,34}" title="Debe agregar letras, puntos o números" required/></div>
             <div class="span3 well well-small"><b>Confirmar contraseña</b></div>
-            <div class="span6 well well-small"><input type="password" name="contrasena_c" id="contrasena_c" maxlength="34" pattern="[A-Za-z.0-9]{1,34}" placeholder="Debe repetir la contraseña" required/></div>
+            <div class="span6 well well-small"><input type="password" name="contrasena_c" id="contrasena_c" maxlength="34" pattern="[A-Za-z.0-9]{1,34}" title="Debe repetir la contraseña" required/></div>
             <div class="span9 well well-small" align="center"><button class="btn btn-primary" id="crear_uno" name="crear_uno" type="submit">Guardar</button></div>
 			<div class="span9 well well-small" align="center"> <button class="btn btn-primary" id="crear_otro" name="crear_otro" type="submit">Guardar y añadir otro</button></div>
             </p>
