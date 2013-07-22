@@ -71,17 +71,17 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
     <div class="span9 well well-large" >
  			<p>
             <div class="span3 well well-small"><b>Nombre</b></div>
-            <div class="span6 well well-small "><input type="text" name="nombre" id="nombre"  maxlength="34" pattern="[A-Za-zñÑáéíóúÁÉÍÓÚ ]{1,34}" autofocus required/></div>
+            <div class="span6 well well-small "><input type="text" name="nombre" id="nombre"  maxlength="34" pattern="[A-Za-zñÑáéíóúÁÉÍÓÚ ]{1,34}" placeholder="Ingrese el nombre" autofocus required/></div>
             <div class="span3 well well-small"><b>Apellido</b></div>
-            <div class="span6 well well-small "><input type="text" name="apellido" id="apellido" maxlength="34" pattern="[A-Za-zñÑáéíóúÁÉÍÓÚ ]{1,34}" required/></div>
+            <div class="span6 well well-small "><input type="text" name="apellido" id="apellido" maxlength="34" pattern="[A-Za-zñÑáéíóúÁÉÍÓÚ ]{1,34}" placeholder="Ingrese el apellido" required/></div>
             <div class="span3 well well-small"><b>Dirección</b></div>
             <div class="span6 well well-small"><input type="text" name="direccion" id="direccion" maxlength="254" required/></div>
             <div class="span3 well well-small"><b>Nombre de Usuario</b></div>
-            <div class="span6 well well-small"><input type="text" name="usuario" id="usuario" placeholder="Ej. Guardian604" maxlength="34" pattern="[A-ZÑ]{1}[a-z.ñ0-9]{1,33}" required/></div>
+            <div class="span6 well well-small"><input type="text" name="usuarioo" id="usuarioo" placeholder=" El formato es Mayúscula(letras o números) Ej. Mariela.arboleda2541" maxlength="34" pattern="[A-ZÑ]{1}[a-z.ñ0-9]{1,33}"  required/></div>
             <div class="span3 well well-small"><b>Contraseña</b></div>
-            <div class="span6 well well-small"><input type="password" name="contrasena" id="contrasena" maxlength="34" pattern="[A-Za-z.0-9]{1,34}" required/></div>
+            <div class="span6 well well-small"><input type="password" name="contrasena" id="contrasena" maxlength="34" pattern="[A-Za-z.0-9]{1,34}" placeholder="Debe agregar letras, puntos o números" required/></div>
             <div class="span3 well well-small"><b>Confirmar contraseña</b></div>
-            <div class="span6 well well-small"><input type="password" name="contrasena_c" id="contrasena_c" maxlength="34" pattern="[A-Za-z.0-9]{1,34}" required/></div>
+            <div class="span6 well well-small"><input type="password" name="contrasena_c" id="contrasena_c" maxlength="34" pattern="[A-Za-z.0-9]{1,34}" placeholder="Debe repetir la contraseña" required/></div>
             <div class="span9 well well-small" align="center"><button class="btn btn-primary" id="crear_uno" name="crear_uno" type="submit">Guardar</button></div>
 			<div class="span9 well well-small" align="center"> <button class="btn btn-primary" id="crear_otro" name="crear_otro" type="submit">Guardar y añadir otro</button></div>
             </p>
@@ -98,13 +98,13 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
 	//codigo para guardar
 	if(isset($_POST["crear_uno"]) || isset($_POST["crear_otro"])){
 
-	if(isset($_POST["nombre"]) &&  isset($_POST["apellido"]) && isset($_POST["direccion"]) && isset($_POST["usuario"]) && isset($_POST["contrasena"]) && isset($_POST["contrasena_c"]) && $_POST["nombre"]!="" && $_POST["apellido"]!="" && $_POST["direccion"]!="" && $_POST["usuario"]!="" && $_POST["contrasena"]!="" && $_POST["contrasena_c"]!=""){
+	if(isset($_POST["nombre"]) &&  isset($_POST["apellido"]) && isset($_POST["direccion"]) && isset($_POST["usuarioo"]) && isset($_POST["contrasena"]) && isset($_POST["contrasena_c"]) && $_POST["nombre"]!="" && $_POST["apellido"]!="" && $_POST["direccion"]!="" && $_POST["usuarioo"]!="" && $_POST["contrasena"]!="" && $_POST["contrasena_c"]!=""){
 		$SQL="SELECT * FROM usuario where usuario='".$_POST["usuario"]."'";
 		$result = pg_query ($conn, $SQL ) or die("Error en la consulta SQL");
 		$registros= pg_num_rows($result);
 		if($registros == 0){
 				if($_POST["contrasena"]==$_POST["contrasena_c"]){
-						$insertar = "insert into usuario values(nextval('usuario_usuarioid_seq'),'".$_POST['nombre']."','".$_POST['apellido']."','".$_POST['direccion']."','".$_POST['usuario']."','".$_POST['contrasena']."',".$_SESSION["id_usuario"].");";
+						$insertar = "insert into usuario values(nextval('usuario_usuarioid_seq'),'".$_POST['nombre']."','".$_POST['apellido']."','".$_POST['direccion']."','".$_POST['usuarioo']."','".$_POST['contrasena']."',".$_SESSION["id_usuario"].");";
 						$conex=conectar();
 						pg_query($conex,$insertar) or die (pg_last_error($conex));
 						llenarLog(1,"USUARIO");

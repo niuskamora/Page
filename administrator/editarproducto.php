@@ -162,8 +162,8 @@ if(isset($_POST["guardar"])){
 		$direccion="../recursos"; //para cargar
 		$direccion2="recursos";//para guardar		
 		$tipo = explode('/',$_FILES['imagen']['type']);
-		$uploadfile =$direccion."/img/".$id.".".$tipo[1];
-		$uploadfile2 =$direccion2."/img/".$id.".".$tipo[1];
+		$uploadfile =$direccion."/img/producto/".$id.".".$tipo[1];
+		$uploadfile2 =$direccion2."/img/producto/".$id.".".$tipo[1];
 
 >>>>>>> 8c31fd2af5080e7037cfb91b2e0e036704a6a4db
 		$error = $_FILES['imagen']['error']; 
