@@ -93,7 +93,6 @@ $id=$_GET['id'];
 ================================================== --> 
 <script type="text/javascript" src="../recursos/js/jquery-2.0.2.js" ></script> 
 <script src="../recursos/js/bootstrap.js"></script> 
-<script src="../recursos/js/bootstrap.min.js"></script>
 <script src="../recursos/redactor/redactor.js"></script>
 <script src="../recursos/redactor/redactor.min.js"></script>
 <script type="text/javascript">

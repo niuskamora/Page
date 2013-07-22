@@ -136,8 +136,8 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
 					$direccion="../recursos"; //para cargar
 					$direccion2="recursos";//para guardar
 					$tipo = explode('/',$_FILES['imagen']['type']);
-					$uploadfile =$direccion."/img/".$arreglo[0].".".$tipo[1];
-					$uploadfile2 =$direccion2."/img/".$arreglo[0].".".$tipo[1];
+					$uploadfile =$direccion."/img/producto/".$arreglo[0].".".$tipo[1];
+					$uploadfile2 =$direccion2."/img/producto/".$arreglo[0].".".$tipo[1];
 					$error = $_FILES['imagen']['error']; 
 					$subido = false;
 					
