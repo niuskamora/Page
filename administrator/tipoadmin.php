@@ -63,18 +63,36 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
 <!-- /container -->
 <div class="container">
    <div class="row-fluid">
-                       
+                  <?php
+				   $ban=false;
+				   $SQL9="SELECT * FROM administrador WHERE tipoadministradorid=".$_SESSION["id_usuario"];
+		$result9 = pg_query ($conn, $SQL9) or die("Error en la consulta SQL");
+		$row9 = pg_fetch_array ($result9);
+		$reg= pg_num_rows($result9);
+		      if($reg= pg_num_rows($result9)){
+				  if($row9['tipoadministradorid']==1){
+					  $ban=true;
+				  }
+				}
+				   
+				  ?>     
     <div class="span3">
       <div style="text-align:center">
         
           <ul class="nav  nav-pills nav-stacked">
-              <li class="active"><a href="creartipoadmin.php"> <span class="add-on"><i class="icon-plus "></i></span> Crear </a></li>
+        <?php  if($ban){ ?>
+           <li class="active"><a href="creartipoadmin.php"> <span class="add-on"><i class="icon-plus "></i></span> Crear </a></li>
               <li><a href="principal.php"> <span class="add-on"><i class="icon-arrow-left"></i></span> Atrás</a></li>
             
-          </ul>
-          
-
+             
         
+          <?php }else { ?>
+             
+			  <li class="active"><a href="principal.php"> <span class="add-on"><i class="icon-arrow-left"></i></span> Atrás</a></li>
+			  
+			<?php  } ?>
+
+          </ul>
       </div>
     </div>
     <div class="span9">
@@ -139,14 +157,22 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
 			echo '<td width="10%">'.$row["tipoadministradorid"].'</td>';
 			echo '<td width="20%">'.$row["nombre"].'</td>';
 			echo '<td width="34%">'.$row["descripcion"].'</td>';
-			echo '<td width="18%"> <a href="editartipoadmin.php?id='.$row["tipoadministradorid"].'&boton=editar"> <button class="btn btn-primary"  type="button" name="boton"> <span class="add-on"><i class="icon-pencil"></i> </span> Editar  </button>  </a></td>';
-			echo '<td width="18%">  <a href="eliminartipoadmin.php?id='.$row["tipoadministradorid"].'&boton=eliminar"> <button class="btn btn-primary"  type="button"  name="boton"> <span class="add-on"><i class="icon-pencil"></i> </span> Eliminar  </button> </a> </td>';
+			if($ban){
+				echo '<td width="18%"> <a href="editartipoadmin.php?id='.$row["tipoadministradorid"].'&boton=editar"> <button class="btn btn-primary"  type="button" name="boton"> <span class="add-on"><i class="icon-pencil"></i> </span> Editar  </button>  </a></td>';
+			echo '<td width="18%">  <a href="eliminartipoadmin.php?id='.$row["tipoadministradorid"].'&boton=eliminar"> <button class="btn btn-primary"   type="button"  name="boton"> <span class="add-on"><i class="icon-pencil"></i> </span> Eliminar  </button> </a> </td>';
+			}else{
+			echo '<td width="18%"> <a href="editartipoadmin.php?id='.$row["tipoadministradorid"].'&boton=editar"> <button class="btn btn-primary" disabled type="button" name="boton"> <span class="add-on"><i class="icon-pencil"></i> </span> Editar  </button>  </a></td>';
+			echo '<td width="18%">  <a href="eliminartipoadmin.php?id='.$row["tipoadministradorid"].'&boton=eliminar"> <button class="btn btn-primary"  disabled type="button"  name="boton"> <span class="add-on"><i class="icon-pencil"></i> </span> Eliminar  </button> </a> </td>';	
+			}
+			
 			echo '</tr>';
             
 			}
 			
-    
+  
 		?>
+      
+    
 	 </form> 	
 </tbody>	  
     </table>
