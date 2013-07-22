@@ -2,7 +2,7 @@
 
 //conexión de la base de dattos  
 function conectar(){{  
-	   if (!($conexion = pg_connect("host=192.168.1.105  dbname=pangeapage port=5432 user=postgres password=p4ng34"))){
+	   if (!($conexion = pg_connect("host=192.168.1.108  dbname=pangeapage port=5432 user=postgres password=p4ng34"))){
 	       echo "No pudo conectarse al servidor";
 	       exit();
 	   }
@@ -145,11 +145,8 @@ function menu_principal($idm,$activo)
 					 }
 					 else
 					 {
-				       if(strtolower($activo)==strtolower($row['nombre']))
-						echo '<li class="dropdown active">';
-						else
-						echo '<li class="dropdown">';
-						echo'<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+						echo '<li class="dropdown">
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown">
 						'.$row['nombre'].'
 						<b class="caret"></b></a>
                         <ul class="dropdown-menu">';
