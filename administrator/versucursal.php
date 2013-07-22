@@ -97,8 +97,20 @@ $id=$_GET['id'];
             <div class="span3 well well-small"><b>Imagen</b></div>
 <<<<<<< HEAD
             <div class="span6 well well-small"><img src="<?php echo "../".$row['imagen'];?>"></div>
-           
-            
+            <div class="span3 well well-small"><b>Latitud</b></div>
+            <div class="span6 well well-small"><?php echo $row['latitud'];?></div>
+            <div class="span3 well well-small"><b>Longitud</b></div>
+            <div class="span6 well well-small"><?php echo $row['longitud'];?></div>
+            <div class="span3 well well-small"><b>Descripción</b></div>
+            <div class="span6 well well-small"><?php echo $row['descripcion'];?></div>
+                
+              
+            	<div class="span3 well well-small"><b>Latitud</b></div>
+            	<div class="span6 well well-small"><?php echo $row['latitud'];?></div>
+                <div class="span3 well well-small"><b>Longitud</b></div>
+            	<div class="span6 well well-small"><?php echo $row['longitud'];?></div>
+                <div class="span3 well well-small"><b>Descripción</b></div>
+            	<div class="span6 well well-small"><?php echo $row['descripcion'];?></div>
                 
               
             	<div class="span3 well well-small"><b>Latitud</b></div>
@@ -117,6 +129,7 @@ $id=$_GET['id'];
             <div class="span6 well well-small"><?php echo $row['descripcion'];?></div>
 >>>>>>> 8c31fd2af5080e7037cfb91b2e0e036704a6a4db
                 
+
      <?php }?>
 
          </p>
