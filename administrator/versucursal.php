@@ -85,7 +85,7 @@ $id=$_GET['id'];
             <div class="span3 well well-small"><b>Correo</b></div>
             <div class="span6 well well-small"><?php echo $row['correo'];?></div>
             <div class="span3 well well-small"><b>Imagen</b></div>
-            <div class="span6 well well-small"><img src="<?php echo $row['imagen'];?>"></div>
+            <div class="span6 well well-small"><img src="<?php echo "../".$row['imagen'];?>"></div>
            
             
                 

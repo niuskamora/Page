@@ -110,7 +110,7 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
             <div class=" well well-small"><b>Imagen</b></div>
               </dt>
               <dd>
-<div class=" well well-small"><input id="imagen" name="imagen" type="file" required/></div>
+<div class=" well well-small"><input id="imagen" name="imagen" type="file" /></div>
                   
               </dd>
 
@@ -143,6 +143,8 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
 
                <div align="center" class="span12 well well-small"> 
                 	<button id="guardar" name="guardar" class="btn btn-primary text-center" type="submit">Guardar</button></div>
+                     <div align="center" class="span12 well well-small"> 
+                	<button id="guardar2" name="guardar2" class="btn btn-primary text-center" type="submit">Guardar y añadir otro</button></div>
                 
             
         </form>
@@ -179,11 +181,14 @@ if(isset($_POST["guardar"])){
 			entre el rango 0 a Numero de letras que tiene la cadena */
 		}
 		
-		$direccion="../recursos";
+	$direccion="../recursos";
+		$direccion5="recursos";
 		$tipo = explode('/',$_FILES['imagen']['type']);
 		$uploadfile =$direccion."/img/".$arreglo[0].".".$tipo[1];
 		$error = $_FILES['imagen']['error']; 
 		$subido = false;
+		
+		$uploadfile5 =$direccion5."/img/".$arreglo[0].".".$tipo[1];
 		
 		
 		if($error==UPLOAD_ERR_OK){ 
@@ -236,7 +241,7 @@ if(isset($_POST["guardar"])){
 				imagecopy($img1Recortada, $img1, 0, 0, ceil(($ancho_buscado3-640)/2), ceil(($alto_buscado3-640)/2), ceil(($ancho_buscado3-640)/2)+640, ceil(($alto_buscado3-480)/2)+480);
 				
 				imagejpeg($img1Recortada,$uploadfile,$calidad);				
-				$sql_update="update sucursal set imagen='".$uploadfile."' WHERE sucursalid=".$arreglo[0]."";
+				$sql_update="update sucursal set imagen='".$uploadfile5."' WHERE sucursalid=".$arreglo[0]."";
 			
 				$result= pg_query($conn, $sql_update);
 																													
@@ -278,11 +283,13 @@ if(isset($_POST["guardar2"])){
 		}
 		
 		$direccion="../recursos";
+		$direccion5="recursos";
 		$tipo = explode('/',$_FILES['imagen']['type']);
 		$uploadfile =$direccion."/img/".$arreglo[0].".".$tipo[1];
 		$error = $_FILES['imagen']['error']; 
 		$subido = false;
 		
+		$uploadfile5 =$direccion5."/img/".$arreglo[0].".".$tipo[1];
 		
 		if($error==UPLOAD_ERR_OK){ 
 			    $subido = copy($_FILES['imagen']['tmp_name'], $uploadfile); 
@@ -334,7 +341,8 @@ if(isset($_POST["guardar2"])){
 				imagecopy($img1Recortada, $img1, 0, 0, ceil(($ancho_buscado3-640)/2), ceil(($alto_buscado3-640)/2), ceil(($ancho_buscado3-640)/2)+640, ceil(($alto_buscado3-480)/2)+480);
 				
 				imagejpeg($img1Recortada,$uploadfile,$calidad);				
-				$sql_update="update sucursal set imagen='".$uploadfile."' WHERE sucursalid=".$arreglo[0]."";
+				$sql_update="update sucursal set imagen='".$uploadfile5."' WHERE sucursalid=".$arreglo[0]."";
+				echo $sql_update;
 			
 				$result= pg_query($conn, $sql_update);
 																													
@@ -343,7 +351,7 @@ if(isset($_POST["guardar2"])){
 	
 	if($resultado && $result){
 			llenarLog(1, "Creo sucursal");
-			iraURL('../administrator/crearsucursal.php');
+			//iraURL('../administrator/crearsucursal.php');
 	}
 }
 	    ?>

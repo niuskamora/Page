@@ -71,10 +71,9 @@ $conn=conectar();
 <div class="container" style="background-color:white;">
   
   <h2>  Servicios <h2>
+  <div class="span12"></div>
   
-  <?php
-  
-  
+  <?php  
 		
 		$SQL="SELECT * FROM  informacion WHERE  tipoinformacionid=".$_GET['id'];
 		$result = pg_query ($conn, $SQL ) or die("Error en la consulta SQL");
@@ -83,8 +82,24 @@ $conn=conectar();
 	if($registros != 0){
 			for ($i=0;$i<$registros;$i++)
 			{
+				$row = pg_fetch_array ($result,$i);
+				
+				if($row["nombre"]=="Servicios"){
+					?>
+					  <div class="span12">
+					   <div class="span8">
+                        <?php echo $row["descripcion"] ?>
+                       </div>
+					   <div class="span4">
+                      <img src="<?php echo $row['imagen']?>">
+                       </div>
+					  </div>
+                      
+                    <?php
+					
+				}
 
-			$row = pg_fetch_array ($result,$i);
+			
   
   ?>
   

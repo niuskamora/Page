@@ -99,7 +99,7 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
               </dt>
               <dd>
                 <div class=" well well-small">
-                            	<img width="200" height="100" src="<?php echo $row['imagen'];?> ">
+                            	<img width="200" height="100" src="<?php echo "../".$row['imagen'];?> ">
 			<input id="imagen" name="imagen" type="file" />
                 </div>
               </dd>
@@ -153,11 +153,13 @@ if(isset($_POST["guardar"])){
 		}
 		
 		$direccion="../recursos";
+		$direccion2="recursos";
 		$tipo = explode('/',$_FILES['imagen']['type']);
-		$uploadfile =$direccion."/img/".$id.".".$tipo[1];
+		$uploadfile =$direccion."/img/".$arreglo[0].".".$tipo[1];
 		$error = $_FILES['imagen']['error']; 
 		$subido = false;
 		
+		$uploadfile2 =$direccion."/img/".$arreglo[0].".".$tipo[1];
 		
 		if($error==UPLOAD_ERR_OK){
 			    $subido = copy($_FILES['imagen']['tmp_name'], $uploadfile); 
@@ -209,7 +211,7 @@ if(isset($_POST["guardar"])){
 				imagecopy($img1Recortada, $img1, 0, 0, ceil(($ancho_buscado3-640)/2), ceil(($alto_buscado3-640)/2), ceil(($ancho_buscado3-640)/2)+640, ceil(($alto_buscado3-480)/2)+480);
 				
 				imagejpeg($img1Recortada,$uploadfile,$calidad);				
-				$sql_update="update PRODUCTO set imagen='".$uploadfile."' where productoid=".$_GET['id'];
+				$sql_update="update PRODUCTO set imagen='".$uploadfile2."' where productoid=".$_GET['id'];
 				$result= pg_query($conn, $sql_update);
 																													
 			}		

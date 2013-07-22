@@ -69,12 +69,15 @@ $conn=conectar();
   </div>
 </div>
 <div class="container" style="background-color:white;">
+
+
+
+ <br>
+  <div> <h2 align="left " class="well "> Servicios</h2> </div>
   
-  <h2>  Servicios <h2>
-  
-  <?php
   
   
+  <?php  
 		
 		$SQL="SELECT * FROM  informacion WHERE  tipoinformacionid=".$_GET['id'];
 		$result = pg_query ($conn, $SQL ) or die("Error en la consulta SQL");
@@ -83,28 +86,85 @@ $conn=conectar();
 	if($registros != 0){
 			for ($i=0;$i<$registros;$i++)
 			{
-
-			$row = pg_fetch_array ($result,$i);
-  
-  ?>
-  
-  <button type="button" class="btn btn-warning" data-toggle="collapse" data-target="#demo<?php $row["id"] ?>">
-    <?php $row["nombre"]  ?>
-</button>
- 
-<div id="demo<?php $row["id"] ?>" class="collapse">
-      <div class="row-fluid">
-      <span> 
-      
-      </div>
-      </div>
-
-</div>
-
-<?php 
+				$row = pg_fetch_array ($result,$i);
+				
+				if($row['titulo']=="Servicios"){
+					?>
+					  <div class="span12">
+					   <div align="justify" class="span8">
+                        <?php echo $row['descripcion'] ?>
+                       </div>
+					   <div class="span3">
+                      <img src="<?php echo $row['imagen']?>">
+                       </div>
+					  </div>
+                      
+                    <?php
+					
+				}
 			}
+			
+			$SQL="SELECT * FROM  informacion WHERE  tipoinformacionid=".$_GET['id'];
+		$result = pg_query ($conn, $SQL ) or die("Error en la consulta SQL");
+		$registros= pg_num_rows($result);
+		
+	if($registros != 0){
+		?>
+		<div class="accordion" id="accordion2">
+        <?php
+			for ($i=0;$i<$registros;$i++)
+			{
+				$row = pg_fetch_array ($result,$i);
+				
+				if($row['titulo']!="Servicios"){
+					
+					 ?>
+
+  
+ <div class="accordion-group">
+    <div class="accordion-heading">
+      <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#c<?php echo $row['informacionid'] ?>">
+      <?php echo $row['titulo']?>
+        
+      </a>
+    </div>
+    <div id="c<?php echo $row['informacionid']?>" class="accordion-body collapse">
+      <div class="accordion-inner">
+        <div class="span11 well">
+					    <div align="justify" class="span7">
+                        <?php echo $row['descripcion'] ?>
+                       </div> 
+					   <div class="span3">
+                      <img src="<?php echo $row['imagen']?>">
+                       </div>
+					  </div>
+      </div>
+    </div>
+  </div>
+                 
+      </div>
+  
+
+
+ 
+<?php 
+					
+					}
+
+			
+			}
+ 
+			}
+			?>
+			</div>
+            
+            
+            <?php
 	}
 ?>
+
+
+  
 <div id="cont2" class="container" >
 <?php 
 // $frase=obtenerQuote();
@@ -112,14 +172,14 @@ $conn=conectar();
 ?>
   <div id="intro">
     <div class="container">
-     <!-- aqui iba la frase -->
+   
     </div>
   </div>
   <br>
   <h2 class="section_header">
-    <hr class="left visible-desktop">
+ 
     <span><!-- aqui iba el autor --></span>
-    <hr class="right visible-desktop">
+ 
   </h2>
   <br>
   <div class="row-fluid">
