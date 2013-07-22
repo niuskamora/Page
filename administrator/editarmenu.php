@@ -199,7 +199,7 @@ if(isset($_POST["guardar"])){
         $resultado=pg_query($conn,"UPDATE menu SET nombre='$nombr', enlace='$enla' where menuid=".$_GET['id']) or die(pg_last_error($conn));
 		if($resultado){
 			llenarLog(2, "Modifico tipo de administrador");
-javaalert("El tipo de administrador fue modificado con exito");
+javaalert("El menu fue modificado con exito");
 iraURL("menu.php");
 		}
 }
