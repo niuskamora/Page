@@ -83,7 +83,9 @@ $conn=conectar();
           <p> <?php echo "<blockquote>".$row['descripcion'] ?> </p>
         </div>
         <div class="span3"> <img src="<?php echo $row['imagen']?>"> </div>
+      
       </div>
+      
       <?php
 	  
 					
@@ -94,10 +96,18 @@ $conn=conectar();
 		$result = pg_query ($conn, $SQL ) or die("Error en la consulta SQL");
 		$registros= pg_num_rows($result);
 		$aux=0;
+		
+		?> <div class="span12">
+        </div>  <?php
 	if($registros != 0){
 		?>
+            
+      <br>
+          
+    
       <?php
-			for ($i=0;$i<$registros;$i++)
+	  
+	  			for ($i=0;$i<$registros;$i++)
 			{
 				$row = pg_fetch_array ($result,$i);
 				
@@ -105,23 +115,27 @@ $conn=conectar();
 					$vector[] =$row['informacionid'];
 					$aux=$aux+1;
 					 ?>
-      <div  class=" span3 well"> <img src="<?php echo $row['imagen'] ?>"   id="<?php echo $row['informacionid'] ?>" name="d1" class="marco" style="width:350px; height:200px;"/>
-        <div class="contenthover marco">
-          <h3><?php echo $row['titulo'] ?></h3>
+                       <br>
+      <div  class=" span3 well" style="background:rgb(0,0,102); width:180px; height:150px; "> <img src="<?php echo $row['imagen'] ?>"   id="<?php echo $row['informacionid'] ?>" name="d1" style="width:150px; height:120px;"/>
+        <div class="contenthover">
+          <h4><?php echo $row['titulo'] ?></h4>
           <p align="justify"><?php echo $row['descripcion'] ?></p>
           <?php if($row['enlace']!=''){?>
           <p><a href=" <?php echo $row['enlace'] ?>" class="mybutton" ><?php echo $row['titulo'] ?></a></p>
         </div>
       </div>
+      
       <?php } 
 	  			   }
 				}
  			}
 			?>
     </div>
+  
     <?php
 	}
 ?>
+
   </div>
 </div>
 <script type="text/javascript">
