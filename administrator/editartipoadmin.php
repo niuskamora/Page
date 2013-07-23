@@ -5,7 +5,24 @@ $conn=conectar();
 if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
 	iraURL('../administrator/index.php');
 	}
-
+		
+if(isset($_POST["guardar"])){
+	
+	if($_POST["nombre"]!='' && $_POST["descripcion"]!=''){
+		$id=$_GET['id'];
+		$nombre=$_POST['nombre'];
+		$descripcion=$_POST['descripcion'];
+        $resultado=pg_query($conn,"UPDATE tipoadministrador SET nombre='$nombre', descripcion='$descripcion' where tipoadministradorid=$id") or die(pg_last_error($conn));
+		if($resultado){
+			llenarLog(2, "Modifico tipo de administrador");
+			javaalert("tipo de información fue editado con exito");
+iraURL("tipoadmin.php");
+		}
+		
+		}else{
+		javaalert("Debe llenar todos los campos obligatorios");
+	}
+}
 ?>
 
 <!DOCTYPE html>
@@ -98,34 +115,15 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
                 </div>
               </dd>
               <dt> </dt>
-              <dd>
-                <div class="well well-small">
+              
+                <div align="center" class="well well-small">
                   <button  id="guardar" name="guardar" class="btn btn-primary text-center" type="submit"> </i></span>Modificar</button>
                 </div>
-              </dd>
+            
             </dl>
           </div>
         </form>
-        <?php
-		
-if(isset($_POST["guardar"])){
-	
-	if($_POST["nombre"]!='' && $_POST["descripcion"]!=''){
-		$id=$_GET['id'];
-		$nombre=$_POST['nombre'];
-		$descripcion=$_POST['descripcion'];
-        $resultado=pg_query($conn,"UPDATE tipoadministrador SET nombre='$nombre', descripcion='$descripcion' where tipoadministradorid=$id") or die(pg_last_error($conn));
-		if($resultado){
-			llenarLog(2, "Modifico tipo de administrador");
-			javaalert("tipo de información fue editado con exito");
-iraURL("tipoadmin.php");
-		}
-		
-		}else{
-		javaalert("Debe llenar todos los campos obligatorios");
-	}
-}
-?>
+
         </p>
       </div>
     </div>

@@ -7,7 +7,47 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
 	iraURL('../administrator/index.php');
 	}
 
-?>
+		
+if(isset($_POST["guardar"])){
+
+	
+		$nombre=$_POST['nombre'];
+		if($_POST['submenu']==''){
+			$submenu="0";
+		}else{
+		$submenu=$_POST['submenu'];
+		}
+		$enlace=$_POST['enlace'];
+		$orden="0";
+		$admin=$_SESSION["id_usuario"];
+        pg_query($conn,"INSERT INTO menu values( nextval('menu_menuid_seq'),'$nombre','$submenu','$admin','$enlace','$orden')") or die(pg_last_error($conn));
+llenarLog(1, "creo menu");
+
+javaalert("El menu fue creado con exito");
+iraURL("menu.php");
+	
+}
+
+if(isset($_POST["guardar2"])){
+	
+	
+		$nombre=$_POST['nombre'];
+		if($_POST['submenu']=="Principal"){
+			$submenu="0";
+		}else{
+		$submenu=$_POST['submenu'];
+		}
+		$enlace=$_POST['enlace'];
+		$orden="100";
+		$admin=$_SESSION["id_usuario"];
+        pg_query($conn,"INSERT INTO menu values( nextval('menu_menuid_seq'),'$nombre','$submenu','$admin','$enlace','$orden')") or die(pg_last_error($conn));
+llenarLog(1, "creo menu");
+javaalert("El menu fue creado con exito");
+iraURL("crearmenu.php");
+	
+}
+
+	    ?>
 
 <!DOCTYPE html>
 <html lang="es">
@@ -115,59 +155,19 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
                   <input id="enlace" name="enlace"  type="text" value="" contenteditable="true" required/>
                 </div>
               </dd>
+            
               
-              
-              <dt> </dt>
-              <dd>
-                <div class="well well-small">
+                <div align="center" class="well well-small">
                   <button id="guardar" name="guardar" class="btn btn-primary text-center" type="submit"> </span>Guardar</button>
                 </div>
-              </dd>
+                 <div align="center" class="well well-small">
+                  <button id="guardar2" name="guardar2" class="btn btn-primary text-center" type="submit"> </span>Guardar y añadir otro</button>
+                </div>
+              
             </dl>
           </div>
         </form>
-		<?php
-		
-if(isset($_POST["guardar"])){
 
-	
-		$nombre=$_POST['nombre'];
-		if($_POST['submenu']==''){
-			$submenu="0";
-		}else{
-		$submenu=$_POST['submenu'];
-		}
-		$enlace=$_POST['enlace'];
-		$orden="0";
-		$admin=$_SESSION["id_usuario"];
-        pg_query($conn,"INSERT INTO menu values( nextval('menu_menuid_seq'),'$nombre','$submenu','$admin','$enlace','$orden')") or die(pg_last_error($conn));
-llenarLog(1, "creo menu");
-
-javaalert("El menu fue creado con exito");
-iraURL("menu.php");
-	
-}
-
-if(isset($_POST["guardar2"])){
-	
-	
-		$nombre=$_POST['nombre'];
-		if($_POST['submenu']=="Principal"){
-			$submenu="0";
-		}else{
-		$submenu=$_POST['submenu'];
-		}
-		$enlace=$_POST['enlace'];
-		$orden="100";
-		$admin=$_SESSION["id_usuario"];
-        pg_query($conn,"INSERT INTO menu values( nextval('menu_menuid_seq'),'$nombre','$submenu','$admin','$enlace','$orden')") or die(pg_last_error($conn));
-llenarLog(1, "creo menu");
-javaalert("El menu fue creado con exito");
-iraURL("crearmenu.php");
-	
-}
-
-	    ?>
         
          </p>
       </div>

@@ -7,6 +7,20 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
 	iraURL('../administrator/index.php');
 	}
 
+ 
+	
+		
+if(isset($_POST["guardar"])){
+		
+		$nombr=$_POST['nombre'];
+		$enla=$_POST['enlace'];
+        $resultado=pg_query($conn,"UPDATE menu SET nombre='$nombr', enlace='$enla' where menuid=".$_GET['id']) or die(pg_last_error($conn));
+		if($resultado){
+			llenarLog(2, "Modifico tipo de administrador");
+javaalert("El menu fue modificado con exito");
+iraURL("menu.php");
+		}
+}
 ?>
 
 <!DOCTYPE html>
@@ -167,11 +181,11 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
                  <input id="nombre" name="enlace"  type="text" value="<?php echo $row["enlace"] ?>" contenteditable=true required/>
                 </div>
               </dd>
-               <dd>
+               
                 <div align="center" class="well well-small">
                   <button id="guardar" name="guardar" class="btn btn-primary text-center" type="submit"> Modificar</button>
                 </div>
-              </dd>
+            
             </dl>
           </div>
 		
@@ -188,22 +202,7 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
           
 	 
 </form> 	
-    
-	<?php
-	
-		
-if(isset($_POST["guardar"])){
-		
-		$nombr=$_POST['nombre'];
-		$enla=$_POST['enlace'];
-        $resultado=pg_query($conn,"UPDATE menu SET nombre='$nombr', enlace='$enla' where menuid=".$_GET['id']) or die(pg_last_error($conn));
-		if($resultado){
-			llenarLog(2, "Modifico tipo de administrador");
-javaalert("El menu fue modificado con exito");
-iraURL("menu.php");
-		}
-}
-?>
+
            
         
          </p>
