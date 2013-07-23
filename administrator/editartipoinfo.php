@@ -6,6 +6,22 @@ $conn=conectar();
 if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
 	iraURL('../administrator/index.php');
 	}
+			
+if(isset($_POST["guardar"])){
+	if(isset($_POST["nombre"]) && isset($_POST["descripcion"]) && $_POST["nombre"]!="" && $_POST["descripcion"]!="" ){
+		$id=$_GET['id'];
+		$nombre=$_POST['nombre'];
+		$descripcion=$_POST['descripcion'];
+        $resultado=pg_query($conn,"UPDATE tipoinformacion SET nombre='$nombre', descripcion='$descripcion' where tipoinformacionid=$id") or die(pg_last_error($conn));
+		if($resultado){
+			llenarLog(2, "tipo de información");
+			javaalert("El tipo de información fue modificado con éxito");
+			iraURL("tipoinfo.php");
+		}
+	}else{
+				javaalert("Debe agregar todos los campos, por favor verifique");
+	}
+}
 ?>
 
 <!DOCTYPE html>
@@ -112,23 +128,5 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
 <script type="text/javascript" src="../recursos/js/jquery-2.0.2.js" ></script> 
 <script src="../recursos/js/bootstrap.js"></script> 
 
-   <?php
-		
-if(isset($_POST["guardar"])){
-	if(isset($_POST["nombre"]) && isset($_POST["descripcion"]) && $_POST["nombre"]!="" && $_POST["descripcion"]!="" ){
-		$id=$_GET['id'];
-		$nombre=$_POST['nombre'];
-		$descripcion=$_POST['descripcion'];
-        $resultado=pg_query($conn,"UPDATE tipoinformacion SET nombre='$nombre', descripcion='$descripcion' where tipoinformacionid=$id") or die(pg_last_error($conn));
-		if($resultado){
-			llenarLog(2, "tipo de información");
-			javaalert("El tipo de información fue modificado con éxito");
-			iraURL("tipoinfo.php");
-		}
-	}else{
-				javaalert("Debe agregar todos los campos, por favor verifique");
-	}
-}
-?>
 </body>
 </html>

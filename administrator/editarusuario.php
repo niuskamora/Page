@@ -6,6 +6,38 @@ $conn=conectar();
 if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
 	iraURL('../administrator/index.php');
 	}
+			
+if(isset($_POST["guardar"])){
+		if(isset($_POST["nombre"]) &&  isset($_POST["apellido"]) && isset($_POST["direccion"]) && isset($_POST["usuario"]) && isset($_POST["contrasena"]) && isset($_POST["contrasena_c"]) && $_POST["nombre"]!="" && $_POST["apellido"]!="" && $_POST["direccion"]!="" && $_POST["usuario"]!="" && $_POST["contrasena"]!="" && $_POST["contrasena_c"]!=""){
+		$SQL="SELECT * FROM usuario where usuario='".$_POST["usuario"]."' and usuarioid!=".$_GET['id'];
+		$result = pg_query ($conn, $SQL ) or die("Error en la consulta SQL");
+		$registros= pg_num_rows($result);
+		if($registros == 0){
+			if($_POST["contrasena"]==$_POST["contrasena_c"]){
+					$id=$_GET['id'];
+					$nombre=$_POST['nombre'];
+					$apellido=$_POST['apellido'];
+					$direccion=$_POST['direccion'];
+					$usuario=$_POST['usuario'];
+					$contrasena=$_POST['contrasena'];
+					$resultado=pg_query($conn,"UPDATE usuario SET nombre='$nombre', apellido='$apellido' , direccion='$direccion', usuario='$usuario', contrasena='$contrasena' where usuarioid=$id") or die(pg_last_error($conn));
+					if($resultado){
+						llenarLog(2, "Usuario");
+						javaalert("El usuario fue modificado con éxito");
+						iraURL("usuario.php");
+					}
+			}else{
+					javaalert("Las contraseñas no coinciden, por favor verifique");
+				}		
+		}else{
+			javaalert("El nombre de usuario ya esta registrado, por favor verifique");
+
+		}			
+		}else{
+						javaalert("Debe agregar todos los campos, por favor verifique");
+
+		}
+}
 ?>
 
 <!DOCTYPE html>
@@ -117,7 +149,7 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
               </dt>
               <dd>
                 <div class="well well-small">
-<input type="password" name="contrasena" id="contrasena" value="<?php echo $row['contrasena']?>" maxlength="34" pattern="[A-Za-z.0-9]{1,34}" required/>
+<input type="password" name="contrasena" id="contrasena" value="<?php echo $row['contrasena']?>" maxlength="34" pattern="[A-Za-z.0-9ñÑ]{1,34}" required/>
                 </div>
               </dd>
                 </dd>
@@ -126,7 +158,7 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
               </dt>
               <dd>
                 <div class="well well-small">
-<input type="password" name="contrasena_c" id="contrasena_c" value="<?php echo $row['contrasena']?>" maxlength="34" pattern="[A-Za-z.0-9]{1,34}" required/>
+<input type="password" name="contrasena_c" id="contrasena_c" value="<?php echo $row['contrasena']?>" maxlength="34" pattern="[A-Za-z.0-9ñÑ]{1,34}" required/>
                 </div>
               </dd>
                 <div class="well well-small" align="center">
@@ -148,39 +180,5 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
 <script type="text/javascript" src="../recursos/js/jquery-2.0.2.js" ></script> 
 <script src="../recursos/js/bootstrap.js"></script> 
 
-   <?php
-		
-if(isset($_POST["guardar"])){
-		if(isset($_POST["nombre"]) &&  isset($_POST["apellido"]) && isset($_POST["direccion"]) && isset($_POST["usuario"]) && isset($_POST["contrasena"]) && isset($_POST["contrasena_c"]) && $_POST["nombre"]!="" && $_POST["apellido"]!="" && $_POST["direccion"]!="" && $_POST["usuario"]!="" && $_POST["contrasena"]!="" && $_POST["contrasena_c"]!=""){
-		$SQL="SELECT * FROM usuario where usuario='".$_POST["usuario"]."' and usuarioid!=".$_GET['id'];
-		$result = pg_query ($conn, $SQL ) or die("Error en la consulta SQL");
-		$registros= pg_num_rows($result);
-		if($registros == 0){
-			if($_POST["contrasena"]==$_POST["contrasena_c"]){
-					$id=$_GET['id'];
-					$nombre=$_POST['nombre'];
-					$apellido=$_POST['apellido'];
-					$direccion=$_POST['direccion'];
-					$usuario=$_POST['usuario'];
-					$contrasena=$_POST['contrasena'];
-					$resultado=pg_query($conn,"UPDATE usuario SET nombre='$nombre', apellido='$apellido' , direccion='$direccion', usuario='$usuario', contrasena='$contrasena' where usuarioid=$id") or die(pg_last_error($conn));
-					if($resultado){
-						llenarLog(2, "Usuario");
-						javaalert("El usuario fue modificado con éxito");
-						iraURL("usuario.php");
-					}
-			}else{
-					javaalert("Las contraseñas no coinciden, por favor verifique");
-				}		
-		}else{
-			javaalert("El nombre de usuario ya esta registrado, por favor verifique");
-
-		}			
-		}else{
-						javaalert("Debe agregar todos los campos, por favor verifique");
-
-		}
-}
-?>
 </body>
 </html>
