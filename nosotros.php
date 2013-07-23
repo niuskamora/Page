@@ -112,9 +112,9 @@ $conn=conectar();
 			$row = pg_fetch_array ($result,$i);
 			if($row['titulo']=="Nosotros"){?>
 				<div id="<?php echo $row['informacionid'];?>" class="span12">
-                  <br>
-                   <br>
-                   <br>
+                  	<br>
+                  	<br>
+                   	<br>
 					<div align="justify" class="span8">
                     	<h2 id="in" align="left"><?php echo $row['titulo'];?></h2>
                 		<?php echo $row['descripcion'];?>
@@ -132,31 +132,25 @@ $conn=conectar();
 				else{
 					?>
 				<div id="<?php echo $row['informacionid'];?>" class="span12">
-                <?php if($row['titulo']!="Valores"){?>
-                    	<div align="justify" class="span8">
+                	<div align="justify" class="span8">
+                		<br>
+                		<br>
+                		<br>
+                		<h2 id="in" align="left"><?php echo $row['titulo'];?></h2> 
+                		<?php echo $row['descripcion'];?>
+                	</div>
+                    <div class="span3">
+                	<?php if($row['imagen']!=""){ ?>
+                    	<br>
+                    	<br>
                         <br>
-                   <br>
-                   <br>
-                        	<h2 id="in" align="left"><?php echo $row['titulo'];?></h2> 
-                			<?php echo $row['descripcion'];?>
-                        </div>
-                        <?php if($row['imagen']!=""){ ?>
-       						<div class="span3"><img src="<?php echo $row['imagen'];?>"></div>
-						<?php }?>
-                <?php }else{?>
-                    	<div align="justify">
-                        <br>
-                   <br>
-                   <br>
-                        	<h2 id="in" align="left"><?php echo $row['titulo'];?></h2>
-                			<img src="<?php echo $row['imagen'];?>">
-                       	</div>
-                    <?php }?>
+       					<img src="<?php echo $row['imagen'];?>">
+					<?php }?>
+                    </div>
 				</div>
                <?php	
 				}
 			}
-		
 		?>
  		</div>
 	</div>
