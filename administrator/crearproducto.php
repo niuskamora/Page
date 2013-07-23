@@ -75,7 +75,7 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
      <div class="span9 well well-large" >
  			<p>
         <div class="span3 well well-small"><b>Nombre</b></div>
-            <div class="span6 well well-small "><input type="text" name="nombre" id="nombre" maxlength="34" title="Ingrese el nombre" placeholder="Ej. Sistema de Comercialización" autofocus required/></div>
+            <div class="span6 well well-small "><input type="text" name="nombre" id="nombre" maxlength="249" title="Ingrese el nombre" placeholder="Ej. Sistema de Comercialización" autofocus required/></div>
             <div class="span3 well well-small"><b>Descripción</b></div>
             <div class="span6 well well-small"><textarea id="redactor" name="redactor" maxlength="2499" required></textarea></div>
              <div class="span3 well well-small"><b>Enlace</b></div>

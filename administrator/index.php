@@ -62,7 +62,7 @@ if (isset($_POST["Biniciar"])) {
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
     <script src="../recursos/js/jquery.js"></script>
-	<script src="../recursos/js/bootstrap.js" ></script> 
+    <script src="../recursos/js/bootstrap.js" ></script> 
 
   </body>
 </html>

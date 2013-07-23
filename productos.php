@@ -75,39 +75,42 @@ $conn=conectar();
  <!-- aqui estaba el carusel-->
  <div> 
  	<h2 class="well" align="left">
-  		Productos
+  		<br>
+        Productos
   	</h2>
        <p>Pangeatech pone a su disposición el mejor software adpatable a su empresa. Continue leyendo y enterese acerca de nuestros principales productos.</p>
 
   </div>
  
  <div class="row-fluid">
- 
          <?php 
 		$SQL="SELECT * FROM producto";
 		$result = pg_query ($conn, $SQL ) or die("Error en la consulta SQL");
 		$registros= pg_num_rows($result);	
-		if($registros != 0){				 
-		
+		if($registros != 0){				 		
 		for ($i=0;$i<$registros;$i++)
 			{	
 			$row = pg_fetch_array ($result,$i);
+			if(strlen ($row[2])>200){
+				$descripcion=substr($row[2],0,200)."...";
+			}else{
+				$descripcion=$row[2];
+			}
 			echo '
-			<div class="span12 well-large">
+			 <div class="row-fluid">
+			<div class="span12" align="center">
 			<div class="span1"></div>
-			<div class="span10 well well-small" align="center">
+			<div class="span10 well" align="center">
 			<div class="span2"><img width="100" height="100" src="'.$row[4].'"> </div>
-			<div class="span8" align="justify"><p><b>'.$row[1].'</b></p>'.substr($row[2],0,200)."...".'<p><a href="verproducto.php?id='.$row[0].'&boton=ver">ver más</a></p></div>
+			<div class="span8" align="justify"><p><b>'.$row[1].'</b></p>'.$descripcion.'<p><a href="verproducto.php?id='.$row[0].'&boton=ver"><button class="btn btn-primary"> <span class="add-on"><i class="icon-eye-open"></i></span> Ver más</button></a></p></div>
 			</div>
 			<div class="span1"></div>			
 			 </div>
+			 </div>
+
 			';
-			}
-		?>
-       
-    <?php 
+			}//fin del for
 		}else{
-		
 	?>
      <div class="alert alert-block" align="center">
     <h2 class="alert alert-block">Atención  
@@ -117,8 +120,7 @@ $conn=conectar();
     <?php 
 	}
 	?>
-  <!--cierre de div  row flui -->
-</div>
+
 </div><!--cierre de div container -->
 <div id="cont2" class="container" >
 
