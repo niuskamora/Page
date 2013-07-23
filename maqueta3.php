@@ -116,7 +116,7 @@ $conn=conectar();
 					$aux=$aux+1;
 					 ?>
                        <br>
-      <div  class=" span3 well" style="background:rgb(0,0,102); width:180px; height:150px; "> <img src="<?php echo $row['imagen'] ?>"   id="<?php echo $row['informacionid'] ?>" name="d1" style="width:150px; height:120px;"/>
+      <div  class=" span3 well" style="background:rgb(0,0,102); width:202px; height:206px;  padding:2px 2px 2px 2px;"> <img src="<?php echo $row['imagen'] ?>"   id="<?php echo $row['informacionid'] ?>" name="d1" style="width:200px; height:200px;"/>
         <div class="contenthover">
           <h4><?php echo $row['titulo'] ?></h4>
           <p align="justify"><?php echo $row['descripcion'] ?></p>
