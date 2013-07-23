@@ -81,7 +81,7 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
       <?php 
 		$SQL="SELECT * FROM usuario";
 		$result = pg_query ($conn, $SQL ) or die("Error en la consulta SQL");
-		$registros= pg_num_rows($result);
+		$registros= pg_num_rows($result);		
 	if($registros == 0){
     ?>
     <div class="alert alert-block" align="center">
