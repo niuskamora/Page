@@ -28,25 +28,25 @@ if (isset($_POST["Biniciar"])) {
 <title>:: Pangea Technologies ::</title>
 <link href="../recursos/css/bootstrap.css" rel="stylesheet" />
 <link href="../recursos/css/bootstrap.min.css" rel="stylesheet">
-<link href="../recursoscss/bootstrap-responsive.css" rel="stylesheet">
-<link href="../recursoscss/bootstrap-responsive.min.css" rel="stylesheet">
+<link href="../recursos/css/bootstrap-responsive.css" rel="stylesheet">
+<link href="../recursos/css/bootstrap-responsive.min.css" rel="stylesheet">
 <link href="../recursos/css/estiloadmin.css" rel="stylesheet" />
 </head>
 
 <body>
 
-<div class="container">
+<div class="container" align="center">
 
       <form class="form-signin" id="FormInicio" method="post">
         <h3 class="form-signin-heading">Por favor, inicie sesión</h3>
-        <input type="text" class="input-block-level" placeholder="Usuario" name="usuario" id="usuario" required>
+        <input type="text" class="input-block-level" placeholder="Usuario" name="usuario" id="usuario"  maxlength="34" pattern="[a-z.ñ]{1,34}" title="Solo se admite minúsculas y punto" autofocus required>        
         <input type="password" class="input-block-level" placeholder="Contraseña" name="password" id="password" required>
         <button class="btn btn-large btn-primary" type="submit" name="Biniciar">Iniciar Sesión</button>
       </form>
 
     </div> <!-- /container -->
-
+<script type="text/javascript" src="../recursos/js/jquery-2.0.2.js" ></script> 
 <script src="../recursos/js/bootstrap.js"></script>
-<script src="../recursos/js/bootstrap.min.js"></script>
+
 </body>
 </html>
