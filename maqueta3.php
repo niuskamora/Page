@@ -15,16 +15,19 @@ $conn=conectar();
 <link rel=StyleSheet href="recursos/css/bootstrap.min.css" type="text/css" />
 <link rel=StyleSheet href="recursos/animate/animate.css" type="text/css" />
 <link rel=StyleSheet href="recursos/css/estilogeneral.css" type="text/css" />
-<link rel="stylesheet" type="text/css" href="recursos/circular/css/jquery.jscrollpane.css" media="all" />
-<link rel="stylesheet" type="text/css" href="recursos/circular/css/style.css" media="all" />
+
 <style></style>
 <link rel=StyleSheet href="recursos/css/bootstrap-responsive.min.css" type="text/css" />
 <link rel=StyleSheet href="recursos/slide/jquery.pageslide.css" type="text/css" />
+<script type="text/javascript" src="recursos/js/jquery-2.0.2.js" ></script> 
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.0/jquery.min.js"></script>
+<script type="text/javascript" src="recursos/js/jquery.contenthover.js" ></script> 
+<script type="text/javascript" src="recursos/js/jquery.contenthover.min.js" ></script>
 <head>
 <body>
-<script type="text/javascript" src="recursos/js/jquery-2.0.2.js" ></script> 
+
 <script type="text/javascript" src="recursos/js/bootstrap.min.js" ></script> 
-<script type="text/javascript" src="recursos/slide/jquery.pageslide.min.js" ></script>
+
 
 
  
@@ -100,7 +103,7 @@ $conn=conectar();
 		
 	if($registros != 0){
 		?>
-      <div class="accordion span11" id="accordion2">
+      <div class="span12">
         <?php
 			for ($i=0;$i<$registros;$i++)
 			{
@@ -109,21 +112,21 @@ $conn=conectar();
 				if($row['titulo']!="Tecnología"){
 					$vector[] =$row['informacionid'];
 					 ?>
-        <div id="<?php echo $row['informacionid'] ?>" style="width:300px; height:240px; background:#eee; ">
-    <div style="padding:20px;">
+       
     
-        <p><img src="<?php echo $row['imagen'] ?>" /></p>
-        <p><?php echo $row['titulo'] ?></p>
-    </div>
-</div>
-<div class="contenthover">
-    <h3><?php echo $row['informacionid'] ?></h3>
-    <p><?php echo $row['descripcion'] ?></p>
-    <?php if($row['enlace']!=''){?> 
-    <p><a href="echo <?php $row['enlace'] ?>" class="mybutton"></a></p>
+        <img class="my" src="<?php echo $row['imagen'] ?>"  id="d1" name="d1" style="width:300px; height:240px;"/> 
+       
+
+		<div class="contenthover">
+    	<h3><?php echo $row['titulo'] ?></h3>
+    	<p><?php echo $row['descripcion'] ?></p>
+   			 <?php if($row['enlace']!=''){?> 
+   			 <p><a href=" <?php echo $row['enlace'] ?>" class="mybutton" ><?php echo $row['titulo'] ?></a></p>
+    	</div>
+        
     <?php } ?>
     
-</div>
+
         
         <?php 			   }
 				}
@@ -137,20 +140,17 @@ $conn=conectar();
   </div>
 </div>
 
-<script type="text/javascript" src="recursos/circular/js/jquery.contentcarousel.js"></script> 
-<script type="text/javascript" src="recursos/js/funciones.js" ></script> 
-<script type="text/javascript" src="recursos/circular/js/jquery.easing.1.3.js"></script> 
 <script type="text/javascript">
 	$(document).ready(
 		function()
 		{
-			<?php $i=0; ?>
-			while(<?php $vector[$i]!=0 ?>){
-			$('<?php $vector[$i]?>').contenthover({
+			
+			$('.my').contenthover({
    				 overlay_background:'#333'
 							});
-							<?php $i=i+1; ?>
-			}
+							
+							
+		
 		}
 	);
 	</script>
