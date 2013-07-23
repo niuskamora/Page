@@ -70,7 +70,7 @@ if(isset($_POST["guardar"])){
 				}
 
 				list($ancho,$alto)=getimagesize($rutaImagenOriginal);
-				$ancho_buscado3=0;
+				/*$ancho_buscado3=0;
 				$alto_buscado3=0;	
 			
 			    if($ancho!=$an){
@@ -95,9 +95,9 @@ if(isset($_POST["guardar"])){
 				   $alto_buscado3=ceil(($al*$alto_buscado3)/$ancho_buscado3);
 				   $ancho_buscado3=$al;	
 				}
-				
-                $tmp=imagecreatetruecolor($ancho_buscado3,$alto_buscado3);
-				imagecopyresampled($tmp,$img_original,0,0,0,0,$ancho_buscado3, $alto_buscado3,$ancho,$alto);
+				*/
+                $tmp=imagecreatetruecolor($ancho,$alto);
+				imagecopyresampled($tmp,$img_original,0,0,0,0,$an, $al,$ancho,$alto);
 				//Definimos la calidad de la imagen final
 				$calidad=100;
 				//Se crea la imagen final en el directorio indicado
@@ -105,15 +105,15 @@ if(isset($_POST["guardar"])){
 										
 				$fichero=$uploadfile;			
 				$img1 = imagecreatefromjpeg($fichero);
-				$img1Recortada = imagecreatetruecolor ($an, $al);
-				imagecopy($img1Recortada, $img1, 0, 0, ceil(($ancho_buscado3-$an)/2), ceil(($alto_buscado3-$al)/2), ceil(($ancho_buscado3-$an)/2)+$an, ceil(($alto_buscado3-$al)/2)+$al);
+				/*$img1Recortada = imagecreatetruecolor ($an, $al);
+				imagecopy($img1Recortada, $img1, 0, 0, ceil(($ancho_buscado3-$an)/2), ceil(($alto_buscado3-$al)/2), ceil(($ancho_buscado3-$an)/2)+$an, ceil(($alto_buscado3-$al)/2)+$al);*/
 				
-				imagejpeg($img1Recortada,$uploadfile,$calidad);				
+				imagejpeg($img1,$uploadfile,$calidad);				
 				$sql_update="update informacion set imagen='".$uploadfile2."' where informacionid=$id";
 			
 				$result= pg_query($conn, $sql_update);
 																													
-			}
+			}		
 		 }
 		 
 		 if($resultado || $result){
@@ -151,7 +151,7 @@ if(isset($_POST["guardar"])){
       <div class="container" style="width: auto;"> <a class="btn btn-navbar" href="#nav" data-toggle="collapse" data-target="#barrap"> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </a> <a  class="brand" id="brand-admin" href="#">PANGEATECH</a>
         <div id="barrap" class="nav-collapse collapse">
           <ul class="nav">
-            <li class="dropdown"> <a  class="dropdown-toggle" data-target="#" data-toggle="dropdown"> Gestion Usuarios <b class="caret"></b> </a>
+            <li class="dropdown"> <a  class="dropdown-toggle" data-target="#" data-toggle="dropdown"> Gestión Usuarios <b class="caret"></b> </a>
               <ul class="dropdown-menu">
                 <li><a href="tipoadmin.php"> Tipo Administrador </a></li>
                 <li><a href="admin.php">Administrador</a></li>
@@ -161,9 +161,9 @@ if(isset($_POST["guardar"])){
             <li><a href="menu.php"> Menú</a></li>
             <li><a href="producto.php">Producto</a></li>
             <li><a href="sucursal.php">Sucursal</a></li>
-            <li class="dropdown">
+            <li class="dropdown active">
              <a  class="dropdown-toggle" data-target="#" data-toggle="dropdown">
-              Gestion Informacion <b class="caret"></b> </a>
+              Gestión Información <b class="caret"></b> </a>
               <ul class="dropdown-menu">
                 <li><a href="tipoinfo.php">Tipo Infomación</a></li>
                 <li><a href="info.php">Información</a></li>
