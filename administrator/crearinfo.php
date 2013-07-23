@@ -72,7 +72,7 @@ if(isset($_POST["guardar"]) || isset($_POST["guardar2"])){
 				}
 
 				list($ancho,$alto)=getimagesize($rutaImagenOriginal);
-				$ancho_buscado3=0;
+				/*$ancho_buscado3=0;
 				$alto_buscado3=0;	
 			
 			    if($ancho!=$an){
@@ -97,9 +97,9 @@ if(isset($_POST["guardar"]) || isset($_POST["guardar2"])){
 				   $alto_buscado3=ceil(($al*$alto_buscado3)/$ancho_buscado3);
 				   $ancho_buscado3=$al;	
 				}
-				
-                $tmp=imagecreatetruecolor($ancho_buscado3,$alto_buscado3);
-				imagecopyresampled($tmp,$img_original,0,0,0,0,$ancho_buscado3, $alto_buscado3,$ancho,$alto);
+				*/
+                $tmp=imagecreatetruecolor($ancho,$alto);
+				imagecopyresampled($tmp,$img_original,0,0,0,0,$an, $al,$ancho,$alto);
 				//Definimos la calidad de la imagen final
 				$calidad=100;
 				//Se crea la imagen final en el directorio indicado
@@ -107,10 +107,10 @@ if(isset($_POST["guardar"]) || isset($_POST["guardar2"])){
 										
 				$fichero=$uploadfile;			
 				$img1 = imagecreatefromjpeg($fichero);
-				$img1Recortada = imagecreatetruecolor ($an, $al);
-				imagecopy($img1Recortada, $img1, 0, 0, ceil(($ancho_buscado3-$an)/2), ceil(($alto_buscado3-$al)/2), ceil(($ancho_buscado3-$an)/2)+$an, ceil(($alto_buscado3-$al)/2)+$al);
+				/*$img1Recortada = imagecreatetruecolor ($an, $al);
+				imagecopy($img1Recortada, $img1, 0, 0, ceil(($ancho_buscado3-$an)/2), ceil(($alto_buscado3-$al)/2), ceil(($ancho_buscado3-$an)/2)+$an, ceil(($alto_buscado3-$al)/2)+$al);*/
 				
-				imagejpeg($img1Recortada,$uploadfile,$calidad);				
+				imagejpeg($img1,$uploadfile,$calidad);				
 				$sql_update="update informacion set imagen='".$uploadfile2."' where informacionid=".$arreglo[0]."";
 			
 				$result= pg_query($conn, $sql_update);
