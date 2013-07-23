@@ -65,7 +65,7 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
    <div class="row-fluid">
                   <?php
 				   $ban=false;
-				   $SQL9="SELECT * FROM administrador WHERE tipoadministradorid=".$_SESSION["id_usuario"];
+				   $SQL9="SELECT * FROM administrador WHERE tipoadministradorid=".$_SESSION["admin"];
 		$result9 = pg_query ($conn, $SQL9) or die("Error en la consulta SQL");
 		$row9 = pg_fetch_array ($result9);
 		$reg= pg_num_rows($result9);
