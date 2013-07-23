@@ -6,6 +6,40 @@ $conn=conectar();
 if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
 	iraURL('../administrator/index.php');
 	}
+
+	//codigo para guardar
+	if(isset($_POST["crear_uno"]) || isset($_POST["crear_otro"])){
+
+	if(isset($_POST["nombre"]) &&  isset($_POST["apellido"]) && isset($_POST["direccion"]) && isset($_POST["usuarioo"]) && isset($_POST["contrasena"]) && isset($_POST["contrasena_c"]) && $_POST["nombre"]!="" && $_POST["apellido"]!="" && $_POST["direccion"]!="" && $_POST["usuarioo"]!="" && $_POST["contrasena"]!="" && $_POST["contrasena_c"]!=""){
+		$SQL="SELECT * FROM usuario where usuario='".$_POST["usuario"]."'";
+		$result = pg_query ($conn, $SQL ) or die("Error en la consulta SQL");
+		$registros= pg_num_rows($result);
+		if($registros == 0){
+				if($_POST["contrasena"]==$_POST["contrasena_c"]){
+						$insertar = "insert into usuario values(nextval('usuario_usuarioid_seq'),'".$_POST['nombre']."','".$_POST['apellido']."','".$_POST['direccion']."','".$_POST['usuarioo']."','".$_POST['contrasena']."',".$_SESSION["id_usuario"].");";
+						$conex=conectar();
+						pg_query($conex,$insertar) or die (pg_last_error($conex));
+						llenarLog(1,"USUARIO");
+						if(isset($_POST["crear_uno"])){
+						iraURL('../administrator/usuario.php');		
+						}else{
+						iraURL('../administrator/crearusuario.php');	
+							}
+				}else{
+					javaalert("Las contraseñas no coinciden, por favor verifique");
+				}
+		}//fin de $registros
+		else{
+			javaalert("El nombre de usuario ya esta registrado, por favor verifique");
+		}
+	}//fin de isset
+	else{
+				javaalert("Debe agregar todos los campos, por favor verifique");
+			}
+			
+			
+		}				
+
 ?>
 
 <!DOCTYPE html>
@@ -79,9 +113,9 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
             <div class="span3 well well-small"><b>Nombre de Usuario</b></div>
             <div class="span6 well well-small"><input type="text" name="usuarioo" id="usuarioo" placeholder="Ej. Mariela.arboleda2541" title="El formato es Mayúscula(letras, puntos o números)" maxlength="34" pattern="[A-ZÑ]{1}[a-z.ñ0-9]{1,33}"  required/></div>
             <div class="span3 well well-small"><b>Contraseña</b></div>
-            <div class="span6 well well-small"><input type="password" name="contrasena" id="contrasena" maxlength="34" pattern="[A-Za-z.0-9]{1,34}" title="Debe agregar letras, puntos o números" required/></div>
+            <div class="span6 well well-small"><input type="password" name="contrasena" id="contrasena" maxlength="34" pattern="[A-Za-z.0-9ñÑ]{1,34}" title="Debe agregar letras, puntos o números" required/></div>
             <div class="span3 well well-small"><b>Confirmar contraseña</b></div>
-            <div class="span6 well well-small"><input type="password" name="contrasena_c" id="contrasena_c" maxlength="34" pattern="[A-Za-z.0-9]{1,34}" title="Debe repetir la contraseña" required/></div>
+            <div class="span6 well well-small"><input type="password" name="contrasena_c" id="contrasena_c" maxlength="34" pattern="[A-Za-z.0-9ñÑ]{1,34}" title="Debe repetir la contraseña" required/></div>
             <div class="span9 well well-small" align="center"><button class="btn btn-primary" id="crear_uno" name="crear_uno" type="submit">Guardar</button></div>
 			<div class="span9 well well-small" align="center"> <button class="btn btn-primary" id="crear_otro" name="crear_otro" type="submit">Guardar y añadir otro</button></div>
             </p>
@@ -94,40 +128,7 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
 ================================================== --> 
 <script type="text/javascript" src="../recursos/js/jquery-2.0.2.js" ></script> 
 <script src="../recursos/js/bootstrap.js"></script> 
-<?php 
-	//codigo para guardar
-	if(isset($_POST["crear_uno"]) || isset($_POST["crear_otro"])){
 
-	if(isset($_POST["nombre"]) &&  isset($_POST["apellido"]) && isset($_POST["direccion"]) && isset($_POST["usuarioo"]) && isset($_POST["contrasena"]) && isset($_POST["contrasena_c"]) && $_POST["nombre"]!="" && $_POST["apellido"]!="" && $_POST["direccion"]!="" && $_POST["usuarioo"]!="" && $_POST["contrasena"]!="" && $_POST["contrasena_c"]!=""){
-		$SQL="SELECT * FROM usuario where usuario='".$_POST["usuario"]."'";
-		$result = pg_query ($conn, $SQL ) or die("Error en la consulta SQL");
-		$registros= pg_num_rows($result);
-		if($registros == 0){
-				if($_POST["contrasena"]==$_POST["contrasena_c"]){
-						$insertar = "insert into usuario values(nextval('usuario_usuarioid_seq'),'".$_POST['nombre']."','".$_POST['apellido']."','".$_POST['direccion']."','".$_POST['usuarioo']."','".$_POST['contrasena']."',".$_SESSION["id_usuario"].");";
-						$conex=conectar();
-						pg_query($conex,$insertar) or die (pg_last_error($conex));
-						llenarLog(1,"USUARIO");
-						if(isset($_POST["crear_uno"])){
-						iraURL('../administrator/usuario.php');		
-						}else{
-						iraURL('../administrator/crearusuario.php');	
-							}
-				}else{
-					javaalert("Las contraseñas no coinciden, por favor verifique");
-				}
-		}//fin de $registros
-		else{
-			javaalert("El nombre de usuario ya esta registrado, por favor verifique");
-		}
-	}//fin de isset
-	else{
-				javaalert("Debe agregar todos los campos, por favor verifique");
-			}
-			
-			
-		}				
-	?>
     
      </form>
      

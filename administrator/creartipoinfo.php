@@ -6,6 +6,22 @@ $conn=conectar();
 if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
 	iraURL('../administrator/index.php');
 	}
+	//codigo para guardar y volver a la pagina de tipoinformacion.php
+	if(isset($_POST["crear_uno"]) || isset($_POST["crear_otro"])){
+		if(isset($_POST["nombre"]) && isset($_POST["descripcion"]) && $_POST["nombre"]!="" && $_POST["descripcion"]!="" ){
+				$insertar = "insert into tipoinformacion values(nextval('tipoinformacion_tipoinformacionid_seq'),'".$_POST['nombre']."','".$_POST['descripcion']."');";
+				$conex=conectar();
+				pg_query($conex,$insertar) or die (pg_last_error($conex));
+				if(isset($_POST["crear_uno"])){
+					iraURL('../administrator/tipoinfo.php');	
+				}else{
+					iraURL('../administrator/creartipoinfo.php');	
+					}	
+				llenarLog(1,"Tipo de Información");
+			}else{
+				javaalert("Debe agregar todos los campos, por favor verifique");
+			}
+	}
 ?>
 
 <!DOCTYPE html>
@@ -93,24 +109,6 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
 <script type="text/javascript" src="../recursos/js/jquery-2.0.2.js" ></script> 
 <script src="../recursos/js/bootstrap.js"></script> 
 
-<?php 
-	//codigo para guardar y volver a la pagina de tipoinformacion.php
-	if(isset($_POST["crear_uno"]) || isset($_POST["crear_otro"])){
-		if(isset($_POST["nombre"]) && isset($_POST["descripcion"]) && $_POST["nombre"]!="" && $_POST["descripcion"]!="" ){
-				$insertar = "insert into tipoinformacion values(nextval('tipoinformacion_tipoinformacionid_seq'),'".$_POST['nombre']."','".$_POST['descripcion']."');";
-				$conex=conectar();
-				pg_query($conex,$insertar) or die (pg_last_error($conex));
-				if(isset($_POST["crear_uno"])){
-					iraURL('../administrator/tipoinfo.php');	
-				}else{
-					iraURL('../administrator/creartipoinfo.php');	
-					}	
-				llenarLog(1,"Tipo de Información");
-			}else{
-				javaalert("Debe agregar todos los campos, por favor verifique");
-			}
-	}
-	?>
       
    </form>
 </body>

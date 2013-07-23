@@ -6,6 +6,105 @@ $conn=conectar();
 if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
 	iraURL('../administrator/index.php');
 	}
+	//codigo para guardar 
+	if(isset($_POST["crear_uno"]) || isset($_POST["crear_otro"])){
+
+	if(isset($_POST["nombre"]) && $_POST["nombre"]!="" && isset($_POST["redactor"]) && $_POST["redactor"]!="" && isset($_POST["enlace"]) && $_POST["enlace"]!="" ){		
+				$insertar = "insert into producto values(nextval('producto_productoid_seq'),'".$_POST['nombre']."','".$_POST['redactor']."','".$_POST['enlace']."','');";
+				$conex=conectar();
+				pg_query($conex,$insertar) or die (pg_last_error($conex));
+				$sql_select="SELECT last_value FROM producto_productoid_seq;";
+				$results=pg_query($conn, $sql_select);
+				$arreglo=pg_fetch_array($results,0);
+				
+				if($_FILES['imagen']['name']!=""){
+					
+					$caracteres = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz"; //posibles caracteres a usar
+					$numerodeletras=5; //numero de letras para generar el texto
+					$cadena = ""; //variable para almacenar la cadena generada
+					for($i=0;$i<$numerodeletras;$i++){
+						$cadena .= substr($caracteres,rand(0,strlen($caracteres)),1); /*Extraemos 1 caracter de los caracteres 
+						entre el rango 0 a Numero de letras que tiene la cadena */
+					}
+					
+					$direccion="../recursos"; //para cargar
+					$direccion2="recursos";//para guardar
+					$tipo = explode('/',$_FILES['imagen']['type']);
+					$uploadfile =$direccion."/img/producto/".$cadena.".".$tipo[1];
+					$uploadfile2 =$direccion2."/img/producto/".$cadena.".".$tipo[1];
+					$error = $_FILES['imagen']['error']; 
+					$subido = false;
+					
+					
+					if($error==UPLOAD_ERR_OK){ 
+							$subido = copy($_FILES['imagen']['tmp_name'], $uploadfile); 
+							$rutaImagenOriginal=$uploadfile;
+							if($tipo[1]=="jpg" || $tipo[1]=="JPEG" || $tipo[1]=="JPG" || $tipo[1]=="jpeg"){
+								$img_original = imagecreatefromjpeg($rutaImagenOriginal);
+							}
+							if($tipo[1]=="png"){
+								$img_original = imagecreatefrompng($rutaImagenOriginal);
+							}
+			
+							list($ancho,$alto)=getimagesize($rutaImagenOriginal);
+							$ancho_buscado3=0;
+							$alto_buscado3=0;	
+						
+							if($ancho!=640){
+							   $ancho_buscado3=640;
+							   $alto_buscado3=ceil((640*$alto)/$ancho);					
+							}
+						
+							if($alto<=$ancho){
+							   $alto_buscado3=480;
+							   $ancho_buscado3=ceil((480*$ancho)/$alto);
+							}else{
+							   $ancho_buscado3=640;
+							   $alto_buscado3=ceil((640*$alto)/$ancho);
+							}	
+			
+							if($alto_buscado3<480){
+							   $ancho_buscado3=ceil((480*$ancho_buscado3)/$alto_buscado3);
+							   $alto_buscado3=480;
+							}
+			
+							if($ancho_buscado3<640){
+							   $alto_buscado3=ceil((640*$alto_buscado3)/$ancho_buscado3);
+							   $ancho_buscado3=640;	
+							}
+							
+							$tmp=imagecreatetruecolor($ancho_buscado3,$alto_buscado3);
+							imagecopyresampled($tmp,$img_original,0,0,0,0,$ancho_buscado3, $alto_buscado3,$ancho,$alto);
+							//Definimos la calidad de la imagen final
+							$calidad=100;
+							//Se crea la imagen final en el directorio indicado
+							imagejpeg($tmp,$uploadfile,$calidad);				
+													
+							$fichero=$uploadfile;			
+							$img1 = imagecreatefromjpeg($fichero);
+							$img1Recortada = imagecreatetruecolor (640, 480);
+							imagecopy($img1Recortada, $img1, 0, 0, ceil(($ancho_buscado3-640)/2), ceil(($alto_buscado3-640)/2), ceil(($ancho_buscado3-640)/2)+640, ceil(($alto_buscado3-480)/2)+480);
+							
+							imagejpeg($img1Recortada,$uploadfile,$calidad);				
+							$sql_update="update PRODUCTO set imagen='".$uploadfile2."' where productoid=".$arreglo[0]."";
+						
+							$result= pg_query($conn, $sql_update);
+																																
+						}		
+					 }
+				
+			
+						llenarLog(1,"PRODUCTO");
+						if(isset($_POST["crear_uno"])){
+						iraURL('../administrator/producto.php');		
+						}else{
+						iraURL('../administrator/crearproducto.php');	
+							}	
+		}else{
+			javaalert("Debe agregar todos los campos, por favor verifique");
+		}		
+	}
+
 ?>
 
 <!DOCTYPE html>
@@ -111,107 +210,6 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
 		}
 	);
 	</script>
-<?php 
-	//codigo para guardar 
-	if(isset($_POST["crear_uno"]) || isset($_POST["crear_otro"])){
-
-	if(isset($_POST["nombre"]) && $_POST["nombre"]!="" && isset($_POST["redactor"]) && $_POST["redactor"]!="" && isset($_POST["enlace"]) && $_POST["enlace"]!="" ){		
-				$insertar = "insert into producto values(nextval('producto_productoid_seq'),'".$_POST['nombre']."','".$_POST['redactor']."','".$_POST['enlace']."','');";
-				$conex=conectar();
-				pg_query($conex,$insertar) or die (pg_last_error($conex));
-				$sql_select="SELECT last_value FROM producto_productoid_seq;";
-				$results=pg_query($conn, $sql_select);
-				$arreglo=pg_fetch_array($results,0);
-				
-				if($_FILES['imagen']['name']!=""){
-					
-					$caracteres = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz"; //posibles caracteres a usar
-					$numerodeletras=5; //numero de letras para generar el texto
-					$cadena = ""; //variable para almacenar la cadena generada
-					for($i=0;$i<$numerodeletras;$i++){
-						$cadena .= substr($caracteres,rand(0,strlen($caracteres)),1); /*Extraemos 1 caracter de los caracteres 
-						entre el rango 0 a Numero de letras que tiene la cadena */
-					}
-					
-					$direccion="../recursos"; //para cargar
-					$direccion2="recursos";//para guardar
-					$tipo = explode('/',$_FILES['imagen']['type']);
-					$uploadfile =$direccion."/img/producto/".$cadena.".".$tipo[1];
-					$uploadfile2 =$direccion2."/img/producto/".$cadena.".".$tipo[1];
-					$error = $_FILES['imagen']['error']; 
-					$subido = false;
-					
-					
-					if($error==UPLOAD_ERR_OK){ 
-							$subido = copy($_FILES['imagen']['tmp_name'], $uploadfile); 
-							$rutaImagenOriginal=$uploadfile;
-							if($tipo[1]=="jpg" || $tipo[1]=="JPEG" || $tipo[1]=="JPG" || $tipo[1]=="jpeg"){
-								$img_original = imagecreatefromjpeg($rutaImagenOriginal);
-							}
-							if($tipo[1]=="png"){
-								$img_original = imagecreatefrompng($rutaImagenOriginal);
-							}
-			
-							list($ancho,$alto)=getimagesize($rutaImagenOriginal);
-							$ancho_buscado3=0;
-							$alto_buscado3=0;	
-						
-							if($ancho!=640){
-							   $ancho_buscado3=640;
-							   $alto_buscado3=ceil((640*$alto)/$ancho);					
-							}
-						
-							if($alto<=$ancho){
-							   $alto_buscado3=480;
-							   $ancho_buscado3=ceil((480*$ancho)/$alto);
-							}else{
-							   $ancho_buscado3=640;
-							   $alto_buscado3=ceil((640*$alto)/$ancho);
-							}	
-			
-							if($alto_buscado3<480){
-							   $ancho_buscado3=ceil((480*$ancho_buscado3)/$alto_buscado3);
-							   $alto_buscado3=480;
-							}
-			
-							if($ancho_buscado3<640){
-							   $alto_buscado3=ceil((640*$alto_buscado3)/$ancho_buscado3);
-							   $ancho_buscado3=640;	
-							}
-							
-							$tmp=imagecreatetruecolor($ancho_buscado3,$alto_buscado3);
-							imagecopyresampled($tmp,$img_original,0,0,0,0,$ancho_buscado3, $alto_buscado3,$ancho,$alto);
-							//Definimos la calidad de la imagen final
-							$calidad=100;
-							//Se crea la imagen final en el directorio indicado
-							imagejpeg($tmp,$uploadfile,$calidad);				
-													
-							$fichero=$uploadfile;			
-							$img1 = imagecreatefromjpeg($fichero);
-							$img1Recortada = imagecreatetruecolor (640, 480);
-							imagecopy($img1Recortada, $img1, 0, 0, ceil(($ancho_buscado3-640)/2), ceil(($alto_buscado3-640)/2), ceil(($ancho_buscado3-640)/2)+640, ceil(($alto_buscado3-480)/2)+480);
-							
-							imagejpeg($img1Recortada,$uploadfile,$calidad);				
-							$sql_update="update PRODUCTO set imagen='".$uploadfile2."' where productoid=".$arreglo[0]."";
-						
-							$result= pg_query($conn, $sql_update);
-																																
-						}		
-					 }
-				
-			
-						llenarLog(1,"PRODUCTO");
-						if(isset($_POST["crear_uno"])){
-						iraURL('../administrator/producto.php');		
-						}else{
-						iraURL('../administrator/crearproducto.php');	
-							}	
-		}else{
-			javaalert("Debe agregar todos los campos, por favor verifique");
-		}		
-	}
-
-	?>
     		</form >
 
 </body>

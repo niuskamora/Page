@@ -10,6 +10,131 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
 
 ?>
 
+<?php
+
+if(isset($_POST["guardar"]) || isset($_POST["guardar2"])){
+	
+	if(isset($_POST["titulo"]) && isset($_POST["redactor"]) && $_POST["titulo"]!="" && $_POST["redactor"]!="" && $_POST["tipoinfo"]>0){
+	
+		$titulo=$_POST['titulo'];
+		$descripcion=$_POST['redactor'];
+		$enlace=$_POST['enlace'];
+		$tipoinfo=$_POST['tipoinfo'];
+		
+		if(isset($_POST["op"])){
+		
+			if($_POST["op"]==1){
+				$an=50;
+				$al=50;
+			}
+			if($_POST["op"]==2){
+				$an=320;
+				$al=240;
+			}
+			if($_POST["op"]==3){
+				$an=640;
+				$al=480;
+			}
+		}
+	
+		$resultado=pg_query($conn,"INSERT INTO informacion values( nextval('informacion_informacionid_seq'),'$titulo','$descripcion','$enlace','','$tipoinfo',".$_SESSION["id_usuario"].")") or die(pg_last_error($conn));
+	
+		$sql_select="SELECT last_value FROM informacion_informacionid_seq;";
+		$results=pg_query($conn, $sql_select);
+		$arreglo=pg_fetch_array($results,0);
+	
+		if($_FILES['imagen']['name']!=""){
+		
+			$caracteres = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz"; //posibles caracteres a usar
+			$numerodeletras=5; //numero de letras para generar el texto
+			$cadena = ""; //variable para almacenar la cadena generada
+			for($i=0;$i<$numerodeletras;$i++){
+    			$cadena .= substr($caracteres,rand(0,strlen($caracteres)),1); /*Extraemos 1 caracter de los caracteres 
+				entre el rango 0 a Numero de letras que tiene la cadena */
+			}
+		
+			$direccion="../recursos/img/informacion";
+			$direccion2="recursos/img/informacion";
+			$tipo = explode('/',$_FILES['imagen']['type']);
+			$uploadfile =$direccion."/".$cadena.".".$tipo[1];
+			$uploadfile2 =$direccion2."/".$cadena.".".$tipo[1];
+			$error = $_FILES['imagen']['error']; 
+			$subido = false;
+		
+			if($error==UPLOAD_ERR_OK){ 
+			    $subido = copy($_FILES['imagen']['tmp_name'], $uploadfile); 
+				$rutaImagenOriginal=$uploadfile;
+				if($tipo[1]=="jpg" || $tipo[1]=="JPEG" || $tipo[1]=="JPG" || $tipo[1]=="jpeg"){
+					$img_original = imagecreatefromjpeg($rutaImagenOriginal);
+				}
+				if($tipo[1]=="png"){
+					$img_original = imagecreatefrompng($rutaImagenOriginal);
+				}
+
+				list($ancho,$alto)=getimagesize($rutaImagenOriginal);
+				$ancho_buscado3=0;
+				$alto_buscado3=0;	
+			
+			    if($ancho!=$an){
+				   $ancho_buscado3=$an;
+				   $alto_buscado3=ceil(($an*$alto)/$ancho);					
+				}
+			
+				if($alto<=$ancho){
+				   $alto_buscado3=$al;
+				   $ancho_buscado3=ceil(($al*$ancho)/$alto);
+				}else{
+				   $ancho_buscado3=$an;
+				   $alto_buscado3=ceil(($an*$alto)/$ancho);
+				}	
+
+                if($alto_buscado3<$an){
+				   $ancho_buscado3=ceil(($an*$ancho_buscado3)/$alto_buscado3);
+				   $alto_buscado3=$an;
+				}
+
+				if($ancho_buscado3<$al){
+				   $alto_buscado3=ceil(($al*$alto_buscado3)/$ancho_buscado3);
+				   $ancho_buscado3=$al;	
+				}
+				
+                $tmp=imagecreatetruecolor($ancho_buscado3,$alto_buscado3);
+				imagecopyresampled($tmp,$img_original,0,0,0,0,$ancho_buscado3, $alto_buscado3,$ancho,$alto);
+				//Definimos la calidad de la imagen final
+				$calidad=100;
+				//Se crea la imagen final en el directorio indicado
+				imagejpeg($tmp,$uploadfile,$calidad);				
+										
+				$fichero=$uploadfile;			
+				$img1 = imagecreatefromjpeg($fichero);
+				$img1Recortada = imagecreatetruecolor ($an, $al);
+				imagecopy($img1Recortada, $img1, 0, 0, ceil(($ancho_buscado3-$an)/2), ceil(($alto_buscado3-$al)/2), ceil(($ancho_buscado3-$an)/2)+$an, ceil(($alto_buscado3-$al)/2)+$al);
+				
+				imagejpeg($img1Recortada,$uploadfile,$calidad);				
+				$sql_update="update informacion set imagen='".$uploadfile2."' where informacionid=".$arreglo[0]."";
+			
+				$result= pg_query($conn, $sql_update);
+																													
+			}		
+		 }
+	
+		if($resultado || $result){
+			javaalert('Se Creo la Información');
+			llenarLog(1, "Información");
+			if(isset($_POST["guardar"])){
+				iraURL('../administrator/info.php');
+			}
+			else{
+				iraURL('../administrator/crearinfo.php');
+			}
+				
+		}
+	}else{
+		javaalert("Ingrese todos los campos");
+	}
+}
+?>
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -120,131 +245,6 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
       </div>
      </p>
   </div>
-		
-<?php
-
-if(isset($_POST["guardar"]) || isset($_POST["guardar2"])){
-	
-	if(isset($_POST["titulo"]) && isset($_POST["redactor"]) && $_POST["titulo"]!="" && $_POST["redactor"]!="" && $_POST["tipoinfo"]>0){
-	
-		$titulo=$_POST['titulo'];
-		$descripcion=$_POST['redactor'];
-		$enlace=$_POST['enlace'];
-		$tipoinfo=$_POST['tipoinfo'];
-		
-		if(isset($_POST["op"])){
-		
-			if($_POST["op"]==1){
-				$an=50;
-				$al=50;
-			}
-			if($_POST["op"]==2){
-				$an=320;
-				$al=240;
-			}
-			if($_POST["op"]==3){
-				$an=640;
-				$al=480;
-			}
-		}
-	
-		$resultado=pg_query($conn,"INSERT INTO informacion values( nextval('informacion_informacionid_seq'),'$titulo','$descripcion','$enlace','','$tipoinfo',".$_SESSION["id_usuario"].")") or die(pg_last_error($conn));
-	
-		$sql_select="SELECT last_value FROM informacion_informacionid_seq;";
-		$results=pg_query($conn, $sql_select);
-		$arreglo=pg_fetch_array($results,0);
-	
-		if($_FILES['imagen']['name']!=""){
-		
-			$caracteres = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz"; //posibles caracteres a usar
-			$numerodeletras=5; //numero de letras para generar el texto
-			$cadena = ""; //variable para almacenar la cadena generada
-			for($i=0;$i<$numerodeletras;$i++){
-    			$cadena .= substr($caracteres,rand(0,strlen($caracteres)),1); /*Extraemos 1 caracter de los caracteres 
-				entre el rango 0 a Numero de letras que tiene la cadena */
-			}
-		
-			$direccion="../recursos/img/informacion";
-			$direccion2="recursos/img/informacion";
-			$tipo = explode('/',$_FILES['imagen']['type']);
-			$uploadfile =$direccion."/".$cadena.".".$tipo[1];
-			$uploadfile2 =$direccion2."/".$cadena.".".$tipo[1];
-			$error = $_FILES['imagen']['error']; 
-			$subido = false;
-		
-			if($error==UPLOAD_ERR_OK){ 
-			    $subido = copy($_FILES['imagen']['tmp_name'], $uploadfile); 
-				$rutaImagenOriginal=$uploadfile;
-				if($tipo[1]=="jpg" || $tipo[1]=="JPEG" || $tipo[1]=="JPG" || $tipo[1]=="jpeg"){
-					$img_original = imagecreatefromjpeg($rutaImagenOriginal);
-				}
-				if($tipo[1]=="png"){
-					$img_original = imagecreatefrompng($rutaImagenOriginal);
-				}
-
-				list($ancho,$alto)=getimagesize($rutaImagenOriginal);
-				$ancho_buscado3=0;
-				$alto_buscado3=0;	
-			
-			    if($ancho!=$an){
-				   $ancho_buscado3=$an;
-				   $alto_buscado3=ceil(($an*$alto)/$ancho);					
-				}
-			
-				if($alto<=$ancho){
-				   $alto_buscado3=$al;
-				   $ancho_buscado3=ceil(($al*$ancho)/$alto);
-				}else{
-				   $ancho_buscado3=$an;
-				   $alto_buscado3=ceil(($an*$alto)/$ancho);
-				}	
-
-                if($alto_buscado3<$an){
-				   $ancho_buscado3=ceil(($an*$ancho_buscado3)/$alto_buscado3);
-				   $alto_buscado3=$an;
-				}
-
-				if($ancho_buscado3<$al){
-				   $alto_buscado3=ceil(($al*$alto_buscado3)/$ancho_buscado3);
-				   $ancho_buscado3=$al;	
-				}
-				
-                $tmp=imagecreatetruecolor($ancho_buscado3,$alto_buscado3);
-				imagecopyresampled($tmp,$img_original,0,0,0,0,$ancho_buscado3, $alto_buscado3,$ancho,$alto);
-				//Definimos la calidad de la imagen final
-				$calidad=100;
-				//Se crea la imagen final en el directorio indicado
-				imagejpeg($tmp,$uploadfile,$calidad);				
-										
-				$fichero=$uploadfile;			
-				$img1 = imagecreatefromjpeg($fichero);
-				$img1Recortada = imagecreatetruecolor ($an, $al);
-				imagecopy($img1Recortada, $img1, 0, 0, ceil(($ancho_buscado3-$an)/2), ceil(($alto_buscado3-$al)/2), ceil(($ancho_buscado3-$an)/2)+$an, ceil(($alto_buscado3-$al)/2)+$al);
-				
-				imagejpeg($img1Recortada,$uploadfile,$calidad);				
-				$sql_update="update informacion set imagen='".$uploadfile2."' where informacionid=".$arreglo[0]."";
-			
-				$result= pg_query($conn, $sql_update);
-																													
-			}		
-		 }
-	
-		if($resultado && $result){
-			javaalert('Se Creo la Información');
-			llenarLog(1, "Información");
-			if(isset($_POST["guardar"])){
-				iraURL('../administrator/info.php');
-			}
-			else{
-				iraURL('../administrator/crearinfo.php');
-			}
-				
-		}
-	}else{
-		javaalert("Ingrese todos los campos");
-	}
-}
-?>
 </div>  
 </div>
 
