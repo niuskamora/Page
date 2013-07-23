@@ -78,11 +78,13 @@ $conn=conectar();
   		<br>
         Productos
   	</h2>
-       <p>Pangeatech pone a su disposición el mejor software adpatable a su empresa. Continue leyendo y enterese acerca de nuestros principales productos.</p>
 
   </div>
- 
+ <div class="span12">
+            <p><blockquote>Pangeatech pone a su disposición el mejor software adpatable a su empresa. Continue leyendo y enterese acerca de nuestros principales productos.</blockquote></p>
+</div> 
  <div class="row-fluid">
+
          <?php 
 		$SQL="SELECT * FROM producto";
 		$result = pg_query ($conn, $SQL ) or die("Error en la consulta SQL");

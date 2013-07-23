@@ -34,7 +34,7 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
       <div class="container" style="width: auto;"> <a class="btn btn-navbar" href="#nav" data-toggle="collapse" data-target="#barrap"> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </a> <a  class="brand" id="brand-admin" href="#">PANGEATECH</a>
         <div id="barrap" class="nav-collapse collapse">
           <ul class="nav">
-            <li class="dropdown"> <a  class="dropdown-toggle" data-target="#" data-toggle="dropdown"> Gestion Usuarios <b class="caret"></b> </a>
+            <li class="dropdown"> <a  class="dropdown-toggle" data-target="#" data-toggle="dropdown"> Gestión Usuarios <b class="caret"></b> </a>
               <ul class="dropdown-menu">
                 <li><a href="tipoadmin.php"> Tipo Administrador </a></li>
                 <li><a href="admin.php">Administrador</a></li>
@@ -42,11 +42,11 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
               </ul>
             </li>
             <li><a href="menu.php"> Menú</a></li>
-            <li><a href="producto.php">Producto</a></li>
+            <li class="active"><a href="producto.php">Producto</a></li>
             <li><a href="sucursal.php">Sucursal</a></li>
             <li class="dropdown">
              <a  class="dropdown-toggle" data-target="#" data-toggle="dropdown">
-              Gestion Informacion <b class="caret"></b> </a>
+              Gestión Información <b class="caret"></b> </a>
               <ul class="dropdown-menu">
                 <li><a href="tipoinfo.php">Tipo Infomación</a></li>
                 <li><a href="info.php">Información</a></li>
@@ -92,7 +92,7 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
 			?>  
             
             <div class="well alert alert-danger">
-    			<h2 class="alert alert-danger" align="center">Atención</h2>
+   			<h2 style="color:rgb(255,255,255)" align="center"> Atención</h2>
     			<h4 align="center">No se puede eliminar el registro </h4>
 	 		</div>
      
