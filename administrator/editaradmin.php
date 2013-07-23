@@ -11,6 +11,54 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
 $id=$_GET['id'];
 
 ?>
+
+<?php
+
+if(isset($_POST["guardar"])){
+	
+	$cons="SELECT * FROM administrador WHERE administradorid=$id";
+	$resulta = pg_query ($conn, $cons) or die("Error en la consulta SQL");
+			
+	if($row=pg_fetch_array($resulta)){
+		$id=$row['administradorid'];
+	}
+	
+	
+	if(isset($_POST["nombre"]) &&  isset($_POST["apellido"]) && isset($_POST["usuario"]) && isset($_POST["contrasena"]) && isset($_POST["contrasena_c"]) && $_POST["nombre"]!="" && $_POST["apellido"]!="" && $_POST["usuario"]!="" && $_POST["contrasena"]!="" && $_POST["contrasena_c"]!="" && $_POST["tipoadmin"]>0){
+	
+		$nombre=$_POST['nombre'];
+		$apellido=$_POST['apellido'];
+		$usuario=$_POST['usuario'];
+		$contrasena=$_POST['contrasena'];
+		$tipoadmin=$_POST['tipoadmin'];
+		
+		$SQL="SELECT * FROM administrador where usuario='$usuario' and administradorid!=$id";
+		$result = pg_query ($conn, $SQL ) or die("Error en la consulta SQL");
+		$registros= pg_num_rows($result);
+	
+		if($registros == 0){
+	
+			if($_POST["contrasena"]==$_POST["contrasena_c"]){
+				$resultado=pg_query($conn,"UPDATE administrador SET nombre='$nombre', apellido='$apellido', usuario='$usuario', contrasena='$contrasena', tipoadministradorid='$tipoadmin' WHERE administradorid=$id") or die(pg_last_error($conn));
+	
+				if($resultado){
+					javaalert('Se Modifico el Administrador');
+					llenarLog(2, "Administrador");
+					iraURL('../administrator/admin.php');
+				}
+			}else{
+				javaalert("Las contraseñas no coinciden, por favor verifique");
+			}
+		}else{
+			javaalert("El nombre de usuario ya esta registrado, por favor verfique");
+		}
+	
+	}else{
+		javaalert("Ingrese todos los campos");
+	}
+}
+?>
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -91,7 +139,7 @@ $id=$_GET['id'];
               </dt>
               <dd>
                 <div class=" well well-small" align="left">
-                  <input id="nombre" name="nombre" type="text" value="<?php echo $row['nombre']; ?>" contenteditable="true" placeholder="Ej. Niuska Jenireé" maxlength="34" pattern="[A-Za-z,ñ,Ñ,á,é,í,ó,ú,Á,É,Í,Ó,Ú]{1,34}" required/>
+                  <input id="nombre" name="nombre" type="text" value="<?php echo $row['nombre']; ?>" contenteditable="true" placeholder="Ej. Niuska Jenireé" maxlength="34" pattern="[A-Za-z,ñ,Ñ,á,é,í,ó,ú,Á,É,Í,Ó,Ú, ]{1,34}" required/>
                 </div>
               </dd>
               <dt>
@@ -99,7 +147,7 @@ $id=$_GET['id'];
               </dt>
               <dd>
                 <div class="well well-small">
-                  <input id="apellido" name="apellido" type="text" value="<?php echo $row['apellido']; ?>" contenteditable="true" placeholder="Ej. Mora Hurtado" maxlength="34" pattern="[A-Za-z,ñ,Ñ,á,é,í,ó,ú,Á,É,Í,Ó,Ú]{1,34}" required/>
+                  <input id="apellido" name="apellido" type="text" value="<?php echo $row['apellido']; ?>" contenteditable="true" placeholder="Ej. Mora Hurtado" maxlength="34" pattern="[A-Za-z,ñ,Ñ,á,é,í,ó,ú,Á,É,Í,Ó,Ú, ]{1,34}" required/>
                 </div>
               </dd>
               <dt>
@@ -164,44 +212,6 @@ $id=$_GET['id'];
         </form>
     
         <?php }?>
-<?php
-
-if(isset($_POST["guardar"])){
-	
-	if(isset($_POST["nombre"]) &&  isset($_POST["apellido"]) && isset($_POST["usuario"]) && isset($_POST["contrasena"]) && isset($_POST["contrasena_c"]) && $_POST["nombre"]!="" && $_POST["apellido"]!="" && $_POST["usuario"]!="" && $_POST["contrasena"]!="" && $_POST["contrasena_c"]!="" && $_POST["tipoadmin"]>0){
-	
-		$nombre=$_POST['nombre'];
-		$apellido=$_POST['apellido'];
-		$usuario=$_POST['usuario'];
-		$contrasena=$_POST['contrasena'];
-		$tipoadmin=$_POST['tipoadmin'];
-		
-		$SQL="SELECT * FROM administrador where usuario='$usuario' and administradorid!=".$row['administradorid'];
-		$result = pg_query ($conn, $SQL ) or die("Error en la consulta SQL");
-		$registros= pg_num_rows($result);
-	
-		if($registros == 0){
-	
-			if($_POST["contrasena"]==$_POST["contrasena_c"]){
-				$resultado=pg_query($conn,"UPDATE administrador SET nombre='$nombre', apellido='$apellido', usuario='$usuario', contrasena='$contrasena', tipoadministradorid='$tipoadmin' WHERE administradorid=$id") or die(pg_last_error($conn));
-	
-				if($resultado){
-					javaalert('Se Modifico el Administrador');
-					llenarLog(2, "Administrador");
-					iraURL('../administrator/admin.php');
-				}
-			}else{
-				javaalert("Las contraseñas no coinciden, por favor verifique");
-			}
-		}else{
-			javaalert("El nombre de usuario ya esta registrado, por favor verfique");
-		}
-	
-	}else{
-		javaalert("Ingrese todos los campos");
-	}
-}
-?>
   	</p>
     </div>
    </div>

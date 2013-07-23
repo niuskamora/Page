@@ -9,6 +9,50 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
 	}
 ?>
 
+
+<?php
+
+if(isset($_POST["guardar"]) || isset($_POST["guardar2"])){
+
+	if(isset($_POST["nombre"]) &&  isset($_POST["apellido"]) && isset($_POST["usuario"]) && isset($_POST["contrasena"]) && isset($_POST["contrasena_c"]) && $_POST["nombre"]!="" && $_POST["apellido"]!="" && $_POST["usuario"]!="" && $_POST["contrasena"]!="" && $_POST["contrasena_c"]!="" && $_POST["tipoadmin"]>0){
+	
+		$nombre=$_POST['nombre'];
+		$apellido=$_POST['apellido'];
+		$usuario=$_POST['usuario'];
+		$contrasena=$_POST['contrasena'];
+		$tipoadmin=$_POST['tipoadmin'];
+
+		$SQL="SELECT * FROM administrador where usuario='$usuario'";
+		$result = pg_query ($conn, $SQL ) or die("Error en la consulta SQL");
+		$registros= pg_num_rows($result);
+	
+		if($registros == 0){
+
+			if($_POST["contrasena"]==$_POST["contrasena_c"]){
+				$resultado=pg_query($conn,"INSERT INTO administrador values( nextval('administrador_administradorid_seq'),'$nombre','$apellido','$usuario','$contrasena',".$_SESSION["id_usuario"].",'$tipoadmin')") or die(pg_last_error($conn));
+	
+				if($resultado){
+					javaalert('Se Creo un Administrador');
+					llenarLog(1, "Administrador");
+					if(isset($_POST["guardar"])){
+						iraURL('../administrator/admin.php');
+					}
+					else{
+						iraURL('../administrator/crearadmin.php');
+					}
+				}
+			}else{
+				javaalert("Las contraseñas no coinciden, por favor verifique");
+			}
+		}else{
+			javaalert("El nombre de usuario ya esta registrado, por favor verfique");
+		}
+	}else{
+		javaalert("Ingrese todos los campos");
+	}
+}
+?>
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -73,9 +117,9 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
     <div class="span9 well well-large">
         <p>
             <div class="span3 well well-small"><b>Nombre</b></div>
-            <div class="span6 well well-small"><input id="nombre" name="nombre" type="text" placeholder="Ej. Niuska Jenireé" maxlength="34" pattern="[A-Za-z,ñ,Ñ,á,é,í,ó,ú,Á,É,Í,Ó,Ú]{1,34}" required autofocus/></div>
+            <div class="span6 well well-small"><input id="nombre" name="nombre" type="text" placeholder="Ej. Niuska Jenireé" maxlength="34" pattern="[A-Za-z,ñ,Ñ,á,é,í,ó,ú,Á,É,Í,Ó,Ú, ]{1,34}" required autofocus/></div>
             <div class="span3 well well-small"><b>Apellido</b></div>
-            <div class="span6 well well-small"><input id="apellido" name="apellido" type="text" placeholder="Ej. Mora Hurtado"  maxlength="34" pattern="[A-Za-z,ñ,Ñ,á,é,í,ó,ú,Á,É,Í,Ó,Ú]{1,34}" required/></div>
+            <div class="span6 well well-small"><input id="apellido" name="apellido" type="text" placeholder="Ej. Mora Hurtado"  maxlength="34" pattern="[A-Za-z,ñ,Ñ,á,é,í,ó,ú,Á,É,Í,Ó,Ú, ]{1,34}" required/></div>
             <div class="span3 well well-small"><b>Usuario</b></div>
             <div class="span6 well well-small"><input id="usuario" name="usuario" type="text" placeholder="Ej. niuska.mora" maxlength="34" pattern="[a-z.ñ]{1,34}" required/></div>
             <div class="span3 well well-small"><b>Contraseña</b></div>
@@ -92,7 +136,7 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
 						$result = pg_query ($conn, $SQL ) or die("Error en la consulta SQL");
 						
 						while($row=pg_fetch_array($result)){
-							echo '<option value="'.$row['menuid'].'">'.$row['nombre'].'</option>';
+							echo '<option value="'.$row['tipoadministradorid'].'">'.$row['nombre'].'</option>';
 
 							}
 
@@ -109,49 +153,6 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
                 
          </p>
     </div>
-<?php
-
-if(isset($_POST["guardar"]) || isset($_POST["guardar2"])){
-
-	if(isset($_POST["nombre"]) &&  isset($_POST["apellido"]) && isset($_POST["usuario"]) && isset($_POST["contrasena"]) && isset($_POST["contrasena_c"]) && $_POST["nombre"]!="" && $_POST["apellido"]!="" && $_POST["usuario"]!="" && $_POST["contrasena"]!="" && $_POST["contrasena_c"]!="" && $_POST["tipoadmin"]>0){
-	
-		$nombre=$_POST['nombre'];
-		$apellido=$_POST['apellido'];
-		$usuario=$_POST['usuario'];
-		$contrasena=$_POST['contrasena'];
-		$tipoadmin=$_POST['tipoadmin'];
-
-		$SQL="SELECT * FROM administrador where usuario='$usuario'";
-		$result = pg_query ($conn, $SQL ) or die("Error en la consulta SQL");
-		$registros= pg_num_rows($result);
-	
-		if($registros == 0){
-
-			if($_POST["contrasena"]==$_POST["contrasena_c"]){
-				$resultado=pg_query($conn,"INSERT INTO administrador values( nextval('administrador_administradorid_seq'),'$nombre','$apellido','$usuario','$contrasena',".$_SESSION["id_usuario"].",'$tipoadmin')") or die(pg_last_error($conn));
-	
-				if($resultado){
-					javaalert('Se Creo un Administrador');
-					llenarLog(1, "Administrador");
-					if(isset($_POST["guardar"])){
-						iraURL('../administrator/admin.php');
-					}
-					else{
-						iraURL('../administrator/crearadmin.php');
-					}
-				}
-			}else{
-				javaalert("Las contraseñas no coinciden, por favor verifique");
-			}
-		}else{
-			javaalert("El nombre de usuario ya esta registrado, por favor verfique");
-		}
-	}else{
-		javaalert("Ingrese todos los campos");
-	}
-}
-?>
-    
   </div>
 </div>
 
