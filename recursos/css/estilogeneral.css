@@ -75,6 +75,13 @@ height:230px;
 .contenthover a.mybutton:hover {
 	 background:#34742d; 
 	}
+	
+ .marco{ 
+ border: 4px solid #000000;
+-moz-border-radius: 20px;
+-webkit-border-radius: 20px;
+padding: 10px;
+}
 .scrolltop {
 	background-color: #F1F1F1;
 	border: 1px solid darkGray;
