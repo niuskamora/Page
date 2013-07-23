@@ -105,8 +105,8 @@ $conn=conectar();
 					$vector[] =$row['informacionid'];
 					$aux=$aux+1;
 					 ?>
-      <div class="span3"> <img src="<?php echo $row['imagen'] ?>"  id="<?php echo $row['informacionid'] ?>" name="d1" style="width:350px; height:200px;"/>
-        <div class="contenthover">
+      <div  class=" span3 well"> <img src="<?php echo $row['imagen'] ?>"   id="<?php echo $row['informacionid'] ?>" name="d1" class="marco" style="width:350px; height:200px;"/>
+        <div class="contenthover marco">
           <h3><?php echo $row['titulo'] ?></h3>
           <p align="justify"><?php echo $row['descripcion'] ?></p>
           <?php if($row['enlace']!=''){?>

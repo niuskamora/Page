@@ -127,11 +127,11 @@ iraURL("creartipoadmin.php");
               </dd>
               <dt> </dt>
               
-                <div class="well well-small">
+                <div align="center" class="well well-small">
                   <button id="guardar" name="guardar" class="btn btn-primary text-center" type="submit"> </span>Guardar</button>
                 </div>
               
-                <div class="well well-small">
+                <div align="center" class="well well-small">
                   <button id="guardar2" name="guardar2" class="btn btn-primary text-center" type="submit"> </span>Guardar y añadir otro</button>
                 </div>
              
