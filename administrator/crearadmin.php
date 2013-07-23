@@ -123,9 +123,9 @@ if(isset($_POST["guardar"]) || isset($_POST["guardar2"])){
             <div class="span3 well well-small"><b>Usuario</b></div>
             <div class="span6 well well-small"><input id="usuario" name="usuario" type="text" placeholder="Ej. niuska.mora" maxlength="34" pattern="[a-z.ñ]{1,34}" required/></div>
             <div class="span3 well well-small"><b>Contraseña</b></div>
-            <div class="span6 well well-small"><input id="contrasena" name="contrasena" type="password" maxlength="34" pattern="[A-Za-z.0-9]{1,34}" required/></div>
+            <div class="span6 well well-small"><input id="contrasena" name="contrasena" type="password" maxlength="34" pattern="[A-Za-z.0-9ñÑ]{1,34}" required/></div>
             <div class="span3 well well-small"><b>Confirmar Contrseña</b></div>
-            <div class="span6 well well-small"><input id="contrasena_c" name="contrasena_c" type="password" maxlength="34" pattern="[A-Za-z.0-9]{1,34}" required/></div>
+            <div class="span6 well well-small"><input id="contrasena_c" name="contrasena_c" type="password" maxlength="34" pattern="[A-Za-z.0-9ñÑ]{1,34}" required/></div>
 			<div class="span3 well well-small"><b>Tipo de Administrador</b></div>
             <div class="span6 well well-small">
             <select id="tipoadmin" name="tipoadmin">
