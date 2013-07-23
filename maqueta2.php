@@ -88,15 +88,18 @@ $conn=conectar();
             <li class="nav-header">Pangeatech</li>
             <li class=""><a href="#in">Pangeatech</a></li>
             <?php
+			
 							}else{
 							$m=$m+1;
 							if($m==1){
 								?>
             <li class="nav-header">Servicios</li>
-            <li class="active"><span class="add-on"><i class="icon-globe"></i></span><a href="#<?php echo $row['informacionid'] ?>" > <?php echo $row['titulo']?></a></li>
+            <li class="active"><span class="add-on"><i class="icon-globe"></i></span><a href="#<?php echo $row['informacionid']; ?>" > <?php echo $row['titulo']?></a></li>
             <?php  }else{ ?>
             <li class=""><span class="add-on"><i class="icon-globe"></i></span><a href="#<?php echo $row['informacionid']?>"> <?php echo $row['titulo']?></a></li>
-            <?php }
+            <?php
+			
+			 }
 					     } 
                         } 
 					   } 
@@ -126,13 +129,16 @@ $conn=conectar();
       <div class="span12">
         <div  align="justify" class="span8"> <p>  <?php echo "<blockquote>".$row['descripcion'] ?> </p> </div>
         <div class="span3">  <img src="<?php echo $row['imagen']?>"> </div>
+       
       </div>
-     
+      
       <?php
+	  
 	  
 					
 				}
 			}
+			
 			
 			$SQL="SELECT * FROM  informacion WHERE  tipoinformacionid=".$_GET['id'];
 		$result = pg_query ($conn, $SQL ) or die("Error en la consulta SQL");
@@ -140,16 +146,21 @@ $conn=conectar();
 		
 	if($registros != 0){
 		?>
+     
       <div class="accordion span11" id="accordion2">
+      <br>
         <?php
 			for ($i=0;$i<$registros;$i++)
 			{
 				$row = pg_fetch_array ($result,$i);
+				if($i<$registros-1){
+					$row2 = pg_fetch_array ($result,$i+1);
+				}
 				
 				if($row['titulo']!="Servicios"){
 					
 					 ?>
-        <div id="<?php echo $row['informacionid'] ?>" class="accordion-group">
+        <div id="<?php echo $row2['informacionid']; ?>" class="accordion-group">
           <div  class="accordion-heading"> <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#c<?php echo $row['informacionid'] ?>"> <?php echo $row['titulo']?> </a> </div>
           <div id="c<?php echo $row['informacionid']?>" class="accordion-body collapse">
             <div class="accordion-inner">
@@ -160,8 +171,11 @@ $conn=conectar();
             </div>
           </div>
         </div>
+        <br>
         
-        <?php 			   }
+        <?php 			
+		
+		   }
 				}
  			}
 			?>

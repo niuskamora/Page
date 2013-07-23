@@ -24,7 +24,10 @@ $conn=conectar();
 <body>
 <script type="text/javascript" src="recursos/js/jquery-2.0.2.js" ></script> 
 <script type="text/javascript" src="recursos/js/bootstrap.min.js" ></script> 
-<script type="text/javascript" src="recursos/slide/jquery.pageslide.min.js" ></script> 
+<script type="text/javascript" src="recursos/slide/jquery.pageslide.min.js" ></script>
+
+
+ 
 <a href="#" class="scrolltop" style="display: none;"> <span>up</span> </a>
 <div  class="container-fluid" style="background-image: url('recursos/img/back.jpg'); background-repeat: repeat;">
 <div id="fullp">
@@ -34,23 +37,16 @@ $conn=conectar();
       
       <!--Nav bar content-->
       <div  class="row-fluid headerg hidden-desktop">
-        <div class="headera" style="text-align: left;" >
-           <img  src="recursos/img/izquierdasuperior.png" style="margin-bottom: 3px;" />
-           </div>
-        <div  class="headerb" style="text-align: center;">
-           <img  src="recursos/img/logo.png" style="margin-bottom: 3px;" height="160" />
-           </div>
-        <div class="headerc"  style="text-align: right;">
-           <img  src="recursos/img/derechainferior.png" style="margin-bottom: 3px; text-align: left;" />
-           </div>
+        <div class="headera" style="text-align: left;" > <img  src="recursos/img/izquierdasuperior.png" style="margin-bottom: 3px;" /> </div>
+        <div  class="headerb" style="text-align: center;"> <img  src="recursos/img/logo.png" style="margin-bottom: 3px;" height="160" /> </div>
+        <div class="headerc"  style="text-align: right;"> <img  src="recursos/img/derechainferior.png" style="margin-bottom: 3px; text-align: left;" /> </div>
       </div>
       <div class="navbar navbar-inverse navbar-fixed-top">
         <div class="navbar-inner">
-          <div class="container"><a id="open" href="#nav" class="btn btn-navbar" data-toggle="collapse" data-target="#barrac"><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></a>
-          <a id="open2" href="#" class="btn btn-navbar" data-toggle="collapse" data-target="#login"><i class="icon-user icon-white"></i></a> <a class="brand visible-desktop" style="float:left" href="#"><img  src="recursos/img/logop.png" width="140" height="20"/></a>
+          <div class="container"><a id="open" href="#nav" class="btn btn-navbar" data-toggle="collapse" data-target="#barrac"><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></a> <a id="open2" href="#" class="btn btn-navbar" data-toggle="collapse" data-target="#login"><i class="icon-user icon-white"></i></a> <a class="brand visible-desktop" style="float:left" href="#"><img  src="recursos/img/logop.png" width="140" height="20"/></a>
             <div id="barrac" class="nav-collapse collapse">
               <ul id="nav" class="nav slidernav">
-              <?php   menu_principal(0,"home"); ?>  
+                <?php   menu_principal(0,"home"); ?>
               </ul>
             </div>
             <!--/.nav-collapse -->
@@ -69,15 +65,55 @@ $conn=conectar();
   </div>
 </div>
 <div class="container" style="background-color:white;">
-
-
-
- <br>
-  <div> <h2 align="left " class="well "> Servicios</h2> </div>
-  
-  
-  
-  <?php  
+  <div class=" row-fluid span12">
+    <div class="span2">
+      <aside class="span2 well affix" data-spy="affix">
+        <nav id="website-nav" class="sidebar-nav">
+          <ul id="website-nav" class="nav nav-list">
+            <?php $SQL="SELECT * FROM  informacion WHERE  tipoinformacionid=".$_GET['id'];
+		$result = pg_query ($conn, $SQL ) or die("Error en la consulta SQL");
+		$registros= pg_num_rows($result);
+		$m=0;
+	if($registros != 0){
+		?>
+            <div class="accordion" id="accordion2">
+            <?php
+			for ($i=0;$i<$registros;$i++)
+			{
+				$row = pg_fetch_array ($result,$i);
+				
+				if($row['titulo']=="Servicios"){
+					?>
+            <br>
+            <li class="nav-header">Pangeatech</li>
+            <li class=""><a href="#in">Pangeatech</a></li>
+            <?php
+			
+							}else{
+							$m=$m+1;
+							if($m==1){
+								?>
+            <li class="nav-header">Servicios</li>
+            <li class="active"><span class="add-on"><i class="icon-globe"></i></span><a href="#<?php echo $row['informacionid']; ?>" > <?php echo $row['titulo']?></a></li>
+            <?php  }else{ ?>
+            <li class=""><span class="add-on"><i class="icon-globe"></i></span><a href="#<?php echo $row['informacionid']?>"> <?php echo $row['titulo']?></a></li>
+            <?php
+			
+			 }
+					     } 
+                        } 
+					   } 
+					   ?>
+                       </div>
+          </ul>
+        </nav>
+      </aside>
+    </div>
+    <div class="span10"> <br>
+      <div class=" row-fluid span12">
+        <h2 id="in" align="left " class="well span11"> Servicios</h2>
+      </div>
+      <?php  
 		
 		$SQL="SELECT * FROM  informacion WHERE  tipoinformacionid=".$_GET['id'];
 		$result = pg_query ($conn, $SQL ) or die("Error en la consulta SQL");
@@ -90,19 +126,19 @@ $conn=conectar();
 				
 				if($row['titulo']=="Servicios"){
 					?>
-					  <div class="span12">
-					   <div align="justify" class="span8">
-                        <?php echo $row['descripcion'] ?>
-                       </div>
-					   <div class="span3">
-                      <img src="<?php echo $row['imagen']?>">
-                       </div>
-					  </div>
-                      
-                    <?php
+      <div class="span12">
+        <div  align="justify" class="span8"> <p>  <?php echo "<blockquote>".$row['descripcion'] ?> </p> </div>
+        <div class="span3">  <img src="<?php echo $row['imagen']?>"> </div>
+       
+      </div>
+      
+      <?php
+	  
+	  
 					
 				}
 			}
+			
 			
 			$SQL="SELECT * FROM  informacion WHERE  tipoinformacionid=".$_GET['id'];
 		$result = pg_query ($conn, $SQL ) or die("Error en la consulta SQL");
@@ -110,76 +146,61 @@ $conn=conectar();
 		
 	if($registros != 0){
 		?>
-		<div class="accordion" id="accordion2">
+     
+      <div class="accordion span11" id="accordion2">
+      <br>
         <?php
 			for ($i=0;$i<$registros;$i++)
 			{
 				$row = pg_fetch_array ($result,$i);
+				if($i<$registros-1){
+					$row2 = pg_fetch_array ($result,$i+1);
+				}
 				
 				if($row['titulo']!="Servicios"){
 					
 					 ?>
-
-  
- <div class="accordion-group">
-    <div class="accordion-heading">
-      <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#c<?php echo $row['informacionid'] ?>">
-      <?php echo $row['titulo']?>
+        <div id="<?php echo $row2['informacionid']; ?>" class="accordion-group">
+          <div  class="accordion-heading"> <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#c<?php echo $row['informacionid'] ?>"> <?php echo $row['titulo']?> </a> </div>
+          <div id="c<?php echo $row['informacionid']?>" class="accordion-body collapse">
+            <div class="accordion-inner">
+              <div class="span12 well">
+                <div align="justify" class="span8"> <?php echo $row['descripcion'] ?> </div>
+                <div class="span3"> <img src="<?php echo $row['imagen']?>"> </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <br>
         
-      </a>
-    </div>
-    <div id="c<?php echo $row['informacionid']?>" class="accordion-body collapse">
-      <div class="accordion-inner">
-        <div class="span11 well">
-					    <div align="justify" class="span7">
-                        <?php echo $row['descripcion'] ?>
-                       </div> 
-					   <div class="span3">
-                      <img src="<?php echo $row['imagen']?>">
-                       </div>
-					  </div>
-      </div>
-    </div>
-  </div>
-                 
-      </div>
-  
-
-
- 
-<?php 
-					
-					}
-
-			
-			}
- 
-			}
+        <?php 			
+		
+		   }
+				}
+ 			}
 			?>
-			</div>
-            
-            
-            <?php
+      </div>
+      <?php
 	}
 ?>
+    </div>
+  </div>
+</div>
 
 
-  
 <div id="cont2" class="container" >
 <?php 
-// $frase=obtenerQuote();
+ $frase=obtenerQuote();
 
 ?>
   <div id="intro">
     <div class="container">
-   
+    
     </div>
   </div>
   <br>
   <h2 class="section_header">
- 
-    <span><!-- aqui iba el autor --></span>
- 
+
   </h2>
   <br>
   <div class="row-fluid">
@@ -381,6 +402,9 @@ $conn=conectar();
     </div>
   </div>
 </div>
+
+
+
 <script type="text/javascript" src="recursos/circular/js/jquery.contentcarousel.js"></script> 
 <script type="text/javascript" src="recursos/js/funciones.js" ></script> 
 <script type="text/javascript" src="recursos/circular/js/jquery.easing.1.3.js"></script> 
