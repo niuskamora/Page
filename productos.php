@@ -113,9 +113,8 @@ $conn=conectar();
 		}else{
 	?>
      <div class="alert alert-block" align="center">
-    <h2 class="alert alert-block">Atención  
+   			<h2 style="color:rgb(255,255,255)"> Atención</h2>
     <h4>No existen registros en producto</h4>
-    </h2>
     </div>
     <?php 
 	}
