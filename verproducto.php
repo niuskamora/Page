@@ -82,6 +82,7 @@ if(!isset($_GET['id'])){
 		?>
  <div> 
  	<h2 class="well" align="left">
+    <br>
   		<?php echo $row['nombre'];  ?>
   	</h2>
   </div>
@@ -89,14 +90,21 @@ if(!isset($_GET['id'])){
  <div class="row-fluid">
   <div class="span12">
   <br>
-   <p>
-  
+		   <p>
     		<div class="span9" align="justify"><?php echo $row['descripcion'];?></div>
         	<div class="span2"><img src="<?php echo $row['imagen'];?>"></div>
-    <?php }?>
-    </p>
+   
+   		 </p>
   </div>
+  <div class="span12" align="center">
+  <form method="post">
+  <button class="btn btn-primary" id="atras" name="atras" type="submit">Atrás</button>
+	</form> 
+  </div>
+ 
  </div>
+ 
+  <?php }?>
  <div class="row-fluid">
   </div>
  
@@ -289,5 +297,12 @@ if(!isset($_GET['id'])){
 <script type="text/javascript" src="recursos/circular/js/jquery.easing.1.3.js"></script> 
 <!-- the jScrollPane script -->
 
+
+<?php 
+	//codigo para guardar
+	if(isset($_POST["atras"])){
+		iraURL('productos.php');	
+	}				
+	?>
 <body>
 </html>

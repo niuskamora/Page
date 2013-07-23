@@ -73,11 +73,11 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
     <div class="span9 well well-large">
         <p>
             <div class="span3 well well-small"><b>Nombre</b></div>
-            <div class="span6 well well-small"><input id="nombre" name="nombre" type="text" maxlength="34" pattern="[A-Za-z,ñ,Ñ,á,é,í,ó,ú,Á,É,Í,Ó,Ú]{1,34}" required autofocus/></div>
+            <div class="span6 well well-small"><input id="nombre" name="nombre" type="text" placeholder="Ej. Niuska Jenireé" maxlength="34" pattern="[A-Za-z,ñ,Ñ,á,é,í,ó,ú,Á,É,Í,Ó,Ú]{1,34}" required autofocus/></div>
             <div class="span3 well well-small"><b>Apellido</b></div>
-            <div class="span6 well well-small"><input id="apellido" name="apellido" type="text"  maxlength="34" pattern="[A-Za-z,ñ,Ñ,á,é,í,ó,ú,Á,É,Í,Ó,Ú]{1,34}" required/></div>
+            <div class="span6 well well-small"><input id="apellido" name="apellido" type="text" placeholder="Ej. Mora Hurtado"  maxlength="34" pattern="[A-Za-z,ñ,Ñ,á,é,í,ó,ú,Á,É,Í,Ó,Ú]{1,34}" required/></div>
             <div class="span3 well well-small"><b>Usuario</b></div>
-            <div class="span6 well well-small"><input id="usuario" name="usuario" type="text" placeholder="Ej. Nombre.apellido" maxlength="34" pattern="[A-ZÑ]{1}[a-z.ñ0-9]{1,33}" required/></div>
+            <div class="span6 well well-small"><input id="usuario" name="usuario" type="text" placeholder="Ej. niuska.mora" maxlength="34" pattern="[a-z.ñ]{1,34}" required/></div>
             <div class="span3 well well-small"><b>Contraseña</b></div>
             <div class="span6 well well-small"><input id="contrasena" name="contrasena" type="password" maxlength="34" pattern="[A-Za-z.0-9]{1,34}" required/></div>
             <div class="span3 well well-small"><b>Confirmar Contrseña</b></div>

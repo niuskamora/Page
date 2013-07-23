@@ -91,7 +91,7 @@ $id=$_GET['id'];
               </dt>
               <dd>
                 <div class=" well well-small" align="left">
-                  <input id="nombre" name="nombre" type="text" value="<?php echo $row['nombre']; ?>" contenteditable="true" maxlength="34" pattern="[A-Za-z,ñ,Ñ,á,é,í,ó,ú,Á,É,Í,Ó,Ú]{1,34}" required/>
+                  <input id="nombre" name="nombre" type="text" value="<?php echo $row['nombre']; ?>" contenteditable="true" placeholder="Ej. Niuska Jenireé" maxlength="34" pattern="[A-Za-z,ñ,Ñ,á,é,í,ó,ú,Á,É,Í,Ó,Ú]{1,34}" required/>
                 </div>
               </dd>
               <dt>
@@ -99,7 +99,7 @@ $id=$_GET['id'];
               </dt>
               <dd>
                 <div class="well well-small">
-                  <input id="apellido" name="apellido" type="text" value="<?php echo $row['apellido']; ?>" contenteditable="true" maxlength="34" pattern="[A-Za-z,ñ,Ñ,á,é,í,ó,ú,Á,É,Í,Ó,Ú]{1,34}" required/>
+                  <input id="apellido" name="apellido" type="text" value="<?php echo $row['apellido']; ?>" contenteditable="true" placeholder="Ej. Mora Hurtado" maxlength="34" pattern="[A-Za-z,ñ,Ñ,á,é,í,ó,ú,Á,É,Í,Ó,Ú]{1,34}" required/>
                 </div>
               </dd>
               <dt>
@@ -107,7 +107,7 @@ $id=$_GET['id'];
               </dt>
               <dd>
                 <div class="well well-small">
-                  <input id="usuario" name="usuario" type="text" value="<?php echo $row['usuario']; ?>" contenteditable="true" placeholder="Ej. Nombre.apellido" maxlength="34" pattern="[A-ZÑ]{1}[a-z.ñ0-9]{1,33}" required/>
+                  <input id="usuario" name="usuario" type="text" value="<?php echo $row['usuario']; ?>" contenteditable="true" placeholder="Ej. niuska.mora" maxlength="34" pattern="[a-z.ñ]{1,34}" required/>
                 </div>
               </dd>
               <dt>
