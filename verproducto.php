@@ -6,6 +6,10 @@ $conn=conectar();
 if(!isset($_GET['id'])){
 	iraURL('index.php');
 	}
+	//codigo para ir atras
+	if(isset($_POST["atras"])){
+		iraURL('productos.php');	
+	}				
 
 ?>
 <!DOCTYPE html>
@@ -298,11 +302,6 @@ if(!isset($_GET['id'])){
 <!-- the jScrollPane script -->
 
 
-<?php 
-	//codigo para guardar
-	if(isset($_POST["atras"])){
-		iraURL('productos.php');	
-	}				
-	?>
+
 <body>
 </html>
