@@ -64,52 +64,12 @@ $conn=conectar();
     </div>
   </div>
 </div>
+<br>
 <div class="container" style="background-color:white;">
-  <div class=" row-fluid span12">
-    <div class="span2">
-      <aside class="span2 well affix" data-spy="affix">
-        <nav id="website-nav" class="sidebar-nav">
-          <ul id="website-nav" class="nav nav-list">
-            <?php $SQL="SELECT * FROM  informacion WHERE  tipoinformacionid=".$_GET['id'];
-		$result = pg_query ($conn, $SQL ) or die("Error en la consulta SQL");
-		$registros= pg_num_rows($result);
-		$m=0;
-	if($registros != 0){
-		?>
-            <div class="accordion" id="accordion2">
-            <?php
-			for ($i=0;$i<$registros;$i++)
-			{
-				$row = pg_fetch_array ($result,$i);
-				
-				if($row['titulo']=="Servicios"){
-					?>
-            <br>
-            <li class="nav-header">Pangeatech</li>
-            <li class=""><a href="#in">Pangeatech</a></li>
-            <?php
-							}else{
-							$m=$m+1;
-							if($m==1){
-								?>
-            <li class="nav-header">Servicios</li>
-            <li class="active"><span class="add-on"><i class="icon-globe"></i></span><a href="#<?php echo $row['informacionid'] ?>" > <?php echo $row['titulo']?></a></li>
-            <?php  }else{ ?>
-            <li class=""><span class="add-on"><i class="icon-globe"></i></span><a href="#<?php echo $row['informacionid']?>"> <?php echo $row['titulo']?></a></li>
-            <?php }
-					     } 
-                        } 
-					   } 
-					   ?>
-                       </div>
-          </ul>
-        </nav>
-      </aside>
-    </div>
-    <div class="span10"> <br>
-      <div class=" row-fluid span12">
-        <h2 id="in" align="left " class="well span11"> Servicios</h2>
-      </div>
+  <div class=" row-fluid ">
+ 
+  <h2 id="in" class="well span12"> Tecnología</h2>
+    
       <?php  
 		
 		$SQL="SELECT * FROM  informacion WHERE  tipoinformacionid=".$_GET['id'];
@@ -121,7 +81,7 @@ $conn=conectar();
 			{
 				$row = pg_fetch_array ($result,$i);
 				
-				if($row['titulo']=="Servicios"){
+				if($row['titulo']=="Tecnología"){
 					?>
       <div class="span12">
         <div  align="justify" class="span8"> <p>  <?php echo "<blockquote>".$row['descripcion'] ?> </p> </div>
@@ -146,20 +106,24 @@ $conn=conectar();
 			{
 				$row = pg_fetch_array ($result,$i);
 				
-				if($row['titulo']!="Servicios"){
-					
+				if($row['titulo']!="Tecnología"){
+					$vector[] =$row['informacionid'];
 					 ?>
-        <div id="<?php echo $row['informacionid'] ?>" class="accordion-group">
-          <div  class="accordion-heading"> <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#c<?php echo $row['informacionid'] ?>"> <?php echo $row['titulo']?> </a> </div>
-          <div id="c<?php echo $row['informacionid']?>" class="accordion-body collapse">
-            <div class="accordion-inner">
-              <div class="span12 well">
-                <div align="justify" class="span8"> <?php echo $row['descripcion'] ?> </div>
-                <div class="span3"> <img src="<?php echo $row['imagen']?>"> </div>
-              </div>
-            </div>
-          </div>
-        </div>
+        <div id="<?php echo $row['informacionid'] ?>" style="width:300px; height:240px; background:#eee; ">
+    <div style="padding:20px;">
+    
+        <p><img src="<?php echo $row['imagen'] ?>" /></p>
+        <p><?php echo $row['titulo'] ?></p>
+    </div>
+</div>
+<div class="contenthover">
+    <h3><?php echo $row['informacionid'] ?></h3>
+    <p><?php echo $row['descripcion'] ?></p>
+    <?php if($row['enlace']!=''){?> 
+    <p><a href="echo <?php $row['enlace'] ?>" class="mybutton"></a></p>
+    <?php } ?>
+    
+</div>
         
         <?php 			   }
 				}
@@ -169,13 +133,27 @@ $conn=conectar();
       <?php
 	}
 ?>
-    </div>
+    
   </div>
 </div>
 
 <script type="text/javascript" src="recursos/circular/js/jquery.contentcarousel.js"></script> 
 <script type="text/javascript" src="recursos/js/funciones.js" ></script> 
 <script type="text/javascript" src="recursos/circular/js/jquery.easing.1.3.js"></script> 
+<script type="text/javascript">
+	$(document).ready(
+		function()
+		{
+			<?php $i=0; ?>
+			while(<?php $vector[$i]!=0 ?>){
+			$('<?php $vector[$i]?>').contenthover({
+   				 overlay_background:'#333'
+							});
+							<?php $i=i+1; ?>
+			}
+		}
+	);
+	</script>
 <!-- the jScrollPane script -->
 
 <body>
