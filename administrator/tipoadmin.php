@@ -133,7 +133,7 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
 					<span>Nombre</span>
 				  </th>
 				  <th data-hide="phone" data-sort-ignore="true">
-					Descripcion
+					Descripción
 				  </th>
 				  <th data-hide="phone" data-sort-ignore="true">
 					<span class="add-on"> <i class="icon-pencil"></i> </span> Editar 

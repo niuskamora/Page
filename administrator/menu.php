@@ -118,9 +118,9 @@ if(isset($_GET['b']))
               <th data-class="expand" data-type="numeric"> <span>Id</span> </th>
               <th> <span>Nombre</span> </th>
               <th> <span></span> </th>
-              <th data-hide="phone" data-sort-ignore="true"> administrador </th>
-              <th data-hide="phone" data-sort-ignore="true"> enlace </th>
-              <th data-hide="phone" data-sort-ignore="true"> orden </th>
+              <th data-hide="phone" data-sort-ignore="true"> Administrador </th>
+              <th data-hide="phone" data-sort-ignore="true">Enlace </th>
+              <th data-hide="phone" data-sort-ignore="true"> Orden </th>
               <th data-hide="phone" data-sort-ignore="true"> <span class="add-on"> <i class="icon-pencil"></i> </span> Editar </th>
               <th data-hide="phone" data-sort-ignore="true"> <span class="add-on"><i class="icon-trash"></i></span> Eliminar </th>
               <th data-hide="phone" data-sort-ignore="true"> <span class="add-on"><i class="icon-tasks"></i></span> Up/Down </th>

@@ -68,8 +68,8 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
       <div style="text-align:center">
         
           <ul class="nav  nav-pills nav-stacked">
-              <li class="active"><a href="crearmenu.php"> <span class="add-on"><i class="icon-plus "></i></span> Crear </a></li>
-              <li><a href="sucursal.php"> <span class="add-on"><i class="icon-arrow-left"></i></span> Atrás</a></li>
+             
+              <li class="active"><a href="sucursal.php"> <span class="add-on"><i class="icon-arrow-left"></i></span> Atrás</a></li>
             
           </ul>
           
@@ -125,10 +125,10 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
 					<span>Nombre</span>
 				  </th>
 				  <th>
-					<span>Descripcion</span>
+					<span>Descripción</span>
 				  </th>
                    <th>
-					<span>direccion</span>
+					<span>Dirección</span>
 				  </th>
                 
 				 

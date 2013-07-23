@@ -124,7 +124,7 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
 					<span>Nombre</span>
 				  </th>
 				  <th>
-					<span>Descripcion</span>
+					<span>Descripción</span>
 				  </th>
                 
 				 

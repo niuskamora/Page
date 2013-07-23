@@ -127,7 +127,7 @@ iraURL("crearmenu.php");
                 </div>
               </dd>
               <dt>
-                <div class=" well well-small"> <b>submenu </b></div>
+                <div class=" well well-small"> <b>Submenu </b></div>
               </dt>
               <dd>
                 <div class="well well-small"><select id="submenu" name="submenu">
@@ -148,7 +148,7 @@ iraURL("crearmenu.php");
               </dd>
               
                <dt>
-                <div class=" well well-small"><b> enlace</b> </div>
+                <div class=" well well-small"><b> Enlace</b> </div>
               </dt>
               <dd>
                 <div class=" well well-small">

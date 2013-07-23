@@ -181,7 +181,7 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
 			if($row=pg_fetch_array($resulta)){
 		?>
 
-            <div class="span3 well well-small"><b>nombre</b></div>
+            <div class="span3 well well-small"><b>Nombre</b></div>
             <div class="span6 well well-small"><input id="nombre" name="nombre" type="text" value="<?php echo $row['nombre'];?>" required/></div>
             <div class="span3 well well-small"><b>Dirección</b></div>
             <div class="span6 well well-small" align="justify"><input id="direccion" name="direccion" type="text" value="<?php echo $row['direccion'];?>" required/></div>

@@ -118,7 +118,7 @@ iraURL("creartipoadmin.php");
                 </div>
               </dd>
               <dt>
-                <div class=" well well-small"> Descripcion </div>
+                <div class=" well well-small"> Descripción </div>
               </dt>
               <dd>
                 <div class="well well-small">

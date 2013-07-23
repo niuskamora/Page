@@ -136,7 +136,7 @@ iraURL("menu.php");
                 </div>
               </dd>
               <dt>
-                <div class=" well well-small"> submenu </div>
+                <div class=" well well-small"> Submenu </div>
               </dt>
               <dd>
                 <div class="well well-small">
