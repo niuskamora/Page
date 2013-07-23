@@ -3,8 +3,6 @@ session_start();
 
 include("recursos/funciones.php");
 $conn=conectar();
-
-
 ?>
 <!DOCTYPE html>
 
@@ -28,7 +26,7 @@ $conn=conectar();
 <script type="text/javascript" src="recursos/js/bootstrap.min.js" ></script> 
 <script type="text/javascript" src="recursos/slide/jquery.pageslide.min.js" ></script> 
 <a href="#" class="scrolltop" style="display: none;"> <span>up</span> </a>
-<div  class="container-fluid" style="background-image: url('recursos/img/back.jpg'); background-repeat: repeat;">
+<div class="container-fluid" style="background-image: url('recursos/img/back.jpg'); background-repeat: repeat;">
 <div id="fullp">
 <div class="container" style="background-color:white;">
   <div class="row-fluid">
@@ -70,61 +68,105 @@ $conn=conectar();
     </div>
   </div>
 </div>
-<div class="container" style="background-color:white;">
- <!-- aqui estaba el carusel-->
- 
-<br>
-<br>
-<br>
- <?php
-   	$cons1="SELECT * FROM informacion WHERE tipoinformacionid=".$_GET['id']." ORDER BY informacionid";
-	$resulta1 = pg_query ($conn, $cons1) or die("Error en la consulta SQL");
-	$registros= pg_num_rows($resulta1);
 
-if($registros != 0){
-	for ($i=0;$i<$registros;$i++){
-		$row1 = pg_fetch_array ($resulta1,$i);
-		if($row1['titulo']=="Nosotros"){?>
- 
-		<div> <h2 id="in" align="left" class="well"><?php echo $row1['titulo']?></h2></div>
- 
- 		<div class="row-fluid">
-  		<div class="span12">
-  		<br>
-  		<p>
-			<div class="span9" align="justify"><?php echo $row1['descripcion'];?></div>
-      		<?php if($row1['imagen']!=""){ ?>
-       			<div class="span2"><img src="<?php echo $row1['imagen'];?>"></div>
-			<?php }?> 
-    	</p>
-    </div>
-  </div>
- <?php }else {?>
-	<div> <h2 id="in" align="left" class="well"><?php echo $row1['titulo']?></h2></div>
- 
- 	<div class="row-fluid">
-  	<div class="span12">
-  	<br>
-  	<p>
-    	<?php if($row1['titulo']!="Valores"){?>
-			<div class="span9" align="justify"><?php echo $row1['descripcion'];?></div>
-      	<?php if($row1['imagen']!=""){ ?>
-       		<div class="span2"><img src="<?php echo $row1['imagen'];?>"></div>
-		<?php } 
+<div class="container" style="background-color:white;">
+  <div class="span12">
+	<div class="row-fluid">
+    	<div class="span2">
+        	<aside class="span2 well affix" data-spy="affix">
+				<nav id="website-nav" class="sidebar-nav">
+					<ul id="website-nav" class="nav nav-list">
+        				<?php $SQL="SELECT * FROM  informacion WHERE  tipoinformacionid=".$_GET['id']." ORDER BY informacionid";
+						$result=pg_query ($conn, $SQL ) or die("Error en la consulta SQL");
+						$registros=pg_num_rows($result);
+						$m=0;
+						if($registros!=0){?>
+							<div class="accordion" id="accordion2">
+       						 <?php for ($i=0;$i<$registros;$i++){
+								$row = pg_fetch_array($result);
+								if($row['titulo']=="Nosotros"){?>
+									<br>
+                                    <br>
+									<li class="nav-header">Nosotros</li>
+                                    <li class=""><a href="#<?php echo $row['informacionid'];?>"><?php echo $row['titulo']?></a></li>
+                            		<?php }else{?> 
+										<li class=""><a href="#<?php echo $row['informacionid'];?>"><?php echo $row['titulo']?></a></li>
+                       				<?php }
+					    			} 
+                        		} 
+					 		?>
+                        </ul>
+					</nav>
+				</aside>
+		</div>
+        
+<div class="span10">
+  <?php  
 		
-		}else {?>
-			<div align="justify" class="span10">
-            <img src="<?php echo $row1['imagen']?>">
-            </div>
-       <?php }?> 
-    </p>
-    </div>
-  </div>
- <?php }
+	$SQL="SELECT * FROM  informacion WHERE tipoinformacionid=".$_GET['id']." ORDER BY informacionid";
+	$result = pg_query ($conn, $SQL ) or die("Error en la consulta SQL");
+	$registros= pg_num_rows($result);
+		
+	if($registros != 0){
+		for ($i=0;$i<$registros;$i++){
+			$row = pg_fetch_array ($result,$i);
+			if($row['titulo']=="Nosotros"){?>
+				<div id="<?php echo $row['informacionid'];?>" class="span12">
+                  <br>
+                   <br>
+                   <br>
+					<div align="justify" class="span8">
+                    	<h2 id="in" align="left"><?php echo $row['titulo'];?></h2>
+                		<?php echo $row['descripcion'];?>
+                	</div>
+					<div class="span3">
+					<?php if($row['imagen']!=""){ ?>
+                    	<br>
+                    	<br>
+       					<img src="<?php echo $row['imagen'];?>">
+					<?php }?>
+                    </div>
+				</div>
+               <?php	
+				}
+				else{
+					?>
+				<div id="<?php echo $row['informacionid'];?>" class="span12">
+                <?php if($row['titulo']!="Valores"){?>
+                    	<div align="justify" class="span8">
+                        <br>
+                   <br>
+                   <br>
+                        	<h2 id="in" align="left"><?php echo $row['titulo'];?></h2> 
+                			<?php echo $row['descripcion'];?>
+                        </div>
+                        <?php if($row['imagen']!=""){ ?>
+       						<div class="span3"><img src="<?php echo $row['imagen'];?>"></div>
+						<?php }?>
+                <?php }else{?>
+                    	<div align="justify">
+                        <br>
+                   <br>
+                   <br>
+                        	<h2 id="in" align="left"><?php echo $row['titulo'];?></h2>
+                			<img src="<?php echo $row['imagen'];?>">
+                       	</div>
+                    <?php }?>
+				</div>
+               <?php	
+				}
+			}
+		
+		?>
+ 		</div>
+	</div>
+	<?php
 	}
-}
- ?>
+	?>
+		</div>
+	</div>
 </div>
+
 <div id="cont2" class="container" >
 
   <h2 class="section_header">
@@ -308,10 +350,12 @@ if($registros != 0){
     </div>
   </div>
 </div>
+</div>
+
 <script type="text/javascript" src="recursos/circular/js/jquery.contentcarousel.js"></script> 
 <script type="text/javascript" src="recursos/js/funciones.js" ></script> 
 <script type="text/javascript" src="recursos/circular/js/jquery.easing.1.3.js"></script> 
 <!-- the jScrollPane script -->
 
-<body>
+</body>
 </html>
