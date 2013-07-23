@@ -200,8 +200,6 @@ height:230px;
 
 /** RESPONSIVEEE */
 
-
-
 @media (min-width: 1200px) {
 	.section_header small {
 		display: inline-block;
@@ -243,36 +241,33 @@ height:230px;
 }
 
  @media screen and (max-width: 48.063em) {
-.affix {
-position: relative;
-}
-#magic-line {
-	display: none;
-}
-.hero-unit {
-	padding: 30px;
-	text-align: center;
-}
-.ca-item{
-	
-height:450px;	
-	
-}
-.ca-icon{
-	background:transparent url(../images/productsp.png) no-repeat center center;
-}
-.ca-item-2 .ca-icon{
-	
+	.affix {
+		position: relative;
+	}
+	#magic-line {
+		display: none;
+	}
+	.hero-unit {
+		padding: 30px;
+		text-align: center;
+	}
+	.ca-item{
+		height:450px;	
+	}
+	.ca-icon{
+		background:transparent url(../images/productsp.png) no-repeat center center;
+	}
+	.ca-item-2 .ca-icon{
 		background-image:url(../images/globep.png);
-}
-.ca-item-3 .ca-icon{
-background-image:url(../images/teamp.png);
-}
-.ca-item-4 .ca-icon{
-	background-image:url(../images/red-sucursalesp.png);
+	}
+	.ca-item-3 .ca-icon{
+		background-image:url(../images/teamp.png);
+	}
+	.ca-item-4 .ca-icon{
+		background-image:url(../images/red-sucursalesp.png);
+	}
 }
 
-}
 @media (min-width: 980px) {
 	
 	#hero .carousel-inner .item {
@@ -280,16 +275,15 @@ background-image:url(../images/teamp.png);
 	}
 	.ca-item{
 		float:left;
-	width:300px;
-	
-}
+		width:300px;	
+	}
 	
 }
 @media (max-width: 979px) {
 	body {
 		padding-top: 0px;
 	}
-.section_header {
+	.section_header {
 		margin-top: 60px;
 	}
 	.section_header small {
@@ -304,14 +298,14 @@ background-image:url(../images/teamp.png);
 	}
 	.ca-item{
 		float:left;
-	width:280px;
+		width:280px;
+	}
 	
 }
-	
-}
-/* Portrait tablet to landscape and desktop */
-@media (min-width: 768px) and (max-width: 979px) { 
 
+/* Portrait tablet to landscape and desktop */
+@media (min-width: 768px) and (max-width: 979px) {
+	
 	#intro h1 {
 		width: 80%;
 	}
@@ -330,10 +324,11 @@ background-image:url(../images/teamp.png);
 	}
 	.ca-item{
 		float:left;
-	width:260px;
+		width:260px;
+	}
 	
 }
-}
+
 /* Landscape phone to portrait tablet */
 @media (max-width: 767px) {	
 	#intro h1 {
@@ -378,9 +373,9 @@ background-image:url(../images/teamp.png);
 	}
 	.ca-item{
 		float:left;
-	width:250px;
-	
-}	
+		width:250px;
+	}
+		
 }
 /* Landscape phones and down */
 @media (max-width: 480px) {
@@ -395,7 +390,6 @@ background-image:url(../images/teamp.png);
 	.section_header span {
 		width: auto;
 	}
-	
 	
 }
 }
