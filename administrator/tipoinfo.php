@@ -123,10 +123,15 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
 		for ($i=0;$i<$registros;$i++)
 			{
 			$row = pg_fetch_array ($result,$i );
+			if(strlen ($row[2])>35){
+				$descripcion=substr($row[2],0,35)."...";
+				}else{
+					$descripcion=$row[2];
+				}
 			echo '<tr>';
 			echo '<td width="10%">'.$row[0].'</td>';
 			echo '<td width="20%">'.$row[1].'</td>';
-			echo '<td width="40%">'.$row[2].'</td>';
+			echo '<td width="40%">'.$descripcion.'</td>';
 			echo '<td width="13%"> <a href="editartipoinfo.php?id='.$row[0].'&boton=editar"> <button class="btn btn-primary" type="button"  name="editar"> <span class="add-on"><i class="icon-pencil"></i> </span> Editar  </button> </td>';
 			echo '<td width="16%"><a href="eliminartipoinfo.php?id='.$row[0].'&boton=eliminar"> <button class="btn btn-primary" type="button"  name="eliminar"> <span class="add-on"><i class="icon-trash"></i></span> Eliminar</button> </td>';
 			echo '</tr>';
