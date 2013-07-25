@@ -18,7 +18,7 @@ function desconectar($conexion){
 //creación de sesiones de administradores
 function crearsesion($u,$p){
 	if($u!="" && $p!=""){
-		$_SESSION["usuarioadmin"] = strtolower($u);
+		$_SESSION["usuarioadmin"] = $u;
 		$_SESSION["passwordadmin"] = $p;
 
 		return true;
