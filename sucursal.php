@@ -56,7 +56,7 @@ $sucursal=obtenerSucursal($_GET['ids']);
           <a id="open2" href="#" class="btn btn-navbar" data-toggle="collapse" data-target="#login"><i class="icon-user icon-white"></i></a> <a class="brand visible-desktop" style="float:left" href="#"><img  src="recursos/img/logop.png" width="140" height="20"/></a>
             <div id="barrac" class="nav-collapse collapse">
               <ul id="nav" class="nav slidernav">
-              <?php   menu_principal(0,"sucursales"); ?>  
+              <?php   menu_principal(0,"Sucursales"); ?>  
               </ul>
             </div>
             <!--/.nav-collapse -->
@@ -368,10 +368,26 @@ $sucursal=obtenerSucursal($_GET['ids']);
 <script type="text/javascript" src="recursos/circular/js/jquery.contentcarousel.js"></script> 
 <script type="text/javascript" src="recursos/js/funciones.js" ></script> 
 <script type="text/javascript" src="recursos/js/funcionesmapa.js" ></script> 
+<script type="text/javascript">
+$(document).ready(function() {
+ 
+$('.dropdown-toggle').click(function(e) {
+  e.preventDefault();
+  setTimeout($.proxy(function() {
+    if ('ontouchstart' in document.documentElement) {
+      $(this).siblings('.dropdown-backdrop').off().remove();
+    }
+  }, this), 0);
+});
+ 
+ 
+});
 
+
+
+</script>
 <script type="text/javascript" src="recursos/circular/js/jquery.easing.1.3.js"></script> 
  <script>
-           
             google.maps.event.addDomListener(window, 'load', initialize);               
 </script>  
 <!-- the jScrollPane script -->

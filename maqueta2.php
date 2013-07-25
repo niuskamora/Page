@@ -407,6 +407,42 @@ $conn=conectar();
 
 <script type="text/javascript" src="recursos/circular/js/jquery.contentcarousel.js"></script> 
 <script type="text/javascript" src="recursos/js/funciones.js" ></script> 
+<script type="text/javascript">
+$(document).ready(function() {
+ 
+$('.dropdown-toggle').click(function(e) {
+  e.preventDefault();
+  setTimeout($.proxy(function() {
+    if ('ontouchstart' in document.documentElement) {
+      $(this).siblings('.dropdown-backdrop').off().remove();
+    }
+  }, this), 0);
+});
+ 
+ 
+});
+
+
+
+</script>
+<script type="text/javascript">
+$(document).ready(function() {
+ 
+$('.dropdown-toggle').click(function(e) {
+  e.preventDefault();
+  setTimeout($.proxy(function() {
+    if ('ontouchstart' in document.documentElement) {
+      $(this).siblings('.dropdown-backdrop').off().remove();
+    }
+  }, this), 0);
+});
+ 
+ 
+});
+
+
+
+</script>
 <script type="text/javascript" src="recursos/circular/js/jquery.easing.1.3.js"></script> 
 <!-- the jScrollPane script -->
 

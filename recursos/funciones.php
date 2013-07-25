@@ -187,8 +187,12 @@ function menu_principal($idm,$activo)
 					 }
 					 else
 					 {
-						echo '<li class="dropdown">
-						<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+						 if(strtolower($activo)==strtolower($row['nombre']))
+							echo '<li class="dropdown active">';
+						 else
+							echo '<li class="dropdown">';
+								
+						echo '<a href="#" class="dropdown-toggle" data-toggle="dropdown">
 						'.$row['nombre'].'
 						<b class="caret"></b></a>
                         <ul class="dropdown-menu">';
