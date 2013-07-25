@@ -151,7 +151,7 @@ if(isset($_POST["guardar"]) || isset($_POST["guardar2"])){
                 <h5>Tamaños Recomendados</h5>
                 <ul>
                 	<li>Redes Sociales 40*40</li>
-                    <li>Tecnología 180*200</li>
+                    <li>Tecnología 180*130</li>
                     <li>Información 320*420</li>
                 </ul>
             </div>
