@@ -9,6 +9,31 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
 
 ?>
 
+<?php
+	
+if(isset($_POST["guardar"])){
+	
+	if($_POST["nombre"]!='' && $_POST["enlace"]!=''){
+		
+		$nombre=$_POST['nombre'];
+		$submenu=$_GET["id"];
+		$admin=$_SESSION["id_usuario"];
+		$enla=$_POST['enlace'];
+		
+	$resultado=pg_query($conn,"INSERT INTO menu values( nextval('menu_menuid_seq'),'$nombre','$submenu','$admin','$enla')") or die(pg_last_error($conn));
+	
+	if($resultado){
+			
+			llenarLog(1, "Submenu");
+			iraURL('../administrator/submenu.php?id='.$_GET['id']);
+		}
+	}else{
+		javaalert("Debe llenar todos los campos obligatorios");
+		}
+
+}
+?>
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -179,11 +204,11 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
     </table>
       <div class="span12">   <ul id="pagination" class="footable-nav"><span>Pages:</span></ul></div>
      <?php }else{  ?>
+     
 		 <div class="well alert alert-block">
-   	<h2  align="center" style="color:rgb(255,255,255)"> Atención</h2>
-    <h4 align="center">No existen submenú </h4>
-    </div>
-		 
+   			<h2 align="center" style="color:rgb(255,255,255)"> Atención</h2>
+    		<h4 align="center">No Existen Submenú </h4>
+    	</div>
 		 
 	<?php } ?>
      
@@ -238,36 +263,7 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
 </form> 	
     
 
-  </div>
-
-		
- 	<?php
-	
-		
-if(isset($_POST["guardar"])){
-	
-	if($_POST["nombre"]!='' && $_POST["enlace"]!=''){
-		
-		$nombre=$_POST['nombre'];
-		$submenu=$_GET["id"];
-		$admin=$_SESSION["id_usuario"];
-		$enla=$_POST['enlace'];
-		
-       
-	$resultado=pg_query($conn,"INSERT INTO menu values( nextval('menu_menuid_seq'),'$nombre','$submenu','$admin','$enla')") or die(pg_last_error($conn));
-	
-	if($resultado){
-			
-			llenarLog(1, "Creo submenu");
-			iraURL('../administrator/submenu.php?id='.$_GET['id']);
-		}
-	}else{
-		javaalert("Debe llenar todos los campos obligatorios");
-		}
-
-}
-?>
-           
+  </div>       
         
          </p>
       </div>

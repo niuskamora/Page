@@ -15,8 +15,10 @@ if(isset($_POST["guardar"])){
 		$nombre=$_POST['nombre'];
 		$descripcion=$_POST['descripcion'];
         pg_query($conn,"INSERT INTO tipoadministrador values( nextval('tipoadministrador_tipoadministradorid_seq'),'$nombre','$descripcion')") or die(pg_last_error($conn));
-javaalert("El tipo de administrador fue creado con exito");
-iraURL("tipoadmin.php");
+		
+		llenarLog(1, "Tipo Administrador");
+		javaalert("El tipo de administrador fue creado con exito");
+		iraURL("tipoadmin.php");
 	}else{
 		javaalert("Debe llenar todos los campos obligatorios");
 	}
@@ -24,14 +26,16 @@ iraURL("tipoadmin.php");
 }
 
 if(isset($_POST["guardar2"])){
+	
 	if($_POST["nombre"]!='' && $_POST["descripcion"]!=''){
 	
 		$nombre=$_POST['nombre'];
 		$descripcion=$_POST['descripcion'];
         pg_query($conn,"INSERT INTO tipoadministrador values( nextval('tipoadministrador_tipoadministradorid_seq'),'$nombre','$descripcion')") or die(pg_last_error($conn));
-llenarLog(1, "creo tipo Administrador");
-javaalert("El tipo de información fue creado con exito");
-iraURL("creartipoadmin.php");
+		
+		llenarLog(1, "Tipo Administrador");
+		javaalert("El tipo de información fue creado con exito");
+		iraURL("creartipoadmin.php");
 }else{
 		javaalert("Debe llenar todos los campos obligatorios");
 	}
