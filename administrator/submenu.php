@@ -120,10 +120,10 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
 					Submenu
 				  </th>
                   	<th data-hide="phone" data-sort-ignore="true">
-					administrador
+					Administrador
 				  </th>
                   <th data-hide="phone" data-sort-ignore="true">
-					enlace
+					Enlace
 				  </th>
 
  <th data-hide="phone" data-sort-ignore="true">
