@@ -99,6 +99,22 @@ if(!isset($_GET['id'])){
         	<div class="span2"><img src="<?php echo $row['imagen'];?>"></div>
    
    		 </p>
+         <?php 
+		 if(isset($_SESSION["usuario_cliente"])){
+			$usuario=$_SESSION["id_cliente"];
+			$producto=$_GET['id'];
+			$query="SELECT * FROM usuarioproducto WHERE usuarioid=$usuario AND productoid=$producto";
+			$Qlogin = pg_query($conn,$query) or die(pg_last_error($conn));
+			$fila = pg_fetch_array($Qlogin);
+					if(pg_num_rows($Qlogin) > 0){
+					?>
+                     <p>
+                    <div class="span12" align="justify">Enlace:<a href="<?php echo $row['enlace'];?>"><?php echo $row['enlace'];?></div>   
+                	 </p>
+                    <?php
+					}
+			 }
+		 ?>
   </div>
   <div class="span12" align="center">
   <form method="post">
