@@ -28,7 +28,7 @@ function crearsesion($u,$p){
 //creación de sesiones de clientes
 function crearsesioncliente($u,$p){
 	if($u!="" && $p!=""){
-		$_SESSION["usuario_cliente"] = strtolower($u);
+		$_SESSION["usuario_cliente"] =$u;
 		$_SESSION["passwordcliente"] = $p;
 		
 		return true;
@@ -67,13 +67,10 @@ function validarlogincliente(){
 	if(existesesioncliente()){
 		$conex = conectar();
 		$usu = $_SESSION["usuario_cliente"];
-		$pass = $_SESSION["passwordcliente"];
-		
-		
+		$pass = $_SESSION["passwordcliente"];	
 		$query="SELECT * FROM usuario WHERE usuario='$usu' AND contrasena='$pass'";
 		$Qlogin = pg_query($conex,$query) or die(pg_last_error($conex));
-		$fila = pg_fetch_array($Qlogin);
-		
+		$fila = pg_fetch_array($Qlogin);	
 		if(pg_num_rows($Qlogin) == 0){
 			javaalert('Usuario o Contraseña invalida!');
 			quitarsesioncliente();
