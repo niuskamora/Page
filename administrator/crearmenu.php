@@ -18,7 +18,7 @@ if(isset($_POST["guardar"])){
 		$submenu=$_POST['submenu'];
 		}
 		$enlace=$_POST['enlace'];
-		$orden="0";
+		$orden="100";
 		$admin=$_SESSION["id_usuario"];
         pg_query($conn,"INSERT INTO menu values( nextval('menu_menuid_seq'),'$nombre','$submenu','$admin','$enlace','$orden')") or die(pg_last_error($conn));
 llenarLog(1, "creo menu");
