@@ -93,7 +93,7 @@ $conn=conectar();
 				}
 			}
 			
-			$SQL="SELECT * FROM  informacion WHERE  tipoinformacionid=".$_GET['id'];
+			$SQL="SELECT * FROM  informacion WHERE  tipoinformacionid=".$_GET['id']." order by titulo";
 		$result = pg_query ($conn, $SQL ) or die("Error en la consulta SQL");
 		$registros= pg_num_rows($result);
 		$aux=0;
@@ -133,8 +133,15 @@ $conn=conectar();
             
             <div id="<?php echo $row['informacionid'] ?>" style="width:180px; height:200px; background:#eee; ">
     <div style="padding:2px;">
+   
         <p><img src="<?php echo $row['imagen'] ?>"style="width:180px; height:130px;" /></p>
-        <h2 style="-webkit-text-stroke:3px white;"> <?php echo $row['titulo'] ?></h2>
+         <?php if(strlen($row['titulo'])<9) {?>
+        <div align="center" style="font-size:40px; margin-top:25px;  color: rgb(0,0,102); text-shadow: 0.1em 0.1em 0.2em  #796565;"> <?php echo $row['titulo'] ?></div>
+        <?php }else if(strlen($row['titulo'])<11){ ?>
+        <div align="center" style="font-size:32px; margin-top:25px;  color: rgb(0,0,102); text-shadow: 0.1em 0.1em 0.2em  #796565;"> <?php echo $row['titulo'] ?></div>
+        <?php }else{?>
+         <div align="center" style="font-size:18px; margin-top:25px;  color: rgb(0,0,102); text-shadow: 0.1em 0.1em 0.2em  #796565;"> <?php echo $row['titulo'] ?></div>
+        <?php }?>
     </div>
 
       </div>     
