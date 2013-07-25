@@ -85,7 +85,6 @@ $conn=conectar();
        						 <?php for ($i=0;$i<$registros;$i++){
 								$row = pg_fetch_array($result);
 								if($row['titulo']=="Nosotros"){?>
-									<br>
                                     <br>
 									<li class="nav-header">Nosotros</li>
                                     <li class=""><a href="#<?php echo $row['informacionid'];?>"><?php echo $row['titulo']?></a></li>

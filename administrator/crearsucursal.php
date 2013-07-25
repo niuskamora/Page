@@ -35,69 +35,21 @@ if(isset($_POST["guardar"])){
 			entre el rango 0 a Numero de letras que tiene la cadena */
 		}
 		
-	$direccion="../recursos/img/sucursal";
+		$direccion="../recursos/img/sucursal";
 		$direccion2="recursos/img/sucursal";
 		$tipo = explode('/',$_FILES['imagen']['type']);
 		$uploadfile =$direccion."/".$cadena.".".$tipo[1];
+		$uploadfile2 =$direccion2."/".$cadena.".".$tipo[1];
 		$error = $_FILES['imagen']['error']; 
-		$subido = false;
 		
-		$uploadfile5 =$direccion5."/".$cadena.".".$tipo[1];
-		
+		//Agregar esta linea
+		$imagen=$_FILES['imagen']['tmp_name'];
 		
 		if($error==UPLOAD_ERR_OK){ 
-			    $subido = copy($_FILES['imagen']['tmp_name'], $uploadfile); 
-				$rutaImagenOriginal=$uploadfile;
-				if($tipo[1]=="jpg" || $tipo[1]=="JPEG" || $tipo[1]=="JPG" || $tipo[1]=="jpeg"){
-					$img_original = imagecreatefromjpeg($rutaImagenOriginal);
-				}
-				if($tipo[1]=="png"){
-					$img_original = imagecreatefrompng($rutaImagenOriginal);
-				}
-
-				list($ancho,$alto)=getimagesize($rutaImagenOriginal);
-				$ancho_buscado3=0;
-				$alto_buscado3=0;	
-			
-			    if($ancho!=640){
-				   $ancho_buscado3=640;
-				   $alto_buscado3=ceil((640*$alto)/$ancho);					
-				}
-			
-				if($alto<=$ancho){
-				   $alto_buscado3=480;
-				   $ancho_buscado3=ceil((480*$ancho)/$alto);
-				}else{
-				   $ancho_buscado3=640;
-				   $alto_buscado3=ceil((640*$alto)/$ancho);
-				}	
-
-                if($alto_buscado3<480){
-				   $ancho_buscado3=ceil((480*$ancho_buscado3)/$alto_buscado3);
-				   $alto_buscado3=480;
-				}
-
-				if($ancho_buscado3<640){
-				   $alto_buscado3=ceil((640*$alto_buscado3)/$ancho_buscado3);
-				   $ancho_buscado3=640;	
-				}
-				
-                $tmp=imagecreatetruecolor($ancho_buscado3,$alto_buscado3);
-				imagecopyresampled($tmp,$img_original,0,0,0,0,$ancho_buscado3, $alto_buscado3,$ancho,$alto);
-				//Definimos la calidad de la imagen final
-				$calidad=100;
-				//Se crea la imagen final en el directorio indicado
-				imagejpeg($tmp,$uploadfile,$calidad);				
-										
-				$fichero=$uploadfile;			
-				$img1 = imagecreatefromjpeg($fichero);
-				$img1Recortada = imagecreatetruecolor (640, 480);
-				imagecopy($img1Recortada, $img1, 0, 0, ceil(($ancho_buscado3-640)/2), ceil(($alto_buscado3-640)/2), ceil(($ancho_buscado3-640)/2)+640, ceil(($alto_buscado3-480)/2)+480);
-				
-				imagejpeg($img1Recortada,$uploadfile,$calidad);				
-				$sql_update="update sucursal set imagen='".$uploadfile5."' WHERE sucursalid=".$arreglo[0]."";
-			
-				$result= pg_query($conn, $sql_update);
+			//Nueva función
+			move_uploaded_file($imagen,$uploadfile);		
+			$sql_update="update sucursal set imagen='".$uploadfile2."' WHERE sucursalid=".$arreglo[0]."";
+			$result= pg_query($conn, $sql_update);
 																													
 			}		
 		 }
@@ -117,7 +69,6 @@ if(isset($_POST["guardar2"])){
 	$descripcion=$_POST['redactor'];
 	$latitud=$_POST['latitud'];
 	$longitud=$_POST['longitud'];
-	
 
 	
 	$resultado=pg_query($conn,"INSERT INTO sucursal values( nextval('sucursal_sucursalid_seq'),'$nombre','$direccion','$telefono','$correo','','$latitud','$longitud','$descripcion')") or die(pg_last_error($conn));
@@ -140,72 +91,25 @@ if(isset($_POST["guardar2"])){
 		$direccion2="recursos/img/sucursal";
 		$tipo = explode('/',$_FILES['imagen']['type']);
 		$uploadfile =$direccion."/".$cadena.".".$tipo[1];
-		$error = $_FILES['imagen']['error']; 
-		$subido = false;
+		$uploadfile2 =$direccion2."/".$cadena.".".$tipo[1];
+		$error = $_FILES['imagen']['error'];
 		
-		$uploadfile5 =$direccion5."/".$cadena.".".$tipo[1];
+		//Agregar esta linea
+		$imagen=$_FILES['imagen']['tmp_name'];
 		
 		if($error==UPLOAD_ERR_OK){ 
-			    $subido = copy($_FILES['imagen']['tmp_name'], $uploadfile); 
-				$rutaImagenOriginal=$uploadfile;
-				if($tipo[1]=="jpg" || $tipo[1]=="JPEG" || $tipo[1]=="JPG" || $tipo[1]=="jpeg"){
-					$img_original = imagecreatefromjpeg($rutaImagenOriginal);
-				}
-				if($tipo[1]=="png"){
-					$img_original = imagecreatefrompng($rutaImagenOriginal);
-				}
-
-				list($ancho,$alto)=getimagesize($rutaImagenOriginal);
-				$ancho_buscado3=0;
-				$alto_buscado3=0;	
 			
-			    if($ancho!=640){
-				   $ancho_buscado3=640;
-				   $alto_buscado3=ceil((640*$alto)/$ancho);					
-				}
-			
-				if($alto<=$ancho){
-				   $alto_buscado3=480;
-				   $ancho_buscado3=ceil((480*$ancho)/$alto);
-				}else{
-				   $ancho_buscado3=640;
-				   $alto_buscado3=ceil((640*$alto)/$ancho);
-				}	
-
-                if($alto_buscado3<480){
-				   $ancho_buscado3=ceil((480*$ancho_buscado3)/$alto_buscado3);
-				   $alto_buscado3=480;
-				}
-
-				if($ancho_buscado3<640){
-				   $alto_buscado3=ceil((640*$alto_buscado3)/$ancho_buscado3);
-				   $ancho_buscado3=640;	
-				}
-				
-                $tmp=imagecreatetruecolor($ancho_buscado3,$alto_buscado3);
-				imagecopyresampled($tmp,$img_original,0,0,0,0,$ancho_buscado3, $alto_buscado3,$ancho,$alto);
-				//Definimos la calidad de la imagen final
-				$calidad=100;
-				//Se crea la imagen final en el directorio indicado
-				imagejpeg($tmp,$uploadfile,$calidad);				
-										
-				$fichero=$uploadfile;			
-				$img1 = imagecreatefromjpeg($fichero);
-				$img1Recortada = imagecreatetruecolor (640, 480);
-				imagecopy($img1Recortada, $img1, 0, 0, ceil(($ancho_buscado3-640)/2), ceil(($alto_buscado3-640)/2), ceil(($ancho_buscado3-640)/2)+640, ceil(($alto_buscado3-480)/2)+480);
-				
-				imagejpeg($img1Recortada,$uploadfile,$calidad);				
-				$sql_update="update sucursal set imagen='".$uploadfile5."' WHERE sucursalid=".$arreglo[0]."";
-				echo $sql_update;
-			
-				$result= pg_query($conn, $sql_update);
+			//Nueva función
+			move_uploaded_file($imagen,$uploadfile);		
+			$sql_update="update sucursal set imagen='".$uploadfile2."' WHERE sucursalid=".$arreglo[0]."";
+			$result= pg_query($conn, $sql_update);
 																													
 			}		
 		 }
 	
 	if($resultado && $result){
 			llenarLog(1, "Creo sucursal");
-			//iraURL('../administrator/crearsucursal.php');
+			iraURL('../administrator/crearsucursal.php');
 	}
 }
 	    ?>
@@ -285,7 +189,7 @@ if(isset($_POST["guardar2"])){
               
               
               <dt>
-              <div class="well well-small"><b>nombre</b></div>
+              <div class="well well-small"><b>Nombre</b></div>
               </dt>
               <dd>
                  <div class="well well-small"><input id="nombre" name="nombre" type="text" value="" required/></div>
