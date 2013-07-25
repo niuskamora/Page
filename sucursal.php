@@ -367,6 +367,7 @@ $sucursal=obtenerSucursal($_GET['ids']);
 </div>
 <script type="text/javascript" src="recursos/circular/js/jquery.contentcarousel.js"></script> 
 <script type="text/javascript" src="recursos/js/funciones.js" ></script> 
+<script type="text/javascript" src="recursos/js/funcionesmapa.js" ></script> 
 
 <script type="text/javascript" src="recursos/circular/js/jquery.easing.1.3.js"></script> 
  <script>
