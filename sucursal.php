@@ -61,7 +61,8 @@ $sucursal=obtenerSucursal($_GET['ids']);
             </div>
             <!--/.nav-collapse -->
             <div id="login" class="nav-collapse collapse">
-               <li class="divider-vertical"></li>
+             <ul id="log" class="nav pull-right">
+              <li class="divider-vertical"></li>
                	 <?php  
 			  	if(existesesioncliente()){
 					echo '<li class="dropdown">
