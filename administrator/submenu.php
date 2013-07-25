@@ -180,8 +180,8 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
       <div class="span12">   <ul id="pagination" class="footable-nav"><span>Pages:</span></ul></div>
      <?php }else{  ?>
 		 <div class="well alert alert-block">
-   
-    <h4>No existen submenú </h4>
+   	<h2  align="center" style="color:rgb(255,255,255)"> Atención</h2>
+    <h4 align="center">No existen submenú </h4>
     </div>
 		 
 		 
@@ -229,11 +229,9 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
              <dd>
                 <div class=" well well-small"><input id="enlace" name="enlace"  type="text" value="" contenteditable=true required/></div>
                 </dd>
-             <dd>
-                <div align="left" class="well well-small"><button id="guardar" name="guardar" class="btn btn-primary text-center" type="submit"> Guardar</button>
+              </dl>
+                <div align="center" class="well well-small"><button id="guardar" name="guardar" class="btn btn-primary text-center" type="submit"> Guardar</button>
                  </div>
-              </dd>
-            </dl>
        </div>        
   </div>
 	 
