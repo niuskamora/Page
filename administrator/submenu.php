@@ -179,11 +179,11 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
     </table>
       <div class="span12">   <ul id="pagination" class="footable-nav"><span>Pages:</span></ul></div>
      <?php }else{  ?>
+     
 		 <div class="well alert alert-block">
-   	<h2  align="center" style="color:rgb(255,255,255)"> Atención</h2>
-    <h4 align="center">No existen submenú </h4>
-    </div>
-		 
+   			<h2 align="center" style="color:rgb(255,255,255)"> Atención</h2>
+    		<h4 align="center">No Existen Submenú </h4>
+    	</div>
 		 
 	<?php } ?>
      
