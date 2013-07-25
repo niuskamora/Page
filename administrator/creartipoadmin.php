@@ -15,8 +15,10 @@ if(isset($_POST["guardar"])){
 		$nombre=$_POST['nombre'];
 		$descripcion=$_POST['descripcion'];
         pg_query($conn,"INSERT INTO tipoadministrador values( nextval('tipoadministrador_tipoadministradorid_seq'),'$nombre','$descripcion')") or die(pg_last_error($conn));
-javaalert("El tipo de administrador fue creado con exito");
-iraURL("tipoadmin.php");
+		
+		llenarLog(1, "Tipo Administrador");
+		javaalert("El tipo de administrador fue creado con exito");
+		iraURL("tipoadmin.php");
 	}else{
 		javaalert("Debe llenar todos los campos obligatorios");
 	}
@@ -24,14 +26,16 @@ iraURL("tipoadmin.php");
 }
 
 if(isset($_POST["guardar2"])){
+	
 	if($_POST["nombre"]!='' && $_POST["descripcion"]!=''){
 	
 		$nombre=$_POST['nombre'];
 		$descripcion=$_POST['descripcion'];
         pg_query($conn,"INSERT INTO tipoadministrador values( nextval('tipoadministrador_tipoadministradorid_seq'),'$nombre','$descripcion')") or die(pg_last_error($conn));
-llenarLog(1, "creo tipo Administrador");
-javaalert("El tipo de información fue creado con exito");
-iraURL("creartipoadmin.php");
+		
+		llenarLog(1, "Tipo Administrador");
+		javaalert("El tipo de información fue creado con exito");
+		iraURL("creartipoadmin.php");
 }else{
 		javaalert("Debe llenar todos los campos obligatorios");
 	}
@@ -58,7 +62,7 @@ iraURL("creartipoadmin.php");
 <div class="container">
   <div class="navbar">
     <div class="navbar-inner">
-      <div class="container" style="width: auto;"> <a class="btn btn-navbar" href="#nav" data-toggle="collapse" data-target="#barrap"> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </a> <a  class="brand" id="brand-admin" href="#">PANGEATECH</a>
+      <div class="container" style="width: auto;"> <a class="btn btn-navbar" href="#nav" data-toggle="collapse" data-target="#barrap"> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </a> <a  class="brand" id="brand-admin" href="principal.php">PANGEATECH</a>
         <div id="barrap" class="nav-collapse collapse">
         <ul class="nav">
             <li class="dropdown active"> <a  class="dropdown-toggle" data-target="#" data-toggle="dropdown"> Gestión Usuarios <b class="caret"></b> </a>

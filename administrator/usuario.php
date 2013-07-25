@@ -30,7 +30,7 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
 <div class="container">
   <div class="navbar">
     <div class="navbar-inner">
-      <div class="container" style="width: auto;"> <a class="btn btn-navbar" href="#nav" data-toggle="collapse" data-target="#barrap"> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </a> <a  class="brand" id="brand-admin" href="#">PANGEATECH</a>
+      <div class="container" style="width: auto;"> <a class="btn btn-navbar" href="#nav" data-toggle="collapse" data-target="#barrap"> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </a> <a  class="brand" id="brand-admin" href="principal.php">PANGEATECH</a>
         <div id="barrap" class="nav-collapse collapse">
          <ul class="nav">
             <li class="dropdown active"> <a  class="dropdown-toggle" data-target="#" data-toggle="dropdown"> Gestión Usuarios <b class="caret"></b> </a>
@@ -68,7 +68,7 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
           <div style="text-align:center">
         
           <ul class="nav  nav-pills nav-stacked">
-              <li class="active"><a href="crearusuario.php"> <span class="add-on"><i class="icon-plus "></i></span> Crear </a></li>
+              <li class="active"><a href="crearusuario.php"> <span class="add-on"><i class="icon-plus"></i></span> Crear </a></li>
               <li><a href="principal.php"> <span class="add-on"><i class="icon-arrow-left"></i></span> Atrás</a></li>
             
           </ul>
@@ -104,9 +104,6 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
 				  <th><span>Nombre</span></th>
                   <th><span>Apellido</span></th>
 				  <th data-hide="phone" data-sort-ignore="true">
-					Dirección
-				  </th>
-				  <th data-hide="phone" data-sort-ignore="true">
 					<span class="add-on"> <i class="icon-pencil"></i> </span> Editar 
 				  </th>
 				  <th data-hide="phone" data-sort-ignore="true">
@@ -114,6 +111,9 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
 				  </th>
                   <th data-hide="phone" data-sort-ignore="true">
 				<span class="add-on"><i class="icon-eye-open"></i></span> Ver 
+				  </th>
+                   <th data-hide="phone" data-sort-ignore="true">
+				<span class="add-on"><i class="icon-eye-open"></i></span> Asignar Productos 
 				  </th>
 				</tr>
 	 	</thead>
@@ -123,19 +123,14 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
 			{
 
 			$row = pg_fetch_array ($result,$i );
-			if(strlen ($row[3])>20){
-				$direccion=substr($row[3],0,20)."...";
-				}else{
-					$direccion=$row[3];
-				}
 			echo '<tr>';
 			echo '<td width="10%">'.$row[0].'</td>';
 			echo '<td width="15%">'.$row[1].'</td>';
 			echo '<td width="15%">'.$row[2].'</td>';
-			echo '<td width="21%">'.$direccion.'</td>';
 			echo '<td width="13%"><a href="editarusuario.php?id='.$row[0].'&boton=editar"> <button class="btn btn-primary"> <span class="add-on"><i class="icon-pencil"></i> </span> Editar  </button> </td>';
-			echo '<td width="15%"><a href="eliminarusuario.php?id='.$row[0].'&boton=eliminar"> <button class="btn btn-primary" type="button"  name="eliminar"> <span class="add-on"><i class="icon-trash"></i></span> Eliminar</button> </td>';
+			echo '<td width="13%"><a href="eliminarusuario.php?id='.$row[0].'&boton=eliminar"> <button class="btn btn-primary" type="button"  name="eliminar"> <span class="add-on"><i class="icon-trash"></i></span> Eliminar</button> </td>';
 			echo '<td width="11%"> <a href="verusuario.php?id='.$row[0].'&boton=ver"><button class="btn btn-primary"> <span class="add-on"><i class="icon-eye-open"></i></span> Ver</button> </td>';
+			echo '<td width="12%"> <a href="usuarioproducto.php?id='.$row[0].'&boton=ver"><button class="btn btn-primary"> <span class="add-on"><i class="icon-plus"></i></span> Asignar</button> </td>';
 			echo '</tr>';
 			}
 		?>

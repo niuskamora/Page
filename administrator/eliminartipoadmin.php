@@ -30,7 +30,7 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
 <div class="container">
   <div class="navbar">
     <div class="navbar-inner">
-      <div class="container" style="width: auto;"> <a class="btn btn-navbar" href="#nav" data-toggle="collapse" data-target="#barrap"> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </a> <a  class="brand" id="brand-admin" href="#">PANGEATECH</a>
+      <div class="container" style="width: auto;"> <a class="btn btn-navbar" href="#nav" data-toggle="collapse" data-target="#barrap"> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </a> <a  class="brand" id="brand-admin" href="principal.php">PANGEATECH</a>
         <div id="barrap" class="nav-collapse collapse">
          <ul class="nav">
             <li class="dropdown active"> <a  class="dropdown-toggle" data-target="#" data-toggle="dropdown"> Gestión Usuarios <b class="caret"></b> </a>
@@ -91,10 +91,10 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
 		 
 			?>  
             
-            <div align="center" class="well alert alert-danger">
-    <h2 align="center" style="color:rgb(255,255,255)" class="alert alert-danger">Atención</h2>
-    <h4>no se puede eliminar el registro </h4>
-	 </div>
+            <div class="well alert alert-danger" align="center">
+    			<h2 style="color:rgb(255,255,255)"> Atención</h2>
+    			<h4>No se puede Eliminar el Tipo de Administrador</h4>
+	 		</div>
      
      
      <?php
@@ -104,13 +104,9 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
     ?>
     
     
-    
-    
-    
     <div align="center" class="well well-small alert alert-block">
-    <h2 align="center" style="color:rgb(255,255,255)" class="alert alert-block">Atención</h2>
-    <h4>Desea eliminar el registro </h4>
-   
+    	<h2 style="color:rgb(255,255,255)"> Atención</h2>
+    	<h4>Desea Eliminar el Tipo de Administrador</h4>
     </div>
 
       <div class="well well-large">
@@ -120,10 +116,10 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
 	    <table class="footable table-striped table-hover" data-page-size="5">
 			  <thead>
 				<tr>
-				  <th data-class="expand" data-sort-initial="true" data-type="numeric">
+				  <th data-sort-ignore="true">
 					<span>Nombre</span>
 				  </th>
-				  <th>
+				  <th data-sort-ignore="true">
 					<span>Descripción</span>
 				  </th>
                 
