@@ -17,10 +17,19 @@ function desconectar($conexion){
 
 //creación de sesiones de administradores
 function crearsesion($u,$p){
-
 	if($u!="" && $p!=""){
 		$_SESSION["usuarioadmin"] = strtolower($u);
 		$_SESSION["passwordadmin"] = $p;
+
+		return true;
+	}else
+		return false;
+}
+//creación de sesiones de clientes
+function crearsesioncliente($u,$p){
+	if($u!="" && $p!=""){
+		$_SESSION["usuario_cliente"] = strtolower($u);
+		$_SESSION["passwordcliente"] = $p;
 		
 		return true;
 	}else
@@ -32,11 +41,8 @@ function validarlogin(){
 
 	if(existesesion()){
 		$conex = conectar();
-		
 		$usu = $_SESSION["usuarioadmin"];
 		$pass = $_SESSION["passwordadmin"];
-		
-		
 		$query="SELECT * FROM administrador WHERE usuario='$usu' AND contrasena='$pass'";
 		$Qlogin = pg_query($conex,$query) or die(pg_last_error($conex));
 		$fila = pg_fetch_array($Qlogin);
@@ -45,23 +51,53 @@ function validarlogin(){
 			javaalert('Usuario o Contraseña invalida!');
 			quitarsesion();
 			return false;
-		}else{ 
-		//inserta en logs
-		
+		}else{ 	
 			$_SESSION["id_usuario"]=$fila["administradorid"];
-			$_SESSION["admin"]=$fila["tipoadministradorid"];
-			
-			return true;
-			
+			$_SESSION["admin"]=$fila["tipoadministradorid"];			
+			return true;			
 		}
 	}else
 		return false;
 	
 	
 }
+// validación de usuario de clientes
+function validarlogincliente(){
+
+	if(existesesioncliente()){
+		$conex = conectar();
+		$usu = $_SESSION["usuario_cliente"];
+		$pass = $_SESSION["passwordcliente"];
+		
+		
+		$query="SELECT * FROM usuario WHERE usuario='$usu' AND contrasena='$pass'";
+		$Qlogin = pg_query($conex,$query) or die(pg_last_error($conex));
+		$fila = pg_fetch_array($Qlogin);
+		
+		if(pg_num_rows($Qlogin) == 0){
+			javaalert('Usuario o Contraseña invalida!');
+			quitarsesioncliente();
+			return false;
+		}else{ 
+		//guardo información del cliente
+			$_SESSION["id_cliente"]=$fila["usuarioid"];	
+			$_SESSION["nombre"]=$fila["nombre"];	
+			$_SESSION["apellido"]=$fila["apellido"];			
+			return true;	
+		}
+	}else
+		return false;
+}
 //verificando  sesiones de administradores
 function existesesion(){
 	if(isset($_SESSION["usuarioadmin"]) && isset($_SESSION["passwordadmin"]))
+		return true;
+	else
+		return false;
+}
+//verificando  sesiones de clientes
+function existesesioncliente(){
+	if(isset($_SESSION["usuario_cliente"]) && isset($_SESSION["passwordcliente"]))
 		return true;
 	else
 		return false;
@@ -83,6 +119,15 @@ function quitarsesion(){
 	unset($_SESSION["usuarioadmin"]);
 	unset($_SESSION["passwordadmin"]);
 	unset($_SESSION["id_usuario"]);
+	
+}
+//eliminando variables de sesion de cuenta de clientes
+function quitarsesioncliente(){
+	unset($_SESSION["usuario_cliente"]);
+	unset($_SESSION["passwordcliente"]);		
+	unset($_SESSION["id_cliente"]);
+	unset($_SESSION["nombre"]);
+	unset($_SESSION["apellido"]);	
 	
 }
 //alertas
@@ -179,14 +224,10 @@ order by random() limit 1 ;";
 }
 function obtenerSucursal($id)
 {
-	
 	$conex = conectar();
 	$query="select * from sucursal where sucursalid=".$id;
 	$Qmenu = pg_query($conex,$query) or die(pg_last_error($conex));
 	return $row = pg_fetch_array($Qmenu,0);
-	
-	
-	
 }
 
 ?>

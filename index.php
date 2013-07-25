@@ -57,7 +57,14 @@ $conn=conectar();
             <div id="login" class="nav-collapse collapse">
               <ul id="log" class="nav pull-right">
                 <li class="divider-vertical"></li>
-                <li><a href="/users/sign_up">Iniciar sesion</a></li>
+              <?php  
+			  	if(existesesioncliente()){
+					?>
+             	 <li><?php echo $_SESSION["nombre"]." ".$_SESSION["apellido"]; ?></li>
+					<?php
+				  }else{ ?>
+                <li><a href="iniciosesion.php">Iniciar sesión</a></li>
+                <?php } ?>
               </ul>
             </div>
             <!--/.nav-collapse --> 
