@@ -27,45 +27,45 @@ $conn=conectar();
 <script type="text/javascript" src="recursos/js/bootstrap.min.js" ></script> 
 <a href="#" class="scrolltop" style="display: none;"> <span>up</span> </a>
 <div  class="container-fluid" style="background-image: url('recursos/img/back.jpg'); background-repeat: repeat;">
-<div id="fullp">
-  <div class="container" style="background-color:white;">
-    <div class="row-fluid">
-      <div class="span12"> 
-        
-        <!--Nav bar content-->
-        <div  class="row-fluid headerg hidden-desktop">
-          <div class="headera" style="text-align: left;" > <img  src="recursos/img/izquierdasuperior.png" style="margin-bottom: 3px;" /> </div>
-          <div  class="headerb" style="text-align: center;"> <img  src="recursos/img/logo.png" style="margin-bottom: 3px;" height="160" /> </div>
-          <div class="headerc"  style="text-align: right;"> <img  src="recursos/img/derechainferior.png" style="margin-bottom: 3px; text-align: left;" /> </div>
-        </div>
-        <div class="navbar navbar-inverse navbar-fixed-top">
-          <div class="navbar-inner">
-            <div class="container"><a id="open" href="#nav" class="btn btn-navbar" data-toggle="collapse" data-target="#barrac"><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></a> <a id="open2" href="#" class="btn btn-navbar" data-toggle="collapse" data-target="#login"><i class="icon-user icon-white"></i></a> <a class="brand visible-desktop" style="float:left" href="#"><img  src="recursos/img/logop.png" width="140" height="20"/></a>
-              <div id="barrac" class="nav-collapse collapse">
-                <ul id="nav" class="nav slidernav">
-                  <?php   menu_principal(0,"home"); ?>
-                </ul>
+  
+    <div class="container" style="background-color:white;">
+      <div class="row-fluid">
+        <div class="span12"> 
+          
+          <!--Nav bar content-->
+          <div  class="row-fluid headerg hidden-desktop">
+            <div class="headera" style="text-align: left;" > <img  src="recursos/img/izquierdasuperior.png" style="margin-bottom: 3px;" /> </div>
+            <div  class="headerb" style="text-align: center;"> <img  src="recursos/img/logo.png" style="margin-bottom: 3px;" height="160" /> </div>
+            <div class="headerc"  style="text-align: right;"> <img  src="recursos/img/derechainferior.png" style="margin-bottom: 3px; text-align: left;" /> </div>
+          </div>
+          <div class="navbar navbar-inverse navbar-fixed-top">
+            <div class="navbar-inner">
+              <div class="container"><a id="open" href="#nav" class="btn btn-navbar" data-toggle="collapse" data-target="#barrac"><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></a> <a id="open2" href="#" class="btn btn-navbar" data-toggle="collapse" data-target="#login"><i class="icon-user icon-white"></i></a> <a class="brand visible-desktop" style="float:left" href="#"><img  src="recursos/img/logop.png" width="140" height="20"/></a>
+                <div id="barrac" class="nav-collapse collapse">
+                  <ul id="nav" class="nav slidernav">
+                    <?php   menu_principal(0,"home"); ?>
+                  </ul>
+                </div>
+                <!--/.nav-collapse -->
+                <div id="login" class="nav-collapse collapse">
+                  <ul id="log" class="nav pull-right">
+                    <li class="divider-vertical"></li>
+                    <li><a href="/users/sign_up">Iniciar sesion</a></li>
+                  </ul>
+                </div>
+                <!--/.nav-collapse --> 
+                
               </div>
-              <!--/.nav-collapse -->
-              <div id="login" class="nav-collapse collapse">
-                <ul id="log" class="nav pull-right">
-                  <li class="divider-vertical"></li>
-                  <li><a href="/users/sign_up">Iniciar sesion</a></li>
-                </ul>
-              </div>
-              <!--/.nav-collapse --> 
-              
             </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
-  <br>
-  <div class="container" style="background-color:white;">
-    <div class=" row-fluid ">
-      <h2 id="in" class="well span12"> Tecnología</h2>
-      <?php  
+    <br>
+    <div class="container" style="background-color:white;">
+      <div class=" row-fluid ">
+        <h2 id="in" class="well span12"> Tecnología</h2>
+        <?php  
 		
 		$SQL="SELECT * FROM  informacion WHERE  tipoinformacionid=".$_GET['id'];
 		$result = pg_query ($conn, $SQL ) or die("Error en la consulta SQL");
@@ -78,15 +78,16 @@ $conn=conectar();
 				
 				if($row['titulo']=="Tecnología"){
 					?>
-      <div class="span12">
-        <div  align="justify" class="span8">
-          <p> <?php echo "<blockquote>".$row['descripcion'] ?> </p>
-        </div>
-        <div class="span3"> <img src="<?php echo $row['imagen']?>"> </div>
-      
-      </div>
-      
-      <?php
+        <div  align="center" class="span12">
+          <div  align="justify" class="span8">
+            <p> <?php echo "<blockquote>".$row['descripcion'] ?> </p>
+          </div>
+          
+          <div align="center" class=" span3 well" style=" border-radius:5px; width:250px; height:200px; padding:3px; background-color:rgb(0,0,102)">
+          <img src="<?php echo $row['imagen']?>" style="width:240px; height:193px;"> </div>
+          </div>
+        
+        <?php
 	  
 					
 				}
@@ -97,47 +98,74 @@ $conn=conectar();
 		$registros= pg_num_rows($result);
 		$aux=0;
 		
-		?> <div class="span12">
-        </div>  <?php
+		?>
+       </div>
+       <div align="center" class="row-fluid">
+       
+        <h4 class="visible-phone alert-block alert-info table-bordered"> Pulsa en la imagen para ver la información </h4>
+         <h4 class="visible-tablet alert-block alert-info table-bordered"> Pulsa en la imagen para ver la información </h4>
+        <?php
 	if($registros != 0){
 		?>
-            
-      <br>
-          
-    
-      <?php
-	  
-	  			for ($i=0;$i<$registros;$i++)
+        <br>
+        <br>
+        <br>
+        <br>
+        <div align="center" class="span12">
+          <?php
+ 		$act=0;
+		$ban=0;
+		
+			 for ($i=0;$i<$registros;$i++)
 			{
+				
 				$row = pg_fetch_array ($result,$i);
 				
 				if($row['titulo']!="Tecnología"){
 					$vector[] =$row['informacionid'];
 					$aux=$aux+1;
+					
+					
 					 ?>
-                       <br>
-      <div  class=" span3 well" style="background:rgb(0,0,102); width:202px; height:206px;  padding:2px 2px 2px 2px;"> <img src="<?php echo $row['imagen'] ?>"   id="<?php echo $row['informacionid'] ?>" name="d1" style="width:200px; height:200px;"/>
-        <div class="contenthover">
-          <h4><?php echo $row['titulo'] ?></h4>
-          <p align="justify"><?php echo $row['descripcion'] ?></p>
-          <?php if($row['enlace']!=''){?>
-          <p><a href=" <?php echo $row['enlace'] ?>" class="mybutton" ><?php echo $row['titulo'] ?></a></p>
-        </div>
-      </div>
-      
-      <?php } 
+                     
+            <div align="center" class="span3" style="margin-left:3px; border-color:rgb(0,0,102);: border-left-radius:5px; border-radius:5px;">
+            <div align="center" class="well" style=" border-radius:5px; width:180px; height:200px; padding:3px; background-color:rgb(0,0,102);">
+            
+            <div id="<?php echo $row['informacionid'] ?>" style="width:180px; height:200px; background:#eee; ">
+    <div style="padding:2px;">
+        <p><img src="<?php echo $row['imagen'] ?>"style="width:180px; height:130px;" /></p>
+        <h2 style="-webkit-text-stroke:3px white;"> <?php echo $row['titulo'] ?></h2>
+    </div>
+
+      </div>     
+       <div class="contenthover">
+              <h4><?php echo $row['titulo'] ?></h4>
+              <p align="justify"><?php echo $row['descripcion'] ?></p>
+              <?php if($row['enlace']!=''){?>
+              <p><a href=" <?php echo $row['enlace'] ?>" class="mybutton" ><?php echo $row['titulo'] ?></a></p>
+              <?php		
+			  }?>
+            </div>
+             </div>
+            </div>
+            <?php 
+           
 	  			   }
 				}
+				
+			?>
+        
+      </div>
+      <?php 
  			}
 			?>
     </div>
-  
     <?php
+	
 	}
 ?>
+ </div>
 
-  </div>
-</div>
 <script type="text/javascript">
 	$(document).ready(
 	
@@ -146,7 +174,10 @@ $conn=conectar();
 			<?php $j=0; 
 			 while($j<$aux){ ?>
 			$('#<?php echo $vector[$j] ?>').contenthover({
-   				 overlay_background:'#034482'
+   				 overlay_background:'#034482',
+   					 effect:'slide',
+   					 slide_speed:500,
+   					 slide_direction:'left',
 							});
 			<?php $j=$j+1;} ?>
 		     	}
