@@ -3,13 +3,10 @@ session_start();
 
 include("recursos/funciones.php");
 $conn=conectar();
-if(!isset($_GET['id'])){
-	iraURL('index.php');
-	}
-	//codigo para ir atras
-	if(isset($_POST["atras"])){
-		iraURL('productos.php');	
-	}				
+
+if(!isset($_GET['id']) || isset($_POST["atras"])){
+	iraURL('productos.php');
+	}			
 
 ?>
 <!DOCTYPE html>
@@ -66,8 +63,19 @@ if(!isset($_GET['id'])){
             <div id="login" class="nav-collapse collapse">
               <ul id="log" class="nav pull-right">
                 <li class="divider-vertical"></li>
-                <li><a href="/users/sign_up">Iniciar sesion</a></li>
-              </ul>
+				 <?php  
+			  	if(existesesioncliente()){
+					echo '<li class="dropdown">
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+						'.$_SESSION["nombre"].' '.$_SESSION["apellido"].'
+						<b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+						<li><a href="recursos/quitarsesioncliente.php?pagina=../productos.php">Cerrar Sesión</a></li>
+						  </ul></li>';			
+				  }else{ ?>
+                <li><a href="iniciosesion.php?pagina=productos.php">Iniciar sesión</a></li>
+                <?php } ?>       
+                </ul>
             </div>
             <!--/.nav-collapse --> 
             
@@ -99,6 +107,22 @@ if(!isset($_GET['id'])){
         	<div class="span2"><img src="<?php echo $row['imagen'];?>"></div>
    
    		 </p>
+         <?php 
+		 if(existesesioncliente()){
+			$usuario=$_SESSION["id_cliente"];
+			$producto=$_GET['id'];
+			$query="SELECT * FROM usuarioproducto WHERE usuarioid=$usuario AND productoid=$producto";
+			$Qlogin = pg_query($conn,$query) or die(pg_last_error($conn));
+			$fila = pg_fetch_array($Qlogin);
+					if(pg_num_rows($Qlogin) > 0){
+					?>
+                     <p>
+                    <div class="span12" align="justify">Enlace:<a href="<?php echo $row['enlace'];?>"><?php echo $row['enlace'];?></div>   
+                	 </p>
+                    <?php
+					}
+			 }
+		 ?>
   </div>
   <div class="span12" align="center">
   <form method="post">

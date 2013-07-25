@@ -57,7 +57,18 @@ $conn=conectar();
             <div id="login" class="nav-collapse collapse">
               <ul id="log" class="nav pull-right">
                 <li class="divider-vertical"></li>
-                <li><a href="/users/sign_up">Iniciar sesion</a></li>
+                <?php  
+			  	if(existesesioncliente()){
+					echo '<li class="dropdown">
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+						'.$_SESSION["nombre"].' '.$_SESSION["apellido"].'
+						<b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+						<li><a href="recursos/quitarsesioncliente.php?pagina=../nosotros.php?id=5">Cerrar Sesión</a></li>
+						  </ul></li>';			
+				  }else{ ?>
+                <li><a href="iniciosesion.php?pagina=nosotros.php?id=5">Iniciar sesión</a></li>
+                <?php } ?>  
               </ul>
             </div>
             <!--/.nav-collapse --> 
@@ -85,7 +96,6 @@ $conn=conectar();
        						 <?php for ($i=0;$i<$registros;$i++){
 								$row = pg_fetch_array($result);
 								if($row['titulo']=="Nosotros"){?>
-									<br>
                                     <br>
 									<li class="nav-header">Nosotros</li>
                                     <li class=""><a href="#<?php echo $row['informacionid'];?>"><?php echo $row['titulo']?></a></li>

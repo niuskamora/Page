@@ -23,22 +23,6 @@ if(isset($_POST["guardar"])){
 		$enlace=$_POST['enlace'];
 		$tipoinfo=$_POST['tipoinfo'];
 	
-		if(isset($_POST["op"])){
-		
-			if($_POST["op"]==1){
-				$an=50;
-				$al=50;
-			}
-			if($_POST["op"]==2){
-				$an=320;
-				$al=240;
-			}
-			if($_POST["op"]==3){
-				$an=640;
-				$al=480;
-			}
-		}
-	
 		$resultado=pg_query($conn,"UPDATE informacion SET titulo='$titulo', descripcion='$descripcion', enlace='$enlace', tipoinformacionid='$tipoinfo' WHERE informacionid=$id") or die(pg_last_error($conn));
 	
 		if($_FILES['imagen']['name']!=""){
@@ -56,64 +40,18 @@ if(isset($_POST["guardar"])){
 			$tipo = explode('/',$_FILES['imagen']['type']);
 			$uploadfile =$direccion."/".$cadena.".".$tipo[1];
 			$uploadfile2 =$direccion2."/".$cadena.".".$tipo[1];
-			$error = $_FILES['imagen']['error']; 
-			$subido = false;
-		
-			if($error==UPLOAD_ERR_OK){ 
-			    $subido = copy($_FILES['imagen']['tmp_name'], $uploadfile); 
-				$rutaImagenOriginal=$uploadfile;
-				if($tipo[1]=="jpg" || $tipo[1]=="JPEG" || $tipo[1]=="JPG" || $tipo[1]=="jpeg"){
-					$img_original = imagecreatefromjpeg($rutaImagenOriginal);
-				}
-				if($tipo[1]=="png"){
-					$img_original = imagecreatefrompng($rutaImagenOriginal);
-				}
-
-				list($ancho,$alto)=getimagesize($rutaImagenOriginal);
-				/*$ancho_buscado3=0;
-				$alto_buscado3=0;	
+			$error = $_FILES['imagen']['error'];
 			
-			    if($ancho!=$an){
-				   $ancho_buscado3=$an;
-				   $alto_buscado3=ceil(($an*$alto)/$ancho);					
-				}
+			//Agregar esta linea
+			$imagen=$_FILES['imagen']['tmp_name'];
 			
-				if($alto<=$ancho){
-				   $alto_buscado3=$al;
-				   $ancho_buscado3=ceil(($al*$ancho)/$alto);
-				}else{
-				   $ancho_buscado3=$an;
-				   $alto_buscado3=ceil(($an*$alto)/$ancho);
-				}	
-
-                if($alto_buscado3<$an){
-				   $ancho_buscado3=ceil(($an*$ancho_buscado3)/$alto_buscado3);
-				   $alto_buscado3=$an;
-				}
-
-				if($ancho_buscado3<$al){
-				   $alto_buscado3=ceil(($al*$alto_buscado3)/$ancho_buscado3);
-				   $ancho_buscado3=$al;	
-				}
-				*/
-                $tmp=imagecreatetruecolor($ancho,$alto);
-				imagecopyresampled($tmp,$img_original,0,0,0,0,$an, $al,$ancho,$alto);
-				//Definimos la calidad de la imagen final
-				$calidad=100;
-				//Se crea la imagen final en el directorio indicado
-				imagejpeg($tmp,$uploadfile,$calidad);				
-										
-				$fichero=$uploadfile;			
-				$img1 = imagecreatefromjpeg($fichero);
-				/*$img1Recortada = imagecreatetruecolor ($an, $al);
-				imagecopy($img1Recortada, $img1, 0, 0, ceil(($ancho_buscado3-$an)/2), ceil(($alto_buscado3-$al)/2), ceil(($ancho_buscado3-$an)/2)+$an, ceil(($alto_buscado3-$al)/2)+$al);*/
+			if($error==UPLOAD_ERR_OK){
 				
-				imagejpeg($img1,$uploadfile,$calidad);				
+				//Nueva función
+			   	move_uploaded_file($imagen,$uploadfile);			
 				$sql_update="update informacion set imagen='".$uploadfile2."' where informacionid=$id";
-			
-				$result= pg_query($conn, $sql_update);
-																													
-			}		
+				$result= pg_query($conn, $sql_update);																									
+			}	
 		 }
 		 
 		 if($resultado || $result){
@@ -238,13 +176,11 @@ if(isset($_POST["guardar"])){
                   <?php }?>
                 	<input id="imagen" name="imagen" type="file" contenteditable="true"/>
                 	</br>
-                    <h5>Seleccione el tamaño</h5>
-                    50x50
-                    <input name="op" id="op" type="radio" value="1" checked />
-                    320x240
-                    <input name="op" id="op" type="radio" value="2"/>
-                    640x480
-                    <input name="op" id="op" type="radio" value="3"/>
+                    <ul>
+                		<li>Redes Sociales 40*40</li>
+                    	<li>Tecnología 180*130</li>
+                    	<li>Información 320*420</li>
+                	</ul>
                 </div>
               </dd>
               <dd>

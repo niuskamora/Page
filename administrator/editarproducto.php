@@ -30,63 +30,16 @@ if(isset($_POST["guardar"])){
 		$tipo = explode('/',$_FILES['imagen']['type']);
 		$uploadfile =$direccion."/img/producto/".$cadena.".".$tipo[1];
 		$uploadfile2 =$direccion2."/img/producto/".$cadena.".".$tipo[1];
-
 		$error = $_FILES['imagen']['error']; 
-		$subido = false;
 		
+		//Agregar esta linea
+		$imagen=$_FILES['imagen']['tmp_name'];
 		
 		if($error==UPLOAD_ERR_OK){
-			    $subido = copy($_FILES['imagen']['tmp_name'], $uploadfile); 
-				$rutaImagenOriginal=$uploadfile;
-				if($tipo[1]=="jpg" || $tipo[1]=="JPEG" || $tipo[1]=="JPG" || $tipo[1]=="jpeg"){
-					$img_original = imagecreatefromjpeg($rutaImagenOriginal);
-				}
-				if($tipo[1]=="png"){
-					$img_original = imagecreatefrompng($rutaImagenOriginal);
-				}
-
-				list($ancho,$alto)=getimagesize($rutaImagenOriginal);
-				$ancho_buscado3=0;
-				$alto_buscado3=0;	
-			
-			    if($ancho!=640){
-				   $ancho_buscado3=640;
-				   $alto_buscado3=ceil((640*$alto)/$ancho);					
-				}
-			
-				if($alto<=$ancho){
-				   $alto_buscado3=480;
-				   $ancho_buscado3=ceil((480*$ancho)/$alto);
-				}else{
-				   $ancho_buscado3=640;
-				   $alto_buscado3=ceil((640*$alto)/$ancho);
-				}	
-
-                if($alto_buscado3<480){
-				   $ancho_buscado3=ceil((480*$ancho_buscado3)/$alto_buscado3);
-				   $alto_buscado3=480;
-				}
-
-				if($ancho_buscado3<640){
-				   $alto_buscado3=ceil((640*$alto_buscado3)/$ancho_buscado3);
-				   $ancho_buscado3=640;	
-				}
-				
-                $tmp=imagecreatetruecolor($ancho_buscado3,$alto_buscado3);
-				imagecopyresampled($tmp,$img_original,0,0,0,0,$ancho_buscado3, $alto_buscado3,$ancho,$alto);
-				//Definimos la calidad de la imagen final
-				$calidad=100;
-				//Se crea la imagen final en el directorio indicado
-				imagejpeg($tmp,$uploadfile,$calidad);				
-										
-				$fichero=$uploadfile;			
-				$img1 = imagecreatefromjpeg($fichero);
-				$img1Recortada = imagecreatetruecolor (640, 480);
-				imagecopy($img1Recortada, $img1, 0, 0, ceil(($ancho_buscado3-640)/2), ceil(($alto_buscado3-640)/2), ceil(($ancho_buscado3-640)/2)+640, ceil(($alto_buscado3-480)/2)+480);
-				
-				imagejpeg($img1Recortada,$uploadfile,$calidad);				
-				$sql_update="update PRODUCTO set imagen='".$uploadfile2."' where productoid=".$_GET['id'];
-				$result= pg_query($conn, $sql_update);
+			//Nueva función
+			move_uploaded_file($imagen,$uploadfile);		
+			$sql_update="update PRODUCTO set imagen='".$uploadfile2."' where productoid=".$_GET['id'];
+			$result= pg_query($conn, $sql_update);
 																													
 			}		
 		 }			
