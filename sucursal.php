@@ -61,9 +61,19 @@ $sucursal=obtenerSucursal($_GET['ids']);
             </div>
             <!--/.nav-collapse -->
             <div id="login" class="nav-collapse collapse">
-              <ul id="log" class="nav pull-right">
-                <li class="divider-vertical"></li>
-                <li><a href="/users/sign_up">Iniciar sesion</a></li>
+               <li class="divider-vertical"></li>
+               	 <?php  
+			  	if(existesesioncliente()){
+					echo '<li class="dropdown">
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+						'.$_SESSION["nombre"].' '.$_SESSION["apellido"].'
+						<b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+						<li><a href="recursos/quitarsesioncliente.php?pagina=../productos.php">Cerrar Sesión</a></li>
+						  </ul></li>';			
+				  }else{ ?>
+                <li><a href="iniciosesion.php?pagina=productos.php">Iniciar sesión</a></li>
+                <?php } ?>    
               </ul>
             </div>
             <!--/.nav-collapse --> 
