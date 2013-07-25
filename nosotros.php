@@ -50,7 +50,7 @@ $conn=conectar();
           <a id="open2" href="#" class="btn btn-navbar" data-toggle="collapse" data-target="#login"><i class="icon-user icon-white"></i></a> <a class="brand visible-desktop" style="float:left" href="#"><img  src="recursos/img/logop.png" width="140" height="20"/></a>
             <div id="barrac" class="nav-collapse collapse">
               <ul id="nav" class="nav slidernav">
-              <?php   menu_principal(0,"home"); ?>  
+              <?php   menu_principal(0,"nosotros"); ?>  
               </ul>
             </div>
             <!--/.nav-collapse -->
