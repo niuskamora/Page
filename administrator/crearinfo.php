@@ -21,22 +21,6 @@ if(isset($_POST["guardar"]) || isset($_POST["guardar2"])){
 		$enlace=$_POST['enlace'];
 		$tipoinfo=$_POST['tipoinfo'];
 		
-		if(isset($_POST["op"])){
-		
-			if($_POST["op"]==1){
-				$an=50;
-				$al=50;
-			}
-			if($_POST["op"]==2){
-				$an=320;
-				$al=240;
-			}
-			if($_POST["op"]==3){
-				$an=640;
-				$al=480;
-			}
-		}
-	
 		$resultado=pg_query($conn,"INSERT INTO informacion values( nextval('informacion_informacionid_seq'),'$titulo','$descripcion','$enlace','','$tipoinfo',".$_SESSION["id_usuario"].")") or die(pg_last_error($conn));
 	
 		$sql_select="SELECT last_value FROM informacion_informacionid_seq;";
@@ -58,63 +42,17 @@ if(isset($_POST["guardar"]) || isset($_POST["guardar2"])){
 			$tipo = explode('/',$_FILES['imagen']['type']);
 			$uploadfile =$direccion."/".$cadena.".".$tipo[1];
 			$uploadfile2 =$direccion2."/".$cadena.".".$tipo[1];
-			$error = $_FILES['imagen']['error']; 
-			$subido = false;
+			$error = $_FILES['imagen']['error'];
+			
+			//Agregar esta linea
+			$imagen=$_FILES['imagen']['tmp_name'];
 		
-			if($error==UPLOAD_ERR_OK){ 
-			    $subido = copy($_FILES['imagen']['tmp_name'], $uploadfile); 
-				$rutaImagenOriginal=$uploadfile;
-				if($tipo[1]=="jpg" || $tipo[1]=="JPEG" || $tipo[1]=="JPG" || $tipo[1]=="jpeg"){
-					$img_original = imagecreatefromjpeg($rutaImagenOriginal);
-				}
-				if($tipo[1]=="png"){
-					$img_original = imagecreatefrompng($rutaImagenOriginal);
-				}
-
-				list($ancho,$alto)=getimagesize($rutaImagenOriginal);
-				/*$ancho_buscado3=0;
-				$alto_buscado3=0;	
-			
-			    if($ancho!=$an){
-				   $ancho_buscado3=$an;
-				   $alto_buscado3=ceil(($an*$alto)/$ancho);					
-				}
-			
-				if($alto<=$ancho){
-				   $alto_buscado3=$al;
-				   $ancho_buscado3=ceil(($al*$ancho)/$alto);
-				}else{
-				   $ancho_buscado3=$an;
-				   $alto_buscado3=ceil(($an*$alto)/$ancho);
-				}	
-
-                if($alto_buscado3<$an){
-				   $ancho_buscado3=ceil(($an*$ancho_buscado3)/$alto_buscado3);
-				   $alto_buscado3=$an;
-				}
-
-				if($ancho_buscado3<$al){
-				   $alto_buscado3=ceil(($al*$alto_buscado3)/$ancho_buscado3);
-				   $ancho_buscado3=$al;	
-				}
-				*/
-                $tmp=imagecreatetruecolor($ancho,$alto);
-				imagecopyresampled($tmp,$img_original,0,0,0,0,$an, $al,$ancho,$alto);
-				//Definimos la calidad de la imagen final
-				$calidad=100;
-				//Se crea la imagen final en el directorio indicado
-				imagejpeg($tmp,$uploadfile,$calidad);				
-										
-				$fichero=$uploadfile;			
-				$img1 = imagecreatefromjpeg($fichero);
-				/*$img1Recortada = imagecreatetruecolor ($an, $al);
-				imagecopy($img1Recortada, $img1, 0, 0, ceil(($ancho_buscado3-$an)/2), ceil(($alto_buscado3-$al)/2), ceil(($ancho_buscado3-$an)/2)+$an, ceil(($alto_buscado3-$al)/2)+$al);*/
+			if($error==UPLOAD_ERR_OK){
 				
-				imagejpeg($img1,$uploadfile,$calidad);				
+				//Nueva función
+			   	move_uploaded_file($imagen,$uploadfile);			
 				$sql_update="update informacion set imagen='".$uploadfile2."' where informacionid=".$arreglo[0]."";
-			
-				$result= pg_query($conn, $sql_update);
-																													
+				$result= pg_query($conn, $sql_update);																									
 			}		
 		 }
 	
@@ -210,16 +148,12 @@ if(isset($_POST["guardar"]) || isset($_POST["guardar2"])){
             <div class="span3 well well-small"><b>Imagen</b></div>
             <div class="span6 well well-small"><input id="imagen" name="imagen" type="file"/>
             	</br>
-                <h5>Seleccione el tamaño</h5>
-                <div>50x50
-                	<input name="op" id="op" type="radio" value="1" checked/>
-                </div>
-                <div>320x240
-                	<input name="op" id="op" type="radio" value="2"/>
-                </div>
-                <div>640x480
-                	<input name="op" id="op" type="radio" value="3"/>
-                </div>
+                <h5>Tamaños Recomendados</h5>
+                <ul>
+                	<li>Redes Sociales 40*40</li>
+                    <li>Información 320*420</li>
+                    <li>Noticias 640*840</li>
+                </ul>
             </div>
             <div class="span3 well well-small"><b>Tipo de Información</b></div>
             <div class="span6 well well-small"><select id="tipoinfo" name="tipoinfo">
