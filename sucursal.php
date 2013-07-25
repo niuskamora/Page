@@ -105,6 +105,7 @@ $sucursal=obtenerSucursal($_GET['ids']);
            </div>     
           <div class="span1"></div>
         </div>
+        <div class="span12"> </div>
         <div class="span12 ">
            <div class="span1"></div>
            <div class="span10">
