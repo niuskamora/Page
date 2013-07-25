@@ -49,7 +49,7 @@ if (isset($_POST["inicio"])) {
 
       <form class="form-signin" method="post">
         <h3 class="form-signin-heading">Por favor, inicie sesión</h3>
-        <input type="text" class="input-block-level" placeholder="Usuario" name="usuario" id="usuario" maxlength="34" required>
+        <input type="text" class="input-block-level" placeholder="Usuario" name="usuario" id="usuario" maxlength="34" autofocus required>
         <input type="password" class="input-block-level" placeholder="Contraseña" name="password" id="password" maxlength="34" required>
         <button class="btn btn-large btn-primary" type="submit" name="inicio">Iniciar Sesión</button>
       </form>

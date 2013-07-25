@@ -178,8 +178,8 @@ if(isset($_POST["guardar"])){
                 	</br>
                     <ul>
                 		<li>Redes Sociales 40*40</li>
+                    	<li>Tecnología 180*200</li>
                     	<li>Información 320*420</li>
-                    	<li>Noticias 640*840</li>
                 	</ul>
                 </div>
               </dd>
