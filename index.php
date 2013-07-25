@@ -57,14 +57,18 @@ $conn=conectar();
             <div id="login" class="nav-collapse collapse">
               <ul id="log" class="nav pull-right">
                 <li class="divider-vertical"></li>
-              <?php  
+             	 <?php  
 			  	if(existesesioncliente()){
-					?>
-             	 <li><?php echo $_SESSION["nombre"]." ".$_SESSION["apellido"]; ?></li>
-					<?php
+					echo '<li class="dropdown">
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+						'.$_SESSION["nombre"].' '.$_SESSION["apellido"].'
+						<b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+						<li><a href="recursos/quitarsesioncliente.php?pagina=../index.php">Cerrar Sesión</a></li>
+						  </ul></li>';			
 				  }else{ ?>
-                <li><a href="iniciosesion.php">Iniciar sesión</a></li>
-                <?php } ?>
+                <li><a href="iniciosesion.php?pagina=index.php">Iniciar sesión</a></li>
+                <?php } ?>    
               </ul>
             </div>
             <!--/.nav-collapse --> 

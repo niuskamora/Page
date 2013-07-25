@@ -4,15 +4,14 @@ session_start();
 include("recursos/funciones.php");
 $var=conectar();
 if(isset($_SESSION["usuario_cliente"]) && isset($_SESSION["passwordcliente"])){
-	iraURL('index.php');
+	iraURL($_GET['pagina']);
 	}
 if (isset($_POST["inicio"])) {
     $user = $_POST["usuario"];
     $pass = $_POST["password"];
     if (crearsesioncliente($user, $pass)) {
         if (validarlogincliente()) {
-			iraURL('index.php');
-
+			iraURL($_GET['pagina']);
         }
     }else {
 	javaalert("Debe agregar el usuario y contraseña");
