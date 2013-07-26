@@ -2,9 +2,7 @@
 session_start();
 include("../recursos/funciones.php");
 $conn=conectar();
-if(isset($_GET["id"])){
-$_SESSION["usuarioid"]=$_GET["id"];
-}else{
+if(!isset($_GET["id"])){
 	iraURL('usuario.php');
 	}
 
@@ -14,7 +12,7 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
 if(isset($_POST["guardar"])){	
 	if($_POST["producto"]>0){
 		$producto=$_POST["producto"];
-		$usuario=$_SESSION["usuarioid"];
+		$usuario=$_GET["id"];
 		$resultado=pg_query($conn,"INSERT INTO usuarioproducto values( nextval('usuarioproducto_usuarioproductoid_seq'),$usuario,$producto)") or die(pg_last_error($conn));
 		if($resultado){			
 			llenarLog(1, "USUARIOPRODUCTO");	
@@ -96,7 +94,7 @@ if(isset($_POST["guardar"])){
     
       <?php 
 		
-		$SQL="SELECT usuarioproductoid,nombre FROM usuarioproducto,producto where usuarioproducto.productoid=producto.productoid and usuarioid=".$_SESSION["usuarioid"];
+		$SQL="SELECT usuarioproductoid,nombre FROM usuarioproducto,producto where usuarioproducto.productoid=producto.productoid and usuarioid=".$_GET["id"];
 		$result = pg_query ($conn, $SQL ) or die("Error en la consulta SQL");
 		$registros= pg_num_rows($result);
 	

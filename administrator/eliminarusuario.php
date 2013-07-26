@@ -3,11 +3,23 @@ session_start();
 
 include("../recursos/funciones.php");
 $conn=conectar();
-
+if(!isset($_GET["id"])){
+	iraURL('usuario.php');
+	}
 if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
 	iraURL('../administrator/index.php');
 	}
-
+if(isset($_POST["si"])){
+	   $SQL="DELETE FROM usuario WHERE usuarioid=".$_GET['id'];
+		$result = pg_query ($conn, $SQL ) or die("Error en la consulta SQL");
+		llenarLog(3, "Usuario");
+		javaalert("El usuario fue eliminado");
+		iraURL("usuario.php");
+}
+if(isset($_POST["no"])){
+		iraURL("usuario.php");  
+	
+}
 ?>
 
 <!DOCTYPE html>
@@ -81,7 +93,9 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
 		$result = pg_query ($conn, $SQL ) or die("Error en la consulta SQL");
 		$registros= pg_num_rows($result);
 		$row = pg_fetch_array ($result);
-		
+		if($registros!=1){
+			iraURL("usuario.php");
+			}
 		
 		$SQL2="SELECT * FROM usuarioproducto  WHERE productoid=".$_GET['id'];
 		$result2 = pg_query ($conn, $SQL2 ) or die("Error en la consulta SQL");
@@ -139,17 +153,7 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
 	<?php
 		}
 		
-if(isset($_POST["si"])){
-	   $SQL="DELETE FROM usuario WHERE usuarioid=".$_GET['id'];
-		$result = pg_query ($conn, $SQL ) or die("Error en la consulta SQL");
-		llenarLog(3, "Usuario");
-		javaalert("El usuario fue eliminado");
-		iraURL("usuario.php");
-}
-if(isset($_POST["no"])){
-		iraURL("usuario.php");  
-	
-}
+
 ?>
       
 

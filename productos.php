@@ -52,7 +52,7 @@ $conn=conectar();
           <a id="open2" href="#" class="btn btn-navbar" data-toggle="collapse" data-target="#login"><i class="icon-user icon-white"></i></a> <a class="brand visible-desktop" style="float:left" href="#"><img  src="recursos/img/logop.png" width="140" height="20"/></a>
             <div id="barrac" class="nav-collapse collapse">
               <ul id="nav" class="nav slidernav">
-                        <?php   menu_principal(0,"home"); ?>  
+                        <?php   menu_principal(0,"productos"); ?>  
 
               </ul>
             </div>
@@ -115,7 +115,7 @@ $conn=conectar();
 			<div class="span1"></div>
 			<div class="span10 well" align="center">
 			<div class="span2"><img width="100" height="100" src="'.$row[4].'"> </div>
-			<div class="span8" align="justify"><p><b>'.$row[1].'</b></p>'.$descripcion.'<p><a href="verproducto.php?id='.$row[0].'&boton=ver"><button class="btn btn-primary"> <span class="add-on"><i class="icon-eye-open"></i></span> Ver más</button></a></p></div>
+			<div class="span8" align="justify"><p><b>'.$row[1].'</b></p>'.$descripcion.'<p><a href="verproducto.php?id='.$row[0].'"><button class="btn btn-primary"> <span class="add-on"><i class="icon-eye-open"></i></span> Ver más</button></a></p></div>
 			</div>
 			<div class="span1"></div>			
 			 </div>

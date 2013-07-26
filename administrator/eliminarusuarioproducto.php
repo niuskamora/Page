@@ -3,6 +3,9 @@ session_start();
 
 include("../recursos/funciones.php");
 $conn=conectar();
+if(!isset($_GET["id"])){
+	iraURL('usuario.php');
+	}
 
 if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
 	iraURL('../administrator/index.php');
@@ -13,10 +16,11 @@ if(isset($_POST["si"])){
 		$result = pg_query ($conn, $SQL ) or die("Error en la consulta SQL");
 		llenarLog(3, "UsuarioProducto");
 		javaalert("El producto ya no esta asignado al usuario");
-		iraURL("usuarioproducto.php");
+		iraURL("usuarioproducto.php?id=".$_GET['idusuario']);
+
 }
 if(isset($_POST["no"])){
-		iraURL("usuarioproducto.php");  	
+iraURL("usuarioproducto.php?id=".$_GET['idusuario']);
 }
 ?>
 
@@ -78,7 +82,7 @@ if(isset($_POST["no"])){
     <div class="span3">
       <div style="text-align:center">
           <ul class="nav  nav-pills nav-stacked">
-             <li class="active"><a href="usuario.php"> <span class="add-on"><i class="icon-arrow-left"></i></span> Atrás</a></li> 
+             <li class="active"><a href="usuarioproducto.php?id=<?php echo $_GET['idusuario'];?>"> <span class="add-on"><i class="icon-arrow-left"></i></span> Atrás</a></li> 
           </ul>
       </div>
     </div>
@@ -88,12 +92,15 @@ if(isset($_POST["no"])){
 		$SQL="SELECT nombre,descripcion FROM usuarioproducto,producto where usuarioproducto.productoid=producto.productoid and usuarioproductoid=".$_GET['id'];
 		$result = pg_query ($conn, $SQL ) or die("Error en la consulta SQL");
 		$registros= pg_num_rows($result);
+		if($registros!=1){
+			iraURL("usuarioproducto.php");
+			}
 		$row = pg_fetch_array ($result);
     ?>
     
     <div class="well well-small alert alert-block">
     	<h2 class="alert alert-block" align="center">Atención</h2>
-    	<h4 align="center">¿Desea eliminar el registro? </h4>
+    	<h4 align="center">¿Desea que este producto ya no este asignado a este usuario? </h4>
     </div>
 
       <div class="well well-large">
