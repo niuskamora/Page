@@ -196,7 +196,25 @@ if(isset($_POST["guardar"])){
 ================================================== --> 
 
 <script type="text/javascript" src="../recursos/js/jquery-2.0.2.js" ></script> 
-<script src="../recursos/js/bootstrap.js"></script> 
+<script src="../recursos/js/bootstrap.js"></script>
+<script type="text/javascript">
+$(document).ready(function() {
+ 
+$('.dropdown-toggle').click(function(e) {
+  e.preventDefault();
+  setTimeout($.proxy(function() {
+    if ('ontouchstart' in document.documentElement) {
+      $(this).siblings('.dropdown-backdrop').off().remove();
+    }
+  }, this), 0);
+});
+ 
+ 
+});
+
+
+
+</script>  
 <script src="../recursos/footable/js/footable.js" type="text/javascript"></script>
 <script src="../recursos/footable/js/footable.paginate.js" type="text/javascript"></script>
 <script src="../recursos/footable/js/footable.sortable.js" type="text/javascript"></script>

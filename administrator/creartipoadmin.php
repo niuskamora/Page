@@ -154,7 +154,25 @@ if(isset($_POST["guardar2"])){
 <!-- Le javascript
 ================================================== --> 
 <script type="text/javascript" src="../recursos/js/jquery-2.0.2.js" ></script> 
-<script src="../recursos/js/bootstrap.js"></script> 
+<script src="../recursos/js/bootstrap.js"></script>
+<script type="text/javascript">
+$(document).ready(function() {
+ 
+$('.dropdown-toggle').click(function(e) {
+  e.preventDefault();
+  setTimeout($.proxy(function() {
+    if ('ontouchstart' in document.documentElement) {
+      $(this).siblings('.dropdown-backdrop').off().remove();
+    }
+  }, this), 0);
+});
+ 
+ 
+});
+
+
+
+</script>  
 
 	</body>
 </html>
