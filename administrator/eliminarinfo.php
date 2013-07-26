@@ -10,6 +10,22 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
 
 ?>
 
+<?php
+		
+	if(isset($_POST["si"])){
+		$SQL="DELETE FROM informacion WHERE informacionid=".$_GET['id'];
+		$result = pg_query ($conn, $SQL ) or die("Error en la consulta SQL");
+		javaalert("La Información fue Eliminada");
+		llenarLog(3, "Información");
+		iraURL('../administrator/info.php');
+	}
+	
+	if(isset($_POST["no"])){
+		iraURL('../administrator/info.php');  
+	
+	}
+?>
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -119,21 +135,6 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
 	 </form> 
      
     </div>
-     	<?php
-		
-	if(isset($_POST["si"])){
-		$SQL="DELETE FROM informacion WHERE informacionid=".$_GET['id'];
-		$result = pg_query ($conn, $SQL ) or die("Error en la consulta SQL");
-		javaalert("La Información fue Eliminada");
-		llenarLog(3, "Información");
-		iraURL('../administrator/info.php');
-	}
-	
-	if(isset($_POST["no"])){
-		iraURL('../administrator/info.php');  
-	
-	}
-?>
       
 
 <!-- Le javascript
