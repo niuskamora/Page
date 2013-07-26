@@ -7,6 +7,11 @@ $conn=conectar();
 if(!isset($_GET['id'])){
 	iraURL('index.php');
 }
+else{
+	if($_GET['id']!='5'){
+		iraURL('nosotros.php?id=5');
+	}
+}
 
 ?>
 <!DOCTYPE html>

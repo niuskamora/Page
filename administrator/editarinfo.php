@@ -219,7 +219,11 @@ if(isset($_POST["guardar"])){
           </div>
         </form>
     
-        <?php }?>
+        <?php } else{
+				if($row==0){
+					iraURL('info.php');
+				}
+			}?>
   </p>
     </div>
    </div>

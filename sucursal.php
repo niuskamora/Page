@@ -3,6 +3,11 @@ session_start();
 
 include("recursos/funciones.php");
 
+if(!isset($_GET['ids']))
+{
+   	iraURL("index.php");
+	
+}
 $sucursal=obtenerSucursal($_GET['ids']);
 ?>
 <!DOCTYPE html>
