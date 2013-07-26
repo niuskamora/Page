@@ -102,11 +102,9 @@ $conn=conectar();
     <div class="container">
       <div class="row animated fadeInDown">
         <div class="span12">
-          <div class="span6 animated fadeInDownBig">
-            <h2>Servicios</h2>
-            <p>A través de nuestros servicios tecnológicos ponemos a disposición una gama de soluciones adecuada a las necesidades de su organización, contamos con un grupo de profesionales altamente capacitados con valores, dispuestos a trabajar de la mano para ayudarle a potenciar su negocio.</p>
-          </div>
-          <div class="span6 animated slide2 fadeInUpBig" style="text-align:center"><img style="width:70%;"   src="recursos/img/servitest.png" /> </div>
+         <?php 
+		 obtenerBannermovil();
+		 ?>
         </div>
       </div>
     </div>
