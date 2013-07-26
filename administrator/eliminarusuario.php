@@ -97,11 +97,10 @@ if(isset($_POST["no"])){
 			iraURL("usuario.php");
 			}
 		
-		$SQL2="SELECT * FROM usuarioproducto  WHERE productoid=".$_GET['id'];
+		$SQL2="SELECT * FROM usuarioproducto  WHERE usuarioid=".$_GET['id'];
 		$result2 = pg_query ($conn, $SQL2 ) or die("Error en la consulta SQL");
 		$registros2= pg_num_rows($result2);
-		
-		if($registros2!=0){
+		if($registros2>0){
 		 
 			?>   
             

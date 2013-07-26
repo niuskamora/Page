@@ -139,11 +139,11 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
 				}else{
 					$enlace=$row[3];
 				}
-			echo '<td width="21%">'.$descripcion.'</td>';
+			echo '<td width="19%">'.$descripcion.'</td>';
 			echo '<td width="15%">'.$enlace.'</td>';
-			echo '<td width="13%"><a href="editarproducto.php?id='.$row[0].'"><button class="btn btn-primary"> <span class="add-on"><i class="icon-pencil"></i> </span> Editar  </button> </td>';
-			echo '<td width="18%"><a href="eliminarproducto.php?id='.$row[0].'"> <button class="btn btn-primary" type="button"  name="eliminar"> <span class="add-on"><i class="icon-trash"></i></span> Eliminar</button> </td>';
-			echo '<td width="11%"><a href="verproducto.php?id='.$row[0].'"> <button class="btn btn-primary"> <span class="add-on"><i class="icon-eye-open"></i></span> Ver</button> </td>';
+			echo '<td width="15%"><a href="editarproducto.php?id='.$row[0].'"><button class="btn btn-primary"> <span class="add-on"><i class="icon-pencil"></i> </span> Editar  </button> </td>';
+			echo '<td width="16%"><a href="eliminarproducto.php?id='.$row[0].'"> <button class="btn btn-primary" type="button"  name="eliminar"> <span class="add-on"><i class="icon-trash"></i></span> Eliminar</button> </td>';
+			echo '<td width="13%"><a href="verproducto.php?id='.$row[0].'"> <button class="btn btn-primary"> <span class="add-on"><i class="icon-eye-open"></i></span> Ver</button> </td>';
 			echo '</tr>';
 			}
 		?>

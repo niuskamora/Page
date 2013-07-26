@@ -10,8 +10,8 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
 	//codigo para guardar
 	if(isset($_POST["crear_uno"]) || isset($_POST["crear_otro"])){
 
-	if(isset($_POST["nombre"]) &&  isset($_POST["apellido"]) && isset($_POST["direccion"]) && isset($_POST["usuarioo"]) && isset($_POST["contrasena"]) && isset($_POST["contrasena_c"]) && $_POST["nombre"]!="" && $_POST["apellido"]!="" && $_POST["direccion"]!="" && $_POST["usuarioo"]!="" && $_POST["contrasena"]!="" && $_POST["contrasena_c"]!=""){
-		$SQL="SELECT * FROM usuario where usuario='".$_POST["usuario"]."'";
+	if(isset($_POST["nombre"])  && isset($_POST["usuarioo"]) && isset($_POST["contrasena"]) && isset($_POST["contrasena_c"])  && $_POST["usuarioo"]!="" && $_POST["contrasena"]!="" && $_POST["contrasena_c"]!=""){
+		$SQL="SELECT * FROM usuario where usuario='".$_POST["usuarioo"]."'";
 		$result = pg_query ($conn, $SQL ) or die("Error en la consulta SQL");
 		$registros= pg_num_rows($result);
 		if($registros == 0){
@@ -34,7 +34,7 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
 		}
 	}//fin de isset
 	else{
-				javaalert("Debe agregar todos los campos, por favor verifique");
+				javaalert("Debe agregar el nombre , el usuario y la contraseña obligatoriamente, por favor verifique");
 			}
 			
 			
@@ -105,11 +105,11 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
     <div class="span9 well well-large" >
  			<p>
             <div class="span3 well well-small"><b>Nombre</b></div>
-            <div class="span6 well well-small "><input type="text" name="nombre" id="nombre"  maxlength="34" pattern="[A-Za-zñÑáéíóúÁÉÍÓÚ ]{1,34}" title="Ingrese el nombre" placeholder="Ej. Luz Mariela" autofocus required/></div>
+            <div class="span6 well well-small "><input type="text" name="nombre" id="nombre"  maxlength="34" pattern="[A-Za-zñÑáéíóúÁÉÍÓÚ0-9,. ]{1,34}" title="Puede agregar solo letras,números puntos y comas" placeholder="Ej. Luz Mariela" autofocus required/></div>
             <div class="span3 well well-small"><b>Apellido</b></div>
-            <div class="span6 well well-small "><input type="text" name="apellido" id="apellido" maxlength="34" pattern="[A-Za-zñÑáéíóúÁÉÍÓÚ ]{1,34}" title="Ingrese el apellido" placeholder="Ej. Suarez Hernandez" required/></div>
+            <div class="span6 well well-small "><input type="text" name="apellido" id="apellido" maxlength="34" pattern="[A-Za-zñÑáéíóúÁÉÍÓÚ ]{1,34}" title="Ingrese el apellido" placeholder="Ej. Suarez Hernandez" /></div>
             <div class="span3 well well-small"><b>Dirección</b></div>
-            <div class="span6 well well-small"><input type="text" name="direccion" id="direccion" maxlength="254" placeholder="Ej. Carrera 10 # 8-5" title="Ingrese la dirección" required/></div>
+            <div class="span6 well well-small"><input type="text" name="direccion" id="direccion" maxlength="254" placeholder="Ej. Carrera 10 # 8-5" title="Ingrese la dirección" /></div>
             <div class="span3 well well-small"><b>Nombre de Usuario</b></div>
             <div class="span6 well well-small"><input type="text" name="usuarioo" id="usuarioo" placeholder="Ej. Mariela.arboleda2541" title="El formato es Mayúscula(letras, puntos o números)" maxlength="34" pattern="[A-ZÑ]{1}[a-z.ñ0-9]{1,33}"  required/></div>
             <div class="span3 well well-small"><b>Contraseña</b></div>

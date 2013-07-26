@@ -11,7 +11,7 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
 	}
 			
 if(isset($_POST["guardar"])){
-		if(isset($_POST["nombre"]) &&  isset($_POST["apellido"]) && isset($_POST["direccion"]) && isset($_POST["usuario"]) && isset($_POST["contrasena"]) && isset($_POST["contrasena_c"]) && $_POST["nombre"]!="" && $_POST["apellido"]!="" && $_POST["direccion"]!="" && $_POST["usuario"]!="" && $_POST["contrasena"]!="" && $_POST["contrasena_c"]!=""){
+		if(isset($_POST["nombre"]) && isset($_POST["usuario"]) && isset($_POST["contrasena"]) && isset($_POST["contrasena_c"]) && $_POST["nombre"]!=""  && $_POST["usuario"]!="" && $_POST["contrasena"]!="" && $_POST["contrasena_c"]!=""){
 		$SQL="SELECT * FROM usuario where usuario='".$_POST["usuario"]."' and usuarioid!=".$_GET['id'];
 		$result = pg_query ($conn, $SQL ) or die("Error en la consulta SQL");
 		$registros= pg_num_rows($result);
@@ -129,7 +129,7 @@ if(isset($_POST["guardar"])){
               </dt>
               <dd>
                 <div class="well well-small">
-<input type="text" name="apellido" id="apellido" value="<?php echo $row['apellido']?>" maxlength="34" pattern="[A-Za-zñÑáéíóúÁÉÍÓÚ ]{1,34}" required/>
+<input type="text" name="apellido" id="apellido" value="<?php echo $row['apellido']?>" maxlength="34" pattern="[A-Za-zñÑáéíóúÁÉÍÓÚ ]{1,34}" />
                 </div>
               </dd>
                 </dd>
@@ -138,7 +138,7 @@ if(isset($_POST["guardar"])){
               </dt>
               <dd>
                 <div class="well well-small">
-<input type="text" name="direccion" id="direccion" value="<?php echo $row['direccion']?>" maxlength="254" required/>
+<input type="text" name="direccion" id="direccion" value="<?php echo $row['direccion']?>" maxlength="254" />
                 </div>
               </dd>
                 </dd>
