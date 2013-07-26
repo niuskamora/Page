@@ -4,8 +4,13 @@ session_start();
 include("recursos/funciones.php");
 $conn=conectar();
 
-if(!isset($_GET['id'])|| isset($_GET['id'])!=5){
+if(!isset($_GET['id'])){
 	iraURL('index.php');
+}
+else{
+	if($_GET['id']!='5'){
+		iraURL('nosotros.php?id=5');
+	}
 }
 
 ?>
