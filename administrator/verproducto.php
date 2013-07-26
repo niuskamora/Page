@@ -3,7 +3,9 @@ session_start();
 
 include("../recursos/funciones.php");
 $conn=conectar();
-
+if(!isset($_GET["id"])){
+	iraURL('producto.php');
+	}
 if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
 	iraURL('../administrator/index.php');
 	}
@@ -92,7 +94,10 @@ $id=$_GET['id'];
             <div class="span6 well well-small"><?php echo $row['enlace'];?></div>            
             <div class="span3 well well-small"><b>Imagen</b></div>
             <div class="span6 well well-small"><img src="<?php echo "../".$row['imagen'];?>"></div>               
-     <?php }?>
+     <?php }else{
+			iraURL("producto.php");
+				}
+	 ?>
          </p>
     </div>
     </div>

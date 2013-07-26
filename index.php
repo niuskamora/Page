@@ -38,7 +38,7 @@ $conn=conectar();
            <img  src="recursos/img/izquierdasuperior.png" style="margin-bottom: 3px;" />
            </div>
         <div  class="headerb" style="text-align: center;">
-           <img  src="recursos/img/logo.png" style="margin-bottom: 3px;" height="160" />
+           <img  src="recursos/img/logo.png" style="margin-bottom: 3px;" height="150" />
            </div>
         <div class="headerc"  style="text-align: right;">
            <img  src="recursos/img/derechainferior.png" style="margin-bottom: 3px; text-align: left;" />
@@ -87,22 +87,9 @@ $conn=conectar();
           <div id="myCarousel" class="carousel slide"> 
             <!-- Carousel items -->
             <div class="carousel-inner">
-              <div class="item slide1 active">
-                <div class="row-fluid">
-                  <div class="span6 animated fadeInDownBig">
-                    <h2>Servicios</h2>
-                    <p>A través de nuestros servicios tecnológicos ponemos a disposición una gama de soluciones adecuada a las necesidades de su organización, contamos con un grupo de profesionales altamente capacitados con valores, dispuestos a trabajar de la mano para ayudarle a potenciar su negocio.</p>
-                  </div>
-                  <div class="span6 animated slide2 fadeInUpBig"><img style="width:70%;"   src="recursos/img/servitest.png" /></div>
-                </div>
-              </div>
-              <div class="item slide2">
-                <div class="row-fluid">
-                  <div class="span3"></div>
-                  <div class="span6"><img style="width:70%;" src="recursos/img/servitest.png" /></div>
-                  <div class="span3"></div>
-                </div>
-              </div>
+             <?php 
+			 obtenerBanners();
+			 ?>
             </div>
             <!-- Carousel nav --> 
             

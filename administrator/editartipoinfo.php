@@ -3,6 +3,9 @@ session_start();
 
 include("../recursos/funciones.php");
 $conn=conectar();
+if(!isset($_GET["id"])){
+	iraURL('tipoinfo.php');
+	}
 if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
 	iraURL('../administrator/index.php');
 	}
@@ -88,7 +91,12 @@ if(isset($_POST["guardar"])){
        <?php
         	$cons="SELECT * FROM tipoinformacion WHERE tipoinformacionid=".$_GET['id'];
 			$resulta = pg_query ($conn, $cons) or die("Error en la consulta SQL");
-			$row=pg_fetch_array($resulta)
+				$registros= pg_num_rows($resulta);
+						if($registros!=1){
+							iraURL("tipoinfo.php");
+							}
+			$row=pg_fetch_array($resulta);
+			
 		?>
      <form method="post">
           <div class="row-fluid">

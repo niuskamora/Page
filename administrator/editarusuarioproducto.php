@@ -3,6 +3,9 @@ session_start();
 
 include("../recursos/funciones.php");
 $conn=conectar();
+if(!isset($_GET["id"])){
+	iraURL('usuario.php');
+	}
 
 if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
 	iraURL('../administrator/index.php');
@@ -78,7 +81,7 @@ if(isset($_POST["guardar"])){
     <div class="span3">
       <div style="text-align:center">
           <ul class="nav  nav-pills nav-stacked">
-             <li class="active"><a href="info.php"> <span class="add-on"><i class="icon-arrow-left"></i></span> Atrás</a></li>          
+             <li class="active"><a href="usuarioproducto.php?id=<?php echo $_GET['idusuario'];?>"> <span class="add-on"><i class="icon-arrow-left"></i></span> Atrás</a></li>          
           </ul>
       </div>
     </div>
@@ -100,6 +103,10 @@ if(isset($_POST["guardar"])){
                         <?php
 						$consu1="SELECT producto.productoid,nombre FROM producto,usuarioproducto where usuarioproducto.productoid=producto.productoid and usuarioproductoid=".$_GET["id"];
 						$resulta3 = pg_query ($conn, $consu1) or die("Error en la consulta SQL");
+						$registros= pg_num_rows($resulta3);
+						if($registros!=1){
+							iraURL("usuario.php");
+							}
 						if($row3=pg_fetch_array($resulta3)){
 							echo '<option value="'.$row3['productoid'].'">'.$row3['nombre'].'</option>';
                         

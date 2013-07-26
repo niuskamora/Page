@@ -25,11 +25,11 @@ if(isset($_POST["guardar"])){
 	}
 	
 	
-	if(isset($_POST["nombre"]) &&  isset($_POST["apellido"]) && isset($_POST["usuario"]) && isset($_POST["contrasena"]) && isset($_POST["contrasena_c"]) && $_POST["nombre"]!="" && $_POST["apellido"]!="" && $_POST["usuario"]!="" && $_POST["contrasena"]!="" && $_POST["contrasena_c"]!="" && $_POST["tipoadmin"]>0){
+	if(isset($_POST["nombre"]) &&  isset($_POST["apellido"]) && isset($_POST["usuario2"]) && isset($_POST["contrasena"]) && isset($_POST["contrasena_c"]) && $_POST["nombre"]!="" && $_POST["apellido"]!="" && $_POST["usuario2"]!="" && $_POST["contrasena"]!="" && $_POST["contrasena_c"]!="" && $_POST["tipoadmin"]>0){
 	
 		$nombre=$_POST['nombre'];
 		$apellido=$_POST['apellido'];
-		$usuario=$_POST['usuario'];
+		$usuario=$_POST['usuario2'];
 		$contrasena=$_POST['contrasena'];
 		$tipoadmin=$_POST['tipoadmin'];
 		
@@ -156,7 +156,7 @@ if(isset($_POST["guardar"])){
               </dt>
               <dd>
                 <div class="well well-small">
-                  <input id="usuario" name="usuario" type="text" value="<?php echo $row['usuario']; ?>" contenteditable="true" placeholder="Ej. niuska.mora" maxlength="34" pattern="[a-z.ñ]{1,34}" required/>
+                  <input id="usuario2" name="usuario2" type="text" value="<?php echo $row['usuario']; ?>" contenteditable="true" placeholder="Ej. niuska.mora" maxlength="34" pattern="[a-z.ñ]{1,34}" required/>
                 </div>
               </dd>
               <dt>
