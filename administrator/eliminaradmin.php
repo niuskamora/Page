@@ -99,6 +99,11 @@ if(isset($_POST["no"])){
 		$registros= pg_num_rows($result);
 		$row = pg_fetch_array ($result);
 		
+		if($row==0){
+			iraURL('admin.php');
+		}
+
+		
 		$SQL2="SELECT * FROM administrador WHERE creadorid=".$_GET['id'];
 		$result2 = pg_query ($conn, $SQL2 ) or die("Error en la consulta SQL");
 		$registros2= pg_num_rows($result2);

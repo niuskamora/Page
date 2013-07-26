@@ -4,7 +4,7 @@ session_start();
 include("recursos/funciones.php");
 $conn=conectar();
 
-if(!isset($_GET['id'])){
+if(!isset($_GET['id'])|| isset($_GET['id'])!=5){
 	iraURL('index.php');
 }
 

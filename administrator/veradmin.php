@@ -112,7 +112,11 @@ $id=$_GET['id'];
             	<div class="span6 well well-small"><?php echo $row1['nombre'];?></div>
                 <?php }?>
                 
-        <?php }?>
+        <?php } else{
+				if($row==0){
+					iraURL('admin.php');
+				}
+			}?>
          </p>
     </div>
     </div>
