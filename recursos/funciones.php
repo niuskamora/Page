@@ -234,5 +234,66 @@ function obtenerSucursal($id)
 	$Qmenu = pg_query($conex,$query) or die(pg_last_error($conex));
 	return $row = pg_fetch_array($Qmenu,0);
 }
+function obtenerBanners()
+{
+	
+$conex = conectar();
+	
+	$query="select informacion.titulo,informacion.descripcion,informacion.imagen
+from informacion,tipoinformacion 
+where lower(tipoinformacion.nombre)='noticia' and informacion.tipoinformacionid=tipoinformacion.tipoinformacionid;";
+$Qmenu = pg_query($conex,$query) or die(pg_last_error($conex));
+	
+$numerof=pg_num_rows($Qmenu);
+		
+		if($numerof > 0){ 
+	
+		
+		      for($i=0;$i<$numerof;$i++)
+		{	
+		$row = pg_fetch_array($Qmenu,$i);
+	
+	
+       echo ' <div class="item';
+	   echo' slide'.($i+1);
+	  
+	   if($i==0)
+	      echo' active">';
+		else  
+		 echo '">';
+			if($i%2==0)
+			{
+			 
+			 echo'
+					<div class="row-fluid">
+					  <div class="span6 animated fadeInDownBig">
+						<h2>'.$row[0].'</h2>
+						'.$row[1].'
+					  </div>
+					  <div class="span6 animated slide2 fadeInUpBig">
+					  <img style="width:330px; height:240px" src="'.$row[2].'" /></div>
+					</div>
+				  </div>';
+			}
+			else
+			{
+				echo'
+					<div class="row-fluid">
+					 
+					  <div class="span6 animated slide2 fadeInUpBig">
+					  <img style="width:330px; height:240px;" src="'.$row[2].'" /></div>
+					   <div class="span6 animated fadeInDownBig">
+						<h2>'.$row[0].'</h2>
+						'.$row[1].'
+					  </div>
+					</div>
+				  </div>';
+				
+			}
+		}
+	}
+	
+	
+}
 
 ?>

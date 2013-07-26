@@ -21,7 +21,7 @@ $(function () {
         return false;
     });
 	 $('.carousel').carousel({
-                    interval: 3000,
+                    interval: 7000,
 					
                 });
 		$('.carousel').carousel('cycle');
