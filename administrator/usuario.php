@@ -113,7 +113,7 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
 				<span class="add-on"><i class="icon-eye-open"></i></span> Ver 
 				  </th>
                    <th data-hide="phone" data-sort-ignore="true">
-				<span class="add-on"><i class="icon-eye-open"></i></span> Asignar Productos 
+				<span class="add-on"><i class="icon-plus"></i></span> Asignar Productos 
 				  </th>
 				</tr>
 	 	</thead>

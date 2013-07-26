@@ -98,8 +98,8 @@ iraURL("usuarioproducto.php?id=".$_GET['idusuario']);
 		$row = pg_fetch_array ($result);
     ?>
     
-    <div class="well well-small alert alert-block">
-    	<h2 class="alert alert-block" align="center">Atención</h2>
+    <div class="well well-small alert alert-block" align="center">
+   			<h2 style="color:rgb(255,255,255)"> Atención</h2>
     	<h4 align="center">¿Desea que este producto ya no este asignado a este usuario? </h4>
     </div>
 

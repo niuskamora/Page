@@ -132,7 +132,11 @@ if(!isset($_GET['id']) || isset($_POST["atras"])){
  
  </div>
  
-  <?php }?>
+  <?php }
+  else{
+			iraURL("productos.php");
+				}
+  ?>
  <div class="row-fluid">
   </div>
  

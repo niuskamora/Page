@@ -137,7 +137,7 @@ if(isset($_POST["guardar"])){
               </dt>
               <dd>
                 <div class=" well well-small">
-                  <input id="nombre" name="nombre"  type="text" value="<?php echo $row['nombre'];?>" maxlength="34" contenteditable=true required/>
+                  <input id="nombre" name="nombre"  type="text" value="<?php echo $row['nombre'];?>" maxlength="249" contenteditable=true required/>
                 </div>
               </dd>
               <dt>

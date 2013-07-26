@@ -108,7 +108,7 @@ if(isset($_POST["no"])){
 		 
 			?>  
             
-            <div class="well alert alert-danger">
+            <div class="well alert alert-danger" align="center">
    			<h2 style="color:rgb(255,255,255)" align="center"> Atención</h2>
     			<h4 align="center">No se puede eliminar el registro </h4>
 	 		</div>
@@ -120,8 +120,8 @@ if(isset($_POST["no"])){
 		
     ?>
     
-    <div class="well well-small alert alert-block">
-    	<h2 class="alert alert-block" align="center">Atención</h2>
+    <div class="well well-small alert alert-block" align="center">
+   			<h2 style="color:rgb(255,255,255)"> Atención</h2>
     	<h4 align="center">¿Desea eliminar el registro? </h4>
     </div>
 
