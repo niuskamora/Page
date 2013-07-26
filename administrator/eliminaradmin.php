@@ -116,7 +116,11 @@ if(isset($_POST["no"])){
 		$result4 = pg_query ($conn, $SQL4 ) or die("Error en la consulta SQL");
 		$registros4= pg_num_rows($result4);
 		
-		if($registros2!=0 || $registros3!=0 || $registros4!=0){
+		$SQL5="SELECT * FROM bitacora WHERE administradorid=".$_GET['id'];
+		$result5 = pg_query ($conn, $SQL5 ) or die("Error en la consulta SQL");
+		$registros5= pg_num_rows($result5);
+		
+		if($registros2!=0 || $registros3!=0 || $registros4!=0 || $registros5!=0){
 		 ?>  
             
             <div class="well alert alert-danger" align="center">
@@ -127,7 +131,7 @@ if(isset($_POST["no"])){
      
      <?php
 		  }
-		else if($registros2==0 || $registros3==0 || $registros4==0){
+		else if($registros2==0 || $registros3==0 || $registros4==0 || $registros5==0){
 		
     ?>
     
