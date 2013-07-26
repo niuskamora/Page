@@ -6,6 +6,9 @@ $conn=conectar();
 if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
 	iraURL('../administrator/index.php');
 	}
+	 if($_GET['id']==''){
+	 iraURL('../administrator/menu.php'); 
+  }
 
 ?>
 
@@ -162,7 +165,7 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
 if(isset($_POST["si"])){
 	   $SQL="DELETE FROM menu WHERE menuid=".$_GET['id'];
 		$result = pg_query ($conn, $SQL ) or die("Error en la consulta SQL");
-		llenarLog(3, "elimino menu");
+		llenarLog(3, "menu");
 		javaalert("El menu fue eliminado");
 		iraURL("menu.php");
 		

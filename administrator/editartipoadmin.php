@@ -5,16 +5,20 @@ $conn=conectar();
 if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
 	iraURL('../administrator/index.php');
 	}
+  if($_GET['id']==''){
+	 iraURL('../administrator/tipoadmin.php'); 
+  }
+		
 		
 if(isset($_POST["guardar"])){
 	
-	if($_POST["nombre"]!='' && $_POST["descripcion"]!=''){
+	if(isset($_POST["nombre"]) && isset($_POST["descripcion"]) && $_POST["nombre"]!='' && $_POST["descripcion"]!=''){
 		$id=$_GET['id'];
 		$nombre=$_POST['nombre'];
 		$descripcion=$_POST['descripcion'];
         $resultado=pg_query($conn,"UPDATE tipoadministrador SET nombre='$nombre', descripcion='$descripcion' where tipoadministradorid=$id") or die(pg_last_error($conn));
 		if($resultado){
-			llenarLog(2, "Modifico tipo de administrador");
+			llenarLog(2, "tipo de administrador");
 			javaalert("tipo de información fue editado con exito");
 iraURL("tipoadmin.php");
 		}

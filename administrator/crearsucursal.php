@@ -9,6 +9,8 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
 
 if(isset($_POST["guardar"])){
 	
+	if(isset($_POST["nombre"]) &&  isset($_POST["direccion"]) && isset($_POST["telefono"]) && isset($_POST["correo"]) && isset($_POST["latitud"]) && isset($_POST["longitud"]) && isset($_POST["redactor"]) && $_POST["nombre"]!="" && $_POST["direccion"]!="" && $_POST["telefono"]!="" && $_POST["correo"]!="" && $_POST["latitud"]!="" && $_POST["longitud"]!=""  && $_POST["redactor"]!="" ){
+	
 	$nombre=$_POST['nombre'];
 	$direccion=$_POST['direccion'];
 	$telefono=$_POST['telefono'];
@@ -58,9 +60,14 @@ if(isset($_POST["guardar"])){
 			llenarLog(1, "Creo sucursal");
 			iraURL('../administrator/sucursal.php');
 	}
+	}else{
+		javaalert("Debe llenar todos los campos obligatorios");
+	}
 }
 
 if(isset($_POST["guardar2"])){
+	
+	if(isset($_POST["nombre"]) &&  isset($_POST["direccion"]) && isset($_POST["telefono"]) && isset($_POST["correo"]) && isset($_POST["latitud"]) && isset($_POST["longitud"]) && isset($_POST["redactor"]) && $_POST["nombre"]!="" && $_POST["direccion"]!="" && $_POST["telefono"]!="" && $_POST["correo"]!="" && $_POST["latitud"]!="" && $_POST["longitud"]!=""  && $_POST["redactor"]!="" ){
 	
 	$nombre=$_POST['nombres'];
 	$direccion=$_POST['direccion'];
@@ -111,6 +118,10 @@ if(isset($_POST["guardar2"])){
 			llenarLog(1, "Creo sucursal");
 			iraURL('../administrator/crearsucursal.php');
 	}
+   }else{
+		javaalert("Debe llenar todos los campos obligatorios");
+	}
+  
 }
 	    ?>
 

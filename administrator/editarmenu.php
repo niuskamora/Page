@@ -7,19 +7,25 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
 	iraURL('../administrator/index.php');
 	}
 
- 
+ if($_GET['id']==''){
+	 iraURL('../administrator/menu.php'); 
+  }
 	
 		
 if(isset($_POST["guardar"])){
+	if(isset($_POST["nombre"]) && $_POST["nombre"]!=""){
 		
 		$nombr=$_POST['nombre'];
 		$enla=$_POST['enlace'];
         $resultado=pg_query($conn,"UPDATE menu SET nombre='$nombr', enlace='$enla' where menuid=".$_GET['id']) or die(pg_last_error($conn));
 		if($resultado){
-			llenarLog(2, "Modifico tipo de administrador");
+			llenarLog(2, "tipo de administrador");
 javaalert("El menu fue modificado con exito");
 iraURL("menu.php");
 		}
+	}else{
+		javaalert("Debe llenar todos los campos obligatorios");
+	}
 }
 ?>
 

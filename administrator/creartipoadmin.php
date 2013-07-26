@@ -10,7 +10,7 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
 		
 if(isset($_POST["guardar"])){
 	
-	if($_POST["nombre"]!='' && $_POST["descripcion"]!=''){
+	if(isset($_POST["nombre"]) && isset($_POST["descripcion"]) && $_POST["nombre"]!='' && $_POST["descripcion"]!=''){
 
 		$nombre=$_POST['nombre'];
 		$descripcion=$_POST['descripcion'];
@@ -22,12 +22,12 @@ if(isset($_POST["guardar"])){
 	}else{
 		javaalert("Debe llenar todos los campos obligatorios");
 	}
-	
+
 }
 
 if(isset($_POST["guardar2"])){
 	
-	if($_POST["nombre"]!='' && $_POST["descripcion"]!=''){
+	if(isset($_POST["nombre"]) && isset($_POST["descripcion"]) && $_POST["nombre"]!='' && $_POST["descripcion"]!=''){
 	
 		$nombre=$_POST['nombre'];
 		$descripcion=$_POST['descripcion'];

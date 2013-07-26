@@ -10,7 +10,7 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
 		
 if(isset($_POST["guardar"])){
 
-	
+	if(isset($_POST["nombre"]) &&  isset($_POST["submenu"]) && $_POST["nombre"]!="" && $_POST["submenu"]!=""){
 		$nombre=$_POST['nombre'];
 		if($_POST['submenu']==''){
 			$submenu="0";
@@ -25,12 +25,15 @@ llenarLog(1, "creo menu");
 
 javaalert("El menu fue creado con exito");
 iraURL("menu.php");
+	}else{
+		javaalert("Debe llenar todos los campos obligatorios");
+	}
 	
 }
 
 if(isset($_POST["guardar2"])){
 	
-	
+	if(isset($_POST["nombre"]) &&  isset($_POST["submenu"]) && $_POST["nombre"]!="" && $_POST["submenu"]!=""){
 		$nombre=$_POST['nombre'];
 		if($_POST['submenu']=="Principal"){
 			$submenu="0";
@@ -44,6 +47,9 @@ if(isset($_POST["guardar2"])){
 llenarLog(1, "creo menu");
 javaalert("El menu fue creado con exito");
 iraURL("crearmenu.php");
+	}else{
+		javaalert("Debe llenar todos los campos obligatorios");
+	}
 	
 }
 

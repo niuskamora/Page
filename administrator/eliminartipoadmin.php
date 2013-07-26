@@ -6,6 +6,9 @@ $conn=conectar();
 if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
 	iraURL('../administrator/index.php');
 	}
+	 if($_GET['id']==''){
+	 iraURL('../administrator/tipoadmin.php'); 
+  }
 
 ?>
 
@@ -154,7 +157,7 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
 if(isset($_POST["si"])){
 	   $SQL="DELETE FROM tipoadministrador WHERE tipoadministradorid=".$_GET['id'];
 		$result = pg_query ($conn, $SQL ) or die("Error en la consulta SQL");
-		llenarLog(3, "elimino tipo Administrador");
+		llenarLog(3, "tipo Administrador");
 		javaalert("El tipo de administrador fue eliminado");
 		iraURL("tipoadmin.php");
 		
