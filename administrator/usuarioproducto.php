@@ -2,9 +2,7 @@
 session_start();
 include("../recursos/funciones.php");
 $conn=conectar();
-if(isset($_GET["id"])){
-$_SESSION["usuarioid"]=$_GET["id"];
-}else{
+if(!isset($_GET["id"])){
 	iraURL('usuario.php');
 	}
 
@@ -14,7 +12,7 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
 if(isset($_POST["guardar"])){	
 	if($_POST["producto"]>0){
 		$producto=$_POST["producto"];
-		$usuario=$_SESSION["usuarioid"];
+		$usuario=$_GET["id"];
 		$resultado=pg_query($conn,"INSERT INTO usuarioproducto values( nextval('usuarioproducto_usuarioproductoid_seq'),$usuario,$producto)") or die(pg_last_error($conn));
 		if($resultado){			
 			llenarLog(1, "USUARIOPRODUCTO");	
@@ -85,18 +83,11 @@ if(isset($_POST["guardar"])){
         
                  <ul class="nav  nav-pills nav-stacked">
               <li class="active"><a href="usuario.php"> <span class="add-on"><i class="icon-arrow-left"></i></span> Atrás </a></li>
-
           </ul>
-
-
-        
       </div>
     </div>
-   
-    
       <?php 
-		
-		$SQL="SELECT usuarioproductoid,nombre FROM usuarioproducto,producto where usuarioproducto.productoid=producto.productoid and usuarioid=".$_SESSION["usuarioid"];
+		$SQL="SELECT usuarioproductoid,nombre FROM usuarioproducto,producto where usuarioproducto.productoid=producto.productoid and usuarioid=".$_GET["id"];
 		$result = pg_query ($conn, $SQL ) or die("Error en la consulta SQL");
 		$registros= pg_num_rows($result);
 	
@@ -154,8 +145,14 @@ if(isset($_POST["guardar"])){
    <button type="button" class="btn btn-warning" data-toggle="collapse" data-target="#demo">
     Presione aquí para asignar
 </button>
- 
+						
 <div id="demo" class="collapse">
+ <?php 
+						$SQL="SELECT * FROM producto where productoid NOT IN (SELECT productoid FROM usuarioproducto where usuarioid=".$_GET['id'].")";
+						$resultpro = pg_query ($conn, $SQL ) or die("Error en la consulta SQL");
+						$nro= pg_num_rows($resultpro);
+						if($nro>0){
+							?>
       <div class="row-fluid">
             <dl class="dl-horizontal">
               <dt>
@@ -163,26 +160,34 @@ if(isset($_POST["guardar"])){
               </dt>
               <dd>
                 <div class=" well well-small">
-					<select id="producto" name="producto">
-                    	<option value="0">Seleccione Opción</option>
-                        <?php
-		
-						$SQL="SELECT * FROM producto where productoid NOT IN (SELECT productoid FROM usuarioproducto where usuarioid=".$_GET['id'].")";
-						$resultpro = pg_query ($conn, $SQL ) or die("Error en la consulta SQL");
-						
-						while($rowpro=pg_fetch_array($resultpro)){
-							echo '<option value="'.$rowpro['productoid'].'">'.$rowpro['nombre'].'</option>';
-							}
-						?>
-                    </select>
+					
+                              <select id="producto" name="producto">
+                                <option value="0">Seleccione Opción</option>
+                                <?php					
+                                while($rowpro=pg_fetch_array($resultpro)){
+                                    echo '<option value="'.$rowpro['productoid'].'">'.$rowpro['nombre'].'</option>';
+                                    }
+                                ?>
+                              </select>   
+                           
                     </div>
             </dd>
               </dl>
                 <div align="center" class="well well-small"><button id="guardar" name="guardar" class="btn btn-primary text-center" type="submit"> Guardar</button>
                  </div>
-       </div>        
-  </div>
-	 
+       </div>
+      				 <?php 
+						}else{
+							  ?>
+                            <div class="well alert alert-block">
+                            <h2  align="center" style="color:rgb(255,255,255)"> Atención</h2>
+                            <h4 align="center">Ya no quedan productos por asignar</h4>
+                            </div>
+ 
+                             <?php 
+							}
+					?>        
+  </div> 
 </form> 	
   </div>       
          </p>

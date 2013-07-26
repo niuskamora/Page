@@ -3,6 +3,9 @@ session_start();
 
 include("../recursos/funciones.php");
 $conn=conectar();
+if(!isset($_GET["id"])){
+	iraURL('producto.php');
+	}
 if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
 	iraURL('../administrator/index.php');
 	}
@@ -120,6 +123,10 @@ if(isset($_POST["guardar"])){
        <?php
         	$cons="SELECT * FROM producto WHERE productoid=".$_GET['id'];
 			$resulta = pg_query ($conn, $cons) or die("Error en la consulta SQL");
+			$registros= pg_num_rows($resulta);
+						if($registros!=1){
+							iraURL("producto.php");
+							}
 			$row=pg_fetch_array($resulta)
 		?>
       <form enctype="multipart/form-data" method="post">
@@ -130,7 +137,7 @@ if(isset($_POST["guardar"])){
               </dt>
               <dd>
                 <div class=" well well-small">
-                  <input id="nombre" name="nombre"  type="text" value="<?php echo $row['nombre'];?>" maxlength="34" contenteditable=true required/>
+                  <input id="nombre" name="nombre"  type="text" value="<?php echo $row['nombre'];?>" maxlength="249" contenteditable=true required/>
                 </div>
               </dd>
               <dt>
