@@ -8,6 +8,15 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
 	}
 	 if($_GET['id']==''){
 	 iraURL('../administrator/tipoadmin.php'); 
+  }else {
+	  
+	  $SQLi="SELECT * FROM tipoadministrador WHERE tipoadministradorid=".$_GET['id'];
+		$resulti = pg_query ($conn, $SQLi ) or die("Error en la consulta SQL");
+		$registrosi= pg_num_rows($resulti);
+		if($registrosi==0){
+		 iraURL('../administrator/tipoadmin.php');	
+		}
+	  
   }
 
 ?>

@@ -97,6 +97,11 @@ if(isset($_POST["no"])){
 		$result = pg_query ($conn, $SQL ) or die("Error en la consulta SQL");
 		$registros= pg_num_rows($result);
 		$row = pg_fetch_array ($result);
+	
+		if($row==0){
+			iraURL('info.php');
+		}
+	
     ?>
     
     <div class="well well-small alert alert-block" align="center">

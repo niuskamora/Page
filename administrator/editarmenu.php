@@ -9,6 +9,15 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
 
  if($_GET['id']==''){
 	 iraURL('../administrator/menu.php'); 
+  }else {
+	  
+	  $SQLi="SELECT * FROM menu WHERE menuid=".$_GET['id'];
+		$resulti = pg_query ($conn, $SQLi ) or die("Error en la consulta SQL");
+		$registrosi= pg_num_rows($resulti);
+		if($registrosi==0){
+		  iraURL('../administrator/menu.php');	
+		}
+	  
   }
 	
 		

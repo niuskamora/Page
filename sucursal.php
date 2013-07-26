@@ -3,6 +3,11 @@ session_start();
 
 include("recursos/funciones.php");
 
+if(!isset($_GET['ids']))
+{
+   	iraURL("index.php");
+	
+}
 $sucursal=obtenerSucursal($_GET['ids']);
 ?>
 <!DOCTYPE html>
@@ -70,10 +75,10 @@ $sucursal=obtenerSucursal($_GET['ids']);
 						'.$_SESSION["nombre"].' '.$_SESSION["apellido"].'
 						<b class="caret"></b></a>
                         <ul class="dropdown-menu">
-						<li><a href="recursos/quitarsesioncliente.php?pagina=../productos.php">Cerrar Sesión</a></li>
+						<li><a href="recursos/quitarsesioncliente.php?pagina=../sucursal.php?ids='.$_GET['ids'].'">Cerrar Sesión</a></li>
 						  </ul></li>';			
 				  }else{ ?>
-                <li><a href="iniciosesion.php?pagina=productos.php">Iniciar sesión</a></li>
+                <li><a href="iniciosesion.php?pagina=sucursal.php?ids=<?php echo $_GET['ids']; ?>">Iniciar sesión</a></li>
                 <?php } ?>    
               </ul>
             </div>

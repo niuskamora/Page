@@ -4,7 +4,10 @@ session_start();
 include("recursos/funciones.php");
 $conn=conectar();
 if($_GET['id']==''){
-	 iraURL('../administrator/index.php'); 
+	 iraURL('index.php'); 
+  }
+  else if($_GET['id']!=3){
+	   $_GET['id']=3; 
   }
 ?>
 <!DOCTYPE html>
