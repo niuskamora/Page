@@ -4,15 +4,16 @@ session_start();
 include("../recursos/funciones.php");
 $conn=conectar();
 
+if(!isset($_GET['id'])){
+	iraURL('info.php');
+}
+
 if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
 	iraURL('../administrator/index.php');
-	}
+}
 	
 $id=$_GET['id'];
 
-?>
-
-<?php
 
 if(isset($_POST["guardar"])){
 	
@@ -198,11 +199,8 @@ if(isset($_POST["guardar"])){
 							echo '<option value="'.$row3['tipoinformacionid'].'">'.$row3['nombre'].'</option>';
                         
                         }
-						?>
-                    	<option value="0">Seleccione Opción</option>
-                        <?php
 		
-						$SQL="SELECT * FROM tipoinformacion";
+						$SQL="SELECT * FROM tipoinformacion WHERE tipoinformacionid!=".$row['tipoinformacionid'];
 						$resulta4= pg_query ($conn, $SQL ) or die("Error en la consulta SQL");
 						
 						while($row4=pg_fetch_array($resulta4)){

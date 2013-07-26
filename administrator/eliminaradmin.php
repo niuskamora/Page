@@ -4,9 +4,26 @@ session_start();
 include("../recursos/funciones.php");
 $conn=conectar();
 
+if(!isset($_GET['id'])){
+	iraURL('admin.php');
+}
+
 if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
 	iraURL('../administrator/index.php');
-	}
+}
+	
+	
+if(isset($_POST["si"])){
+	$SQL="DELETE FROM administrador WHERE administradorid=".$_GET['id'];
+	$result = pg_query ($conn, $SQL ) or die("Error en la consulta SQL");
+	javaalert("El Administrador fue Eliminado");
+	llenarLog(3, "Administrador");
+	iraURL('../administrator/admin.php');
+}
+	
+if(isset($_POST["no"])){
+	iraURL('../administrator/admin.php');  
+}
 
 ?>
 
@@ -146,19 +163,6 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
     </div>
      	<?php
 		}
-		
-	if(isset($_POST["si"])){
-		$SQL="DELETE FROM administrador WHERE administradorid=".$_GET['id'];
-		$result = pg_query ($conn, $SQL ) or die("Error en la consulta SQL");
-		javaalert("El Administrador fue Eliminado");
-		llenarLog(3, "Administrador");
-		iraURL('../administrator/admin.php');
-	}
-	
-	if(isset($_POST["no"])){
-		iraURL('../administrator/admin.php');  
-	
-	}
 ?>
       
 
