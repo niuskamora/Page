@@ -7,8 +7,13 @@ $conn=conectar();
 if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
 	iraURL('../administrator/index.php');
 	}
+	 if($_GET['id']==''){
+	 iraURL('../administrator/sucursal.php'); 
+  }
 	
 	$id=$_GET['id'];
+	
+	if(isset($_POST["nombre"]) &&  isset($_POST["direccion"]) && isset($_POST["telefono"]) && isset($_POST["correo"]) && isset($_POST["latitud"]) && isset($_POST["longitud"]) && isset($_POST["redactor"]) && $_POST["nombre"]!="" && $_POST["direccion"]!="" && $_POST["telefono"]!="" && $_POST["correo"]!="" && $_POST["latitud"]!="" && $_POST["longitud"]!=""  && $_POST["redactor"]!="" ){ 
 	if(isset($_POST["guardar"])){
 	
 	$nombres=$_POST['nombre'];
@@ -54,8 +59,12 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
 		 }
 	
 	if($resultado){
-			llenarLog(1, "edito sucursal");
+			llenarLog(1, "sucursal");
 			iraURL('../administrator/sucursal.php');
+	}
+	
+	}else{
+		javaalert("Debe llenar todos los campos obligatorios");
 	}
 }
 	?>

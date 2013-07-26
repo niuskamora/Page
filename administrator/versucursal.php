@@ -8,6 +8,10 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
 	iraURL('../administrator/index.php');
 	}
 	
+	 if($_GET['id']==''){
+	 iraURL('../administrator/sucursal.php'); 
+  }
+	
 $id=$_GET['id'];
 
 ?>

@@ -3,6 +3,9 @@ session_start();
 
 include("recursos/funciones.php");
 $conn=conectar();
+if($_GET['id']==''){
+	 iraURL('../administrator/index.php'); 
+  }
 ?>
 <!DOCTYPE html>
 

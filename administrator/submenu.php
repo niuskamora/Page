@@ -13,7 +13,7 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
 	
 if(isset($_POST["guardar"])){
 	
-	if($_POST["nombre"]!='' && $_POST["enlace"]!=''){
+	if($_POST["nombre"]!='' && isset($_POST["nombre"])){
 		
 		$nombre=$_POST['nombre'];
 		$submenu=$_GET["id"];

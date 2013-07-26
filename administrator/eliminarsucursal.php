@@ -6,6 +6,9 @@ $conn=conectar();
 if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
 	iraURL('../administrator/index.php');
 	}
+	 if($_GET['id']==''){
+	 iraURL('../administrator/sucursal.php'); 
+  }
 
 ?>
 
@@ -158,7 +161,7 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
 if(isset($_POST["si"])){
 	   $SQL="DELETE FROM sucursal WHERE sucursalid=".$_GET['id'];
 		$result = pg_query ($conn, $SQL ) or die("Error en la consulta SQL");
-		llenarLog(3, "elimino sucursal");
+		llenarLog(3, "sucursal");
 		javaalert("sucursal fue eliminado");
 		iraURL("sucursal.php");
 		

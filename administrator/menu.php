@@ -145,8 +145,8 @@ if(isset($_GET['b']))
 		echo '<td width="10">'.$row3["nombre"].' </td>';
 		echo '<td width="15">'.$row["enlace"].' </td>';	
 		echo '<td width="4">'.$row["orden"].' </td>';	  
-			echo '<td width="15%"> <a href="editarmenu.php?id='.$row["menuid"].'&boton=editar"> <button class="btn btn-primary"  type="button" name="boton"> <span class="add-on"><i class="icon-pencil"></i> </span> Editar  </button>  </td></a>';
-			echo '<td width="18%">  <a href="eliminarmenu.php?id='.$row["menuid"].'&boton=eliminar"> <button class="btn btn-primary"  type="button"  name="boton"> <span class="add-on"><i class="icon-trash"></i> </span> Eliminar  </button>  </td></a>';
+			echo '<td width="15%"> <a href="editarmenu.php?id='.$row["menuid"].'"> <button class="btn btn-primary"  type="button" name="boton"> <span class="add-on"><i class="icon-pencil"></i> </span> Editar  </button>  </td></a>';
+			echo '<td width="18%">  <a href="eliminarmenu.php?id='.$row["menuid"].'> <button class="btn btn-primary"  type="button"  name="boton"> <span class="add-on"><i class="icon-trash"></i> </span> Eliminar  </button>  </td></a>';
 			echo '<td width="15%" style="text-align:center">  <a href="menu.php?s='.$row["menuid"].'"> 
 			<i class="icon-circle-arrow-up"></i></a> <a href="menu.php?b='.$row["menuid"].'"> 
 			<i class="icon-circle-arrow-down"></i></a></td>';
