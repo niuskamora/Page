@@ -152,8 +152,12 @@ function llenarLog($accion,$descripcion){
 			break;
 		case 5:
 			$accion="FIN DE SESIÓN";
+			break;
+		case 6:
+			$accion="VACIO DE BITACORA";
 			break;	
 		}
+		
 pg_query($conex,"INSERT INTO bitacora values(nextval('bitacora_bitacoraid_seq'),'".$accion."',current_date,current_time,".$_SESSION["id_usuario"].",'".$descripcion."')") or die(pg_last_error($conex));
 
 }
