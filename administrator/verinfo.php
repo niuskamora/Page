@@ -4,6 +4,10 @@ session_start();
 include("../recursos/funciones.php");
 $conn=conectar();
 
+if(!isset($_GET['id'])){
+	iraURL('info.php');
+}
+
 if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
 	iraURL('../administrator/index.php');
 }

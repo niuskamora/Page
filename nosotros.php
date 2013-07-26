@@ -4,6 +4,10 @@ session_start();
 include("recursos/funciones.php");
 $conn=conectar();
 
+if(!isset($_GET['id'])){
+	iraURL('index.php');
+}
+
 ?>
 <!DOCTYPE html>
 <head>
