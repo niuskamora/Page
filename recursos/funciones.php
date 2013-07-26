@@ -79,7 +79,12 @@ function validarlogincliente(){
 		//guardo información del cliente
 			$_SESSION["id_cliente"]=$fila["usuarioid"];	
 			$_SESSION["nombre"]=$fila["nombre"];	
-			$_SESSION["apellido"]=$fila["apellido"];			
+			if($fila["apellido"]==""){
+			$_SESSION["apellido"]="";	
+				}else{
+					$_SESSION["apellido"]=$fila["apellido"];	
+					}
+					
 			return true;	
 		}
 	}else
