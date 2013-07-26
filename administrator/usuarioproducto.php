@@ -1,30 +1,27 @@
 <?php
 session_start();
-
 include("../recursos/funciones.php");
 $conn=conectar();
-if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
-	iraURL('../administrator/index.php');
+if(isset($_GET["id"])){
+$_SESSION["usuarioid"]=$_GET["id"];
+}else{
+	iraURL('usuario.php');
 	}
 
-		
-if(isset($_POST["guardar"])){
-	
+if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
+	iraURL('../administrator/index.php');
+	}	
+if(isset($_POST["guardar"])){	
 	if($_POST["producto"]>0){
-		
-		$nombre=$_POST['nombre'];
-		$submenu=$_GET["id"];
-		$admin=$_SESSION["id_usuario"];
-		$enla=$_POST['enlace'];
-	$resultado=pg_query($conn,"INSERT INTO menu values( nextval('menu_menuid_seq'),'$nombre','$submenu','$admin','$enla')") or die(pg_last_error($conn));
-	
-	if($resultado){
-			
-			llenarLog(1, "Creo submenu");
-			iraURL('../administrator/submenu.php?id='.$_GET['id']);
+		$producto=$_POST["producto"];
+		$usuario=$_SESSION["usuarioid"];
+		$resultado=pg_query($conn,"INSERT INTO usuarioproducto values( nextval('usuarioproducto_usuarioproductoid_seq'),$usuario,$producto)") or die(pg_last_error($conn));
+		if($resultado){			
+			llenarLog(1, "USUARIOPRODUCTO");	
 		}
 	}else{
-		javaalert("Debe llenar todos los campos obligatorios");
+		javaalert("Debe seleccionar un producto");
+}
 }
 ?>
 
@@ -99,7 +96,7 @@ if(isset($_POST["guardar"])){
     
       <?php 
 		
-		$SQL="SELECT nombre FROM usuarioproducto,producto where and  usuarioproducto.productoid=producto.productoid and usuarioid=".$_GET['id'];
+		$SQL="SELECT usuarioproductoid,nombre FROM usuarioproducto,producto where usuarioproducto.productoid=producto.productoid and usuarioid=".$_SESSION["usuarioid"];
 		$result = pg_query ($conn, $SQL ) or die("Error en la consulta SQL");
 		$registros= pg_num_rows($result);
 	
@@ -135,15 +132,14 @@ if(isset($_POST["guardar"])){
 			{
 			$row = pg_fetch_array ($result,$i );
 		    echo '<tr>';
-			echo '<td width="40%">'.$row7["nombre"].' </td> </a>'; 
-			echo '<td width="15%"> <a href="editarmenu.php?id='.$row["menuid"].'&boton=editar"> <button class="btn btn-primary"  type="button" name="boton"> <span class="add-on"><i class="icon-pencil"></i> </span> Editar  </button>  </td></a>';
-			echo '<td width="15%">  <a href="eliminarmenu.php?id='.$row["menuid"].'&boton=eliminar"> <button class="btn btn-primary"  type="button"  name="boton"> <span class="add-on"><i class="icon-trash"></i> </span> Eliminar  </button>  </td></a>';
+			echo '<td width="40%">'.$row["nombre"].' </td> </a>'; 
+			echo '<td width="15%"> <a href="editarusuarioproducto.php?id='.$row["usuarioproductoid"].'&idusuario='.$_GET["id"].'"> <button class="btn btn-primary"  type="button" name="boton"> <span class="add-on"><i class="icon-pencil"></i> </span> Editar  </button>  </td></a>';
+			echo '<td width="15%">  <a href="eliminarusuarioproducto.php?id='.$row["usuarioproductoid"].'&idusuario='.$_GET["id"].'"> <button class="btn btn-primary"  type="button"  name="boton"> <span class="add-on"><i class="icon-trash"></i> </span> Eliminar  </button>  </td></a>';
 			echo '</tr>';
 			}
 		?>
         </tbody>	  
     </table>
-      <div class="span12">   <ul id="pagination" class="footable-nav"><span>Pages:</span></ul></div>
      <?php }else{  ?>
 		 <div class="well alert alert-block">
    	<h2  align="center" style="color:rgb(255,255,255)"> Atención</h2>
@@ -188,14 +184,7 @@ if(isset($_POST["guardar"])){
   </div>
 	 
 </form> 	
-    
-
-  </div>
-
-		
-
-           
-        
+  </div>       
          </p>
       </div>
     
@@ -208,10 +197,9 @@ if(isset($_POST["guardar"])){
 
 <script type="text/javascript" src="../recursos/js/jquery-2.0.2.js" ></script> 
 <script src="../recursos/js/bootstrap.js"></script> 
-
- <script src="../recursos/footable/js/footable.js" type="text/javascript"></script>
-  <script src="../recursos/footable/js/footable.paginate.js" type="text/javascript"></script>
-  <script src="../recursos/footable/js/footable.sortable.js" type="text/javascript"></script>
+<script src="../recursos/footable/js/footable.js" type="text/javascript"></script>
+<script src="../recursos/footable/js/footable.paginate.js" type="text/javascript"></script>
+<script src="../recursos/footable/js/footable.sortable.js" type="text/javascript"></script>
  
   <script type="text/javascript">
     $(function() {
