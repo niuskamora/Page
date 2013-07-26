@@ -152,8 +152,12 @@ function llenarLog($accion,$descripcion){
 			break;
 		case 5:
 			$accion="FIN DE SESIÓN";
+			break;
+		case 6:
+			$accion="VACIO DE BITACORA";
 			break;	
 		}
+		
 pg_query($conex,"INSERT INTO bitacora values(nextval('bitacora_bitacoraid_seq'),'".$accion."',current_date,current_time,".$_SESSION["id_usuario"].",'".$descripcion."')") or die(pg_last_error($conex));
 
 }
@@ -229,6 +233,90 @@ function obtenerSucursal($id)
 	$query="select * from sucursal where sucursalid=".$id;
 	$Qmenu = pg_query($conex,$query) or die(pg_last_error($conex));
 	return $row = pg_fetch_array($Qmenu,0);
+}
+function obtenerBanners()
+{
+	
+$conex = conectar();
+	
+	$query="select informacion.titulo,informacion.descripcion,informacion.imagen
+from informacion,tipoinformacion 
+where lower(tipoinformacion.nombre)='noticia' and informacion.tipoinformacionid=tipoinformacion.tipoinformacionid;";
+$Qmenu = pg_query($conex,$query) or die(pg_last_error($conex));
+	
+$numerof=pg_num_rows($Qmenu);
+		
+		if($numerof > 0){ 
+	
+		
+		      for($i=0;$i<$numerof;$i++)
+		{	
+		$row = pg_fetch_array($Qmenu,$i);
+	
+	
+       echo ' <div class="item';
+	   echo' slide'.($i+1);
+	  
+	   if($i==0)
+	      echo' active">';
+		else  
+		 echo '">';
+			if($i%2==0)
+			{
+			 
+			 echo'
+					<div class="row-fluid">
+					  <div class="span6 animated fadeInDownBig">
+						<h2>'.$row[0].'</h2>
+						'.$row[1].'
+					  </div>
+					  <div class="span6 animated slide2 fadeInUpBig">
+					  <img style="width:330px; height:240px" src="'.$row[2].'" /></div>
+					</div>
+				  </div>';
+			}
+			else
+			{
+				echo'
+					<div class="row-fluid">
+					 
+					  <div class="span6 animated slide2 fadeInUpBig">
+					  <img style="width:330px; height:240px;" src="'.$row[2].'" /></div>
+					   <div class="span6 animated fadeInDownBig">
+						<h2>'.$row[0].'</h2>
+						'.$row[1].'
+					  </div>
+					</div>
+				  </div>';
+				
+			}
+		}
+	}
+	
+	
+}
+function obtenerBannermovil()
+{
+	
+$conex = conectar();
+	
+	$query="select informacion.titulo,informacion.descripcion,informacion.imagen
+from informacion,tipoinformacion 
+where lower(tipoinformacion.nombre)='noticia' and informacion.tipoinformacionid=tipoinformacion.tipoinformacionid order by random() limit 1;";
+$Qmenu = pg_query($conex,$query) or die(pg_last_error($conex));
+$row = pg_fetch_array($Qmenu,0);
+echo
+ ' <div class="span6 animated fadeInDownBig">
+           	<h2>'.$row[0].'</h2>
+			'.$row[1].'
+          </div>
+          <div class="span6 animated slide2 fadeInUpBig" style="text-align:center">
+		   <img style="width:330px; height:240px" src="'.$row[2].'" />
+           </div>';
+	
+
+
+
 }
 
 ?>

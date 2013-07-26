@@ -98,8 +98,9 @@ $sucursal=obtenerSucursal($_GET['ids']);
         <div class="span12 ">
            <div class="span1"></div>
            <div class="span10">
-               <div class="span3">
+               <div class="span3" style="text-align:center;">
                  <img src="<?php echo $sucursal[5]; ?>" class="img-rounded" />
+                 </br>  </br>
                </div>
                <div class="span9 well well-small">
                    <div class="span12">
