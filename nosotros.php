@@ -3,9 +3,9 @@ session_start();
 
 include("recursos/funciones.php");
 $conn=conectar();
+
 ?>
 <!DOCTYPE html>
-
 <head>
 <title>:: Pangea Technologies ::</title>
 <meta name="description" content="Pagina Web"/>

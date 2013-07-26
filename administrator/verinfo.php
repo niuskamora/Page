@@ -6,7 +6,7 @@ $conn=conectar();
 
 if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
 	iraURL('../administrator/index.php');
-	}
+}
 	
 $id=$_GET['id'];
 
