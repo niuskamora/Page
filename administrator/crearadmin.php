@@ -11,11 +11,11 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
 
 if(isset($_POST["guardar"]) || isset($_POST["guardar2"])){
 
-	if(isset($_POST["nombre"]) &&  isset($_POST["apellido"]) && isset($_POST["usuario"]) && isset($_POST["contrasena"]) && isset($_POST["contrasena_c"]) && $_POST["nombre"]!="" && $_POST["apellido"]!="" && $_POST["usuario"]!="" && $_POST["contrasena"]!="" && $_POST["contrasena_c"]!="" && $_POST["tipoadmin"]>0){
+	if(isset($_POST["nombre"]) &&  isset($_POST["apellido"]) && isset($_POST["usuario1"]) && isset($_POST["contrasena"]) && isset($_POST["contrasena_c"]) && $_POST["nombre"]!="" && $_POST["apellido"]!="" && $_POST["usuario1"]!="" && $_POST["contrasena"]!="" && $_POST["contrasena_c"]!="" && $_POST["tipoadmin"]>0){
 	
 		$nombre=$_POST['nombre'];
 		$apellido=$_POST['apellido'];
-		$usuario=$_POST['usuario'];
+		$usuario=$_POST['usuario1'];
 		$contrasena=$_POST['contrasena'];
 		$tipoadmin=$_POST['tipoadmin'];
 
@@ -118,7 +118,7 @@ if(isset($_POST["guardar"]) || isset($_POST["guardar2"])){
             <div class="span3 well well-small"><b>Apellido</b></div>
             <div class="span6 well well-small"><input id="apellido" name="apellido" type="text" placeholder="Ej. Mora Hurtado"  maxlength="34" pattern="[A-Za-z,ñ,Ñ,á,é,í,ó,ú,Á,É,Í,Ó,Ú, ]{1,34}" required/></div>
             <div class="span3 well well-small"><b>Usuario</b></div>
-            <div class="span6 well well-small"><input id="usuario" name="usuario" type="text" placeholder="Ej. niuska.mora" maxlength="34" pattern="[a-z.ñ]{1,34}" required/></div>
+            <div class="span6 well well-small"><input id="usuario1" name="usuario1" type="text" placeholder="Ej. niuska.mora" maxlength="34" pattern="[a-z.ñ]{1,34}" required/></div>
             <div class="span3 well well-small"><b>Contraseña</b></div>
             <div class="span6 well well-small"><input id="contrasena" name="contrasena" type="password" maxlength="34" pattern="[A-Za-z.0-9ñÑ]{1,34}" required/></div>
             <div class="span3 well well-small"><b>Confirmar Contrseña</b></div>
