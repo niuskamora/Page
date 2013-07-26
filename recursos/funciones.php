@@ -295,5 +295,28 @@ $numerof=pg_num_rows($Qmenu);
 	
 	
 }
+function obtenerBannermovil()
+{
+	
+$conex = conectar();
+	
+	$query="select informacion.titulo,informacion.descripcion,informacion.imagen
+from informacion,tipoinformacion 
+where lower(tipoinformacion.nombre)='noticia' and informacion.tipoinformacionid=tipoinformacion.tipoinformacionid order by random() limit 1;";
+$Qmenu = pg_query($conex,$query) or die(pg_last_error($conex));
+$row = pg_fetch_array($Qmenu,0);
+echo
+ ' <div class="span6 animated fadeInDownBig">
+           	<h2>'.$row[0].'</h2>
+			'.$row[1].'
+          </div>
+          <div class="span6 animated slide2 fadeInUpBig" style="text-align:center">
+		   <img style="width:330px; height:240px" src="'.$row[2].'" />
+           </div>';
+	
+
+
+
+}
 
 ?>
