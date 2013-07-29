@@ -9,6 +9,9 @@ if(!isset($_GET['ids']))
 	
 }
 $sucursal=obtenerSucursal($_GET['ids']);
+if (isset($_POST["inicio"])) {
+   iniciosesion_cliente($_POST["usuario"],$_POST["password"]);
+}
 ?>
 <!DOCTYPE html>
 
@@ -48,8 +51,7 @@ $sucursal=obtenerSucursal($_GET['ids']);
         <div class="headera" style="text-align: left;" >
            <img  src="recursos/img/izquierdasuperior.png" style="margin-bottom: 3px;" />
            </div>
-        <div  class="headerb" style="text-align: center;">
-           <img  src="recursos/img/logo.png" style="margin-bottom: 3px;" height="160" />
+        <div  class="headerb" style="text-align: center;"><a href="index.php" > <img  src="recursos/img/logo.png" style="margin-bottom: 3px;" height="160" /></a>
            </div>
         <div class="headerc"  style="text-align: right;">
            <img  src="recursos/img/derechainferior.png" style="margin-bottom: 3px; text-align: left;" />
@@ -58,31 +60,49 @@ $sucursal=obtenerSucursal($_GET['ids']);
       <div class="navbar navbar-inverse navbar-fixed-top">
         <div class="navbar-inner">
           <div class="container"><a id="open" href="#nav" class="btn btn-navbar" data-toggle="collapse" data-target="#barrac"><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></a>
-          <a id="open2" href="#" class="btn btn-navbar" data-toggle="collapse" data-target="#login"><i class="icon-user icon-white"></i></a> <a class="brand visible-desktop" style="float:left" href="#"><img  src="recursos/img/logop.png" width="140" height="20"/></a>
+          <a id="open2" href="#" class="btn btn-navbar" data-toggle="collapse" data-target="#login"><i class="icon-user icon-white"></i></a> <a class="brand visible-desktop" style="float:left" href="index.php"><img  src="recursos/img/logop.png" width="140" height="20"/></a>
             <div id="barrac" class="nav-collapse collapse">
               <ul id="nav" class="nav slidernav">
               <?php   menu_principal(0,"Sucursales"); ?>  
               </ul>
             </div>
             <!--/.nav-collapse -->
-            <div id="login" class="nav-collapse collapse">
-             <ul id="log" class="nav pull-right">
-              <li class="divider-vertical"></li>
-               	 <?php  
+           <div id="login" class="nav-collapse collapse">
+              <ul id="log" class="nav pull-right">
+                <li class="divider-vertical"></li>
+             	 <?php  
 			  	if(existesesioncliente()){
 					echo '<li class="dropdown">
 						<a href="#" class="dropdown-toggle" data-toggle="dropdown">
 						'.$_SESSION["nombre"].' '.$_SESSION["apellido"].'
 						<b class="caret"></b></a>
                         <ul class="dropdown-menu">
-						<li><a href="recursos/quitarsesioncliente.php?pagina=../sucursal.php?ids='.$_GET['ids'].'">Cerrar Sesión</a></li>
+						<li><a href="recursos/quitarsesioncliente.php?pagina=../index.php">Cerrar Sesión</a></li>
 						  </ul></li>';			
 				  }else{ ?>
-                <li><a href="iniciosesion.php?pagina=sucursal.php?ids=<?php echo $_GET['ids']; ?>">Iniciar sesión</a></li>
+                
+				<li class="dropdown">
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+						Iniciar Sesión
+						<b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+						<li> <form   method="post">
+                         <div class="well" align="center">
+                          <span>Nombre de usuario</span>
+        <input type="text"  placeholder="Usuario" name="usuario" id="usuario"  title="El formato es Mayúscula(letras, puntos o números)" maxlength="34" pattern="[A-ZÑ]{1}[a-z.ñ0-9]{1,33}" autofocus required>
+                         <span>Contraseña</span>
+        <input type="password"  placeholder="Contraseña" name="password" id="password" maxlength="34"  title="Debe agregar la contraseña" required>
+                        <button type="submit" id="inicio" name="inicio" class="btn submit">Iniciar Sesión</button>
+
+                         </div>
+                        </form></li>
+                       </ul></li>
+                
+                
                 <?php } ?>    
               </ul>
             </div>
-            <!--/.nav-collapse --> 
+            <!--/.nav-collapse -->
             
           </div>
         </div>
