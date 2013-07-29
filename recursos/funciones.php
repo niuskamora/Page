@@ -323,5 +323,18 @@ echo
 
 
 }
+function iniciosesion_cliente($user,$pass){
+    if (crearsesioncliente($user, $pass)) {
+        if (validarlogincliente()) {
+			iraURL("#");
+        }
+    }else {
+	javaalert("Debe agregar el usuario y contraseña");
+		}
+}
+	
+
+
+
 
 ?>

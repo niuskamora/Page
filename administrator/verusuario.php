@@ -87,10 +87,20 @@ $id=$_GET['id'];
             <div class="span6 well well-small "><?php echo $row['usuarioid'];?></div>
             <div class="span3 well well-small"><b>Nombre</b></div>
             <div class="span6 well well-small"><?php echo $row['nombre'];?></div>
-            <div class="span3 well well-small"><b>Apellido</b></div>
-            <div class="span6 well well-small"><?php echo $row['apellido'];?></div>
+            <?php 
+			if($row['apellido']!=""){			
+				?>
+                <div class="span3 well well-small"><b>Apellido</b></div>
+                 <div class="span6 well well-small"><?php echo $row['apellido'];?></div>
+				 <?php
+				}
+			if($row['direccion']!=""){
+				?>
             <div class="span3 well well-small"><b>Dirección</b></div>
             <div class="span6 well well-small"><?php echo $row['direccion'];?></div>
+                 <?php
+				}
+			?>
              <div class="span3 well well-small"><b>Usuario</b></div>
             <div class="span6 well well-small"><?php echo $row['usuario'];?></div>
         <?php }
