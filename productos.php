@@ -162,166 +162,16 @@ if (isset($_POST["inicio"])) {
   
   <br>
   <div class="row-fluid">
-    <div class="span12 visible-desktop" style="padding:5px">
+     <div class="span12 visible-desktop" style="padding:5px">
       <div id="ca-container" class="ca-container">
         <div class="ca-wrapper">
-          <div class="ca-item ca-item-1">
-            <div class="ca-item-main">
-              <div class="ca-icon"></div>
-              <h2>Portafolio</h2>
-              <h4> <span class="ca-quote">&ldquo;</span> <span>
-                <p>Destacando nuevas soluciones para un mercado tan cambiante, pangea technologies ofrece un abanico de posibilidades.</p>
-                <p><a class="btn" href="#">Portafolio</a></p>
-                </span> </h4>
-            </div>
-            <div class="ca-content-wrapper">
-              <div class="ca-content">
-                <h6>Animals are not commodities</h6>
-                <a href="#" class="ca-close">close</a>
-                <div class="ca-content-text">
-                 </div>
-              </div>
-            </div>
-          </div>
-          <!--fin del primero -->
-          
-          <div class="ca-item ca-item-2">
-            <div class="ca-item-main">
-              <div class="ca-icon"></div>
-              <h2>Productos</h2>
-              <h4> <span class="ca-quote">&ldquo;</span> <span>
-                <p>Pangea Technologies mantiene una gama de productos adaptadas a las necesidades del entorno empresarial.</p>
-                <p><a class="btn" href="#">Ver Productos</a></p>
-                </span> </h4>
-            </div>
-            <div class="ca-content-wrapper">
-              <div class="ca-content">
-                <h6>Animals are not commodities</h6>
-                <a href="#" class="ca-close">close</a>
-                <div class="ca-content-text">
-                </div>
-              </div>
-            </div>
-          </div>
-          <!--fin del segundo -->
-          
-          <div class="ca-item ca-item-3">
-            <div class="ca-item-main">
-              <div class="ca-icon"></div>
-              <h2>Equipo</h2>
-              <h4> <span class="ca-quote">&ldquo;</span> <span>
-                <p>Desarrolladores y Analistas capacitados en un gran numero de areas para proveer soporte en nuevas tecnologias.</p>
-                </span> </h4>
-            </div>
-            <div class="ca-content-wrapper">
-              <div class="ca-content">
-                <h6>Animals are not commodities</h6>
-                <a href="#" class="ca-close">close</a>
-                <div class="ca-content-text">
-                </div>
-              </div>
-            </div>
-          </div>
-          <!--fin del tercero -->
-          <div class="ca-item ca-item-4">
-            <div class="ca-item-main">
-              <div class="ca-icon"></div>
-              <h2>Sucursales</h2>
-              <h4> <span class="ca-quote">&ldquo;</span> <span>
-                <p>Puntos de encuentro extendidos por toda venezuela con atencion garantizada.</p>
-                </span> </h4>
-            </div>
-            <div class="ca-content-wrapper">
-              <div class="ca-content">
-                <h6>Animals are not commodities</h6>
-                <a href="#" class="ca-close">close</a>
-                <div class="ca-content-text">
-                </div>
-              </div>
-            </div>
-          </div>
-          <!--fin del cuarto --> 
+        <?php carrusel(); ?> 
         </div>
       </div>
       <hr/>
     </div>
     <div class="span12 hidden-desktop" style="padding:5px">
-      <div class="span4 ca-item ca-item-1">
-        <div class="ca-item-main">
-          <div class="ca-icon"></div>
-          <h2>Portafolio</h2>
-          <h4> <span class="ca-quote">&ldquo;</span> <span>
-            <p>Destacando nuevas soluciones para un mercado tan cambiante, pangea technologies ofrece un abanico de posibilidades.</p>
-            <p><a class="btn" href="#">Portafolio</a></p>
-            </span> </h4>
-        </div>
-        <div class="ca-content-wrapper">
-          <div class="ca-content">
-            <h6>Animals are not commodities</h6>
-            <a href="#" class="ca-close">close</a>
-            <div class="ca-content-text">
-            </div>
-          </div>
-        </div>
-      </div>
-      <!--fin del primero -->
-      
-      <div class="span4 ca-item ca-item-2">
-        <div class="ca-item-main">
-          <div class="ca-icon"></div>
-          <h2>Productos</h2>
-          <h4> <span class="ca-quote">&ldquo;</span> <span>
-            <p>Pangea Technologies mantiene una gama de productos adaptadas a las necesidades del entorno empresarial.</p>
-            <p><a class="btn" href="#">Ver Productos</a></p>
-            </span> </h4>
-        </div>
-        <div class="ca-content-wrapper">
-          <div class="ca-content">
-            <h6>Animals are not commodities</h6>
-            <a href="#" class="ca-close">close</a>
-            <div class="ca-content-text">
-            </div>
-          </div>
-        </div>
-      </div>
-      <!--fin del segundo -->
-      
-      <div class="span4 ca-item ca-item-3">
-        <div class="ca-item-main">
-          <div class="ca-icon"></div>
-          <h2>Equipo</h2>
-          <h4> <span class="ca-quote">&ldquo;</span> <span>
-            <p>Desarrolladores y Analistas capacitados en un gran numero de areas para proveer soporte en nuevas tecnologias.</p>
-            </span> </h4>
-        </div>
-        <div class="ca-content-wrapper">
-          <div class="ca-content">
-            <h6>Animals are not commodities</h6>
-            <a href="#" class="ca-close">close</a>
-            <div class="ca-content-text">
-            </div>
-          </div>
-        </div>
-      </div>
-      <!--fin del tercero -->
-      <div class="span4 ca-item ca-item-4">
-        <div class="ca-item-main">
-          <div class="ca-icon"></div>
-          <h2>Sucursales</h2>
-          <h4> <span class="ca-quote">&ldquo;</span> <span>
-            <p>Puntos de encuentro extendidos por toda venezuela con atencion garantizada.</p>
-            </span> </h4>
-        </div>
-        <div class="ca-content-wrapper">
-          <div class="ca-content">
-            <h6>Animals are not commodities</h6>
-            <a href="#" class="ca-close">close</a>
-            <div class="ca-content-text">
-            </div>
-          </div>
-        </div>
-      </div>
-      <!--fin del cuarto -->
+     <?php carruselMovil(); ?>
       <hr/>
     </div>
     <!-- /container -->

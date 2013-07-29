@@ -71,17 +71,17 @@
 	height:189px;
 	position:relative;
 	margin:0 auto;
-	background:transparent url(../images/products.png) no-repeat center center;
+	
 }
 .ca-item-2 .ca-icon{
 	
-		background-image:url(../images/globe.png);
+	
 }
 .ca-item-3 .ca-icon{
-background-image:url(../images/team.png);
+
 }
 .ca-item-4 .ca-icon{
-	background-image:url(../images/red-sucursales.png);
+	
 }
 .ca-item-5 .ca-icon{
 	background-image:url(../images/animal5.png);

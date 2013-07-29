@@ -333,8 +333,84 @@ function iniciosesion_cliente($user,$pass){
 		}
 }
 	
-
-
+function carrusel()
+{
+	
+	$conex = conectar();
+	
+	$query="select informacion.titulo,informacion.descripcion,informacion.imagen,informacion.enlace
+from informacion,tipoinformacion 
+where lower(tipoinformacion.nombre)='carrusel' and informacion.tipoinformacionid=tipoinformacion.tipoinformacionid;";
+$Qmenu = pg_query($conex,$query) or die(pg_last_error($conex));
+	
+$numerof=pg_num_rows($Qmenu);
+		
+		if($numerof > 0){ 
+	
+		
+		      for($i=0;$i<$numerof;$i++)
+		{	
+				$row = pg_fetch_array($Qmenu,$i);
+	
+	echo ' <div class="ca-item ca-item-'.($i+1).'">
+            <div class="ca-item-main">
+              <div class="ca-icon" style="background:url('."'".$row[2]."'".') no-repeat center center" ></div>
+              <h2>';
+			  echo $row[0];
+			  echo '</h2>
+              <h4> <span class="ca-quote">&ldquo;</span> <span>';
+			  echo  $row[1];
+			  if($row[3]!='')
+			  {
+              echo '<p><a class="btn" href="'.$row[3].'">'.$row[0].'</a></p>'; 
+			  }
+              echo '</span> </h4>
+            </div>
+          </div>';
+	
+			}
+		
+		}
+}
+function carruselMovil()
+{
+	
+	$conex = conectar();
+	
+	$query="select informacion.titulo,informacion.descripcion,informacion.imagen,informacion.enlace
+from informacion,tipoinformacion 
+where lower(tipoinformacion.nombre)='carrusel' and informacion.tipoinformacionid=tipoinformacion.tipoinformacionid;";
+$Qmenu = pg_query($conex,$query) or die(pg_last_error($conex));
+	
+$numerof=pg_num_rows($Qmenu);
+		
+		if($numerof > 0){ 
+	
+		
+		      for($i=0;$i<$numerof;$i++)
+		{	
+				$row = pg_fetch_array($Qmenu,$i);
+	
+	echo ' <div class="span4 ca-item ca-item-'.($i+1).'">
+            <div class="ca-item-main">
+              <div class="ca-icon" style="background:url('."'".$row[2]."'".') no-repeat center center; " ></div>
+              <h2>';
+			  echo $row[0];
+			  echo '</h2>
+              <h4> <span class="ca-quote">&ldquo;</span> <span>';
+			  echo  $row[1];
+			  if($row[3]!='')
+			  {
+              echo '<p><a class="btn" href="'.$row[3].'">'.$row[0].'</a></p>'; 
+			  }
+              echo '</span> </h4>
+            </div>
+          </div>';
+	
+			}
+		
+		}
+}
 
 
 ?>
