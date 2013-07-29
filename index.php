@@ -70,7 +70,7 @@ if (isset($_POST["inicio"])) {
 						<li><a href="recursos/quitarsesioncliente.php?pagina=../index.php">Cerrar Sesión</a></li>
 						  </ul></li>';			
 				  }else{ ?>
-                <li>
+                
 				<li class="dropdown">
 						<a href="#" class="dropdown-toggle" data-toggle="dropdown">
 						Iniciar Sesión
@@ -88,7 +88,7 @@ if (isset($_POST["inicio"])) {
                         </form></li>
                        </ul></li>
                 
-                </li>
+                
                 <?php } ?>    
               </ul>
             </div>
@@ -360,6 +360,7 @@ $('.dropdown-toggle').click(function(e) {
     }
   }, this), 0);
 });
+
  
  
 });

@@ -38,12 +38,13 @@ $(function () {
                 $mainNav.append('<li id="magic-line"></li>');
                 var $magicLine = $('#magic-line');
 
+				if($('#nav').find('.active').position()!=null){
                 $magicLine
                         .width($('#nav').find('.active').width())
                         .css('left', $('#nav').find('.active').position().left)
                         .data('origLeft', $magicLine.position().left)
                         .data('origWidth', $magicLine.width());
-
+				}
                 $('#nav li a').hover(function() {
 
                     $el = $(this);
