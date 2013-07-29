@@ -123,11 +123,11 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
 			{
 			$row = pg_fetch_array ($result,$i );
 			echo '<tr>';
-			echo '<td width="5%">'.$row[0].'</td>';
+			echo '<td width="7%">'.$row[0].'</td>';
 			echo '<td width="15%">'.$row[1].'</td>';
 			echo '<td width="15%">'.$row[2].'</td>';
 			echo '<td width="13%"><a href="editarusuario.php?id='.$row[0].'"> <button class="btn btn-primary"> <span class="add-on"><i class="icon-pencil"></i> </span> Editar  </button> </td>';
-			echo '<td width="16%"><a href="eliminarusuario.php?id='.$row[0].'"> <button class="btn btn-primary" type="button"  name="eliminar"> <span class="add-on"><i class="icon-trash"></i></span> Eliminar</button> </td>';
+			echo '<td width="14%"><a href="eliminarusuario.php?id='.$row[0].'"> <button class="btn btn-primary" type="button"  name="eliminar"> <span class="add-on"><i class="icon-trash"></i></span> Eliminar</button> </td>';
 			echo '<td width="11%"> <a href="verusuario.php?id='.$row[0].'"><button class="btn btn-primary"> <span class="add-on"><i class="icon-eye-open"></i></span> Ver</button> </td>';
 			echo '<td width="14%"> <a href="usuarioproducto.php?id='.$row[0].'"><button class="btn btn-primary"> <span class="add-on"><i class="icon-plus"></i></span> Asignar</button> </td>';
 			echo '</tr>';

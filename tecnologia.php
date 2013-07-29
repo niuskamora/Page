@@ -31,8 +31,8 @@ $conn=conectar();
  
 
 
-
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.0/jquery.min.js"></script>
+<script type="text/javascript" src="recursos/js/jquery-2.0.2.js" ></script> 
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
 <script type="text/javascript" src="recursos/js/jquery.contenthover.js" ></script>
 <script type="text/javascript" src="recursos/js/jquery.contenthover.min.js" ></script>
 <script type="text/javascript" src="recursos/js/bootstrap.min.js" ></script> 
@@ -410,7 +410,8 @@ $conn=conectar();
   </div>
 </div>
 
-<script type="text/javascript" src="recursos/circular/js/jquery.contentcarousel.js"></script> 
+<script type="text/javascript" src="recursos/circular/js/jquery.contentcarousel.js"></script>
+<script type="text/javascript" src="recursos/circular/js/jquery.easing.1.3.js"></script>  
 <script type="text/javascript" src="recursos/js/funciones.js" ></script> 
 <script type="text/javascript">
 	$(document).ready(
