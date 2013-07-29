@@ -129,9 +129,9 @@ if (isset($_POST["inicio"])) {
 								if($row['titulo']=="Nosotros"){?>
                                     <br>
 									<li class="nav-header">Nosotros</li>
-                                    <li class=""><a href="#<?php echo $row['informacionid'];?>"><?php echo $row['titulo']?></a></li>
+                                    <li class="active"><span class="add-on"><i class="icon-globe"></i></span><a href="#<?php echo $row['informacionid'];?>"><?php echo $row['titulo']?></a></li>
                             		<?php }else{?> 
-										<li class=""><a href="#<?php echo $row['informacionid'];?>"><?php echo $row['titulo']?></a></li>
+										  <li class=""><span class="add-on"><i class="icon-globe"></i></span><a href="#<?php echo $row['informacionid'];?>"><?php echo $row['titulo']?></a></li>
                        				<?php }
 					    			} 
                         		} 

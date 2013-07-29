@@ -106,8 +106,9 @@ if (isset($_POST["inicio"])) {
         </div>
       </div>
     </div>
-    <br>
+   
     <div class="container" style="background-color:white;">
+    <br>
       <div class=" row-fluid ">
         <h2 id="in" class="well span12"> Tecnología</h2>
         <?php  

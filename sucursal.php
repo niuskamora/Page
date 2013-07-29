@@ -9,6 +9,9 @@ if(!isset($_GET['ids']))
 	
 }
 $sucursal=obtenerSucursal($_GET['ids']);
+if (isset($_POST["inicio"])) {
+   iniciosesion_cliente($_POST["usuario"],$_POST["password"]);
+}
 ?>
 <!DOCTYPE html>
 
@@ -65,24 +68,42 @@ $sucursal=obtenerSucursal($_GET['ids']);
               </ul>
             </div>
             <!--/.nav-collapse -->
-            <div id="login" class="nav-collapse collapse">
-             <ul id="log" class="nav pull-right">
-              <li class="divider-vertical"></li>
-               	 <?php  
+           <div id="login" class="nav-collapse collapse">
+              <ul id="log" class="nav pull-right">
+                <li class="divider-vertical"></li>
+             	 <?php  
 			  	if(existesesioncliente()){
 					echo '<li class="dropdown">
 						<a href="#" class="dropdown-toggle" data-toggle="dropdown">
 						'.$_SESSION["nombre"].' '.$_SESSION["apellido"].'
 						<b class="caret"></b></a>
                         <ul class="dropdown-menu">
-						<li><a href="recursos/quitarsesioncliente.php?pagina=../sucursal.php?ids='.$_GET['ids'].'">Cerrar Sesión</a></li>
+						<li><a href="recursos/quitarsesioncliente.php?pagina=../index.php">Cerrar Sesión</a></li>
 						  </ul></li>';			
 				  }else{ ?>
-                <li><a href="iniciosesion.php?pagina=sucursal.php?ids=<?php echo $_GET['ids']; ?>">Iniciar sesión</a></li>
+                
+				<li class="dropdown">
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+						Iniciar Sesión
+						<b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+						<li> <form   method="post">
+                         <div class="well" align="center">
+                          <span>Nombre de usuario</span>
+        <input type="text"  placeholder="Usuario" name="usuario" id="usuario"  title="El formato es Mayúscula(letras, puntos o números)" maxlength="34" pattern="[A-ZÑ]{1}[a-z.ñ0-9]{1,33}" autofocus required>
+                         <span>Contraseña</span>
+        <input type="password"  placeholder="Contraseña" name="password" id="password" maxlength="34"  title="Debe agregar la contraseña" required>
+                        <button type="submit" id="inicio" name="inicio" class="btn submit">Iniciar Sesión</button>
+
+                         </div>
+                        </form></li>
+                       </ul></li>
+                
+                
                 <?php } ?>    
               </ul>
             </div>
-            <!--/.nav-collapse --> 
+            <!--/.nav-collapse -->
             
           </div>
         </div>
