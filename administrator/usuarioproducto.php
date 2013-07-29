@@ -21,6 +21,10 @@ if(isset($_POST["guardar"])){
 		javaalert("Debe seleccionar un producto");
 }
 }
+// verificando los productos que no estan asociados a este cliente
+$SQL="SELECT * FROM producto where productoid NOT IN (SELECT productoid FROM usuarioproducto where usuarioid=".$_GET['id'].")";
+$resultpro = pg_query ($conn, $SQL ) or die("Error en la consulta SQL");
+$nro= pg_num_rows($resultpro);
 ?>
 
 <!DOCTYPE html>
@@ -123,8 +127,13 @@ if(isset($_POST["guardar"])){
 			{
 			$row = pg_fetch_array ($result,$i );
 		    echo '<tr>';
-			echo '<td width="40%">'.$row["nombre"].' </td> </a>'; 
-			echo '<td width="15%"> <a href="editarusuarioproducto.php?id='.$row["usuarioproductoid"].'&idusuario='.$_GET["id"].'"> <button class="btn btn-primary"  type="button" name="boton"> <span class="add-on"><i class="icon-pencil"></i> </span> Editar  </button>  </td></a>';
+			echo '<td width="40%">'.$row["nombre"].' </td> </a>';
+			if($nro==0){
+		echo '<td width="15%"> <a href="editarusuarioproducto.php?id='.$row["usuarioproductoid"].'&idusuario='.$_GET["id"].'"> <button class="btn btn-primary" type="button" name="boton" disabled> <span class="add-on"><i class="icon-pencil"></i> </span> Editar  </button>  </td></a>';
+				}else{
+		echo '<td width="15%"> <a href="editarusuarioproducto.php?id='.$row["usuarioproductoid"].'&idusuario='.$_GET["id"].'"> <button class="btn btn-primary"  type="button" name="boton"> <span class="add-on"><i class="icon-pencil"></i> </span> Editar  </button>  </td></a>';
+	
+			}
 			echo '<td width="15%">  <a href="eliminarusuarioproducto.php?id='.$row["usuarioproductoid"].'&idusuario='.$_GET["id"].'"> <button class="btn btn-primary"  type="button"  name="boton"> <span class="add-on"><i class="icon-trash"></i> </span> Eliminar  </button>  </td></a>';
 			echo '</tr>';
 			}
@@ -148,9 +157,7 @@ if(isset($_POST["guardar"])){
 						
 <div id="demo" class="collapse">
  <?php 
-						$SQL="SELECT * FROM producto where productoid NOT IN (SELECT productoid FROM usuarioproducto where usuarioid=".$_GET['id'].")";
-						$resultpro = pg_query ($conn, $SQL ) or die("Error en la consulta SQL");
-						$nro= pg_num_rows($resultpro);
+						
 						if($nro>0){
 							?>
       <div class="row-fluid">
