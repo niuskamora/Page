@@ -13,6 +13,10 @@ else{
 	}
 }
 
+//inicio de sesión 
+if (isset($_POST["inicio"])) {
+   iniciosesion_cliente($_POST["usuario"],$_POST["password"]);
+}
 ?>
 <!DOCTYPE html>
 <head>
@@ -76,7 +80,25 @@ else{
 						<li><a href="recursos/quitarsesioncliente.php?pagina=../nosotros.php?id=5">Cerrar Sesión</a></li>
 						  </ul></li>';			
 				  }else{ ?>
-                <li><a href="iniciosesion.php?pagina=nosotros.php?id=5">Iniciar sesión</a></li>
+                <li>
+				<li class="dropdown">
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+						Iniciar Sesión
+						<b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+						<li> <form   method="post">
+                         <div class="well" align="center">
+                          <span>Nombre de usuario</span>
+        <input type="text"  placeholder="Usuario" name="usuario" id="usuario"  title="El formato es Mayúscula(letras, puntos o números)" maxlength="34" pattern="[A-ZÑ]{1}[a-z.ñ0-9]{1,33}" autofocus required>
+                         <span>Contraseña</span>
+        <input type="password"  placeholder="Contraseña" name="password" id="password" maxlength="34"  title="Debe agregar la contraseña" required>
+                        <button type="submit" id="inicio" name="inicio" class="btn submit">Iniciar Sesión</button>
+
+                         </div>
+                        </form></li>
+                       </ul></li>
+                
+                </li>
                 <?php } ?>  
               </ul>
             </div>
