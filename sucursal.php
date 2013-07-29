@@ -51,8 +51,7 @@ if (isset($_POST["inicio"])) {
         <div class="headera" style="text-align: left;" >
            <img  src="recursos/img/izquierdasuperior.png" style="margin-bottom: 3px;" />
            </div>
-        <div  class="headerb" style="text-align: center;">
-           <img  src="recursos/img/logo.png" style="margin-bottom: 3px;" height="160" />
+        <div  class="headerb" style="text-align: center;"><a href="index.php" > <img  src="recursos/img/logo.png" style="margin-bottom: 3px;" height="160" /></a>
            </div>
         <div class="headerc"  style="text-align: right;">
            <img  src="recursos/img/derechainferior.png" style="margin-bottom: 3px; text-align: left;" />
