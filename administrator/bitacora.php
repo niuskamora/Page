@@ -33,7 +33,7 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
       <div class="container" style="width: auto;"> <a class="btn btn-navbar" href="#nav" data-toggle="collapse" data-target="#barrap"> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </a> <a  class="brand" id="brand-admin" href="principal.php">PANGEATECH</a>
         <div id="barrap" class="nav-collapse collapse">
          <ul class="nav">
-            <li class="dropdown active"> <a  class="dropdown-toggle" data-target="#" data-toggle="dropdown"> Gestión Usuarios <b class="caret"></b> </a>
+            <li class="dropdown"> <a  class="dropdown-toggle" data-target="#" data-toggle="dropdown"> Gestión Usuarios <b class="caret"></b> </a>
               <ul class="dropdown-menu">
                 <li><a href="tipoadmin.php"> Tipo Administrador </a></li>
                 <li><a href="admin.php">Administrador</a></li>
@@ -52,7 +52,7 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
               </ul>
             </li>
            <?php if(supera($_SESSION["admin"])){
-            ?><li><a href="bitacora.php"> Bitacora</a></li>
+            ?><li class="active"><a href="bitacora.php"> Bitácora</a></li>
            <?php }?>
             
             <li><a href="cerrarsesion.php">Cerrar Sesión</a></li>
@@ -74,7 +74,7 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
             <ul class="nav  nav-pills nav-stacked">
 
 			  
-              <li class="active"> <a href="eliminarbitacora.php">  <span class="add-on"><i class="icon-trash"></i> </span> Vaciar Bitacora  </a> </li>
+              <li class="active"> <a href="eliminarbitacora.php">  <span class="add-on"><i class="icon-trash"></i> </span> Vaciar Bitácora  </a> </li>
               
               <li><a href="principal.php"> <span class="add-on"><i class="icon-arrow-left"></i></span> Atrás</a></li>
 
