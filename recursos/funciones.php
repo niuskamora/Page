@@ -2,7 +2,7 @@
 
 //conexión de la base de dattos  
 function conectar(){{  
-	   if (!($conexion = pg_connect("host=192.168.1.104  dbname=pangeapage port=5432 user=postgres password=p4ng34"))){
+	   if (!($conexion = pg_connect("host=192.168.1.102  dbname=pangeapage port=5432 user=postgres password=p4ng34"))){
 	       echo "No pudo conectarse al servidor";
 	       exit();
 	   }
@@ -174,7 +174,7 @@ function menu_principal($idm,$activo)
 		
 			
 		$query="SELECT a.menuid,a.nombre,a.submenu,a.enlace,a.orden,count(b.menuid) as cant 
-         FROM menu a full join menu b on a.menuid=b.submenu WHERE a.submenu=".$idm."  group by a.menuid order by orden asc,nombre asc";
+         FROM menu a full join menu b on a.menuid=b.submenu WHERE a.submenu=".$idm."  group by a.menuid,a.nombre,a.submenu,a.enlace,a.orden order by orden asc,nombre asc";
 		$Qmenu = pg_query($conex,$query) or die(pg_last_error($conex));
 		$numerof=pg_num_rows($Qmenu);
 		
