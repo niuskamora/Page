@@ -147,14 +147,14 @@ if(isset($_POST["guardar"])){
                   	<th data-hide="phone" data-sort-ignore="true">
 					Administrador
 				  </th>
-                  <th data-hide="phone" data-sort-ignore="true">
+                  <th data-hide="phone,mediatablet" data-sort-ignore="true">
 					Enlace
 				  </th>
 
- <th data-hide="phone" data-sort-ignore="true">
+ <th data-hide="phone,mediatablet" data-sort-ignore="true">
 					<span class="add-on"> <i class="icon-pencil"></i> </span> Editar 
 				  </th>
-                   <th data-hide="phone" data-sort-ignore="true">
+                   <th data-hide="phone,mediatablet" data-sort-ignore="true">
 					<span class="add-on"> <i class="icon-trash"></i> </span> Eliminar
 				  </th>
 				</tr>
