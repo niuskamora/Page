@@ -134,7 +134,7 @@ if (isset($_POST["inicio"])) {
 			<div class="span1"></div>
 			<div class="span10 well" align="center">
 			<div class="span2"><img width="100" height="100" src="'.$row[4].'"> </div>
-			<div class="span8" align="justify"><p><b>'.$row[1].'</b></p>'.$descripcion.'<p><a href="verproducto.php?id='.$row[0].'"><button class="btn btn-primary"> <span class="add-on"><i class="icon-eye-open"></i></span> Ver más</button></a></p></div>
+			<div class="span8" align="justify"><p><b>'.$row[1].'</b></p>'.$descripcion.'<p><a href="verproducto.php?id='.$row[0].'"><button class="btn btn-inverse"> <span class="add-on"><i class="icon-eye-open"></i></span> Ver más</button></a></p></div>
 			</div>
 			<div class="span1"></div>			
 			 </div>

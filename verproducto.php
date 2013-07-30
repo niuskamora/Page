@@ -146,7 +146,7 @@ if (isset($_POST["inicio"])) {
   </div>
   <div class="span12" align="center">
   <form method="post">
-  <button class="btn btn-primary" id="atras" name="atras" type="submit">Atrás</button>
+  <button class="btn btn-inverse" id="atras" name="atras" type="submit">Atrás</button>
 	</form> 
   </div>
  
