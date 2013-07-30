@@ -121,9 +121,9 @@ if(isset($_GET['b']))
               <th data-hide="phone" data-sort-ignore="true"> Administrador </th>
               <th data-hide="phone" data-sort-ignore="true">Enlace </th>
               <th data-hide="phone" data-sort-ignore="true"> Orden </th>
-              <th data-hide="phone" data-sort-ignore="true"> <span class="add-on"> <i class="icon-pencil"></i> </span> Editar </th>
-              <th data-hide="phone" data-sort-ignore="true"> <span class="add-on"><i class="icon-trash"></i></span> Eliminar </th>
-              <th data-hide="phone" data-sort-ignore="true"> <span class="add-on"><i class="icon-tasks"></i></span> Up/Down </th>
+              <th data-hide="phone,mediatablet" data-sort-ignore="true"> <span class="add-on"> <i class="icon-pencil"></i> </span> Editar </th>
+              <th data-hide="phone,mediatablet" data-sort-ignore="true"> <span class="add-on"><i class="icon-trash"></i></span> Eliminar </th>
+              <th data-hide="phone,mediatablet" data-sort-ignore="true"> <span class="add-on"><i class="icon-tasks"></i></span> Up/Down </th>
             </tr>
           </thead>
           <tbody>
@@ -142,9 +142,9 @@ if(isset($_GET['b']))
 			$SQL3="SELECT nombre FROM administrador WHERE administradorid=".$row["administradorid"];
 		$result3 = pg_query ($conn, $SQL3 ) or die("Error en la consulta SQL");
 		$row3 = pg_fetch_array ($result3);
-		echo '<td width="10">'.$row3["nombre"].' </td>';
-		echo '<td width="15">'.$row["enlace"].' </td>';	
-		echo '<td width="4">'.$row["orden"].' </td>';	  
+		echo '<td width="10%">'.$row3["nombre"].' </td>';
+		echo '<td width="15%">'.$row["enlace"].' </td>';	
+		echo '<td width="4%">'.$row["orden"].' </td>';	  
 			echo '<td width="15%"> <a href="editarmenu.php?id='.$row["menuid"].'"> <button class="btn btn-primary"  type="button" name="boton"> <span class="add-on"><i class="icon-pencil"></i> </span> Editar  </button>  </td></a>';
 			echo '<td width="18%">  <a href="eliminarmenu.php?id='.$row["menuid"].'"> <button class="btn btn-primary"  type="button"  name="boton"> <span class="add-on"><i class="icon-trash"></i> </span> Eliminar  </button>  </td> </a>';
 			echo '<td width="15%" style="text-align:center">  <a href="menu.php?s='.$row["menuid"].'"> 
