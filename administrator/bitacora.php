@@ -51,6 +51,10 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
                 <li><a href="info.php">Información</a></li>
               </ul>
             </li>
+           <?php if(supera($_SESSION["admin"])){
+            ?><li><a href="bitacora.php"> Bitacora</a></li>
+           <?php }?>
+            
             <li><a href="cerrarsesion.php">Cerrar Sesión</a></li>
           </ul>
         </div>
@@ -63,43 +67,25 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
 <!-- /container -->
 <div class="container">
    <div class="row-fluid">
-                  <?php
-				   $ban=false;
-				   $SQL9="SELECT * FROM administrador WHERE tipoadministradorid=".$_SESSION["admin"];
-		$result9 = pg_query ($conn, $SQL9) or die("Error en la consulta SQL");
-		$row9 = pg_fetch_array ($result9);
-		$reg= pg_num_rows($result9);
-		      if($reg= pg_num_rows($result9)){
-				  if($row9['tipoadministradorid']==1){
-					  $ban=true;
-				  }
-				}
-				   
-				  ?>     
+
     <div class="span3">
       <div style="text-align:center">
         
-          <ul class="nav  nav-pills nav-stacked">
-        <?php  if($ban){ ?>
-           <li class="active"><a href="creartipoadmin.php"> <span class="add-on"><i class="icon-plus "></i></span> Crear </a></li>
-              <li><a href="principal.php"> <span class="add-on"><i class="icon-arrow-left"></i></span> Atrás</a></li>
-            
-             
-        
-          <?php }else { ?>
-             
-			  <li class="active"><a href="principal.php"> <span class="add-on"><i class="icon-arrow-left"></i></span> Atrás</a></li>
-			  
-			<?php  } ?>
+            <ul class="nav  nav-pills nav-stacked">
 
-          </ul>
+			  
+              <li class="active"> <a href="eliminarbitacora.php">  <span class="add-on"><i class="icon-trash"></i> </span> Vaciar Bitacora  </a> </li>
+              
+              <li><a href="principal.php"> <span class="add-on"><i class="icon-arrow-left"></i></span> Atrás</a></li>
+
+            </ul>
       </div>
     </div>
     <div class="span9">
     
       <?php 
 		
-		$SQL="SELECT * FROM tipoadministrador";
+		$SQL="SELECT * FROM bitacora order by bitacoraid desc";
 		$result = pg_query ($conn, $SQL ) or die("Error en la consulta SQL");
 		$registros= pg_num_rows($result);
 		
@@ -107,7 +93,7 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
     ?>
     <div class="well alert alert-block">
     <h2 class="alert alert-block">Atención</h2>
-    <h4>No existen registros en tipo de Administracion</h4>
+    <h4>No existen registros en bitacora</h4>
     </div>
      <?php 
 	}else{
@@ -123,24 +109,28 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
 
 	//mostrar resultados
 	?>
-	 <table class="footable table-striped table-hover" data-page-size="5">
+	 <table class="footable table-striped table-hover" data-page-size="10">
 			  <thead>
 				<tr>
 				  <th data-class="expand" data-sort-initial="true" data-type="numeric">
 					<span>Id</span>
 				  </th>
 				  <th>
-					<span>Nombre</span>
+					<span>Acción</span>
 				  </th>
-				  <th data-hide="phone" data-sort-ignore="true">
-					Descripción
-				  </th>
-				  <th data-hide="phone,mediatablet" data-sort-ignore="true">
-					<span class="add-on"> <i class="icon-pencil"></i> </span> Editar 
+                    <th data-hide="phone" data-sort-ignore="true">
+				Descripción 
 				  </th>
 				  <th data-hide="phone,mediatablet" data-sort-ignore="true">
-				<span class="add-on"><i class="icon-trash"></i></span> Eliminar 
+					Fecha
 				  </th>
+				  <th data-hide="phone,mediatablet" data-sort-ignore="true">
+					 Hora
+				  </th>
+				  <th data-hide="phone,mediatablet" data-sort-ignore="true">
+				Administrador
+				  </th>
+                
 				</tr>
 			  </thead>
 				<tbody>
@@ -154,18 +144,17 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
 			$row = pg_fetch_array ($result,$i );
 			
 			echo '<tr>';
-			echo '<td width="10%">'.$row["tipoadministradorid"].'</td>';
-			echo '<td width="20%">'.$row["nombre"].'</td>';
-			echo '<td width="34%">'.$row["descripcion"].'</td>';
-			if($ban){
-				echo '<td width="18%"> <a href="editartipoadmin.php?id='.$row["tipoadministradorid"].'"> <button class="btn btn-primary"  type="button" name="boton"> <span class="add-on"><i class="icon-pencil"></i> </span> Editar  </button>  </a></td>';
-			echo '<td width="18%">  <a href="eliminartipoadmin.php?id='.$row["tipoadministradorid"].'"> <button class="btn btn-primary"   type="button"  name="boton"> <span class="add-on"><i class="icon-trash"></i> </span> Eliminar  </button> </a> </td>';
-			}else{
-			echo '<td width="18%"> <a href="editartipoadmin.php?id='.$row["tipoadministradorid"].'"> <button class="btn btn-primary" disabled type="button" name="boton"> <span class="add-on"><i class="icon-pencil"></i> </span> Editar  </button>  </a></td>';
-			echo '<td width="18%">  <a href="eliminartipoadmin.php?id='.$row["tipoadministradorid"].'"> <button class="btn btn-primary"  disabled type="button"  name="boton"> <span class="add-on"><i class="icon-trash"></i> </span> Eliminar  </button> </a> </td>';	
-			}
-			
-			echo '</tr>';
+			echo '<td width="10%" align="center">'.$row["bitacoraid"].'</td>';
+			echo '<td width="20%" align="center">'.$row["accion"].'</td>';
+			echo '<td width="20%" align="center">'.$row["descripcion"].'</td>';
+			echo '<td width="20%" align="center">'.$row["fecha"].'</td>';
+			echo '<td width="20%" align="center">'.$row["hora"].'</td>';
+			$SQL3="SELECT nombre FROM administrador WHERE administradorid=".$row["administradorid"];
+		$result3 = pg_query ($conn, $SQL3 ) or die("Error en la consulta SQL");
+		$row3 = pg_fetch_array ($result3);
+		
+			echo '<td width="20%" align="center">'.$row3["nombre"].'</td>';
+		    echo '</tr>';
             
 			}
 			
@@ -191,6 +180,17 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
     </div>
   
 </div>
+<?php		
+if(isset($_POST["borrar"])){
+	   $SQL="DELETE FROM bitacora";
+		$result = pg_query ($conn, $SQL ) or die("Error en la consulta SQL");
+		llenarLog(3, "menu");
+		javaalert("El menu fue eliminado");
+		iraURL("menu.php");
+		
+	
+}
+?>
 
 <!-- Le javascript
 ================================================== --> 

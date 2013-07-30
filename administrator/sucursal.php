@@ -145,7 +145,7 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
 			echo '<td width="20%">'.$row["nombre"].'</td>';
 			echo '<td width="25%">'.$row["descripcion"].'</td>';
 			echo '<td width="15%"> <a href="editarsucursal.php?id='.$row["sucursalid"].'"> <button class="btn btn-primary"  type="button" name="boton"> <span class="add-on"><i class="icon-pencil"></i> </span> Editar  </button>  </td></a>';
-			echo '<td width="15%">  <a href="eliminarsucursal.php?id='.$row["sucursalid"].'"> <button class="btn btn-primary"  type="button"  name="boton"> <span class="add-on"><i class="icon-pencil"></i> </span> Eliminar  </button>  </td></a>';
+			echo '<td width="15%">  <a href="eliminarsucursal.php?id='.$row["sucursalid"].'"> <button class="btn btn-primary"  type="button"  name="boton"> <span class="add-on"><i class="icon-trash"></i> </span> Eliminar  </button>  </td></a>';
 			
 			echo '<td width="15%">  <a href="versucursal.php?id='.$row["sucursalid"].'"> <button class="btn btn-primary"  type="button"  name="boton"> <span class="add-on"><i class="icon-eye-open"></i> </span> ver  </button>  </td></a>';
 			echo '</tr>';

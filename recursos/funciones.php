@@ -138,6 +138,25 @@ function javaalert($msj){
 	$fin='"); </script>';
 	echo $ini.$msj.$fin;
 }
+
+//superusuario
+function supera($tipoad){
+	$conn = Conectar();
+	$SQL9="SELECT * FROM administrador WHERE tipoadministradorid=".$tipoad;
+		$result9 = pg_query ($conn, $SQL9) or die("Error en la consulta SQL");
+		$row9 = pg_fetch_array ($result9);
+		$reg= pg_num_rows($result9);
+		      if($reg= pg_num_rows($result9)){
+				  if($row9['tipoadministradorid']==1){
+					  return true;
+				  }else{
+						return false;
+				  }
+				}else{
+						return false;
+				}
+	
+}
 //bitacora del  sitio web
 function llenarLog($accion,$descripcion){
 
