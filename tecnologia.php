@@ -80,19 +80,23 @@ if (isset($_POST["inicio"])) {
 				<li class="dropdown">
 						<a href="#" class="dropdown-toggle" data-toggle="dropdown">
 						Iniciar Sesión
-						<b class="caret"></b></a>
-                        <ul class="dropdown-menu">
-						<li> <form   method="post">
-                         <div class="well" align="center">
-                          <span>Nombre de usuario</span>
-        <input type="text"  placeholder="Usuario" name="usuario" id="usuario"  title="El formato es Mayúscula(letras, puntos o números)" maxlength="34" pattern="[A-ZÑ]{1}[a-z.ñ0-9]{1,33}" autofocus required>
-                         <span>Contraseña</span>
-        <input type="password"  placeholder="Contraseña" name="password" id="password" maxlength="34"  title="Debe agregar la contraseña" required>
-                        <button type="submit" id="inicio" name="inicio" class="btn submit">Iniciar Sesión</button>
-
-                         </div>
-                        </form></li>
-                       </ul></li>
+						<b class="caret"></b></a> <ul class="dropdown-menu">
+                    <li>
+                      <div class="well well-small" align="center"> 
+                      <form method="post">
+                        <dl>
+                          <dt><span>Nombre de usuario</span></dt>
+                          <dd><input type="text"  placeholder="Usuario" name="usuario" id="usuario"  title="El formato es Mayúscula(letras, puntos o números)" maxlength="34" pattern="[A-ZÑ]{1}[a-z.ñ0-9]{1,33}" autofocus required></dd>
+                          <dt>    <span>Contraseña</span></dt>
+                         <dd>     <input type="password"  placeholder="Contraseña" name="password" id="password" maxlength="34"  title="Debe agregar la contraseña" required></dd>
+                         <dt>         </dt>
+                         <dd><button type="submit" id="inicio" name="inicio" class="btn submit">Iniciar Sesión</button>
+                     </dd>
+                        </dl>
+                      </form>
+                     </div>
+                    </li>
+                  </ul></li>
                 
                 </li>
                 <?php } ?> 
