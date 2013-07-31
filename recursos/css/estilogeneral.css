@@ -281,8 +281,17 @@ padding: 1px;
 
  @media screen and (max-width: 48.063em) {
 	.affix {
-		position: relative;
+		position: absolute;
+		font-size:12px;
+		padding:2px;
+		
+	
 	}
+	.row-fluid .span10 {
+	margin-top:200px;
+	}
+	
+	
 	#magic-line {
 		display: none;
 	}
@@ -345,6 +354,9 @@ padding: 1px;
 /* Portrait tablet to landscape and desktop */
 @media (min-width: 768px) and (max-width: 979px) {
 	
+	.row-fluid .span10 {
+	margin-top:0px;
+	}
 	#intro h1 {
 		width: 80%;
 	}
@@ -366,10 +378,13 @@ padding: 1px;
 		width:260px;
 	}
 	
+	
 }
 
 /* Landscape phone to portrait tablet */
 @media (max-width: 767px) {	
+
+
 	#intro h1 {
 		width: 90%;
 	}
@@ -418,6 +433,13 @@ padding: 1px;
 }
 /* Landscape phones and down */
 @media (max-width: 480px) {
+	
+	.affix {
+		position: absolute;
+		font-size:12px;
+		padding:2px;
+		
+	}
 	
 	#intro h1 {
 		font-size: 22px;
