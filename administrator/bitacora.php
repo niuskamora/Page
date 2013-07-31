@@ -3,24 +3,9 @@ session_start();
 
 include("../recursos/funciones.php");
 $conn=conectar();
-if(!isset($_GET["id"])){
-	iraURL('producto.php');
-	}
 if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
 	iraURL('../administrator/index.php');
 	}
-		
-if(isset($_POST["si"])){
-	   $SQL="DELETE FROM producto WHERE productoid=".$_GET['id'];
-		$result = pg_query ($conn, $SQL ) or die("Error en la consulta SQL");
-		llenarLog(3, "Producto");
-		javaalert("El producto fue eliminado");
-		iraURL("producto.php");
-}
-if(isset($_POST["no"])){
-		iraURL("producto.php");  
-	
-}	
 
 ?>
 
@@ -37,8 +22,8 @@ if(isset($_POST["no"])){
 <link href="../recursos/css/bootstrap-responsive.min.css" rel="stylesheet">
 <link href="../recursos/css/estiloadmin.css" rel="stylesheet">
 <link href="../recursos/footable/css/footable-0.1.css" rel="stylesheet" type="text/css" />
-<link href="../recursos/footable/css/footable.sortable-0.1.css" rel="stylesheet" type="text/css" />
-<link href="../recursos/footable/css/footable.paginate.css" rel="stylesheet" type="text/css" />
+  <link href="../recursos/footable/css/footable.sortable-0.1.css" rel="stylesheet" type="text/css" />
+  <link href="../recursos/footable/css/footable.paginate.css" rel="stylesheet" type="text/css" />
 </head>
 
 <body class="preview" id="top" data-spy="scroll" data-target=".subnav" data-offset="80">
@@ -47,7 +32,7 @@ if(isset($_POST["no"])){
     <div class="navbar-inner">
       <div class="container" style="width: auto;"> <a class="btn btn-navbar" href="#nav" data-toggle="collapse" data-target="#barrap"> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </a> <a  class="brand" id="brand-admin" href="principal.php">PANGEATECH</a>
         <div id="barrap" class="nav-collapse collapse">
-          <ul class="nav">
+         <ul class="nav">
             <li class="dropdown"> <a  class="dropdown-toggle" data-target="#" data-toggle="dropdown"> Gestión Usuarios <b class="caret"></b> </a>
               <ul class="dropdown-menu">
                 <li><a href="tipoadmin.php"> Tipo Administrador </a></li>
@@ -56,7 +41,7 @@ if(isset($_POST["no"])){
               </ul>
             </li>
             <li><a href="menu.php"> Menú</a></li>
-            <li class="active"><a href="producto.php">Producto</a></li>
+            <li><a href="producto.php">Producto</a></li>
             <li><a href="sucursal.php">Sucursal</a></li>
             <li class="dropdown">
              <a  class="dropdown-toggle" data-target="#" data-toggle="dropdown">
@@ -66,9 +51,10 @@ if(isset($_POST["no"])){
                 <li><a href="info.php">Información</a></li>
               </ul>
             </li>
-              <?php if(supera($_SESSION["admin"])){
-            ?><li><a href="bitacora.php"> Bitácora</a></li>
+           <?php if(supera($_SESSION["admin"])){
+            ?><li class="active"><a href="bitacora.php"> Bitácora</a></li>
            <?php }?>
+            
             <li><a href="cerrarsesion.php">Cerrar Sesión</a></li>
           </ul>
         </div>
@@ -81,90 +67,134 @@ if(isset($_POST["no"])){
 <!-- /container -->
 <div class="container">
    <div class="row-fluid">
-                       
+
     <div class="span3">
       <div style="text-align:center">
-          <ul class="nav  nav-pills nav-stacked">
-             <li class="active"><a href="producto.php"> <span class="add-on"><i class="icon-arrow-left"></i></span> Atrás</a></li> 
-          </ul>
+        
+            <ul class="nav  nav-pills nav-stacked">
+
+			  
+              <li class="active"> <a href="eliminarbitacora.php">  <span class="add-on"><i class="icon-trash"></i> </span> Vaciar Bitácora  </a> </li>
+              
+              <li><a href="principal.php"> <span class="add-on"><i class="icon-arrow-left"></i></span> Atrás</a></li>
+
+            </ul>
       </div>
     </div>
-    
     <div class="span9">
-   
-        <?php 
+    
+      <?php 
 		
-		 $SQL="SELECT * FROM producto WHERE productoid=".$_GET['id'];
+		$SQL="SELECT * FROM bitacora order by bitacoraid desc";
 		$result = pg_query ($conn, $SQL ) or die("Error en la consulta SQL");
 		$registros= pg_num_rows($result);
-		$row = pg_fetch_array ($result);
-		$registros= pg_num_rows($result);
-		if($registros!=1){
-			iraURL("poducto.php");
-			}
 		
-		$SQL2="SELECT * FROM usuarioproducto  WHERE productoid=".$_GET['id'];
-		$result2 = pg_query ($conn, $SQL2 ) or die("Error en la consulta SQL");
-		$registros2= pg_num_rows($result2);
-		
-		if($registros2!=0){
-		 
-			?>  
-            
-            <div class="well alert alert-danger" align="center">
-   			<h2 style="color:rgb(255,255,255)" align="center"> Atención</h2>
-    			<h4 align="center">No se puede eliminar el registro </h4>
-	 		</div>
-     
-     
-     <?php
-		  }
-		else if($registros2==0){
-		
+	if($registros == 0){
     ?>
-    
-    <div class="well well-small alert alert-block" align="center">
-   			<h2 style="color:rgb(255,255,255)"> Atención</h2>
-    	<h4 align="center">¿Desea eliminar el registro? </h4>
+    <div class="well alert alert-block">
+    <h2 class="alert alert-block">Atención</h2>
+    <h4>No existen registros en bitacora</h4>
     </div>
-
+     <?php 
+	}else{
+	
+	?>
+    
       <div class="well well-large">
-      <br><br>
+    
       
-      <form method="post">
-	    <table class="footable table-striped table-hover" data-page-size="5">
+        <p>
+        <?php
+		
+
+	//mostrar resultados
+	?>
+	 <table class="footable table-striped table-hover" data-page-size="10">
 			  <thead>
 				<tr>
-				  <th data-sort-ignore="true">
-					<span>Nombre</span>
+				  <th data-class="expand" data-sort-initial="true" data-type="numeric">
+					<span>Id</span>
 				  </th>
-				  <th data-sort-ignore="true">
-					<span>Descripción</span>
+				  <th>
+					<span>Acción</span>
 				  </th>
+                    <th data-hide="phone" data-sort-ignore="true">
+				Descripción 
+				  </th>
+				  <th data-hide="phone,mediatablet" data-sort-ignore="true">
+					Fecha
+				  </th>
+				  <th data-hide="phone,mediatablet" data-sort-ignore="true">
+					 Hora
+				  </th>
+				  <th data-hide="phone,mediatablet" data-sort-ignore="true">
+				Administrador
+				  </th>
+                
 				</tr>
 			  </thead>
-	<tbody>
+				<tbody>
+    <form action="editartipoadmin.php" method="get"> 
+   
       <?php   
-	  		echo '<tr>';
-			echo '<td width="30%">  <label>'.$row["nombre"].' </label></td>';
-			echo ' <td width="30%" > <label align="justify">'.$row["descripcion"].' </label></td>';
-			echo '</tr>';
+	  
+		for ($i=0;$i<$registros;$i++)
+			{
+
+			$row = pg_fetch_array ($result,$i );
+			
+			echo '<tr>';
+			echo '<td width="10%" align="center">'.$row["bitacoraid"].'</td>';
+			echo '<td width="20%" align="center">'.$row["accion"].'</td>';
+			echo '<td width="20%" align="center">'.$row["descripcion"].'</td>';
+			echo '<td width="20%" align="center">'.$row["fecha"].'</td>';
+			echo '<td width="20%" align="center">'.$row["hora"].'</td>';
+			$SQL3="SELECT nombre FROM administrador WHERE administradorid=".$row["administradorid"];
+		$result3 = pg_query ($conn, $SQL3 ) or die("Error en la consulta SQL");
+		$row3 = pg_fetch_array ($result3);
+		
+			echo '<td width="20%" align="center">'.$row3["nombre"].'</td>';
+		    echo '</tr>';
+            
+			}
+			
+  
 		?>
-	</tbody>	  
-    </table>
-    
-    <button id="si" name="si" class="btn btn-primary text-center " type="submit">  Si </button>
-    <button id="no" name="no" class="btn btn-primary text-center " type="submit">  No </button>
-	 </form> 
-	<?php
-		}
-
-?>
-
       
+    
+	 </form> 	
+</tbody>	  
+    </table>
+    <?php
+    }
+	?>
+
+    <ul id="pagination" class="footable-nav"><span>Pages:</span></ul>
+
+		
+        
+        
+         </p>
+      </div>
+    </div>
+    </div>
+  
+</div>
+<?php		
+if(isset($_POST["borrar"])){
+	   $SQL="DELETE FROM bitacora";
+		$result = pg_query ($conn, $SQL ) or die("Error en la consulta SQL");
+		llenarLog(3, "menu");
+		javaalert("El menu fue eliminado");
+		iraURL("menu.php");
+		
+	
+}
+?>
 
 <!-- Le javascript
 ================================================== --> 
+
 <script type="text/javascript" src="../recursos/js/jquery-2.0.2.js" ></script> 
 <script src="../recursos/js/bootstrap.js"></script>
 <script type="text/javascript">
@@ -186,9 +216,9 @@ $('.dropdown-toggle').click(function(e) {
 
 </script>  
 
-<script src="../recursos/footable/js/footable.js" type="text/javascript"></script>
-<script src="../recursos/footable/js/footable.paginate.js" type="text/javascript"></script>
-<script src="../recursos/footable/js/footable.sortable.js" type="text/javascript"></script>
+ <script src="../recursos/footable/js/footable.js" type="text/javascript"></script>
+  <script src="../recursos/footable/js/footable.paginate.js" type="text/javascript"></script>
+  <script src="../recursos/footable/js/footable.sortable.js" type="text/javascript"></script>
  
   <script type="text/javascript">
     $(function() {

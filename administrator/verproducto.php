@@ -55,6 +55,9 @@ $id=$_GET['id'];
                 <li><a href="info.php">Información</a></li>
               </ul>
             </li>
+              <?php if(supera($_SESSION["admin"])){
+            ?><li><a href="bitacora.php"> Bitácora</a></li>
+           <?php }?>
             <li><a href="cerrarsesion.php">Cerrar Sesión</a></li>
           </ul>
         </div>

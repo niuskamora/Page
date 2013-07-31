@@ -51,6 +51,9 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
                 <li><a href="info.php">Información</a></li>
               </ul>
             </li>
+             <?php if(supera($_SESSION["admin"])){
+            ?><li><a href="bitacora.php"> Bitácora</a></li>
+           <?php }?>
             <li><a href="cerrarsesion.php">Cerrar Sesión</a></li>
           </ul>
         </div>
@@ -135,10 +138,10 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
 				  <th data-hide="phone" data-sort-ignore="true">
 					Descripción
 				  </th>
-				  <th data-hide="phone" data-sort-ignore="true">
+				  <th data-hide="phone,mediatablet" data-sort-ignore="true">
 					<span class="add-on"> <i class="icon-pencil"></i> </span> Editar 
 				  </th>
-				  <th data-hide="phone" data-sort-ignore="true">
+				  <th data-hide="phone,mediatablet" data-sort-ignore="true">
 				<span class="add-on"><i class="icon-trash"></i></span> Eliminar 
 				  </th>
 				</tr>
@@ -159,10 +162,10 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
 			echo '<td width="34%">'.$row["descripcion"].'</td>';
 			if($ban){
 				echo '<td width="18%"> <a href="editartipoadmin.php?id='.$row["tipoadministradorid"].'"> <button class="btn btn-primary"  type="button" name="boton"> <span class="add-on"><i class="icon-pencil"></i> </span> Editar  </button>  </a></td>';
-			echo '<td width="18%">  <a href="eliminartipoadmin.php?id='.$row["tipoadministradorid"].'"> <button class="btn btn-primary"   type="button"  name="boton"> <span class="add-on"><i class="icon-pencil"></i> </span> Eliminar  </button> </a> </td>';
+			echo '<td width="18%">  <a href="eliminartipoadmin.php?id='.$row["tipoadministradorid"].'"> <button class="btn btn-primary"   type="button"  name="boton"> <span class="add-on"><i class="icon-trash"></i> </span> Eliminar  </button> </a> </td>';
 			}else{
 			echo '<td width="18%"> <a href="editartipoadmin.php?id='.$row["tipoadministradorid"].'"> <button class="btn btn-primary" disabled type="button" name="boton"> <span class="add-on"><i class="icon-pencil"></i> </span> Editar  </button>  </a></td>';
-			echo '<td width="18%">  <a href="eliminartipoadmin.php?id='.$row["tipoadministradorid"].'"> <button class="btn btn-primary"  disabled type="button"  name="boton"> <span class="add-on"><i class="icon-pencil"></i> </span> Eliminar  </button> </a> </td>';	
+			echo '<td width="18%">  <a href="eliminartipoadmin.php?id='.$row["tipoadministradorid"].'"> <button class="btn btn-primary"  disabled type="button"  name="boton"> <span class="add-on"><i class="icon-trash"></i> </span> Eliminar  </button> </a> </td>';	
 			}
 			
 			echo '</tr>';

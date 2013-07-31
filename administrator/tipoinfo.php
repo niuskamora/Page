@@ -51,6 +51,9 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
                 <li><a href="info.php">Información</a></li>
               </ul>
             </li>
+              <?php if(supera($_SESSION["admin"])){
+            ?><li><a href="bitacora.php"> Bitácora</a></li>
+           <?php }?>
             <li><a href="cerrarsesion.php">Cerrar Sesión</a></li>
           </ul>
         </div>
@@ -109,10 +112,10 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
 				  <th data-hide="phone" data-sort-ignore="true">
 					Descripción
 				  </th>
-				  <th data-hide="phone" data-sort-ignore="true">
+				  <th data-hide="phone,mediatablet" data-sort-ignore="true">
 					<span class="add-on"> <i class="icon-pencil"></i> </span> Editar 
 				  </th>
-				  <th data-hide="phone" data-sort-ignore="true">
+				  <th data-hide="phone,mediatablet" data-sort-ignore="true">
 				<span class="add-on"><i class="icon-trash"></i></span> Eliminar 
 				  </th>
 				</tr>
