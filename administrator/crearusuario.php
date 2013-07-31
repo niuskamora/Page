@@ -54,6 +54,7 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
 <link href="../recursos/css/bootstrap.min.css" rel="stylesheet">
 <link href="../recursos/css/bootstrap-responsive.min.css" rel="stylesheet">
 <link href="../recursos/css/estiloadmin.css" rel="stylesheet">
+<link href="../recursos/css/estilo_nombre_usuario.css" rel="stylesheet">
 </head>
 
 <body class="preview" id="top" data-spy="scroll" data-target=".subnav" data-offset="80">
@@ -114,7 +115,11 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
             <div class="span3 well well-small"><b>Dirección</b></div>
             <div class="span6 well well-small"><input type="text" name="direccion" id="direccion" maxlength="254" placeholder="Ej. Carrera 10 # 8-5" title="Ingrese la dirección" /></div>
             <div class="span3 well well-small"><b>Nombre de Usuario</b></div>
-            <div class="span6 well well-small"><input type="text" name="usuarioo" id="usuarioo" placeholder="Ej. Mariela.arboleda2541" title="El formato es Mayúscula(letras, puntos o números)" maxlength="34" pattern="[A-ZÑ]{1}[a-z.ñ0-9]{1,33}"  required/></div>
+            <div class="span6 well well-small"  ><input type="text" name="usuarioo" id="usuarioo" placeholder="Ej. Mariela.arboleda2541" title="El formato es Mayúscula(letras, puntos o números)" maxlength="34" pattern="[A-ZÑ]{1}[a-z.ñ0-9]{1,33}"  required/>
+             <div id="Info" style="float:right"></div>
+             </div>
+             
+
             <div class="span3 well well-small"><b>Contraseña</b></div>
             <div class="span6 well well-small"><input type="password" name="contrasena" id="contrasena" maxlength="34" pattern="[A-Za-z.0-9ñÑ]{1,34}" title="Debe agregar letras, puntos o números" required/></div>
             <div class="span3 well well-small"><b>Confirmar contraseña</b></div>
@@ -142,15 +147,24 @@ $('.dropdown-toggle').click(function(e) {
     }
   }, this), 0);
 });
- 
- 
+ <!-- Codigo para verificar si el nombre de usuario ya existe --> 
+   $('#usuarioo').blur(function(){
+        $('#Info').html('<img src="../recursos/img/loader.gif" alt="" />').fadeOut(1000);
+
+        var usuarioo = $(this).val();        
+        var dataString = 'usuarioo='+usuarioo;
+
+        $.ajax({
+            type: "POST",
+            url: "chequear_nombre_usuario.php",
+            data: dataString,
+            success: function(data) {
+                $('#Info').fadeIn(1000).html(data);
+            }
+        });
+    });    
 });
-
-
-
 </script>  
-
-    
      </form>
      
 </body>
