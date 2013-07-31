@@ -330,13 +330,22 @@ where lower(tipoinformacion.nombre)='noticia' and informacion.tipoinformacionid=
 $Qmenu = pg_query($conex,$query) or die(pg_last_error($conex));
 $row = pg_fetch_array($Qmenu,0);
 echo
- ' <div class="span6 animated fadeInDownBig">
-           	<h2>'.$row[0].'</h2>
+ ' <div class="span12 animated fadeInDownBig" style="margin-left: 0px; text-align:justify; ">
+		 <div class="span2"></div>
+		 <div class="span8">
+		   	<h2>'.$row[0].'</h2>
 			'.$row[1].'
           </div>
-          <div class="span6 animated slide2 fadeInUpBig" style="text-align:center">
+		 <div class="span2"></div>
+		 </div> 
+          <div class="span12 animated slide2 fadeInUpBig" style="text-align:center; margin-left: 0px;">
+		   <div class="span2"></div>
+		    <div class="span8">
 		   <img style="width:330px; height:240px" src="'.$row[2].'" />
-           </div>';
+           </div>
+		    <div class="span2"></div>
+		 </div>
+		   ';
 	
 
 
