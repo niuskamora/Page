@@ -62,6 +62,7 @@ if(isset($_POST["guardar"]) || isset($_POST["guardar2"])){
 <link href="../recursos/css/bootstrap.min.css" rel="stylesheet">
 <link href="../recursos/css/bootstrap-responsive.min.css" rel="stylesheet">
 <link href="../recursos/css/estiloadmin.css" rel="stylesheet">
+<link href="../recursos/css/estilo_nombre_usuario.css" rel="stylesheet">
 </head>
 
 <body class="preview" id="top" data-spy="scroll" data-target=".subnav" data-offset="80">
@@ -121,7 +122,9 @@ if(isset($_POST["guardar"]) || isset($_POST["guardar2"])){
             <div class="span3 well well-small"><b>Apellido</b></div>
             <div class="span6 well well-small"><input id="apellido" name="apellido" type="text" placeholder="Ej. Mora Hurtado"  maxlength="34" pattern="[A-Za-z,ñ,Ñ,á,é,í,ó,ú,Á,É,Í,Ó,Ú, ]{1,34}" required/></div>
             <div class="span3 well well-small"><b>Usuario</b></div>
-            <div class="span6 well well-small"><input id="usuario1" name="usuario1" type="text" placeholder="Ej. niuska.mora" maxlength="34" pattern="[a-z.ñ]{1,34}" required/></div>
+            <div class="span6 well well-small"><input id="usuario1" name="usuario1" type="text" placeholder="Ej. niuska.mora" maxlength="34" pattern="[a-z.ñ]{1,34}" required/>
+            <div id="Info" style="float:right"></div>
+            </div>
             <div class="span3 well well-small"><b>Contraseña</b></div>
             <div class="span6 well well-small"><input id="contrasena" name="contrasena" type="password" maxlength="34" pattern="[A-Za-z.0-9ñÑ]{1,34}" required/></div>
             <div class="span3 well well-small"><b>Confirmar Contrseña</b></div>
@@ -162,15 +165,31 @@ if(isset($_POST["guardar"]) || isset($_POST["guardar2"])){
 <script type="text/javascript">
 $(document).ready(function() {
  
-$('.dropdown-toggle').click(function(e) {
-  e.preventDefault();
-  setTimeout($.proxy(function() {
-    if ('ontouchstart' in document.documentElement) {
-      $(this).siblings('.dropdown-backdrop').off().remove();
-    }
-  }, this), 0);
-});
+	$('.dropdown-toggle').click(function(e) {
+  		e.preventDefault();
+  		setTimeout($.proxy(function() {
+    	if ('ontouchstart' in document.documentElement) {
+      		$(this).siblings('.dropdown-backdrop').off().remove();
+    	}
+  		}, this), 0);
+	});
  
+ <!-- Codigo para verificar si el nombre de usuario ya existe --> 
+   $('#usuario1').blur(function(){
+        $('#Info').html('<img src="../recursos/img/loader.gif" alt="" />').fadeOut(1000);
+
+        var usuario1 = $(this).val();        
+        var dataString = 'usuario1='+usuario1;
+
+        $.ajax({
+            type: "POST",
+            url: "chequear_nombre_admin.php",
+            data: dataString,
+            success: function(data) {
+                $('#Info').fadeIn(1000).html(data);
+            }
+        });
+    });  
  
 });
 

@@ -55,6 +55,8 @@ if(isset($_POST["guardar"])){
 <link href="../recursos/css/bootstrap.min.css" rel="stylesheet">
 <link href="../recursos/css/bootstrap-responsive.min.css" rel="stylesheet">
 <link href="../recursos/css/estiloadmin.css" rel="stylesheet">
+<link href="../recursos/css/estilo_nombre_usuario.css" rel="stylesheet">
+
 </head>
 
 <body class="preview" id="top" data-spy="scroll" data-target=".subnav" data-offset="80">
@@ -151,6 +153,7 @@ if(isset($_POST["guardar"])){
               <dd>
                 <div class="well well-small">
 <input type="text" name="usuario" id="usuario" value="<?php echo $row['usuario']?>" maxlength="34" pattern="[A-ZÑ]{1}[a-z.ñ0-9]{1,33}" required/>
+                <div id="Info" style="float:right"></div>
                 </div>
               </dd>
                 </dd>
@@ -200,7 +203,22 @@ $('.dropdown-toggle').click(function(e) {
     }
   }, this), 0);
 });
- 
+  <!-- Codigo para verificar si el nombre de usuario ya existe --> 
+   $('#usuario').blur(function(){
+	   if($(this).val()!=""){
+		           $('#Info').html('<img src="../recursos/img/loader.gif" alt="" />').fadeOut(1000);
+		   }
+		   var usuarioo = $(this).val();        
+        var dataString = 'usuarioo='+usuarioo;
+        $.ajax({
+            type: "POST",
+            url: "chquear_usuario_editar.php?id_usuario=<?php echo $_GET['id'];?>",
+			data: dataString,
+            success: function(data) {
+                $('#Info').fadeIn(1000).html(data);
+            }
+        });
+    });  
  
 });
 

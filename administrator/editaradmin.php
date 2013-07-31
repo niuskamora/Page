@@ -72,6 +72,7 @@ if(isset($_POST["guardar"])){
 <link href="../recursos/css/bootstrap.min.css" rel="stylesheet">
 <link href="../recursos/css/bootstrap-responsive.min.css" rel="stylesheet">
 <link href="../recursos/css/estiloadmin.css" rel="stylesheet">
+<link href="../recursos/css/estilo_nombre_usuario.css" rel="stylesheet">
 </head>
 
 <body class="preview" id="top" data-spy="scroll" data-target=".subnav" data-offset="80">
@@ -160,6 +161,7 @@ if(isset($_POST["guardar"])){
               <dd>
                 <div class="well well-small">
                   <input id="usuario2" name="usuario2" type="text" value="<?php echo $row['usuario']; ?>" contenteditable="true" placeholder="Ej. niuska.mora" maxlength="34" pattern="[a-z.ñ]{1,34}" required/>
+                <div id="Info" style="float:right"></div>
                 </div>
               </dd>
               <dt>
@@ -230,14 +232,31 @@ if(isset($_POST["guardar"])){
 <script type="text/javascript">
 $(document).ready(function() {
  
-$('.dropdown-toggle').click(function(e) {
-  e.preventDefault();
-  setTimeout($.proxy(function() {
-    if ('ontouchstart' in document.documentElement) {
-      $(this).siblings('.dropdown-backdrop').off().remove();
-    }
-  }, this), 0);
-});
+	$('.dropdown-toggle').click(function(e) {
+  		e.preventDefault();
+  		setTimeout($.proxy(function() {
+    	if ('ontouchstart' in document.documentElement) {
+      		$(this).siblings('.dropdown-backdrop').off().remove();
+    	}
+  	}, this), 0);
+	});
+	
+	<!-- Codigo para verificar si el nombre de usuario ya existe --> 
+   $('#usuario2').blur(function(){
+        $('#Info').html('<img src="../recursos/img/loader.gif" alt="" />').fadeOut(1000);
+
+        var usuario2 = $(this).val();        
+        var dataString = 'usuario2='+usuario2;
+
+        $.ajax({
+            type: "POST",
+            url: "chequear_nombre_admin_editar.php?id=<?php echo $id;?>",
+            data: dataString,
+            success: function(data) {
+                $('#Info').fadeIn(1000).html(data);
+            }
+        });
+    }); 
  
  
 });
