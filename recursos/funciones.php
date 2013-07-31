@@ -2,7 +2,7 @@
 
 //conexión de la base de dattos  
 function conectar(){{  
-	   if (!($conexion = pg_connect("host=192.168.1.102  dbname=pangeapage port=5432 user=postgres password=p4ng34"))){
+	   if (!($conexion = pg_connect("host=192.168.1.103  dbname=pangeapage port=5432 user=postgres password=p4ng34"))){
 	       echo "No pudo conectarse al servidor";
 	       exit();
 	   }
@@ -354,7 +354,7 @@ $numerof=pg_num_rows($Qmenu);
 	
 	echo ' <div class="ca-item ca-item-'.($i+1).'">
             <div class="ca-item-main">
-              <div class="ca-icon" style="background:url('."'".$row[2]."'".') no-repeat center center" ></div>
+              <div class="ca-icon" style="background:url('."'".$row[2]."'".') no-repeat center center; width: 100%;" ></div>
               <h2>';
 			  echo $row[0];
 			  echo '</h2>
@@ -393,7 +393,7 @@ $numerof=pg_num_rows($Qmenu);
 	
 	echo ' <div class="span4 ca-item ca-item-'.($i+1).'">
             <div class="ca-item-main">
-              <div class="ca-icon" style="background:url('."'".$row[2]."'".') no-repeat center center; " ></div>
+              <div class="ca-icon" style="background:url('."'".$row[2]."'".') no-repeat center center; width: 100%; " ></div>
               <h2>';
 			  echo $row[0];
 			  echo '</h2>

@@ -254,8 +254,7 @@ if (isset($_POST["inicio"])) {
         </div>
       </div>
       <hr/>
-    </div>
-    <div class="span12 hidden-desktop" style="padding:5px">
+    </div> <div class="span12 hidden-desktop" style="padding:5px;  margin-left:0px;">
      <?php carruselMovil(); ?>
       <hr/>
     </div>
