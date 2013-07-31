@@ -5,7 +5,8 @@ $conn=conectar();
 if(isset($_REQUEST['usuarioo'])&&$_REQUEST['usuarioo']!="") {
    
     $username = $_REQUEST['usuarioo'];
-	$SQL="SELECT * FROM usuario where usuario='".$username."'";
+	$id= $_REQUEST['id_usuario'];
+	$SQL="SELECT * FROM usuario where usuario='".$username."' and usuarioid!='".$id."'";
 		$result = pg_query ($conn, $SQL ) or die("Error en la consulta SQL");
 		$registros= pg_num_rows($result);
     if($registros>0)
