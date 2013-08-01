@@ -119,9 +119,11 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
              <div id="Info" style="float:right"></div>
              </div>
             <div class="span3 well well-small"><b>Contraseña</b></div>
-            <div class="span6 well well-small"><input type="password" name="contrasena" id="contrasena" maxlength="34" pattern="[A-Za-z.0-9ñÑ]{1,34}" title="Debe agregar letras, puntos o números" required/></div>
+            <div class="span6 well well-small"><input type="password" name="contrasena" id="contrasena" maxlength="34" pattern="[A-Za-z.0-9ñÑ]{6,34}" title="Debe agregar mínimo 6 letras, puntos o números" required/>
+            <div id="seguridad" style="float:right"></div>
+            </div>
             <div class="span3 well well-small"><b>Confirmar contraseña</b></div>
-            <div class="span6 well well-small"><input type="password" name="contrasena_c" id="contrasena_c" maxlength="34" pattern="[A-Za-z.0-9ñÑ]{1,34}" title="Debe repetir la contraseña" required/></div>
+            <div class="span6 well well-small"><input type="password" name="contrasena_c" id="contrasena_c" maxlength="34" pattern="[A-Za-z.0-9ñÑ]{6,34}" title="Debe repetir la contraseña" required/></div>
             <div class="span9 well well-small" align="center"><button class="btn btn-primary" id="crear_uno" name="crear_uno" type="submit">Guardar</button></div>
 			<div class="span9 well well-small" align="center"> <button class="btn btn-primary" id="crear_otro" name="crear_otro" type="submit">Guardar y añadir otro</button></div>
             </p>
@@ -159,6 +161,23 @@ $('.dropdown-toggle').click(function(e) {
             data: dataString,
             success: function(data) {
                 $('#Info').fadeIn(1000).html(data);
+            }
+        });
+    });    
+
+<!-- Codigo para verificar el número de caracteres de la contraseña --> 
+   $('#contrasena').blur(function(){
+	   if($(this).val()!=""){
+		           $('#seguridad').html('<img src="../recursos/img/loader.gif" alt="" />').fadeOut(1000);
+		   }
+        var usuarioo = $(this).val();        
+        var dataString = 'contrasena='+usuarioo;
+        $.ajax({
+            type: "POST",
+            url: "chequear_nombre_usuario.php",
+            data: dataString,
+            success: function(data) {
+                $('#seguridad').fadeIn(1000).html(data);
             }
         });
     });    
