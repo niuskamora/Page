@@ -126,9 +126,13 @@ if(isset($_POST["guardar"]) || isset($_POST["guardar2"])){
             <div id="Info" style="float:right"></div>
             </div>
             <div class="span3 well well-small"><b>Contraseña</b></div>
-            <div class="span6 well well-small"><input id="contrasena" name="contrasena" type="password" maxlength="34" pattern="[A-Za-z.0-9ñÑ]{1,34}" required/></div>
+            <div class="span6 well well-small"><input id="contrasena" name="contrasena" type="password" maxlength="34" pattern="[A-Za-z.0-9ñÑ]{1,34}" required/>
+            <div id="Contra" style="float:right"></div>
+            </div>
             <div class="span3 well well-small"><b>Confirmar Contrseña</b></div>
-            <div class="span6 well well-small"><input id="contrasena_c" name="contrasena_c" type="password" maxlength="34" pattern="[A-Za-z.0-9ñÑ]{1,34}" required/></div>
+            <div class="span6 well well-small"><input id="contrasena_c" name="contrasena_c" type="password" maxlength="34" pattern="[A-Za-z.0-9ñÑ]{1,34}" required/>
+            <div id="Contra" style="float:right"></div>
+            </div>
 			<div class="span3 well well-small"><b>Tipo de Administrador</b></div>
             <div class="span6 well well-small">
             <select id="tipoadmin" name="tipoadmin">
@@ -176,7 +180,10 @@ $(document).ready(function() {
  
  <!-- Codigo para verificar si el nombre de usuario ya existe --> 
    $('#usuario1').blur(function(){
-        $('#Info').html('<img src="../recursos/img/loader.gif" alt="" />').fadeOut(1000);
+        if($(this).val()!=""){
+			$('#Info').html('<img src="../recursos/img/loader.gif" alt="" />').fadeOut(1000);
+
+		}
 
         var usuario1 = $(this).val();        
         var dataString = 'usuario1='+usuario1;
@@ -187,6 +194,26 @@ $(document).ready(function() {
             data: dataString,
             success: function(data) {
                 $('#Info').fadeIn(1000).html(data);
+            }
+        });
+    });
+	
+	<!-- Codigo para verificar las contraseñas --> 
+   $('#contrasena_c').blur(function(){
+        if($(this).val()!=""){
+			$('#Contra').html('<img src="../recursos/img/loader.gif" alt="" />').fadeOut(1000);
+
+		}
+
+        var contrasena_c = $(this).val();        
+        var dataString = 'contrasena_c='+contrasena_c;
+
+        $.ajax({
+            type: "POST",
+            url: "chequear_contrasena.php?con=<?php echo $contrasena;?>",
+            data: dataString,
+            success: function(data) {
+                $('#Contra').fadeIn(1000).html(data);
             }
         });
     });  

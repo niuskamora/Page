@@ -243,8 +243,10 @@ $(document).ready(function() {
 	
 	<!-- Codigo para verificar si el nombre de usuario ya existe --> 
    $('#usuario2').blur(function(){
-        $('#Info').html('<img src="../recursos/img/loader.gif" alt="" />').fadeOut(1000);
+        if($(this).val()!=""){
+			$('#Info').html('<img src="../recursos/img/loader.gif" alt="" />').fadeOut(1000);
 
+		}
         var usuario2 = $(this).val();        
         var dataString = 'usuario2='+usuario2;
 

@@ -3,7 +3,7 @@ include("../recursos/funciones.php");
 sleep(1);
 $conn=conectar();
 $id=$_REQUEST['id'];
-if(isset($_REQUEST['usuario2'])) {
+if(isset($_REQUEST['usuario2']) && $_REQUEST['usuario2']!="") {
    
     $username = $_REQUEST['usuario2'];
 	$SQL="SELECT * FROM administrador where usuario='".$username."' and administradorid!='".$id."'";
@@ -13,5 +13,7 @@ if(isset($_REQUEST['usuario2'])) {
         echo '<div id="Error">No disponible</div>';
     else
         echo '<div id="Success">Disponible</div>';
-}
+}else{
+	  echo '<div></div>';
+	}
 ?>
