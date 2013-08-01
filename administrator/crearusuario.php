@@ -160,14 +160,13 @@ $('.dropdown-toggle').click(function(e) {
         var dataString = 'usuarioo='+usuarioo;
         $.ajax({
             type: "POST",
-            url: "chequear_nombre_usuario.php",
+            url: "chequear_usuario.php",
             data: dataString,
             success: function(data) {
                 $('#Info').fadeIn(1000).html(data);
             }
         });
     });      
-});
 
 <!-- Codigo para verificar las contraseñas --> 
    $('#contrasena_c').blur(function(){
@@ -183,7 +182,29 @@ $('.dropdown-toggle').click(function(e) {
 
         $.ajax({
             type: "POST",
-            url: "chequear_admin.php?contra="+con+"",
+           	url: "chequear_contrasena.php?contra="+con+"",
+            data: dataString,
+            success: function(data) {
+                $('#contra').fadeIn(1000).html(data);
+				$('#contra1').fadeIn(1000).html(data);
+            }
+        });
+    });
+	
+	$('#contrasena').blur(function(){
+        if($(this).val()!=""){
+			$('#contra').html('<img src="../recursos/img/loader.gif" alt="" />').fadeOut(1000);
+			$('#contra1').html('<img src="../recursos/img/loader.gif" alt="" />').fadeOut(1000);
+
+		}
+
+        var contrasena = $(this).val();        
+        var dataString = 'contrasena='+contrasena;
+		var con= document.forms.formulario.contrasena_c.value;
+		
+        $.ajax({
+            type: "POST",
+            url: "chequear_contrasena.php?contra="+con+"",
             data: dataString,
             success: function(data) {
                 $('#contra').fadeIn(1000).html(data);
@@ -192,7 +213,7 @@ $('.dropdown-toggle').click(function(e) {
         });
     });  
  
-
+});
 
  <!-- Codigo para verificar la fortaleza de la contraseña --> 
 

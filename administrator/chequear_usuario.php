@@ -15,19 +15,5 @@ if(isset($_REQUEST['usuarioo'])&&$_REQUEST['usuarioo']!="") {
 }else{
 	  echo '<div></div>';
 	}
-	
-if(isset($_REQUEST['contrasena'])&&$_REQUEST['contrasena']!="") {
-   
-    $contrasena = $_REQUEST['contrasena'];
-    javaalert(strlen($contrasena));
-	if(strlen($contrasena)<6)
-        echo '<div id="Error">Debil</div>';
-    elseif(strlen($contrasena)>6&&strlen($contrasena)<12){
-		
-		}
-        echo '<div id="Success">Disponible</div>';
-}else{
-	  echo '<div></div>';
-	}
-	
+
 ?>
