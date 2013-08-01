@@ -226,6 +226,7 @@ $('.dropdown-toggle').click(function(e) {
 <!-- Codigo para verificar las contraseñas --> 
    $('#contrasena_c').blur(function(){
 	   document.getElementById('fortaleza').style.display='none';
+	   
         if($(this).val()!=""){
 			$('#contra').html('<img src="../recursos/img/loader.gif" alt="" />').fadeOut(1000);
 			$('#contra1').html('<img src="../recursos/img/loader.gif" alt="" />').fadeOut(1000);
@@ -249,7 +250,8 @@ $('.dropdown-toggle').click(function(e) {
 
 	$('#contrasena').blur(function(){
 		document.getElementById('fortaleza').style.display='none';
-        if($(this).val()!=""){
+		
+        if($(this).val()!="" && document.forms.formulario.contrasena_c.value!=""){
 			$('#contra').html('<img src="../recursos/img/loader.gif" alt="" />').fadeOut(1000);
 			$('#contra1').html('<img src="../recursos/img/loader.gif" alt="" />').fadeOut(1000);
 
