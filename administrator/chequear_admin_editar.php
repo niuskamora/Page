@@ -40,10 +40,10 @@ if(isset($_REQUEST['contrasena']) && $_REQUEST['contrasena']!="") {
 if(isset($_REQUEST['contrasena_c']) && $_REQUEST['contrasena_c']!="" && $_REQUEST['contra']!="") {
 	
     if($_REQUEST['contra']==$_REQUEST['contrasena_c'])
-		echo '<div id="Success"></div>';
+		echo '<div id="Success">Coinciden</div>';
         
     else
-        echo '<div id="Error"></div>';
+        echo '<div id="Error">No Coinciden</div>';
 }else{
 	  echo '<div></div>';
 	}
