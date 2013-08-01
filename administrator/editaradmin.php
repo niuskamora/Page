@@ -136,7 +136,7 @@ if(isset($_POST["guardar"])){
 		?>
         
 	
-            <form method="post">
+         <form id="formulario" method="post">
           <div class="row-fluid">
             <dl class="dl-horizontal">
               <dt>
@@ -169,7 +169,9 @@ if(isset($_POST["guardar"])){
               </dt>
               <dd>
                 <div class="well well-small">
-                  <input id="contrasena" name="contrasena" type="password" value="<?php echo $row['contrasena']; ?>" contenteditable="true" pattern="[A-Za-z.0-9ñÑ]{1,34}" required/>
+                  <input id="contrasena" name="contrasena" type="password" value="<?php echo $row['contrasena']; ?>" contenteditable="true" onkeyup="muestra_seguridad_clave(this.value, this.form)" pattern="[A-Za-z.0-9ñÑ]{6,34}" title="Debe agregar mínimo 6 letras, puntos o números" required/>
+             	  <input id="fortaleza" name="fortaleza" type="text" size="10" style="border: 0px; text-decoration:italic;text-align:center;display:none" onfocus="blur()">
+            	  <div id="contra" style="float:right"></div>
                 </div>
               </dd>
               <dt>
@@ -178,6 +180,7 @@ if(isset($_POST["guardar"])){
               <dd>
                 <div class="well well-small">
                   <input id="contrasena_c" name="contrasena_c" type="password" value="<?php echo $row['contrasena']; ?>" contenteditable="true" pattern="[A-Za-z.0-9ñÑ]{1,34}" required/>
+                  <div id="contra1" style="float:right"></div>
                 </div>
               </dd>
               <dt>
@@ -243,23 +246,159 @@ $(document).ready(function() {
 	
 	<!-- Codigo para verificar si el nombre de usuario ya existe --> 
    $('#usuario2').blur(function(){
-        $('#Info').html('<img src="../recursos/img/loader.gif" alt="" />').fadeOut(1000);
+        if($(this).val()!=""){
+			$('#Info').html('<img src="../recursos/img/loader.gif" alt="" />').fadeOut(1000);
 
+		}
         var usuario2 = $(this).val();        
         var dataString = 'usuario2='+usuario2;
 
         $.ajax({
             type: "POST",
-            url: "chequear_nombre_admin_editar.php?id=<?php echo $id;?>",
+            url: "chequear_admin_editar.php?id=<?php echo $id;?>",
             data: dataString,
             success: function(data) {
                 $('#Info').fadeIn(1000).html(data);
             }
         });
     }); 
+	
+	<!-- Codigo para verificar las contraseñas --> 
+   $('#contrasena_c').blur(function(){
+	   document.getElementById('fortaleza').style.display='none';
+	   
+        if($(this).val()!=""){
+			$('#contra').html('<img src="../recursos/img/loader.gif" alt="" />').fadeOut(1000);
+			$('#contra1').html('<img src="../recursos/img/loader.gif" alt="" />').fadeOut(1000);
+
+		}
+
+        var contrasena_c = $(this).val();        
+        var dataString = 'contrasena_c='+contrasena_c;
+		var con= document.forms.formulario.contrasena.value;
+
+        $.ajax({
+            type: "POST",
+            url: "chequear_contrasena.php?contra="+con+"",
+            data: dataString,
+            success: function(data) {
+                $('#contra').fadeIn(1000).html(data);
+				$('#contra1').fadeIn(1000).html(data);
+            }
+        });
+    });
+	
+	$('#contrasena').blur(function(){
+		document.getElementById('fortaleza').style.display='none';
+		
+        if($(this).val()!="" && document.forms.formulario.contrasena_c.value!=""){
+			$('#contra').html('<img src="../recursos/img/loader.gif" alt="" />').fadeOut(1000);
+			$('#contra1').html('<img src="../recursos/img/loader.gif" alt="" />').fadeOut(1000);
+
+		}
+
+        var contrasena = $(this).val();        
+        var dataString = 'contrasena='+contrasena;
+		var con= document.forms.formulario.contrasena_c.value;
+		
+        $.ajax({
+            type: "POST",
+            url: "chequear_contrasena.php?contra="+con+"",
+            data: dataString,
+            success: function(data) {
+                $('#contra').fadeIn(1000).html(data);
+				$('#contra1').fadeIn(1000).html(data);
+            }
+        });
+    }); 
  
  
 });
+
+<!-- Codigo para verificar la fortaleza de la contraseña --> 
+
+var numeros="0123456789";
+var letras="abcdefghyjklmnñopqrstuvwxyz";
+var letras_mayusculas="ABCDEFGHYJKLMNÑOPQRSTUVWXYZ";
+
+function tiene_numeros(texto){
+   for(i=0; i<texto.length; i++){
+      if (numeros.indexOf(texto.charAt(i),0)!=-1){
+         return 1;
+      }
+   }
+   return 0;
+} 
+
+function tiene_letras(texto){
+   texto = texto.toLowerCase();
+   for(i=0; i<texto.length; i++){
+      if (letras.indexOf(texto.charAt(i),0)!=-1){
+         return 1;
+      }
+   }
+   return 0;
+} 
+
+function tiene_minusculas(texto){
+   for(i=0; i<texto.length; i++){
+      if (letras.indexOf(texto.charAt(i),0)!=-1){
+         return 1;
+      }
+   }
+   return 0;
+} 
+
+function tiene_mayusculas(texto){
+   for(i=0; i<texto.length; i++){
+      if (letras_mayusculas.indexOf(texto.charAt(i),0)!=-1){
+         return 1;
+      }
+   }
+   return 0;
+} 
+
+function seguridad_clave(clave){
+	var seguridad = 0;
+	if (clave.length!=0){
+		if (tiene_numeros(clave) && tiene_letras(clave)){
+			seguridad += 30;
+		}
+		if (tiene_minusculas(clave) && tiene_mayusculas(clave)){
+			seguridad += 30;
+		}
+		if (clave.length >= 4 && clave.length <= 5){
+			seguridad += 10;
+		}else{
+			if (clave.length >= 6 && clave.length <= 8){
+				seguridad += 30;
+			}else{
+				if (clave.length > 8){
+					seguridad += 40;
+				}
+			}
+		}
+	}
+	return seguridad				
+}	
+
+function muestra_seguridad_clave(clave,formulario){
+	seguridad=seguridad_clave(clave);
+	document.getElementById('fortaleza').style.color='#FFFFFF'; 
+	if(seguridad>0 && seguridad<=40){
+		 document.getElementById('fortaleza').style.display='block'; 
+		document.getElementById('fortaleza').style.backgroundColor="#2ECCFA"; 
+		formulario.fortaleza.value="Debil";
+		}else if(seguridad>40 && seguridad<=70){
+			formulario.fortaleza.value="Medio";
+			document.getElementById('fortaleza').style.backgroundColor="#5882FA"; 
+		}else if(seguridad>70){
+			formulario.fortaleza.value="Fuerte";
+				document.getElementById('fortaleza').style.backgroundColor="#0404B4"; 
+		}else{
+				document.getElementById('fortaleza').style.display='none'; 
+			}		
+}
 
 
 

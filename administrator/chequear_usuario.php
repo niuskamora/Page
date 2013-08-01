@@ -2,16 +2,18 @@
 include("../recursos/funciones.php");
 sleep(1);
 $conn=conectar();
-$id=$_REQUEST['id'];
-if(isset($_REQUEST['usuario2'])) {
+if(isset($_REQUEST['usuarioo'])&&$_REQUEST['usuarioo']!="") {
    
-    $username = $_REQUEST['usuario2'];
-	$SQL="SELECT * FROM administrador where usuario='".$username."' and administradorid!='".$id."'";
+    $username = $_REQUEST['usuarioo'];
+	$SQL="SELECT * FROM usuario where usuario='".$username."'";
 		$result = pg_query ($conn, $SQL ) or die("Error en la consulta SQL");
 		$registros= pg_num_rows($result);
     if($registros>0)
         echo '<div id="Error">No disponible</div>';
     else
         echo '<div id="Success">Disponible</div>';
-}
+}else{
+	  echo '<div></div>';
+	}
+
 ?>

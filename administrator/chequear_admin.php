@@ -2,10 +2,12 @@
 include("../recursos/funciones.php");
 sleep(1);
 $conn=conectar();
-if(isset($_REQUEST['usuarioo'])&&$_REQUEST['usuarioo']!="") {
+
+//Disponibilidad del nombre de usuario
+if(isset($_REQUEST['usuario1']) && $_REQUEST['usuario1']!="") {
    
-    $username = $_REQUEST['usuarioo'];
-	$SQL="SELECT * FROM usuario where usuario='".$username."'";
+    $username = $_REQUEST['usuario1'];
+	$SQL="SELECT * FROM administrador where usuario='".$username."'";
 		$result = pg_query ($conn, $SQL ) or die("Error en la consulta SQL");
 		$registros= pg_num_rows($result);
     if($registros>0)
