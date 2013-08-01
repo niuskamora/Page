@@ -136,7 +136,7 @@ if(isset($_POST["guardar"])){
 		?>
         
 	
-            <form method="post">
+         <form id="formulario" method="post">
           <div class="row-fluid">
             <dl class="dl-horizontal">
               <dt>
@@ -170,6 +170,8 @@ if(isset($_POST["guardar"])){
               <dd>
                 <div class="well well-small">
                   <input id="contrasena" name="contrasena" type="password" value="<?php echo $row['contrasena']; ?>" contenteditable="true" pattern="[A-Za-z.0-9ñÑ]{1,34}" required/>
+                  <div id="seguridad" style="float:right"></div>
+            	  <div id="contra" style="float:right"></div>
                 </div>
               </dd>
               <dt>
@@ -178,6 +180,7 @@ if(isset($_POST["guardar"])){
               <dd>
                 <div class="well well-small">
                   <input id="contrasena_c" name="contrasena_c" type="password" value="<?php echo $row['contrasena']; ?>" contenteditable="true" pattern="[A-Za-z.0-9ñÑ]{1,34}" required/>
+                  <div id="contra1" style="float:right"></div>
                 </div>
               </dd>
               <dt>
@@ -252,13 +255,53 @@ $(document).ready(function() {
 
         $.ajax({
             type: "POST",
-            url: "chequear_nombre_admin_editar.php?id=<?php echo $id;?>",
+            url: "chequear_admin_editar.php?id=<?php echo $id;?>",
             data: dataString,
             success: function(data) {
                 $('#Info').fadeIn(1000).html(data);
             }
         });
+    });
+	
+	<!-- Codigo para verificar el número de caracteres de la contraseña --> 
+   $('#contrasena').blur(function(){
+	   if($(this).val()!=""){
+		           $('#seguridad').html('<img src="../recursos/img/loader.gif" alt="" />').fadeOut(1000);
+		   }
+        var contasena = $(this).val();        
+        var dataString = 'contrasena='+contrasena;
+        $.ajax({
+            type: "POST",
+            url: "chequear_admin_editar.php",
+            data: dataString,
+            success: function(data) {
+                $('#seguridad').fadeIn(1000).html(data);
+            }
+        });
     }); 
+	
+	<!-- Codigo para verificar las contraseñas --> 
+   $('#contrasena_c').blur(function(){
+        if($(this).val()!=""){
+			$('#contra').html('<img src="../recursos/img/loader.gif" alt="" />').fadeOut(1000);
+			$('#contra1').html('<img src="../recursos/img/loader.gif" alt="" />').fadeOut(1000);
+
+		}
+
+        var contrasena_c = $(this).val();        
+        var dataString = 'contrasena_c='+contrasena_c;
+		var con= document.forms.formulario.contrasena.value;
+
+        $.ajax({
+            type: "POST",
+            url: "chequear_admin_editar.php?contra="+con+"",
+            data: dataString,
+            success: function(data) {
+                $('#contra').fadeIn(1000).html(data);
+				$('#contra1').fadeIn(1000).html(data);
+            }
+        });
+    });  
  
  
 });
