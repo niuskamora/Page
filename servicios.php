@@ -34,10 +34,7 @@ if (isset($_POST["inicio"])) {
 <body>
 <script type="text/javascript" src="recursos/js/jquery-2.0.2.js" ></script> 
 <script type="text/javascript" src="recursos/js/bootstrap.min.js" ></script> 
-<script type="text/javascript" src="recursos/slide/jquery.pageslide.min.js" ></script>
-
-
- 
+<script type="text/javascript" src="recursos/slide/jquery.pageslide.min.js" ></script> 
 <a href="#" class="scrolltop" style="display: none;"> <span>up</span> </a>
 <div  class="container-fluid" style="background-image: url('recursos/img/back.jpg'); background-repeat: repeat;">
 <div id="fullp">
@@ -73,30 +70,33 @@ if (isset($_POST["inicio"])) {
 						<li><a href="recursos/quitarsesioncliente.php?pagina=../servicios.php?id=3">Cerrar Sesión</a></li>
 						  </ul></li>';			
 				  }else{ ?>
-               <li>
-				<li class="dropdown">
-						<a href="#" class="dropdown-toggle" data-toggle="dropdown">
-						Iniciar Sesión
-						<b class="caret"></b></a> <ul class="dropdown-menu">
+                <li>
+                <li class="dropdown"> <a href="#" class="dropdown-toggle" data-toggle="dropdown"> Iniciar Sesión <b class="caret"></b></a>
+                  <ul class="dropdown-menu">
                     <li>
-                      <div class="well well-small" align="center"> 
-                      <form method="post">
-                        <dl>
-                          <dt><span>Nombre de usuario</span></dt>
-                          <dd><input type="text"  placeholder="Usuario" name="usuario" id="usuario"  title="El formato es Mayúscula(letras, puntos o números)" maxlength="34" pattern="[A-ZÑ]{1}[a-z.ñ0-9]{1,33}" autofocus required></dd>
-                          <dt>    <span>Contraseña</span></dt>
-                         <dd>     <input type="password"  placeholder="Contraseña" name="password" id="password" maxlength="34"  title="Debe agregar la contraseña" required></dd>
-                         <dt>         </dt>
-                         <dd><button type="submit" id="inicio" name="inicio" class="btn submit">Iniciar Sesión</button>
-                     </dd>
-                        </dl>
-                      </form>
-                     </div>
+                      <div class="well well-small" align="center">
+                        <form method="post">
+                          <dl>
+                            <dt><span>Nombre de usuario</span></dt>
+                            <dd>
+                              <input type="text"  placeholder="Usuario" name="usuario" id="usuario"  title="El formato es Mayúscula(letras, puntos o números)" maxlength="34" pattern="[A-ZÑ]{1}[a-z.ñ0-9]{1,33}" autofocus required>
+                            </dd>
+                            <dt> <span>Contraseña</span></dt>
+                            <dd>
+                              <input type="password"  placeholder="Contraseña" name="password" id="password" maxlength="34"  title="Debe agregar la contraseña" required>
+                            </dd>
+                            <dt> </dt>
+                            <dd>
+                              <button type="submit" id="inicio" name="inicio" class="btn submit">Iniciar Sesión</button>
+                            </dd>
+                          </dl>
+                        </form>
+                      </div>
                     </li>
-                  </ul></li>
-                
+                  </ul>
                 </li>
-                <?php } ?>  
+                </li>
+                <?php } ?>
               </ul>
             </div>
             <!--/.nav-collapse --> 
@@ -108,29 +108,28 @@ if (isset($_POST["inicio"])) {
   </div>
 </div>
 <div class="container" style="background-color:white;">
-  <div  class=" row-fluid">
-    <div  class="span2">
-    
-      <aside class="span2 well affix visible-desktop" data-spy="affix" >
-        <nav  id="website-nav" class="sidebar-nav">
-          <ul id="website-nav" class="nav nav-list">
-            <?php $SQL="SELECT * FROM  informacion WHERE  tipoinformacionid=".$_GET['id']."order by titulo";
+  <div  class="row-fluid span12">
+  <div class="span2">
+     <div class="span2 well affix visible-desktop" data-spy="affix" >
+    <nav  id="website-nav" class="sidebar-nav">
+      <ul id="website-nav" class="nav nav-list">
+        <?php $SQL="SELECT * FROM  informacion WHERE  tipoinformacionid=".$_GET['id']."order by titulo";
 		$result = pg_query ($conn, $SQL ) or die("Error en la consulta SQL");
 		$registros= pg_num_rows($result);
 		$m=0;
 	if($registros != 0){
 		?>
-            <div class="accordion" id="accordion2" >
-            <?php
+        <div class="accordion" id="accordion2" >
+          <?php
 			for ($j=0;$j<$registros;$j++)
 			{
 				$row = pg_fetch_array ($result,$j);
 				if($row['titulo']=="Servicios"){
 					?>
-            <br>
-            <li class="nav-header">Pangeatech</li>
-            <li class=""><a href="#in">Servicios</a></li>
-            <?php
+          <br>
+          <li class="nav-header">Pangeatech</li>
+          <li class=""><a href="#in">Servicios</a></li>
+          <?php
 			$idsr=$row['informacionid'];
 							}
 			}
@@ -147,13 +146,12 @@ if (isset($_POST["inicio"])) {
 							$m=$m+1;
 							if($m==1){
 								?>
-            <li class="nav-header">Nuestros servicios</li>
-            <li class="active"><span class="add-on"><i class="icon-globe"></i></span><a href="#in" > <?php echo $row['titulo']?></a></li>
-            <?php  }else{ 
+          <li class="nav-header">Nuestros servicios</li>
+          <li class="active"><span class="add-on"><i class="icon-globe"></i></span><a href="#in" > <?php echo $row['titulo']?></a></li>
+          <?php  }else{ 
 		?>
-            
-            <li class=""><span class="add-on"><i class="icon-globe"></i></span><a href="#<?php echo $row2['informacionid']?>"> <?php echo $row['titulo']?></a></li>
-            <?php
+          <li class=""><span class="add-on"><i class="icon-globe"></i></span><a href="#<?php echo $row2['informacionid']?>"> <?php echo $row['titulo']?></a></li>
+          <?php
 			
 			 
 					     }
@@ -161,31 +159,32 @@ if (isset($_POST["inicio"])) {
                         } 
 					   } 
 					   ?>
-                       </div>
-          </ul>
-        </nav>
-      </aside>
-      
-       <aside class="span2 well affix hidden-desktop" data-spy="affix">
-        <nav id="website-nav" class="sidebar-nav">
-          <ul id="website-nav" class="nav nav-list">
-            <?php $SQL="SELECT * FROM  informacion WHERE  tipoinformacionid=".$_GET['id']."order by titulo";
+        </div>
+      </ul>
+    </nav>
+  </div>
+  
+  
+     <div class="span2 well hidden-desktop">
+    <nav id="website-nav" class="  sidebar-nav">
+      <ul id="website-nav" class=" nav nav-list">
+        <?php $SQL="SELECT * FROM  informacion WHERE  tipoinformacionid=".$_GET['id']."order by titulo";
 		$result = pg_query ($conn, $SQL ) or die("Error en la consulta SQL");
 		$registros= pg_num_rows($result);
 		$m=0;
 	if($registros != 0){
 		?>
-            <div class="accordion" id="accordion2" >
-            <?php
+        <div class="accordion" id="accordion2" >
+          <?php
 			for ($j=0;$j<$registros;$j++)
 			{
 				$row = pg_fetch_array ($result,$j);
 				if($row['titulo']=="Servicios"){
 					?>
-            <br>
-            <li class="nav-header">Pangeatech</li>
-            <li class=""><a href="#in">Servicios</a></li>
-            <?php
+          <br>
+          <li class="nav-header">Pangeatech</li>
+          <li class=""><a href="#in">Servicios</a></li>
+          <?php
 			$idsr=$row['informacionid'];
 							}
 			}
@@ -199,10 +198,8 @@ if (isset($_POST["inicio"])) {
 			if($row['titulo']!="Servicios"){
 							
 								?>
-            
-            
-            <li class=""><span class="add-on"><i class="icon-globe"></i></span><a href="#<?php echo $row['informacionid']?>"> <?php echo $row['titulo']?></a></li>
-            <?php
+          <li class=""><span class="add-on"><i class="icon-globe"></i></span><a href="#<?php echo $row['informacionid']?>"> <?php echo $row['titulo']?></a></li>
+          <?php
 			
 			 
 					     
@@ -210,19 +207,17 @@ if (isset($_POST["inicio"])) {
                         } 
 					   } 
 					   ?>
-                       </div>
-          </ul>
-        </nav>
-      </aside>
-      
-     
+        </div>
+      </ul>
+    </nav>
+  </div>
+  </div>
+  
+     <div class="span10"> <br>
+    <div class=" row-fluid span12">
+      <h2 id="in" align="left " class="well span11"> Servicios</h2>
     </div>
-    
-    <div class="span10"> <br>
-      <div class=" row-fluid span12">
-        <h2 id="in" align="left " class="well span11"> Servicios</h2>
-      </div>
-      <?php  
+    <?php  
 		
 		$SQL="SELECT * FROM  informacion WHERE  tipoinformacionid=".$_GET['id'];
 		$result = pg_query ($conn, $SQL ) or die("Error en la consulta SQL");
@@ -235,13 +230,13 @@ if (isset($_POST["inicio"])) {
 				
 				if($row['titulo']=="Servicios"){
 					?>
-      <div class="span12">
-        <div align="justify" class="span8"> <p>  <?php echo "<blockquote>".$row['descripcion'] ?> </p> </div>
-        <div class="span3">  <img src="<?php echo $row['imagen']?>"> </div>
-       
+    <div class="span12">
+      <div align="justify" class="span8">
+        <p> <?php echo "<blockquote>".$row['descripcion'] ?> </p>
       </div>
-      
-      <?php
+      <div class="span3"> <img src="<?php echo $row['imagen']?>"> </div>
+    </div>
+    <?php
 	  
 	  
 					
@@ -256,10 +251,8 @@ if (isset($_POST["inicio"])) {
 	if($registros != 0){
 		  $m=0;
 		?>
-   
-      <div class="accordion span11" id="accordion2">
-      <br>
-        <?php
+    <div class="accordion span11" id="accordion2"> <br>
+      <?php
 			for ($i=0;$i<$registros;$i++)
 			{
 				$row = pg_fetch_array ($result,$i);
@@ -270,76 +263,66 @@ if (isset($_POST["inicio"])) {
 				if($row['titulo']!="Servicios"){
 					$m=$m+1;
 							if($m==1){?>
-								
-								 <div id="<?php echo $row['informacionid']; ?>" class="accordion-group">
-          <div  class="accordion-heading"> <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#c<?php echo $row['informacionid'] ?>"> <?php echo $row['titulo']?> </a> </div>
-          <div id="c<?php echo $row['informacionid']?>" class="accordion-body collapse in">
-            <div class="accordion-inner">
-              <div class="span12 well">
-                <div align="justify" class="span8"> <?php echo $row['descripcion'] ?> </div>
-                <div class="span3"> <img src="<?php echo $row['imagen']?>"> </div>
-              </div>
+      <div id="<?php echo $row['informacionid']; ?>" class="accordion-group">
+        <div  class="accordion-heading"> <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#c<?php echo $row['informacionid'] ?>"> <?php echo $row['titulo']?> </a> </div>
+        <div id="c<?php echo $row['informacionid']?>" class="accordion-body collapse in">
+          <div class="accordion-inner">
+            <div class="span12 well">
+              <div align="justify" class="span8"> <?php echo $row['descripcion'] ?> </div>
+              <div class="span3"> <img src="<?php echo $row['imagen']?>"> </div>
             </div>
           </div>
         </div>
-        <br>
-								
-							<?php }else{?> 
-					
-					
-        <div id="<?php echo $row['informacionid']; ?>" class="accordion-group">
-          <div  class="accordion-heading"> <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#c<?php echo $row['informacionid'] ?>"> <?php echo $row['titulo']?> </a> </div>
-          <div id="c<?php echo $row['informacionid']?>" class="accordion-body collapse">
-            <div class="accordion-inner">
-              <div class="span12 well">
-                <div align="justify" class="span8"> <?php echo $row['descripcion'] ?> </div>
-                <div class="span3"> <img src="<?php echo $row['imagen']?>"> </div>
-              </div>
+      </div>
+      <br>
+      <?php }else{?>
+      <div id="<?php echo $row['informacionid']; ?>" class="accordion-group">
+        <div  class="accordion-heading"> <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#c<?php echo $row['informacionid'] ?>"> <?php echo $row['titulo']?> </a> </div>
+        <div id="c<?php echo $row['informacionid']?>" class="accordion-body collapse">
+          <div class="accordion-inner">
+            <div class="span12 well">
+              <div align="justify" class="span8"> <?php echo $row['descripcion'] ?> </div>
+              <div class="span3"> <img src="<?php echo $row['imagen']?>"> </div>
             </div>
           </div>
         </div>
-        <br>
-        
-        <?php }			
+      </div>
+      <br>
+      <?php }			
 				}
 		  
 				}
  			}
 			?>
-      </div>
-      <?php
+    </div>
+    <?php
 	}
 ?>
-    </div>
+  </div>
   </div>
 </div>
-
-
 <div id="cont2" class="container" >
-<?php 
+  <?php 
  $frase=obtenerQuote();
 
 ?>
   <div id="intro">
-    <div class="container">
-    
-    </div>
+    <div class="container"> </div>
   </div>
   <br>
-  <h2 class="section_header">
-
-  </h2>
+  <h2 class="section_header"> </h2>
   <br>
   <div class="row-fluid">
-      <div class="span12 visible-desktop" style="padding:5px">
+    <div class="span12 visible-desktop" style="padding:5px">
       <div id="ca-container" class="ca-container">
         <div class="ca-wrapper">
-        <?php carrusel(); ?> 
+          <?php carrusel(); ?>
         </div>
       </div>
       <hr/>
-    </div> <div class="span12 hidden-desktop" style="padding:5px;  margin-left:0px;">
-     <?php carruselMovil(); ?>
+    </div>
+    <div class="span12 hidden-desktop" style="padding:5px;  margin-left:0px;">
+      <?php carruselMovil(); ?>
       <hr/>
     </div>
     <!-- /container -->
@@ -354,9 +337,6 @@ if (isset($_POST["inicio"])) {
     </div>
   </div>
 </div>
-
-
-
 <script type="text/javascript" src="recursos/circular/js/jquery.contentcarousel.js"></script> 
 <script type="text/javascript" src="recursos/js/funciones.js" ></script> 
 <script type="text/javascript">
@@ -376,7 +356,7 @@ $('.dropdown-toggle').click(function(e) {
 
 
 
-</script>
+</script> 
 <script type="text/javascript" src="recursos/circular/js/jquery.easing.1.3.js"></script> 
 <!-- the jScrollPane script -->
 

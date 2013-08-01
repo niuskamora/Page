@@ -119,7 +119,7 @@ if (isset($_POST["inicio"])) {
   <div class="span12">
 	<div class="row-fluid">
     	<div class="span2">
-        	<aside class="span2 well affix" data-spy="affix">
+        	<aside class="span2 well affix visible-desktop" data-spy="affix">
 				<nav id="website-nav" class="sidebar-nav">
 					<ul id="website-nav" class="nav nav-list">
         				<?php $SQL="SELECT * FROM  informacion WHERE  tipoinformacionid=".$_GET['id']." ORDER BY informacionid";
@@ -143,6 +143,33 @@ if (isset($_POST["inicio"])) {
                         </ul>
 					</nav>
 				</aside>
+                
+                
+                <aside class="span2 well hidden-desktop">
+				<nav id="website-nav" class="sidebar-nav">
+					<ul id="website-nav" class="nav nav-list">
+        				<?php $SQL="SELECT * FROM  informacion WHERE  tipoinformacionid=".$_GET['id']." ORDER BY informacionid";
+						$result=pg_query ($conn, $SQL ) or die("Error en la consulta SQL");
+						$registros=pg_num_rows($result);
+						$m=0;
+						if($registros!=0){?>
+							<div class="accordion" id="accordion2">
+       						 <?php for ($i=0;$i<$registros;$i++){
+								$row = pg_fetch_array($result);
+								if($row['titulo']=="Nosotros"){?>
+                                    <br>
+									<li class="nav-header">Nosotros</li>
+                                    <li class="active"><span class="add-on"><i class="icon-globe"></i></span><a href="#<?php echo $row['informacionid'];?>"><?php echo $row['titulo']?></a></li>
+                            		<?php }else{?> 
+										  <li class=""><span class="add-on"><i class="icon-globe"></i></span><a href="#<?php echo $row['informacionid'];?>"><?php echo $row['titulo']?></a></li>
+                       				<?php }
+					    			} 
+                        		} 
+					 		?>
+                        </ul>
+					</nav>
+				</aside>
+                
 		</div>
         
 <div class="span10">

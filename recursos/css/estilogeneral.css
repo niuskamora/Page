@@ -240,6 +240,7 @@ padding: 1px;
 /** RESPONSIVEEE */
 
 @media (min-width: 1200px) {
+	
 	.section_header small {
 		display: inline-block;
 	}
@@ -336,14 +337,8 @@ padding: 1px;
 	    position:absolute;
 		font-size:12px;
 		padding:0px;
+	}
 
-	
-	}
-	
-	.row-fluid{
-	}
-	
-	
 	
 	body {
 		padding-top: 0px;
@@ -400,6 +395,10 @@ padding: 1px;
 
 /* Landscape phone to portrait tablet */
 @media (max-width: 767px) {	
+	.affix{
+		position: static;
+		width:inherit;
+	}
 
 
 	#intro h1 {
@@ -452,7 +451,8 @@ padding: 1px;
 @media (max-width: 480px) {
 	
 	.affix {
-		position: absolute;
+		position: static;
+		width:inherit;
 		font-size:12px;
 		padding:2px;
 		
